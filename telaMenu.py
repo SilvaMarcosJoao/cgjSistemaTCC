@@ -138,11 +138,18 @@ class MenuTela:
 
     def mudar_senha(self) -> None:
         self.senha = self.et_nova_senha.get()
-        self.con_senha = self.et_confir_senha.get()
-        self.usuario.alterar_senha(self.senha)
-        self.msg_avi = 'Senha alterada com sucesso!'
-        messagebox.showinfo('Aviso', self.msg_avi)
+        self.conf = self.et_confir_senha.get()
+        if self.senha == '' or self.conf == '':
+            messagebox.showwarning('Alerta', 'Preencha os campos')
+        else:
+            if self.senha != self.conf:
+                messagebox.showinfo('Alerta', 'Senhas diferentes')
+            else:
+                self.usuario.alterar_senha(self.senha)
+                self.msg_avi = 'Senha alterada com sucesso!'
+                messagebox.showinfo('Aviso', self.msg_avi)
                 
+
 
     def widgets_cliente(self) -> None:
         pass
