@@ -3,12 +3,14 @@ from tkinter import ttk
 from tkinter import tix
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
+from modulos.usuario import Usuario
 
 
 appMenu = tix.Tk()
 
 class MenuTela:
     categoria = CategoriaProduto()
+    usuario = Usuario()
     def __init__(self) -> None:
         self.appMenu = appMenu
         self.configTelamenu()
@@ -129,8 +131,16 @@ class MenuTela:
         self.et_confir_senha.place(relx=0.4, rely =0.35, width=180, height=25)
 
         self.img_confirmar = PhotoImage(file='./imagens/confirmar.png')
-        self.btn_alterar_senha = Button(self.usuario_frame, image=self.img_confirmar, bg='#d9d9d9', fg='#151515')
+        self.btn_alterar_senha = Button(self.usuario_frame, image=self.img_confirmar, bg='#d9d9d9', fg='#151515', command=self.mudar_senha)
         self.btn_alterar_senha.place(relx=0.43, rely=0.45, width=120, height=50)
+
+    def mudar_senha(self) -> None:
+        self.senha = self.et_nova_senha.get()
+        self.con_senha = self.et_confir_senha.get()
+        self.usuario.alterar_senha(self.senha, self.con_senha)
+        self.msg_avi = 'Senha alterada com sucesso!'
+        messagebox.showinfo('Aviso', self.msg_avi)
+
 
     def widgets_cliente(self) -> None:
         pass
@@ -331,7 +341,6 @@ class MenuTela:
         self.scrollHor = Scrollbar(self.frameResTelaFornecedor, orient='horizontal')
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.01, rely=0.94, relwidth=0.1, relheight=0.05)
-
 
 
     def widgets_servico(self):
