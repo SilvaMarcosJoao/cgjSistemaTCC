@@ -11,11 +11,11 @@ class BancoDados:
         try:
             self.conexao = sqlite3.connect(self.__nome)
             self.cursor = self.conexao.cursor()
-        except ConnectionError:
-            print('Erro na conexão')
+        except Exception as error:
+            print(f'Houve um erro: {error}')
 
     def desconectar(self) -> None:
         try:
             self.conexao.close()
-        except sqlite3.OperationalError:
-            print('Erro ao desconectar-se')
+        except Exception as erro:
+            print(f'Erro ao desconectar-se: {erro}')

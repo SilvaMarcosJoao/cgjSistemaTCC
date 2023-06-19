@@ -4,6 +4,7 @@ from tkinter import tix
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.usuario import Usuario
+from modulos.validacoes import Validadores
 
 
 appMenu = tix.Tk()
@@ -11,6 +12,7 @@ appMenu = tix.Tk()
 class MenuTela:
     categoria = CategoriaProduto()
     usuario = Usuario()
+    validar = Validadores()
     def __init__(self) -> None:
         self.appMenu = appMenu
         self.configTelamenu()
@@ -137,10 +139,10 @@ class MenuTela:
     def mudar_senha(self) -> None:
         self.senha = self.et_nova_senha.get()
         self.con_senha = self.et_confir_senha.get()
-        self.usuario.alterar_senha(self.senha, self.con_senha)
+        self.usuario.alterar_senha(self.senha)
         self.msg_avi = 'Senha alterada com sucesso!'
         messagebox.showinfo('Aviso', self.msg_avi)
-
+                
 
     def widgets_cliente(self) -> None:
         pass
@@ -149,17 +151,17 @@ class MenuTela:
         self.categoria_frame = Frame(self.frameMenu_right, bg='#d9d9d9')
         self.categoria_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-        self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', bg='#d9d9d9', font=('Roboto', 12))
+        self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', bg='#d9d9d9', font=('Roboto', 12, 'bold'))
         self.lbl_cod_categoria.place(relx=0.25, rely=0.08, height=20)
 
         self.et_cod_categoria = Entry(self.categoria_frame)
-        self.et_cod_categoria.place(relx=0.25, rely=0.12, relwidth=0.1, height=20)
+        self.et_cod_categoria.place(relx=0.25, rely=0.11, relwidth=0.1, height=20)
 
-        self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', bg='#d9d9d9', font=('Roboto', 12))
+        self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', bg='#d9d9d9', font=('Roboto', 12, 'bold'))
         self.lbl_desc_categoria.place(relx=0.5, rely=0.08, height=20)
 
         self.et_desc_categoria = Entry(self.categoria_frame)
-        self.et_desc_categoria.place(relx=0.5, rely=0.12, width=171, height=20)
+        self.et_desc_categoria.place(relx=0.5, rely=0.11, width=171, height=20)
 
         self.img_salvar_categoria = PhotoImage(file='./imagens/salvar.png')
         self.btn_salvar_categoria = Button(self.categoria_frame, image=self.img_salvar_categoria, bg='#d9d9d9', command=self.inserir_categoria)

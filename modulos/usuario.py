@@ -38,13 +38,11 @@ class Usuario:
         res = bancoDado.cursor.execute(f""" SELECT * FROM usuario""").fetchall()
         print(res)
 
-    def alterar_senha(self, novasenha: str, confirma: str):
-        if novasenha == confirma:
+    def alterar_senha(self, confirma: str):
             bancoDado.conectar()
             bancoDado.cursor.execute(f""" UPDATE usuario SET senha= '{confirma}' WHERE cod_usuario = 1 """)
             bancoDado.conexao.commit()
-        else:
-            print('Erro')
+      
     def sair(self):
         pass
 

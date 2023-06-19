@@ -1,3 +1,5 @@
+from tkinter import messagebox
+
 class Validadores:
     def __init__(self):
         self.caractere = None
