@@ -14,6 +14,7 @@ class MenuTela:
     usuario = Usuario()
     validar = Validadores()
     def __init__(self) -> None:
+
         self.appMenu = appMenu
         self.configTelamenu()
         self.frame_menu()
@@ -27,7 +28,6 @@ class MenuTela:
     def delete_page(self):
         for frame in self.frameMenu_right.winfo_children():
             frame.destroy()
-
 
     def configTelamenu(self) -> None:
         self.appMenu.title('Menu Inicial - Sistema de Gerenciamento (SGZurc)')
@@ -404,6 +404,8 @@ class MenuTela:
         #definindo a posição do treeview na tela
         self.listaServico.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.85)
 
+    def widgets_os(self):
+        pass
 
      
 
