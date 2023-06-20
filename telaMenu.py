@@ -152,6 +152,167 @@ class MenuTela:
 
 
     def widgets_cliente(self) -> None:
+        self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
+        self.frameCadTelaCliente.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.47)
+        
+        self.frameResTelaCliente = Frame(self.frameMenu_right, bd=1, background='#d9d9d9')
+        self.frameResTelaCliente.place(relx=0.01, rely=0.50, relwidth=0.98, relheight=0.47)
+        
+        self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 12, 'bold'), bg='#d9d9d9')    
+        self.lbl_cpf_cliente.place(relx=0.075, rely=0.08, height=20)
+        self.et_cpf_cliente = Entry(self.frameCadTelaCliente)
+        self.et_cpf_cliente.place(relx=0.115, rely=0.08, width=125, height=20)
+        
+        self.lbl_nome_cliente = Label(self.frameCadTelaCliente, text='Nome: ', font=('Roboto', 12, 'bold'),bg='#d9d9d9')
+        self.lbl_nome_cliente.place(relx=0.225, rely=0.08, height=20)
+        self.et_nome_cliente = Entry(self.frameCadTelaCliente)
+        self.et_nome_cliente.place(relx=0.32, rely=0.08, width=300, height=20)
+
+        self.lbl_email_cliente = Label(self.frameCadTelaCliente, text='E-mail: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_email_cliente.place(relx=0.58, rely=0.08, height=20)
+        self.et_email_cliente = Entry(self.frameCadTelaCliente)
+        self.et_email_cliente.place(relx=0.635, rely=0.08, width=350, height=20)
+
+        self.lbl_tel_cliente = Label(self.frameCadTelaCliente, text='Telefone: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_tel_cliente.place(relx=0.075, rely=0.2,  height=20)
+        self.et_tel_cliente = Entry(self.frameCadTelaCliente)
+        self.et_tel_cliente.place(relx=0.15, rely=0.2, width=200, height=20)
+
+        self.lbl_logr_cliente = Label(self.frameCadTelaCliente, text='Logradouro: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_logr_cliente.place(relx=0.325, rely=0.2, height=20)
+        self.et_logr_cliente = Entry(self.frameCadTelaCliente)
+        self.et_logr_cliente.place(relx=0.42, rely=0.2, width=602, height=20)
+
+        self.lbl_num_cliente = Label(self.frameCadTelaCliente, text='Número: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_num_cliente.place(relx=0.075, rely=0.3, height=20)
+        self.et_num_cliente = Entry(self.frameCadTelaCliente)
+        self.et_num_cliente.place(relx=0.145, rely=0.3, width=60, height=20)
+
+        self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_cep_cliente.place(relx=0.2, rely=0.3, height=20)
+        self.et_cep_cliente = Entry(self.frameCadTelaCliente)
+        self.et_cep_cliente.place(relx=0.24, rely=0.3, width=80, height=20)
+
+        self.lbl_cidade_cliente = Label(self.frameCadTelaCliente, text='Cidade: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_cidade_cliente.place(relx=0.32, rely=0.3, height=20)
+        self.et_cidade_cliente = Entry(self.frameCadTelaCliente)
+        self.et_cidade_cliente.place(relx=0.38, rely=0.3, width=300, height=20)
+
+        self.lbl_estado_cliente = Label(self.frameCadTelaCliente, text='Estado: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_estado_cliente.place(relx=0.64, rely=0.3, height=20)
+        self.et_estado_cliente = Entry(self.frameCadTelaCliente)
+        self.et_estado_cliente.place(relx=0.7, rely=0.3, width=272, height=20)
+
+
+        #botões com suas funções 
+        self.img_salvar = PhotoImage(file="imagens/adicionar.png")
+        self.btn_salvar = Button(self.frameCadTelaCliente, command = self.inserir_cliente ,image=self.img_salvar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.btn_salvar.place(relx=0.25, rely=0.8, relwidth=0.12, height=50)
+        
+        self.img_listar = PhotoImage(file="imagens/listar.png")
+        self.btn_listar = Button(self.frameCadTelaCliente, command= self.lista_cliente, image=self.img_listar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.btn_listar.place(relx=0.38, rely=0.8, relwidth=0.12, height=50)
+
+        self.img_alterar = PhotoImage(file="imagens/editar.png")
+        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, image=self.img_alterar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.btn_alterar.place(relx=0.51, rely=0.8, relwidth=0.12, height=50)
+
+        self.img_excluir = PhotoImage(file="imagens/excluir.png")
+        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, image=self.img_excluir, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.btn_excluir.place(relx=0.64, rely=0.8, relwidth=0.12, height=50)
+    
+        #criando treeview , dizemos qual é o pai dele(frameResFornecedor), posição que ele vai ficar, as colunas
+        self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 'Col8', 'Col9'))
+        # vamos especificar o cabeçalho de cada coluna criada
+        self.listaCliente.heading("#0", text='')
+        self.listaCliente.heading('#1', text='CPF')
+        self.listaCliente.heading('#2', text='Cliente')
+        self.listaCliente.heading('#3', text='Email')
+        self.listaCliente.heading('#4', text='Telefone')
+        self.listaCliente.heading('#5', text='Logradouro')
+        self.listaCliente.heading('#6', text='Número')
+        self.listaCliente.heading('#7', text='Cep')
+        self.listaCliente.heading('#8', text='Cidade')
+        self.listaCliente.heading('#9', text='Estado')
+        #Agora especificar o tamanho em largura de cada coluna
+        '''
+            A largura tem como número referência o 500, então dividimos o 500 em partes para  cada coluna
+            na coluna 1 a largura 50, equivale a 10% de 500 na coluna 2 200 equivale a 40% de 500 e assim vai.
+        '''
+        self.listaCliente.column('#0', width=1)
+        self.listaCliente.column('#1', width=100)
+        self.listaCliente.column('#2', width=200)
+        self.listaCliente.column('#3', width=250)
+        self.listaCliente.column('#4', width=105)
+        self.listaCliente.column('#5', width=300)
+        self.listaCliente.column('#6', width=80)
+        self.listaCliente.column('#7', width=100)
+        self.listaCliente.column('#8', width=200)
+        self.listaCliente.column('#9', width=200)
+
+  
+        #definindo a posição do treeview na tela
+        self.listaCliente.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.85)
+        
+        #criando barra de rolagem
+        self.scrollLista = Scrollbar(self.frameResTelaCliente, orient='vertical')
+        #informando que a barra de rolagem pertence a lista treeview e unindo os dois elementos
+        self.listaCliente.configure(yscrollcommand=self.scrollLista.set)
+        self.scrollLista.place(relx=0.97, rely=0.01, relwidth= 0.02, relheight=0.85)
+
+        #barra de rolagem horizontal
+        self.scrollHor = Scrollbar(self.frameResTelaCliente, orient='horizontal')
+        self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
+        self.scrollHor.place(relx=0.01, rely=0.9, relwidth=0.1, relheight=0.1)
+
+        #funções que estão associadas aos botões 
+    
+    def  inserir_cliente(self):
+        
+        self.cpf = self.et_cpf_cliente.get()
+        self.cliente.cadastrarCliente(self.cpf)
+        
+        self.nome = self.et_nome_cliente.get()
+        self.cliente.cadastrarCliente(self.nome)
+        
+        self.email = self.et_email_cliente.get()
+        self.cliente.cadastrarCliente(self.email)
+        
+        self.telefone = self.et_tel_cliente.get()
+        self.cliente.cadastrarCliente(self.telefone)
+        
+        self.logradouro = self.et_logr_cliente.get()
+        self.cliente.cadastrarCliente(self.logradouro)
+        
+        self.numero = self.et_num_cliente.get()
+        self.cliente.cadastrarCliente(self.numero)
+        
+        self.cep = self.et_cep_cliente.get()
+        self.cliente.cadastrarCliente(self.cep)
+        
+        self.cidade = self.et_cidade_cliente.get()
+        self.cliente.cadastrarCliente(self.cidade)
+        
+        self.estado = self.et_estado_cliente.get()
+        self.cliente.cadastrarCliente(self.estado)
+        
+        for i in self.inserir_cliente:
+            if i == '':
+                messagebox.showerror('Erro','Preencha todos os campos.')
+            else:
+                messagebox.showinfo('Cliente adicionado!')
+
+    def lista_cliente(self):
+        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.lista = self.cliente.listarCliente()
+       
+        for i in self.lista:
+            self.listaCliente.insert('',END, values=i)
+            
+    def alterar_cliente(self):
+        pass       
+    
+    def excluir_cliente(self):
         pass
 
     def widgets_categoria(self) -> None:
