@@ -4,17 +4,15 @@ from tkinter import tix
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.usuario import Usuario
-from modulos.validacoes import Validadores
+from modulos.funcionalidades import Funcionalidades
 
 
 appMenu = tix.Tk()
 
-class MenuTela:
+class MenuTela(Funcionalidades):
     categoria = CategoriaProduto()
     usuario = Usuario()
-    validar = Validadores()
     def __init__(self) -> None:
-
         self.appMenu = appMenu
         self.configTelamenu()
         self.frame_menu()
@@ -63,7 +61,7 @@ class MenuTela:
         self.balUsuario.bind_widget(self.btn_ger_usuario, balloonmsg='Usuário')
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
-        self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli, bg='#787878')
+        self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli, bg='#787878', command=self.widgets_cliente)
         self.btn_ger_cliente.place(relx=0.08, rely=0.23, width=150, height=50)
         self.balCliente = tix.Balloon(self.frameMenu_left)
         self.balCliente.bind_widget(self.btn_ger_cliente, balloonmsg='Cliente')
@@ -137,19 +135,22 @@ class MenuTela:
         self.btn_alterar_senha.place(relx=0.43, rely=0.45, width=120, height=50)
 
     def mudar_senha(self) -> None:
-        self.senha = self.et_nova_senha.get()
-        self.conf = self.et_confir_senha.get()
-        if self.senha == '' or self.conf == '':
+        if self.et_nova_senha.get() == '' or self.et_confir_senha.get() == '':
             messagebox.showwarning('Alerta', 'Preencha os campos')
+        elif len(self.et_nova_senha.get()) != 8 or len(self.et_confir_senha.get()) != 8:
+            messagebox.showwarning('Alerta', 'A senha deve conter 8 caracteres')
+        elif self.et_nova_senha.get() != self.et_confir_senha.get():
+            messagebox.showinfo('Alerta', 'Senhas diferentes')     
         else:
-            if self.senha != self.conf:
-                messagebox.showinfo('Alerta', 'Senhas diferentes')
-            else:
-                self.usuario.alterar_senha(self.senha)
-                self.msg_avi = 'Senha alterada com sucesso!'
-                messagebox.showinfo('Aviso', self.msg_avi)
+            self.senha = self.et_nova_senha.get()
+            self.conf = self.et_confir_senha.get()
+            self.usuario.alterar_senha(self.senha)
+            self.msg_avi = 'Senha alterada com sucesso!'
+            messagebox.showinfo('Aviso', self.msg_avi)
+            self.limpa_usuario()
                 
-
+    
+        
 
     def widgets_cliente(self) -> None:
         self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
