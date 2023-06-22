@@ -483,23 +483,29 @@ class MenuTela(Funcionalidades, Validadores):
         self.frameResTelaServico = Frame(self.frameMenu_right, bd = 1, bg = '#d9d9d9')
         self.frameResTelaServico.place(relx=0, rely=0.5, relwidth=1, relheight=0.5)
 
+        self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_cod_servico.place(relx=0.04, rely=0.05, height=20)
+        self.et_cod_servico = Entry(self.frameCadTelaServico)
+        self.et_cod_servico.place(relx=0.04, rely=0.12, width=80, height=20)
+
         self.lbl_desc_servico = Label(self.frameCadTelaServico, text='Descrição: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_desc_servico.place(relx=0.04, rely=0.05, height=20)
+        self.lbl_desc_servico.place(relx=0.04, rely=0.22, height=20)
         self.et_desc_servico = Entry(self.frameCadTelaServico)
-        self.et_desc_servico.place(relx=0.04, rely=0.12, width=250, height=20)
+        self.et_desc_servico.place(relx=0.04, rely=0.29, width=250, height=20)
 
         self.lbl_tipo_servico = Label(self.frameCadTelaServico, text='Tipo: ', font=('Roboto', 12, 'bold'),bg='#d9d9d9')
-        self.lbl_tipo_servico.place(relx=0.04, rely=0.22, height=20)
+        self.lbl_tipo_servico.place(relx=0.04, rely=0.4, height=20)
         self.et_tipo_servico = Entry(self.frameCadTelaServico)
-        self.et_tipo_servico.place(relx=0.04, rely=0.29, width=100, height=20)
+        self.et_tipo_servico.place(relx=0.04, rely=0.47, width=100, height=20)
 
         self.lbl_preco_servico = Label(self.frameCadTelaServico, text='Preço: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_preco_servico.place(relx=0.04, rely=0.4, height=20)
+        self.lbl_preco_servico.place(relx=0.04, rely=0.57, height=20)
         self.et_preco_servico = Entry(self.frameCadTelaServico)
-        self.et_preco_servico.place(relx=0.04, rely=0.47, width=80, height=20)
+        self.et_preco_servico.place(relx=0.04, rely=0.63, width=80, height=20)
+
 
         self.img_salvar = PhotoImage(file="imagens/salvar.png")
-        self.btn_salvar = Button(self.frameCadTelaServico, image=self.img_salvar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.btn_salvar = Button(self.frameCadTelaServico, image=self.img_salvar, font=('Roboto', 12, 'bold'), bg='#d9d9d9', command=self.inserir_servico)
         self.btn_salvar.place(relx=0.04, rely=0.75, relwidth=0.12, height=50)
 
         self.img_listar = PhotoImage(file="imagens/listar.png")

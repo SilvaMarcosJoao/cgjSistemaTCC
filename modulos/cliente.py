@@ -1,7 +1,8 @@
-
+from modulos.dbsqlite import BancoDados
+banco = BancoDados()
 
 class Cliente:
-    def __init__(self,cpf: str, nome_cliente: str, email :str ,telefone: str, logradouro: str, numero : int, cep : int, cidade: str, estado: str ):
+    def __init__(self,cpf: str=None, nome_cliente: str=None, email :str=None ,telefone: str=None, logradouro: str=None, numero : int=None, cep : int=None, cidade: str=None, estado: str=None):
         self.__nome_cliente=nome_cliente
         self.__logradouro=logradouro
         self.__cpf=cpf

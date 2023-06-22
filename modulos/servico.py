@@ -1,9 +1,10 @@
+from modulos.dbsqlite import BancoDados
 
-
+banco = BancoDados()
 
 class Servico:
     # Construtor
-    def __init__(self, cod_servico: str, descricao_servico: str, preco_servico: float, tipo: str) -> None:
+    def __init__(self, cod_servico: str=None, descricao_servico: str=None, preco_servico: float=None, tipo: str=None) -> None:
         # Atributos (privado)
         self.__cod_servico = cod_servico
         self.__descricao_servico = descricao_servico
@@ -35,11 +36,11 @@ class Servico:
     def set_tipo(self, tipo: str) -> None:
         self.__tipo = tipo
 
-    def cadastrarServico(self) -> None:
+    def cadastrarServico(self, codigo, descricao, preco, tipo) -> None:
         banco.conectar()
         try:
             banco.cursor.execute(f"""INSERT INTO servico(cod_servico, descricao_servico, preco_servico, tipo)
-            VALUES ('{self.__cod_servico}', '{self.__descricao_servico}', '{self.__preco_servico}', '{self.__tipo}')""")
+            VALUES ('{codigo}', '{descricao}', '{preco}', '{tipo}')""")
             banco.conexao.commit()
             banco.desconectar()
         except:

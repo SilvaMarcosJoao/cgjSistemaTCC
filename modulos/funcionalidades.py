@@ -2,10 +2,12 @@ from tkinter import *
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
+from modulos.servico import Servico
 
 class Funcionalidades:
     categoria = CategoriaProduto()
     cliente = Cliente()
+    servico = Servico()
     
     def __init__(self):
         self.caractere = None
@@ -58,7 +60,10 @@ class Funcionalidades:
             messagebox.showinfo('Aviso', self.msg_avi)
             self.limpa_usuario()     
     
-    
+    def limpa_usuario(self):
+        self.et_nova_senha.delete(0, END)
+        self.et_confir_senha.delete(0, END)
+
     def inserir_categoria(self):
         self.desc = self.et_desc_categoria.get()
         self.categoria.cadastrarCategoria(self.desc)
@@ -188,7 +193,16 @@ class Funcionalidades:
         self.et_cidade_cliente.delete(0,END)
         self.et_estado_cliente.delete(0,END)
 
+    def inserir_servico(self):
+        self.cod_servico = self.et_cod_servico.get()
+        self.desc_servico = self.et_desc_servico.get()
+        self.preco_servico = self.et_preco_servico.get()
+        self.tipo_servico = self.et_tipo_servico.get()
+        self.servico.cadastrarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
+        self.limpa_servico()
 
-    def limpa_usuario(self):
-        self.et_nova_senha.delete(0, END)
-        self.et_confir_senha.delete(0, END)
+    def limpa_servico(self):
+        self.et_cod_servico.delete(0, END)
+        self.et_desc_servico.delete(0, END)
+        self.et_preco_servico.delete(0, END)
+        self.et_tipo_servico.delete(0, END)
