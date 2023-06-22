@@ -201,6 +201,9 @@ class Funcionalidades:
         self.servico.cadastrarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
         self.limpa_servico()
 
+    def exibir_servico(self):
+        pass
+    
     def limpa_servico(self):
         self.et_cod_servico.delete(0, END)
         self.et_desc_servico.delete(0, END)
