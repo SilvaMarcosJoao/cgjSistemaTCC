@@ -1,7 +1,4 @@
-
 from modulos.dbsqlite import BancoDados
-
-
 
 banco = BancoDados()
 
@@ -38,15 +35,13 @@ class CategoriaProduto:
         banco.conexao.commit()
         banco.desconectar()
         
-    def alterarCategoria(self, cod_categoria_produto, desc_categoria_produto) -> None:
+    def alterarCategoria(self, cod, desc) -> None:
         banco.conectar()
-        banco.cursor.execute(f"""UPDATE CategoriaProduto
-                                SET cod_categoria_produto = ('{cod_categoria_produto}'), 
-                                desc_categoria_produto = ('{desc_categoria_produto }'),
-                                WHERE cod_categoria_produto='{cod_categoria_produto}'""")
+        banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc}')
+                                WHERE cod_categoria_produto = ('{cod}') """) 
         banco.conexao.commit()
         banco.desconectar()
-        
+
     def listarCategoria(self) -> list:
         banco.conectar()
         categoria =banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
@@ -57,14 +52,14 @@ class CategoriaProduto:
         banco.conectar()
         Categ = banco.cursor.execute(f"""SELECT cod_categoria_produto, desc_categoria_produto
                                 FROM CategoriaPorduto
-                                WHERE cod_categoria_produto='{cod_categoria_produto}'""").fetchmany()
+                                WHERE cod_categoria_produto='{cod_categoria_produto}' """).fetchmany()
         print(Categ)
         banco.desconectar()    
     
     def deletarCategoria(self, cod_categoria_produto):
         banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM CategoriaProduto
-                                WHERE cod_categoria_produto='{cod_categoria_produto}'""")
+        banco.cursor.execute(f"""DELETE FROM categoria_produto
+                                WHERE cod_categoria_produto = '{cod_categoria_produto}' """)
         banco.conexao.commit()
         banco.desconectar()
         

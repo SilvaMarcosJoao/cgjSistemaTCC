@@ -1,17 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import tix
-from tkinter import messagebox
-from modulos.categoriaproduto import CategoriaProduto
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
-
+from modulos.validacoes import Validadores
 
 appMenu = tix.Tk()
 
-class MenuTela(Funcionalidades):
-    categoria = CategoriaProduto()
+class MenuTela(Funcionalidades, Validadores):
     usuario = Usuario()
+    lmtsen = None
     def __init__(self) -> None:
         self.appMenu = appMenu
         self.configTelamenu()
@@ -134,24 +132,9 @@ class MenuTela(Funcionalidades):
         self.btn_alterar_senha = Button(self.usuario_frame, image=self.img_confirmar, bg='#d9d9d9', fg='#151515', command=self.mudar_senha)
         self.btn_alterar_senha.place(relx=0.43, rely=0.45, width=120, height=50)
 
-    def mudar_senha(self) -> None:
-        if self.et_nova_senha.get() == '' or self.et_confir_senha.get() == '':
-            messagebox.showwarning('Alerta', 'Preencha os campos')
-        elif len(self.et_nova_senha.get()) != 8 or len(self.et_confir_senha.get()) != 8:
-            messagebox.showwarning('Alerta', 'A senha deve conter 8 caracteres')
-        elif self.et_nova_senha.get() != self.et_confir_senha.get():
-            messagebox.showinfo('Alerta', 'Senhas diferentes')     
-        else:
-            self.senha = self.et_nova_senha.get()
-            self.conf = self.et_confir_senha.get()
-            self.usuario.alterar_senha(self.senha)
-            self.msg_avi = 'Senha alterada com sucesso!'
-            messagebox.showinfo('Aviso', self.msg_avi)
-            self.limpa_usuario()
-                
     
+                
         
-
     def widgets_cliente(self) -> None:
         self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
         self.frameCadTelaCliente.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.47)
@@ -297,12 +280,6 @@ class MenuTela(Funcionalidades):
         self.estado = self.et_estado_cliente.get()
         self.cliente.cadastrarCliente(self.estado)
         
-        for i in self.inserir_cliente:
-            if i == '':
-                messagebox.showerror('Erro','Preencha todos os campos.')
-            else:
-                messagebox.showinfo('Cliente adicionado!')
-
     def lista_cliente(self):
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarCliente()
@@ -341,14 +318,14 @@ class MenuTela(Funcionalidades):
         self.btn_lista_categoria.place(relx=0.38, rely=0.2, relwidth=0.1, height=50)
 
         self.img_alterar_categoria = PhotoImage(file='./imagens/editar.png')
-        self.btn_alterar_categoria = Button(self.categoria_frame, image=self.img_alterar_categoria, bg='#d9d9d9')
+        self.btn_alterar_categoria = Button(self.categoria_frame, image=self.img_alterar_categoria, bg='#d9d9d9', command=self.editar_categoria)
         self.btn_alterar_categoria.place(relx=0.51, rely=0.2, relwidth=0.1, height=50)
 
         self.img_excluir_categoria = PhotoImage(file='./imagens/excluir.png')
-        self.btn_excluir_categoria = Button(self.categoria_frame, image=self.img_excluir_categoria, bg='#d9d9d9')
+        self.btn_excluir_categoria = Button(self.categoria_frame, image=self.img_excluir_categoria, bg='#d9d9d9', command=self.excluir_categoria)
         self.btn_excluir_categoria.place(relx=0.64, rely=0.2, relwidth=0.1, height=50)
 
-        self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, column=('Col1', 'Col2'))
+        self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'))
 
         self.listaCategoria.heading('#0', text='')
         self.listaCategoria.heading('#1', text='Código Categoria')
@@ -363,23 +340,8 @@ class MenuTela(Funcionalidades):
         #informando que a barra de rolagem pertence a lista treeview e unindo os dois elementos
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
         self.scrollListaCat.place(relx=0.71, rely=0.48, relwidth= 0.02, relheight=0.5)
+        self.listaCategoria.bind("<Double-1>", self.duplo_clique_cat)
 
-
-    def inserir_categoria(self):
-        self.desc = self.et_desc_categoria.get()
-        self.categoria.cadastrarCategoria(self.desc)
-
-    def exibir_categoria(self):
-        self.listaCategoria.delete(*self.listaCategoria.get_children())
-        self.exibir = self.categoria.listarCategoria()
-
-        for i in self.exibir:
-            self.listaCategoria.insert('',END, values=i)
-
-    def alterar_categoria(self):
-        self.desc = self.et_desc_categoria.get()
-        self.categoria.alterarCategoria()
-    
     def widgets_produto(self):
         self.produto_frame = Frame(self.frameMenu_right, bg='#d9d9d9')
         self.produto_frame.place(relx=0, rely=0, relwidth=1, relheight=1)

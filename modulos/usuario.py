@@ -46,6 +46,3 @@ class Usuario:
     def sair(self):
         pass
 
-
-usuario = Usuario()
-usuario.logar()
