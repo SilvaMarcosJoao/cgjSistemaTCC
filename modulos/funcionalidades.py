@@ -104,40 +104,21 @@ class Funcionalidades:
 #CRUD do Cliente
         
     def  inserir_cliente(self):
-        self.cpf = self.et_cpf_cliente.get()
-        self.cliente.cadastrarCliente(self.cpf)
-        
+
+        self.cpf = self.et_cpf_cliente.get() 
         self.nome = self.et_nome_cliente.get()
-        self.cliente.cadastrarCliente(self.nome)
-        
-        self.email = self.et_email_cliente.get()
-        self.cliente.cadastrarCliente(self.email)
-        
-        self.telefone = self.et_tel_cliente.get()
-        self.cliente.cadastrarCliente(self.telefone)
-        
+        self.email = self.et_email_cliente.get() 
+        self.telefone = self.et_tel_cliente.get()   
         self.logradouro = self.et_logr_cliente.get()
-        self.cliente.cadastrarCliente(self.logradouro)
-        
         self.numero = self.et_num_cliente.get()
-        self.cliente.cadastrarCliente(self.numero)
-        
-        self.cep = self.et_cep_cliente.get()
-        self.cliente.cadastrarCliente(self.cep)
-        
+        self.cep = self.et_cep_cliente.get()       
         self.cidade = self.et_cidade_cliente.get()
-        self.cliente.cadastrarCliente(self.cidade)
-        
         self.estado = self.et_estado_cliente.get()
-        self.cliente.cadastrarCliente(self.estado)
+
+        self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
+                                      self.telefone,self.logradouro,self.numero,
+                                      self.cep,self.cidade,self.estado)    
         self.limpa_cliente()
-        
-        for i in self.inserir_cliente:
-            if i == '':
-                messagebox.showerror('Erro','Preencha todos os campos.')
-            else:
-                messagebox.showinfo('Cliente adicionado!')
-        
     
     def lista_cliente(self):
         self.listaCliente.delete(*self.listaCliente.get_children())
@@ -159,7 +140,7 @@ class Funcionalidades:
         self.cliente.alterarCliente(self.cpf,self.nome,self.email,self.telefone,
                                     self.logradouro,self.numero,self.cep,self.cidade,
                                     self.estado)       
-    
+        self.lista_cliente()
     
     def excluir_cliente(self):
         self.nome = self.et_nome_cliente.get()

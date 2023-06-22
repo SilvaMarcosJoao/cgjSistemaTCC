@@ -206,7 +206,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_excluir.place(relx=0.64, rely=0.8, relwidth=0.12, height=50)
     
         #criando treeview , dizemos qual é o pai dele(frameResFornecedor), posição que ele vai ficar, as colunas
-        self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 'Col8', 'Col9'))
+        self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 'Col8', 'Col9'))
         # vamos especificar o cabeçalho de cada coluna criada
         self.listaCliente.heading("#0", text='')
         self.listaCliente.heading('#1', text='CPF')
@@ -231,8 +231,8 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaCliente.column('#5', width=300)
         self.listaCliente.column('#6', width=80)
         self.listaCliente.column('#7', width=100)
-        self.listaCliente.column('#8', width=200)
-        self.listaCliente.column('#9', width=200)
+        self.listaCliente.column('#8', width=100)
+        self.listaCliente.column('#9', width=50)
 
   
         #definindo a posição do treeview na tela
@@ -248,50 +248,8 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrollHor = Scrollbar(self.frameResTelaCliente, orient='horizontal')
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.01, rely=0.9, relwidth=0.1, relheight=0.1)
-
+        self.listaCliente.bind("<Double-1>", self.duplo_clique_cliente)
         #funções que estão associadas aos botões 
-    
-    def  inserir_cliente(self):
-        
-        self.cpf = self.et_cpf_cliente.get()
-        self.cliente.cadastrarCliente(self.cpf)
-        
-        self.nome = self.et_nome_cliente.get()
-        self.cliente.cadastrarCliente(self.nome)
-        
-        self.email = self.et_email_cliente.get()
-        self.cliente.cadastrarCliente(self.email)
-        
-        self.telefone = self.et_tel_cliente.get()
-        self.cliente.cadastrarCliente(self.telefone)
-        
-        self.logradouro = self.et_logr_cliente.get()
-        self.cliente.cadastrarCliente(self.logradouro)
-        
-        self.numero = self.et_num_cliente.get()
-        self.cliente.cadastrarCliente(self.numero)
-        
-        self.cep = self.et_cep_cliente.get()
-        self.cliente.cadastrarCliente(self.cep)
-        
-        self.cidade = self.et_cidade_cliente.get()
-        self.cliente.cadastrarCliente(self.cidade)
-        
-        self.estado = self.et_estado_cliente.get()
-        self.cliente.cadastrarCliente(self.estado)
-        
-    def lista_cliente(self):
-        self.listaCliente.delete(*self.listaCliente.get_children())
-        self.lista = self.cliente.listarCliente()
-       
-        for i in self.lista:
-            self.listaCliente.insert('',END, values=i)
-            
-    def alterar_cliente(self):
-        pass       
-    
-    def excluir_cliente(self):
-        pass
 
     def widgets_categoria(self) -> None:
         self.categoria_frame = Frame(self.frameMenu_right, bg='#d9d9d9')

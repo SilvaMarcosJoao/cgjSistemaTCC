@@ -67,13 +67,13 @@ class Cliente:
     def set_estado(self, estado):
         self.__estado = estado
 
-    def cadastrarCliente(self):
+    def cadastrarCliente(self, cpf,nome_cliente,email,telefone,logradouro,numero,cep,cidade,estado):
         banco.conectar()
         banco.cursor.execute(f"""Insert into Cliente(cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado) 
-                          values('{self.__cpf }','{self.__nome_cliente }','{self.__email }','{self.__telefone }',
-                          '{self.__logradouro }','{self.__numero }','{self.__cep }','{self.__cidade }',
-                          '{self.__estado }')""")
+                          values('{cpf }','{nome_cliente }','{email }','{telefone }',
+                          '{logradouro }','{numero }','{cep }','{cidade }',
+                          '{estado }')""")
         banco.conexao.commit()
         banco.desconectar()
         
@@ -93,19 +93,19 @@ class Cliente:
         banco.conexao.commit()
         banco.desconectar()
         
-    def listarCliente(self):
+    def listarCliente(self) -> list :
         banco.conectar()
         clientes=banco.cursor.execute(f"""SELECT * FROM CLIENTE""").fetchall()   
-        print(clientes)   
         banco.desconectar()
-        
-    def consultarCliente(self, cpf):
+        return clientes 
+    
+    def consultarCliente(self, nome) -> list:
         banco.conectar()
         cli = banco.cursor.execute(f"""SELECT cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
-                                WHERE cpf='{cpf}'""").fetchmany()
-        print(cli)
+                                WHERE nome_cliente='{nome}'""").fetchmany()
         banco.desconectar()    
+        return cli
     
     def deletarCliente(self, cpf):
         banco.conectar()
@@ -113,10 +113,6 @@ class Cliente:
                                 WHERE cpf='{cpf}'""")
         banco.conexao.commit()
         banco.desconectar()
-        
-        
-cliente2 = Cliente('000.000.000-87', 'Guilherme', 'gsantos809812gasn', '79988888', 'abacate', 12, 34245,'aracaju', 'sergipe')
-cliente2.listarCliente()
 
 
 
