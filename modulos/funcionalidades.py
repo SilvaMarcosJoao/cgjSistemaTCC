@@ -1,9 +1,12 @@
 from tkinter import *
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
+from modulos.cliente import Cliente
 
 class Funcionalidades:
     categoria = CategoriaProduto()
+    cliente = Cliente()
+    
     def __init__(self):
         self.caractere = None
         self.numInt = None
@@ -91,27 +94,101 @@ class Funcionalidades:
     def limpa_categoria(self):
         self.et_cod_categoria.delete(0, END)
         self.et_desc_categoria.delete(0, END)
+        
+        
+#CRUD do Cliente
+        
+    def  inserir_cliente(self):
+        self.cpf = self.et_cpf_cliente.get()
+        self.cliente.cadastrarCliente(self.cpf)
+        
+        self.nome = self.et_nome_cliente.get()
+        self.cliente.cadastrarCliente(self.nome)
+        
+        self.email = self.et_email_cliente.get()
+        self.cliente.cadastrarCliente(self.email)
+        
+        self.telefone = self.et_tel_cliente.get()
+        self.cliente.cadastrarCliente(self.telefone)
+        
+        self.logradouro = self.et_logr_cliente.get()
+        self.cliente.cadastrarCliente(self.logradouro)
+        
+        self.numero = self.et_num_cliente.get()
+        self.cliente.cadastrarCliente(self.numero)
+        
+        self.cep = self.et_cep_cliente.get()
+        self.cliente.cadastrarCliente(self.cep)
+        
+        self.cidade = self.et_cidade_cliente.get()
+        self.cliente.cadastrarCliente(self.cidade)
+        
+        self.estado = self.et_estado_cliente.get()
+        self.cliente.cadastrarCliente(self.estado)
+        self.limpa_cliente()
+        
+        for i in self.inserir_cliente:
+            if i == '':
+                messagebox.showerror('Erro','Preencha todos os campos.')
+            else:
+                messagebox.showinfo('Cliente adicionado!')
+        
+    
+    def lista_cliente(self):
+        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.lista = self.cliente.listarCliente()
+        for i in self.lista:
+            self.listaCliente.insert('',END, values=i)
+  
+            
+    def alterar_cliente(self):
+        self.cpf = self.et_cpf_cliente.get()
+        self.nome = self.et_nome_cliente.get()
+        self.email = self.et_email_cliente.get()
+        self.telefone = self.et_tel_cliente.get()
+        self.logradouro = self.et_logr_cliente.get()
+        self.numero = self.et_num_cliente.get()
+        self.cep = self.et_cep_cliente.get()
+        self.cidade = self.et_cidade_cliente.get()
+        self.estado = self.et_estado_cliente.get()
+        self.cliente.alterarCliente(self.cpf,self.nome,self.email,self.telefone,
+                                    self.logradouro,self.numero,self.cep,self.cidade,
+                                    self.estado)       
+    
+    
+    def excluir_cliente(self):
+        self.nome = self.et_nome_cliente.get()
+        self.cliente.deletarCliente(self.nome)
+        self.limpa_cliente()
+        self.lista_cliente()
 
-
-
-
-
-
-
-
-
-
-
-
-
+    def duplo_clique_cliente(self, event):
+        self.limpa_cliente()
+        self.listaCliente.selection()
+        for i in self.listaCliente.selection():
+            col1, col2, col3, col4,col5, col6, col7, col8, col9 = self.listaCliente.item(i, 'values')
+            self.et_cpf_cliente.insert(END, col1)
+            self.et_nome_cliente.insert(END, col2) 
+            self.et_email_cliente.insert(END, col3)
+            self.et_tel_cliente.insert(END, col4)
+            self.et_logr_cliente.insert(END, col5)
+            self.et_num_cliente.insert(END, col6)
+            self.et_cep_cliente.insert(END, col7)
+            self.et_cidade_cliente.insert(END, col8)
+            self.et_estado_cliente.insert(END, col9)
+    
+    def limpa_cliente(self):
+        self.et_cpf_cliente.delete(0,END)
+        self.et_nome_cliente.delete(0,END)
+        self.et_email_cliente.delete(0,END)
+        self.et_tel_cliente.delete(0,END)
+        self.et_logr_cliente.delete(0,END)
+        self.et_num_cliente.delete(0,END)
+        self.et_cep_cliente.delete(0,END)
+        self.et_cidade_cliente.delete(0,END)
+        self.et_estado_cliente.delete(0,END)
 
 
     def limpa_usuario(self):
         self.et_nova_senha.delete(0, END)
         self.et_confir_senha.delete(0, END)
-
-    
-
-    
-
-
