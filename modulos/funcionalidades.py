@@ -4,7 +4,6 @@ from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
 from modulos.servico import Servico
 from modulos.usuario import Usuario
-
 from modulos.fornecedor import Fornecedor
 
 class Funcionalidades:
@@ -93,7 +92,7 @@ class Funcionalidades:
   
 
 #CRUD do Cliente
-    def  inserir_cliente(self):
+    def inserir_cliente(self):
         self.cpf = self.et_cpf_cliente.get() 
         self.nome = self.et_nome_cliente.get()
         self.email = self.et_email_cliente.get() 
@@ -115,7 +114,6 @@ class Funcionalidades:
         for n in self.lista:
             self.listaCliente.insert('',END, values=n)
 
-            
     def alterar_cliente(self):
         self.cod = self.et_cod_cliente.get()
         self.cpf = self.et_cpf_cliente.get()
@@ -264,6 +262,7 @@ class Funcionalidades:
         self.desc_servico = self.et_desc_servico.get()
         self.preco_servico = self.et_preco_servico.get()
         self.tipo_servico = self.et_tipo_servico.get()
+        
         self.servico.cadastrarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
         self.limpa_servico()
 
@@ -297,5 +296,9 @@ class Funcionalidades:
             self.et_desc_servico.insert(END, col2) 
             self.et_preco_servico.insert(END, col3)
             self.et_tipo_servico.insert(END, col4)
-         
-#CRUD de 
+    
+    def limpa_servico(self):
+        self.et_cod_servico.delete(0, END)
+        self.et_desc_servico.delete(0, END)
+        self.et_preco_servico.delete(0, END)
+        self.et_tipo_servico.delete(0, END)
