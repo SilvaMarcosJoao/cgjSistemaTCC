@@ -1,10 +1,11 @@
 from tkinter import *
 from tkinter import messagebox
 from modulos.usuario import Usuario
+from modulos.funcionalidades import Funcionalidades
 
 objUsuario = Usuario()
 
-class MudarSenhaTela:
+class MudarSenhaTela(Funcionalidades):
 
     def __init__(self) -> None:
         self.mudasenhatela = Toplevel()
@@ -44,31 +45,9 @@ class MudarSenhaTela:
         self.confirmar_senha = Label(self.mudasenhatela, text="Confirmar senha:",fg='#FFFFFF')
         self.confirmar_senha.place(relx=0.19, rely=0.45)
         self.confirmar_senha.configure(background='#585858',font=("Roboto", 12))
-        self.et_conf_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')  
-        self.et_conf_senha.place(relx=0.44, rely=0.46, width=120)
+        self.et_confir_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')  
+        self.et_confir_senha.place(relx=0.44, rely=0.46, width=120)
 
-        self.btn_alterar = Button(self.mudasenhatela, text="Alterar", bg="#FFFFFF", fg="#151515", command=self.inter_muda_senha)
+        self.btn_alterar = Button(self.mudasenhatela, text="Alterar", bg="#FFFFFF", fg="#151515", command=self.mudar_senha)
         self.btn_alterar.place(relx=0.45, rely=0.59, width=90, height=50)
     
-
-    def inter_muda_senha(self) -> None:
-        self.senha = self.et_nova_senha.get()
-        self.repete_senha = self.et_conf_senha.get()
-        try:
-            objUsuario.alterar_senha(self.senha, self.repete_senha)
-
-        except:
-            self.msg_erro = 'Erro, por favor corrija!'
-            messagebox.showerror('Erro',self.msg_erro)
-        else:
-            self.msg_avi = 'Senha alterada com sucesso!'
-            messagebox.showinfo('Aviso', self.msg_avi)
-
-
-
-
-
-
-
-
-

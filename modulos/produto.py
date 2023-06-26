@@ -55,10 +55,10 @@ class Produto:
         self.__preco_venda_produto = preco_venda_produto
 
     def set_qtd(self, qtd):
-        self.__numero = qtd
+        self.__qtd = qtd
 
     def set_cod_categoria_produto(self, cod_categoria_produto):
-        self.__cep = cod_categoria_produto
+        self.__cod_produto = cod_categoria_produto
 
      #cadastra os produtos 
     def cadastrarProduto(self):

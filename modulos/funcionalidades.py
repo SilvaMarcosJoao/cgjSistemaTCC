@@ -3,50 +3,20 @@ from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
 from modulos.servico import Servico
+from modulos.usuario import Usuario
+
 from modulos.fornecedor import Fornecedor
 
 class Funcionalidades:
+
+    # OBJETOS DAS CLASSES 
     categoria = CategoriaProduto()
     cliente = Cliente()
     servico = Servico()
+    usuario = Usuario()
     fornecedor = Fornecedor()
     
-    def __init__(self):
-        self.caractere = None
-        self.numInt = None
-
-    def valida_string(self,texto: str) -> str:
-        '''
-        Esta função recebe um parâmetro qualquer para ser validado
-        se é ou não uma String
-        :param texto: recebe uma cadeia de caractere
-        :return v: retorna a string após ser validada
-        '''
-        try:
-            self.caractere = str(input(texto)).strip()
-        except (ValueError, TypeError, FloatingPointError):
-            print('\033[1;31mErro, valor digitado não é compatível com um texto\033[m')
-
-        else:
-            return self.caractere
-
-    def valida_int(self, valor: int) -> int:
-        '''
-            Esta função recebe um parâmetro qualquer para ser validado
-            se é ou não um valor inteiro
-            :param valor: recebe um valor
-            :return v: retorna o valor validado
-            '''
-        while True:
-            try:
-                self.numInt = int(input(valor))
-            except ValueError:
-                print('\033[1;31mValor inválido\033[m')
-            except TypeError:
-                print('\033[1;31mTipo de valor errado\033[m')
-            else:
-                return self.numInt
-            
+    # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def mudar_senha(self) -> None:
         if self.et_nova_senha.get() == '' or self.et_confir_senha.get() == '':
             messagebox.showwarning('Alerta', 'Preencha os campos')
@@ -70,25 +40,38 @@ class Funcionalidades:
 
     def inserir_categoria(self):
         self.desc = self.et_desc_categoria.get()
-        self.categoria.cadastrarCategoria(self.desc)
+        if self.desc == '':
+            messagebox.showwarning('Alerta', 'Insira da descrição da categoria')
+        else:
+            self.categoria.cadastrarCategoria(self.desc)
+            messagebox.showinfo('Info', 'Categoria de produto cadastrada com sucesso!')
         self.limpa_categoria()
 
     def exibir_categoria(self):
         self.listaCategoria.delete(*self.listaCategoria.get_children())
         self.exibir = self.categoria.listarCategoria()
-        for i in self.exibir:
-            self.listaCategoria.insert('',END, values=i)
+        if len(self.exibir) == 0:
+            messagebox.showinfo('Informação', 'Não há categorias cadastradas')
+        else:
+            for i in self.exibir:
+                self.listaCategoria.insert('',END, values=i)  
+    
 
     def editar_categoria(self):
         self.cod = self.et_cod_categoria.get()
         self.desc = self.et_desc_categoria.get()
-        self.categoria.alterarCategoria(self.cod, self.desc)
-        self.limpa_categoria()
+        if self.desc == '':
+            messagebox.showwarning('Alerta', 'Insira da descrição da categoria')
+        else:
+            self.categoria.alterarCategoria(self.cod, self.desc)
+            messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
+            self.limpa_categoria()
         self.exibir_categoria()
 
     def excluir_categoria(self):
         self.cod = self.et_cod_categoria.get()
         self.categoria.deletarCategoria(self.cod)
+        messagebox.showinfo('Info', 'Categoria excluída com sucesso!')
         self.limpa_categoria()
         self.exibir_categoria()
 
@@ -104,8 +87,12 @@ class Funcionalidades:
         self.et_cod_categoria.delete(0, END)
         self.et_desc_categoria.delete(0, END)
         
-        
-#CRUD do Cliente 
+    def exibir_categ_prod(self) -> list:
+        self.exibir = self.categoria.listarCategoria()
+        return self.exibir
+  
+
+#CRUD do Cliente
     def  inserir_cliente(self):
         self.cpf = self.et_cpf_cliente.get() 
         self.nome = self.et_nome_cliente.get()
@@ -125,9 +112,9 @@ class Funcionalidades:
     def lista_cliente(self):
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarCliente()
-        for i in self.lista:
-            self.listaCliente.insert('',END, values=i)
-  
+        for n in self.lista:
+            self.listaCliente.insert('',END, values=n)
+
             
     def alterar_cliente(self):
         self.cod = self.et_cod_cliente.get()
@@ -268,6 +255,47 @@ class Funcionalidades:
         self.et_cidade_fornecedor.delete(0,END)
         self.et_estado_fornecedor.delete(0,END)
         #self.et_qtd_fornecida_fornecedor.delete(0,END)
-       # self.et_data_fornecimento.delete(0,END)
-           
+        #self.et_data_fornecimento.delete(0,END)
+       
+       
+# FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
+    def inserir_servico(self):
+        self.cod_servico = self.et_cod_servico.get()
+        self.desc_servico = self.et_desc_servico.get()
+        self.preco_servico = self.et_preco_servico.get()
+        self.tipo_servico = self.et_tipo_servico.get()
+        self.servico.cadastrarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
+        self.limpa_servico()
+
+    def exibir_servico(self):
+        self.listaServico.delete(*self.listaServico.get_children())
+        self.exibir_serv = self.servico.listarServicos()
+        for s in self.exibir_serv:
+            self.listaServico.insert('',END, values=s)
+
+    def editar_servico(self):
+        self.cod_servico = self.et_cod_servico.get()
+        self.desc_servico = self.et_desc_servico.get()
+        self.preco_servico = self.et_preco_servico.get()
+        self.tipo_servico = self.et_tipo_servico.get()
+        self.servico.alterarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
+        self.limpa_servico()
+        self.exibir_servico()
+
+    def deletar_servico(self):
+        self.cod_servico = self.et_cod_servico.get()
+        self.servico.excluirServico(self.cod_servico)
+        self.limpa_servico()
+        self.exibir_servico()
+
+    def duplo_clique_servico(self, event):
+        self.limpa_servico()
+        self.listaServico.selection()
+        for i in self.listaServico.selection():
+            col1, col2, col3, col4 = self.listaServico.item(i, 'values')
+            self.et_cod_servico.insert(END, col1)
+            self.et_desc_servico.insert(END, col2) 
+            self.et_preco_servico.insert(END, col3)
+            self.et_tipo_servico.insert(END, col4)
+         
 #CRUD de 
