@@ -2,7 +2,8 @@ from modulos.dbsqlite import BancoDados
 banco = BancoDados()
 
 class Cliente:
-    def __init__(self,cpf: str=None, nome_cliente: str=None, email :str=None ,telefone: str=None, logradouro: str=None, numero : int=None, cep : int=None, cidade: str=None, estado: str=None):
+    def __init__(self, cod_cliente: int=None, cpf: str=None, nome_cliente: str=None, email: str=None ,telefone: str=None, logradouro: str=None, numero : int=None, cep : int=None, cidade: str=None, estado: str=None):
+        self._cod_cliente=cod_cliente
         self.__nome_cliente=nome_cliente
         self.__logradouro=logradouro
         self.__cpf=cpf
@@ -13,6 +14,9 @@ class Cliente:
         self.__cidade=cidade
         self.__estado=estado
 
+    def get_cod_cliente(self) -> int:
+        return self.__cod_cliente
+    
     def get_nome_cliente(self) -> str:
         return self.__nome_cliente
 
@@ -39,6 +43,9 @@ class Cliente:
 
     def get_estado(self) -> str:
         return self.__estado
+    
+    def set_cod_cliente(self, cod: int )-> None:
+        self.__cod_cliente = cod
 
     def set_nome_cliente(self, nome_cliente):
         self.__nome_cliente = nome_cliente
@@ -77,7 +84,7 @@ class Cliente:
         banco.conexao.commit()
         banco.desconectar()
         
-    def alterarCliente(self, cod, cpf, nome_cliente, email, telefone, logradouro, numero, cep, cidade, estado):
+    def alterarCliente(self, cod_cliente, cpf, nome_cliente, email, telefone, logradouro, numero, cep, cidade, estado):
         banco.conectar()
         banco.cursor.execute(f"""UPDATE Cliente
                                 SET cpf = ('{cpf }'), 
@@ -89,7 +96,7 @@ class Cliente:
                                 cep = ('{cep }'), 
                                 cidade= ('{cidade }'), 
                                 estado = ('{estado }')
-                                WHERE cpf='{cod}'""")
+                                WHERE cod_cliente='{cod_cliente}'""")
         banco.conexao.commit()
         banco.desconectar()
         
@@ -107,12 +114,9 @@ class Cliente:
         banco.desconectar()    
         return cli
     
-    def deletarCliente(self, cpf):
+    def deletarCliente(self, cod_cliente):
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM Cliente
-                                WHERE cpf='{cpf}'""")
+                                WHERE cod_cliente='{cod_cliente}'""")
         banco.conexao.commit()
         banco.desconectar()
-
-
-
