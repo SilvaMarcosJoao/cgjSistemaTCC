@@ -22,6 +22,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.imgAlterar = PhotoImage(file='./imagens/editar.png')
         self.imgListar = PhotoImage(file="imagens/listar.png")
         self.imgExcluir = PhotoImage(file='./imagens/excluir.png')
+        self.imgConsultar = PhotoImage(file='imagens/consultar.png')
 
     def indicate(self, page):
         self.delete_page()
@@ -384,6 +385,7 @@ class MenuTela(Funcionalidades, Validadores):
         
     # CONFIGURAÇÕES DA TELA FORNECEDOR
     def widgets_fornecedor(self) -> None:
+        self.img_crud()
         self.frameCadTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
         self.frameCadTelaFornecedor.place(relx=0, rely=0, relwidth=1, relheight=0.49)
 
@@ -453,27 +455,23 @@ class MenuTela(Funcionalidades, Validadores):
       #  self.btn_calendario = Button(self.frameCadTelaFornecedor, text='Selecionar Data', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
        # self.btn_calendario.place(relx=0.24, rely=0.34, width=180, height=40)
 
-        self.img_consultar = PhotoImage(file="imagens/consultar.png")
-        self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor, image=self.img_consultar, bg="#d9d9d9")
+        
+        self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor, image=self.imgConsultar, bg="#d9d9d9")
         self.btn_consultar.place(relx=0.45, rely=0.65, relwidth=0.1, height=40)
 
         self.et_consultar = Entry(self.frameCadTelaFornecedor, font=('Roboto', 16))
         self.et_consultar.place(relx=0.56, rely=0.65, width=422, height=40)
         
-        self.img_salvar = PhotoImage(file="imagens/adicionar.png")
-        self.btn_salvar = Button(self.frameCadTelaFornecedor, command= self.inserir_fornecedor, image=self.img_salvar, bg='#d9d9d9')
+        self.btn_salvar = Button(self.frameCadTelaFornecedor, command= self.inserir_fornecedor, image=self.imgSalvar, bg='#d9d9d9')
         self.btn_salvar.place(relx=0.02, rely=0.65, relwidth=0.09, height=40)
 
-        self.img_listar = PhotoImage(file="imagens/listar.png")
-        self.btn_listar = Button(self.frameCadTelaFornecedor, command= self.lista_fornecedor, image=self.img_listar, bg='#d9d9d9')
+        self.btn_listar = Button(self.frameCadTelaFornecedor, command= self.lista_fornecedor, image=self.imgListar, bg='#d9d9d9')
         self.btn_listar.place(relx=0.12, rely=0.65, relwidth=0.09, height=40)
 
-        self.img_alterar = PhotoImage(file="imagens/editar.png")
-        self.btn_alterar = Button(self.frameCadTelaFornecedor, command= self.alterar_fornecedor, image=self.img_alterar, bg='#d9d9d9')
+        self.btn_alterar = Button(self.frameCadTelaFornecedor, command= self.alterar_fornecedor, image=self.imgAlterar, bg='#d9d9d9')
         self.btn_alterar.place(relx=0.22, rely=0.65, relwidth=0.09, height=40)
 
-        self.img_excluir = PhotoImage(file="imagens/excluir.png")
-        self.btn_excluir = Button(self.frameCadTelaFornecedor, command=self.excluir_fornecedor , image=self.img_excluir, bg='#d9d9d9')
+        self.btn_excluir = Button(self.frameCadTelaFornecedor, command=self.excluir_fornecedor , image=self.imgExcluir, bg='#d9d9d9')
         self.btn_excluir.place(relx=0.32, rely=0.65, relwidth=0.095, height=40)
 
         self.listaForne = ttk.Treeview(self.frameResTelaFornecedor, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 
