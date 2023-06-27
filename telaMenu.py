@@ -113,7 +113,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_nova_senha = Label(self.usuario_frame, text='Nova Senha:',font=('Roboto', 16))
         self.lbl_nova_senha.place(relx=0.4, rely=0.2)
         self.et_nova_senha = Entry(self.usuario_frame, font=('Roboto', 14))
-        self.et_nova_senha.place(relx=0.4, rely =0.25, width=150, height=25)
+        self.et_nova_senha.place(relx=0.4, rely =0.25, width=180, height=25)
 
         self.lbl_confir_senha = Label(self.usuario_frame, text='Confirmar Senha:', font=('Roboto', 16))
         self.lbl_confir_senha.place(relx=0.4, rely=0.3)
@@ -422,12 +422,12 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_logr_fornecedor = Label(self.frameCadTelaFornecedor, text='Logradouro: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_logr_fornecedor.place(relx=0.35, rely=0.02, height=20)
         self.et_logr_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 10))
-        self.et_logr_fornecedor.place(relx=0.35, rely=0.09, width=455, height=20)
+        self.et_logr_fornecedor.place(relx=0.35, rely=0.09, width=400, height=20)
 
         self.lbl_num_fornecedor = Label(self.frameCadTelaFornecedor, text='Número: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_num_fornecedor.place(relx=0.84, rely=0.02, height=20)
+        self.lbl_num_fornecedor.place(relx=0.77, rely=0.02, height=20)
         self.et_num_fornecedor = Entry(self.frameCadTelaFornecedor)
-        self.et_num_fornecedor.place(relx=0.84, rely=0.09, width=70, height=20)
+        self.et_num_fornecedor.place(relx=0.77, rely=0.09, width=70, height=20)
 
         self.lbl_cep_fornecedor = Label(self.frameCadTelaFornecedor, text='Cep: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_cep_fornecedor.place(relx=0.35, rely=0.17, height=20)
@@ -435,19 +435,19 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_cep_fornecedor.place(relx=0.35, rely=0.24, width=80, height=20)
 
         self.lbl_cidade_fornecedor = Label(self.frameCadTelaFornecedor, text='Cidade: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_cidade_fornecedor.place(relx=0.54, rely=0.18, height=20)
+        self.lbl_cidade_fornecedor.place(relx=0.35, rely=0.49, height=20)
         self.et_cidade_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 10))
-        self.et_cidade_fornecedor.place(relx=0.54, rely=0.24, width=220, height=20)
+        self.et_cidade_fornecedor.place(relx=0.35, rely=0.58, width=220, height=20)
 
         self.lbl_estado_fornecedor = Label(self.frameCadTelaFornecedor, text='Estado: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_estado_fornecedor.place(relx=0.77, rely=0.18, height=20)
+        self.lbl_estado_fornecedor.place(relx=0.35, rely=0.32, height=20)
         self.et_estado_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 10))
-        self.et_estado_fornecedor.place(relx=0.77, rely=0.24, width=210, height=20)
+        self.et_estado_fornecedor.place(relx=0.35, rely=0.40, width=210, height=20)
 
         self.lbl_qtd_fornecida_fornecedor = Label(self.frameCadTelaFornecedor, text='Qtd Fornecida: ', font=('Roboto', 12, 'bold'),bg='#d9d9d9')
-        self.lbl_qtd_fornecida_fornecedor.place(relx=0.45, rely=0.33, height=20)
+        self.lbl_qtd_fornecida_fornecedor.place(relx=0.35, rely=0.67, height=20)
         self.et_qtd_fornecida_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 10))
-        self.et_qtd_fornecida_fornecedor.place(relx=0.35, rely=0.50, relwidth=0.06, height=20)
+        self.et_qtd_fornecida_fornecedor.place(relx=0.35, rely=0.75, relwidth=0.06, height=20)
 
         self.lbl_data_fornecimento = Label(self.frameCadTelaFornecedor, text='Data do Fornecimento: ', font=('Roboto', 12, 'bold'),bg='#d9d9d9')
         self.lbl_data_fornecimento.place(relx=0.02, rely=0.66, height=20)
@@ -459,22 +459,22 @@ class MenuTela(Funcionalidades, Validadores):
 
         
         self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor, image=self.imgConsultar, bg="#d9d9d9")
-        self.btn_consultar.place(relx=0.45, rely=0.84, relwidth=0.1, height=40)
+        self.btn_consultar.place(relx=0.25, rely=0.84, relwidth=0.1, height=40)
 
         self.et_consultar = Entry(self.frameCadTelaFornecedor, font=('Roboto', 16))
-        self.et_consultar.place(relx=0.56, rely=0.84, width=422, height=40)
+        self.et_consultar.place(relx=0.37, rely=0.84, width=422, height=40)
         
         self.btn_salvar = Button(self.frameCadTelaFornecedor, command= self.inserir_fornecedor, image=self.imgSalvar, bg='#d9d9d9')
-        self.btn_salvar.place(relx=0.02, rely=0.84, relwidth=0.09, height=40)
+        self.btn_salvar.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
 
         self.btn_listar = Button(self.frameCadTelaFornecedor, command= self.lista_fornecedor, image=self.imgListar, bg='#d9d9d9')
-        self.btn_listar.place(relx=0.12, rely=0.84, relwidth=0.09, height=40)
+        self.btn_listar.place(relx=0.88, rely=0.22, relwidth=0.09, height=40)
 
         self.btn_alterar = Button(self.frameCadTelaFornecedor, command= self.alterar_fornecedor, image=self.imgAlterar, bg='#d9d9d9')
-        self.btn_alterar.place(relx=0.22, rely=0.84, relwidth=0.09, height=40)
+        self.btn_alterar.place(relx=0.88, rely=0.39, relwidth=0.09, height=40)
 
         self.btn_excluir = Button(self.frameCadTelaFornecedor, command=self.excluir_fornecedor , image=self.imgExcluir, bg='#d9d9d9')
-        self.btn_excluir.place(relx=0.32, rely=0.84, relwidth=0.095, height=40)
+        self.btn_excluir.place(relx=0.88, rely=0.55, relwidth=0.09, height=40)
 
         self.listaForne = ttk.Treeview(self.frameResTelaFornecedor, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 
                                                                                         'Col8', 'Col9', 'Col10'), show='headings')
