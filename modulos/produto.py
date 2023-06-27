@@ -60,12 +60,12 @@ class Produto:
     def set_cod_categoria_produto(self, cod_categoria_produto):
         self.__cod_produto = cod_categoria_produto
 
-     #cadastra os produtos 
-    def cadastrarProduto(self):
+    #cadastra os produtos 
+    def cadastrarProduto(self, cod_produto, desc_produto, mod_produto, preco_compra, preco_venda, qtd, categoria):
         banco.conectar()
         banco.cursor.execute(f"""Insert into Produto(cod_produto, desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, qtd, cod_categoria_produto) 
-                          values('{self.__cod_produto }','{self.__desc_produto }','{self.__modelo_produto }','{self.__preco_compra_produto}','{self.__preco_venda_produto }','{self.__qtd }','{self.__categoria_produto }')""")
+                          values('{cod_produto}','{desc_produto }','{mod_produto }','{preco_compra}','{preco_venda}','{qtd}','{categoria}')""")
         banco.conexao.commit()
         banco.desconectar()
     
