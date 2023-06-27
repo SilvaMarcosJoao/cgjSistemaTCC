@@ -199,7 +199,7 @@ class MenuTela(Funcionalidades, Validadores):
     
     
         self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
-                                                                                      'Col8', 'Col9','Col10'))
+                                                                                      'Col8', 'Col9','Col10'), show = 'headings')
 
         self.listaCliente.heading("#0", text='')
         self.listaCliente.heading("#1", text='Código')
@@ -228,6 +228,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaCliente.column('#7', width=100, anchor='center')
         self.listaCliente.column('#8', width=100, anchor='center')
         self.listaCliente.column('#9', width=50, anchor='center')
+        self.listaCliente.column('#10', width=50, anchor='center')
 
         self.listaCliente.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.85)
         
@@ -437,7 +438,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_excluir.place(relx=0.32, rely=0.65, relwidth=0.095, height=40)
 
         self.listaForne = ttk.Treeview(self.frameResTelaFornecedor, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 
-        'Col8', 'Col9', 'Col10', 'Col11', 'Col12'), show='headings')
+                                                                                        'Col8', 'Col9', 'Col10'), show='headings')
         
         self.listaForne.heading("#0", text='')
         self.listaForne.heading("#1", text='Código')
@@ -454,26 +455,22 @@ class MenuTela(Funcionalidades, Validadores):
        # self.listaForne.heading('#12', text='Data')
 
         self.listaForne.column('#0', width=1, anchor='center')
-        self.listaForne.column('#1', width=50, anchor='center')
+        self.listaForne.column('#1', width=10, anchor='center')
         self.listaForne.column('#2', width=200, anchor='center')
-        self.listaForne.column('#0', width=1)
-        self.listaForne.column('#1', width=10)
-        self.listaForne.column('#2', width=200)
-        self.listaForne.column('#3', width=250)
-        self.listaForne.column('#4', width=150)
-        self.listaForne.column('#5', width=350)
-        self.listaForne.column('#6', width=80)
-        self.listaForne.column('#7', width=80)
-        self.listaForne.column('#8', width=200)
-        self.listaForne.column('#9', width=200)
-        self.listaForne.column('#10', width=80)
+        self.listaForne.column('#3', width=250, anchor='center')
+        self.listaForne.column('#4', width=105, anchor='center')
+        self.listaForne.column('#5', width=300, anchor='center')
+        self.listaForne.column('#6', width=80, anchor='center')
+        self.listaForne.column('#7', width=100, anchor='center')
+        self.listaForne.column('#8', width=100, anchor='center')
+        self.listaForne.column('#9', width=50, anchor='center')
+        self.listaForne.column('#10', width=50, anchor='center')
        # self.listaForne.column('#11', width=80)
         #self.listaForne.column('#12', width=80)
 
         self.listaForne.place(relx=0.01, rely=0.03, relwidth=0.93, relheight=0.9)
 
         self.scrollListaForne = Scrollbar(self.frameResTelaFornecedor, orient='vertical')
-
         self.listaForne.configure(yscrollcommand=self.scrollListaForne.set)
         self.scrollListaForne.place(relx=0.97, rely=0.03, relwidth= 0.02, relheight=0.9)
 

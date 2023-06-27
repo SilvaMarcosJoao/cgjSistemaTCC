@@ -4,7 +4,6 @@ from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
 from modulos.servico import Servico
 from modulos.usuario import Usuario
-
 from modulos.fornecedor import Fornecedor
 
 class Funcionalidades:
@@ -190,10 +189,10 @@ class Funcionalidades:
         self.limpa_fornecedor()
                 
     def lista_fornecedor(self):
-        self.listaFornecedor.delete(*self.listaFornecedor.get_children())
-        self.lista = self.fornecedor.listarFornecedor()
-        for i in self.lista:
-            self.listaFornecedor.insert('',END, values=i)
+        self.listaForne.delete(*self.listaForne.get_children())
+        self.listaf = self.fornecedor.listarFornecedor()
+        for i in self.listaf:
+            self.listaForne.insert('',END, values = i)
             
     def pesquisar_fornecedor(self):
         pass
@@ -201,7 +200,7 @@ class Funcionalidades:
     def alterar_fornecedor(self):
         self.cod = self.et_cod_fornecedor.get()
         self.cnpj = self.et_cnpj_fornecedor.get()
-        self.nome = self.et_nome_fornececdor.get()
+        self.nome = self.et_nome_fornecedor.get()
         self.email = self.et_email_fornecedor.get()
         self.telefone = self.et_tel_fornecedor.get()
         self.logradouro = self.et_logr_fornecedor.get()
@@ -225,14 +224,14 @@ class Funcionalidades:
         self.limpa_fornecedor()
         self.lista_fornecedor()
         
-    def duplo_clique_for(self):
+    def duplo_clique_for(self, event):
         self.limpa_fornecedor()
-        self.listaFornecedor.selection()
-        for i in self.listaFornecedor.selection():
-         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10, col11 = self.listaFornecedor.item(i, 'values')
+        self.listaForne.selection()
+        for i in self.listaForne.selection():
+         col1, col2, col3, col4, col5, col6, col7, col8, col9, col10= self.listaForne.item(i, 'values')
          self.et_cod_fornecedor.insert(END,col1)
          self.et_cnpj_fornecedor.insert(END,col2)
-         self.et_nome_fornececdor.insert(END,col3)
+         self.et_nome_fornecedor.insert(END,col3)
          self.et_email_fornecedor.insert(END,col4)
          self.et_tel_fornecedor.insert(END,col5)
          self.et_logr_fornecedor.insert(END,col6)
@@ -246,7 +245,7 @@ class Funcionalidades:
     def limpa_fornecedor(self):
         self.et_cod_fornecedor.delete(0,END)
         self.et_cnpj_fornecedor.delete(0,END)
-        self.et_nome_fornececdor.delete(0,END)
+        self.et_nome_fornecedor.delete(0,END)
         self.et_email_fornecedor.delete(0,END)
         self.et_tel_fornecedor.delete(0,END)
         self.et_logr_fornecedor.delete(0,END)
@@ -298,4 +297,4 @@ class Funcionalidades:
             self.et_preco_servico.insert(END, col3)
             self.et_tipo_servico.insert(END, col4)
          
-#CRUD de 
+#CRUD do Produto
