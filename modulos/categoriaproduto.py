@@ -48,13 +48,12 @@ class CategoriaProduto:
         banco.desconectar()
         return categoria
 
-    def consultarCategoria(self, cod_categoria_produto):
+    def consultarCategoria(self):
         banco.conectar()
-        Categ = banco.cursor.execute(f"""SELECT cod_categoria_produto, desc_categoria_produto
-                                FROM CategoriaPorduto
-                                WHERE cod_categoria_produto='{cod_categoria_produto}' """).fetchmany()
-        print(Categ)
+        cate = banco.cursor.execute(f"""SELECT desc_categoria_produto
+                                FROM categoria_produto """).fetchall()
         banco.desconectar()    
+        return cate
     
     def deletarCategoria(self, cod_categoria_produto):
         banco.conectar()

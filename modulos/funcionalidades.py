@@ -5,6 +5,7 @@ from modulos.cliente import Cliente
 from modulos.servico import Servico
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
+from modulos.produto import Produto
 
 class Funcionalidades:
 
@@ -14,6 +15,7 @@ class Funcionalidades:
     servico = Servico()
     usuario = Usuario()
     fornecedor = Fornecedor()
+    produto = Produto()
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def mudar_senha(self) -> None:
@@ -86,10 +88,25 @@ class Funcionalidades:
         self.et_cod_categoria.delete(0, END)
         self.et_desc_categoria.delete(0, END)
         
-    def exibir_categ_prod(self) -> list:
-        self.exibir = self.categoria.listarCategoria()
+    def exibir_categ_prod(self):
+        self.exibir = self.categoria.consultarCategoria()
+
         return self.exibir
+
+
+    
   
+
+    def inserir_produto(self):
+        self.cod_produto = self.et_cod_produto.get()
+        self.desc_produto = self.desc_produto.get()
+        self.mod_produto = self.et_mode_produto.get()
+        self.preco_compra = self.et_preco_comp_produto.get()
+        self.preco_venda = self.et_preco_ven_produto.get()
+        self.qtd_produto = self.et_qtd_produto.get()
+        self.cat_produto = self.TipVar.get()
+        
+        self.produto.cadastrarProduto()
 
 #CRUD do Cliente
     def inserir_cliente(self):

@@ -1,11 +1,10 @@
 from tkinter import *
 from tkinter import ttk
-from tkinter import tix
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
 
-appMenu = tix.Tk()
+appMenu = Tk()
 
 class MenuTela(Funcionalidades, Validadores):
 
@@ -94,8 +93,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center',bg='#d9d9d9', command=self.appMenu.destroy)
         self.btn_sair.place(relx=0.08, rely=0.86, width=150, height=50)
-        self.balSair = tix.Balloon(self.frameMenu_left)
-        self.balSair.bind_widget(self.btn_sair, balloonmsg='Sair')
 
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
@@ -331,13 +328,18 @@ class MenuTela(Funcionalidades, Validadores):
         self.TipVar.set('')
 
         self.lista = self.exibir_categ_prod()
+
+
+
+        
+        
         
         #Variavel do option menu
         self.popupMenu = OptionMenu(self.produto_frame, self.TipVar, *self.lista)
         self.popupMenu.place(relx=0.41, rely=0.22, relwidth=0.12, height=25)
 
-        #se quisermos obter essa informação para cadastrar no banco
-        self.estadoCivil = self.TipVar.get()
+        
+        
 
         self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
         self.btn_salvar_produto.place(relx=0.56, rely=0.06, relwidth=0.1, height=50)
