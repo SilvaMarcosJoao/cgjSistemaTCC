@@ -131,66 +131,71 @@ class MenuTela(Funcionalidades, Validadores):
         self.frameResTelaCliente.place(relx=0.01, rely=0.50, relwidth=0.98, relheight=0.47)
         
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_cliente.place(relx=0.80, rely=0.4, height=20)
+        self.lbl_cod_cliente.place(relx=0.04, rely=0.05, height=20)
         self.et_cod_cliente = Entry(self.frameCadTelaCliente)
-        self.et_cod_cliente.place(relx=0.9, rely=0.4, width=100, height=20)
+        self.et_cod_cliente.place(relx=0.09, rely=0.05, width=220, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
-        self.lbl_cpf_cliente.place(relx=0.075, rely=0.08, height=20)
+        self.lbl_cpf_cliente.place(relx=0.055, rely=0.15, height=20)
         self.et_cpf_cliente = Entry(self.frameCadTelaCliente)
-        self.et_cpf_cliente.place(relx=0.115, rely=0.08, width=125, height=20)
+        self.et_cpf_cliente.place(relx=0.09, rely=0.15, width=220, height=20)
         
         self.lbl_nome_cliente = Label(self.frameCadTelaCliente, text='Nome: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
-        self.lbl_nome_cliente.place(relx=0.225, rely=0.08, height=20)
+        self.lbl_nome_cliente.place(relx=0.045, rely=0.25, height=20)
         self.et_nome_cliente = Entry(self.frameCadTelaCliente)
-        self.et_nome_cliente.place(relx=0.32, rely=0.08, width=300, height=20)
+        self.et_nome_cliente.place(relx=0.09, rely=0.25, width=220, height=20)
 
         self.lbl_email_cliente = Label(self.frameCadTelaCliente, text='E-mail: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_email_cliente.place(relx=0.58, rely=0.08, height=20)
+        self.lbl_email_cliente.place(relx=0.045, rely=0.35, height=20)
         self.et_email_cliente = Entry(self.frameCadTelaCliente)
-        self.et_email_cliente.place(relx=0.635, rely=0.08, width=350, height=20)
+        self.et_email_cliente.place(relx=0.09, rely=0.35, width=220, height=20)
 
         self.lbl_tel_cliente = Label(self.frameCadTelaCliente, text='Telefone: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_tel_cliente.place(relx=0.075, rely=0.2,  height=20)
+        self.lbl_tel_cliente.place(relx=0.03, rely=0.45,  height=20)
         self.et_tel_cliente = Entry(self.frameCadTelaCliente)
-        self.et_tel_cliente.place(relx=0.15, rely=0.2, width=200, height=20)
+        self.et_tel_cliente.place(relx=0.09, rely=0.45, width=220, height=20)
 
-        self.lbl_logr_cliente = Label(self.frameCadTelaCliente, text='Logradouro: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_logr_cliente.place(relx=0.325, rely=0.2, height=20)
+        self.lbl_logr_cliente = Label(self.frameCadTelaCliente, text='Endereço: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_logr_cliente.place(relx=0.025, rely=0.55, height=20)
         self.et_logr_cliente = Entry(self.frameCadTelaCliente)
-        self.et_logr_cliente.place(relx=0.42, rely=0.2, width=602, height=20)
+        self.et_logr_cliente.place(relx=0.09, rely=0.55, width=220, height=20)
 
         self.lbl_num_cliente = Label(self.frameCadTelaCliente, text='Número: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_num_cliente.place(relx=0.075, rely=0.3, height=20)
+        self.lbl_num_cliente.place(relx=0.35, rely=0.05, height=20)
         self.et_num_cliente = Entry(self.frameCadTelaCliente)
-        self.et_num_cliente.place(relx=0.145, rely=0.3, width=60, height=20)
+        self.et_num_cliente.place(relx=0.405, rely=0.05, width=60, height=20)
 
         self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cep_cliente.place(relx=0.2, rely=0.3, height=20)
+        self.lbl_cep_cliente.place(relx=0.49, rely=0.05, height=20)
         self.et_cep_cliente = Entry(self.frameCadTelaCliente)
-        self.et_cep_cliente.place(relx=0.24, rely=0.3, width=80, height=20)
+        self.et_cep_cliente.place(relx=0.525, rely=0.05, width=100, height=20)
 
         self.lbl_cidade_cliente = Label(self.frameCadTelaCliente, text='Cidade: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cidade_cliente.place(relx=0.32, rely=0.3, height=20)
+        self.lbl_cidade_cliente.place(relx=0.355, rely=0.15, height=20)
         self.et_cidade_cliente = Entry(self.frameCadTelaCliente)
-        self.et_cidade_cliente.place(relx=0.38, rely=0.3, width=300, height=20)
+        self.et_cidade_cliente.place(relx=0.405, rely=0.15, width=220, height=20)
 
         self.lbl_estado_cliente = Label(self.frameCadTelaCliente, text='Estado: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_estado_cliente.place(relx=0.64, rely=0.3, height=20)
+        self.lbl_estado_cliente.place(relx=0.355, rely=0.25, height=20)
         self.et_estado_cliente = Entry(self.frameCadTelaCliente)
-        self.et_estado_cliente.place(relx=0.7, rely=0.3, width=272, height=20)
+        self.et_estado_cliente.place(relx=0.405, rely=0.25, width=220, height=20)
 
-        self.btn_salvar = Button(self.frameCadTelaCliente, command=self.inserir_cliente, image=self.imgSalvar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.btn_salvar.place(relx=0.25, rely=0.8, relwidth=0.12, height=50)
+        self.btn_salvar = Button(self.frameCadTelaCliente, command=self.inserir_cliente, image=self.imgSalvar,  text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_salvar.place(relx=0.85, rely=0.05, relwidth=0.12, height=50)
         
-        self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente, image=self.imgListar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.btn_listar.place(relx=0.38, rely=0.8, relwidth=0.12, height=50)
+        self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente, image=self.imgListar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_listar.place(relx=0.85, rely=0.25, relwidth=0.12, height=50)
 
-        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, image=self.imgAlterar, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.btn_alterar.place(relx=0.51, rely=0.8, relwidth=0.12, height=50)
+        self.btn_consultar = Button(self.frameCadTelaCliente,  image=self.imgConsultar, text=' Consultar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_consultar.place(relx=0.355, rely=0.7, relwidth=0.1, height=30)
+        self.lbl_et_consultar = Entry(self.frameCadTelaCliente)
+        self.lbl_et_consultar.place(relx=0.5, rely=0.7, width=220, height=30)
 
-        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, image=self.imgExcluir, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.btn_excluir.place(relx=0.64, rely=0.8, relwidth=0.12, height=50)
+        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, image=self.imgAlterar, text=' Alterar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_alterar.place(relx=0.85, rely=0.45, relwidth=0.12, height=50)
+
+        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, image=self.imgExcluir, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_excluir.place(relx=0.85, rely=0.65, relwidth=0.12, height=50)
     
         self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
                                                                                       'Col8', 'Col9','Col10'), show = 'headings')
@@ -329,17 +334,9 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lista = self.exibir_categ_prod()
 
-
-
-        
-        
-        
         #Variavel do option menu
         self.popupMenu = OptionMenu(self.produto_frame, self.TipVar, *self.lista)
         self.popupMenu.place(relx=0.41, rely=0.22, relwidth=0.12, height=25)
-
-        
-        
 
         self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
         self.btn_salvar_produto.place(relx=0.56, rely=0.06, relwidth=0.1, height=50)

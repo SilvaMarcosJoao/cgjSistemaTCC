@@ -89,14 +89,12 @@ class Funcionalidades:
         self.et_desc_categoria.delete(0, END)
         
     def exibir_categ_prod(self):
-        self.exibir = self.categoria.consultarCategoria()
-
+        self.exibir = self.categoria.listarCategoria()
+    
         return self.exibir
 
 
     
-  
-
     def inserir_produto(self):
         self.cod_produto = self.et_cod_produto.get()
         self.desc_produto = self.desc_produto.get()
