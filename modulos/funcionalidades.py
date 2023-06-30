@@ -193,7 +193,7 @@ class Funcionalidades:
         self.cidade = self.et_cidade_fornecedor.get()
         self.estado = self.et_estado_fornecedor.get()
         #self.qtd = self.et_qtd_fornecida_fornecedor.get()
-       # self.data = self.et_data_fornecimento.get()
+        #self.data = self.et_data_fornecimento.get()
         
         self.fornecedor.cadastrarFornecedor(self.cnpj,self.nome,
                                              self.email, self.telefone, 
@@ -209,6 +209,9 @@ class Funcionalidades:
             self.listaForne.insert('',END, values = i)
             
     def pesquisar_fornecedor(self):
+        self.nome = self.et_nome_fornecedor.get()
+        self.fornecedor.consultarFornecedor(self.nome)
+        self.lista_fornecedor()
         pass
     
     def alterar_fornecedor(self):
@@ -253,7 +256,7 @@ class Funcionalidades:
          self.et_cep_fornecedor.insert(END,col8)
          self.et_cidade_fornecedor.insert(END,col9)
          self.et_estado_fornecedor.insert(END,col10)
-        # self.et_qtd_fornecida_fornecedor.insert(END,col11)
+         #self.et_qtd_fornecida_fornecedor.insert(END,col11)
          #self.et_data_fornecimento.insert(END,col12)
     
     def limpa_fornecedor(self):
