@@ -89,22 +89,74 @@ class Funcionalidades:
         self.et_desc_categoria.delete(0, END)
         
     def exibir_categ_prod(self):
-        self.exibir = self.categoria.listarCategoria()
-    
-        return self.exibir
-
-
+        self.res = self.categoria.listarCategoria()
+        return self.res
     
     def inserir_produto(self):
-        self.cod_produto = self.et_cod_produto.get()
-        self.desc_produto = self.desc_produto.get()
+        self.desc_produto = self.et_desc_produto.get()
         self.mod_produto = self.et_mode_produto.get()
         self.preco_compra = self.et_preco_comp_produto.get()
         self.preco_venda = self.et_preco_ven_produto.get()
         self.qtd_produto = self.et_qtd_produto.get()
-        self.cat_produto = self.TipVar.get()
-        
-        self.produto.cadastrarProduto()
+        self.cat = self.et_categoria.get()
+        self.cod_cat = [self.cat]
+        self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
+        messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')
+        print(self.cod_cat[0][1])
+        '''for c in range(0, 2):
+            self.grava = {'Codigo': self.res[c][0]}
+            print(self.grava)'''
+
+
+    def exibir_produto(self):
+        self.listaProd.delete(*self.listaProd.get_children())
+        self.exibirProd = self.produto.listarProduto()
+        if len(self.exibirProd) == 0:
+            messagebox.showinfo('Informação', 'Não há produtos cadastrados')
+        else:
+            for i in self.exibirProd:
+                self.listaProd.insert('',END, values=i)  
+    
+
+    def editar_produto(self):
+        self.desc_produto = self.et_desc_produto.get()
+        self.mod_produto = self.et_mode_produto.get()
+        self.preco_compra = self.et_preco_comp_produto.get()
+        self.preco_venda = self.et_preco_ven_produto.get()
+        self.qtd_produto = self.et_qtd_produto.get()
+        self.cat = self.et_categoria.get()
+        self.cod_cat = [self.cat]
+        messagebox.showinfo('Informação', 'Produto alterado com sucesso!')
+
+    def excluir_produto(self):
+        self.cod_prod = self.et_cod_produto.get()
+        self.produto.deletarProduto(self.cod_prod)
+        self.exibir_produto()
+        self.limpa_produto()
+        messagebox.showinfo('Info', 'Produto excluído com sucesso!')
+
+    def duplo_clique_prod(self, event):
+        self.limpa_produto()
+        self.listaProd.selection()
+        for i in self.listaProd.selection():
+            col1, col2, col3, col4, col5, col6, col7 = self.listaProd.item(i, 'values')
+            self.et_cod_produto.insert(END, col1)
+            self.et_desc_produto.insert(END, col2)
+            self.et_mode_produto.insert(END, col3)
+            self.et_preco_comp_produto.insert(END, col4)
+            self.et_preco_ven_produto.insert(END, col5)
+            self.et_qtd_produto.insert(END, col6)
+            self.et_categoria.set(col7)
+            
+
+    def limpa_produto(self):
+        self.et_cod_produto.delete(0, END)
+        self.et_desc_produto.delete(0, END) 
+        self.et_mode_produto.delete(0, END)
+        self.et_preco_comp_produto.delete(0, END)
+        self.et_preco_ven_produto.delete(0, END)
+        self.et_qtd_produto.delete(0, END)
+
 
 #CRUD do Cliente
     def inserir_cliente(self):

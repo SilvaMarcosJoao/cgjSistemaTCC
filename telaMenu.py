@@ -30,6 +30,11 @@ class MenuTela(Funcionalidades, Validadores):
     def delete_page(self):
         for f in self.frameMenu_right.winfo_children():
             f.destroy()
+
+    def validaEntradas(self):
+        self.impCod = (self.appMenu.register(self.limitar_cod), "%P")
+        self.tamCod = (self.appMenu.register(self.limitar_tam_cod), "%P")
+        
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -123,6 +128,7 @@ class MenuTela(Funcionalidades, Validadores):
     
                   
     def widgets_cliente(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
         self.frameCadTelaCliente.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.47)
@@ -132,7 +138,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_cliente.place(relx=0.04, rely=0.05, height=20)
-        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 10))
+        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 10), validate='key', validatecommand=self.impCod)
         self.et_cod_cliente.place(relx=0.09, rely=0.05, width=220, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
@@ -180,22 +186,22 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_estado_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 10))
         self.et_estado_cliente.place(relx=0.405, rely=0.25, width=220, height=20)
 
-        self.btn_salvar = Button(self.frameCadTelaCliente, command=self.inserir_cliente, image=self.imgSalvar,  text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
-        self.btn_salvar.place(relx=0.85, rely=0.05, relwidth=0.12, height=50)
+        self.btn_salvar = Button(self.frameCadTelaCliente, command=self.inserir_cliente, image=self.imgSalvar,  text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_salvar.place(relx=0.88, rely=0.10, relwidth=0.12, height=50)
         
-        self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente, image=self.imgListar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
-        self.btn_listar.place(relx=0.85, rely=0.25, relwidth=0.12, height=50)
+        self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente, image=self.imgListar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_listar.place(relx=0.88, rely=0.32, relwidth=0.12, height=50)
 
-        self.btn_consultar = Button(self.frameCadTelaCliente,  image=self.imgConsultar, text=' Consultar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
+        self.btn_consultar = Button(self.frameCadTelaCliente,  image=self.imgConsultar, text=' Consultar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050')
         self.btn_consultar.place(relx=0.355, rely=0.7, relwidth=0.1, height=30)
         self.lbl_et_consultar = Entry(self.frameCadTelaCliente)
         self.lbl_et_consultar.place(relx=0.5, rely=0.7, width=220, height=30)
 
-        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, image=self.imgAlterar, text=' Alterar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
-        self.btn_alterar.place(relx=0.85, rely=0.45, relwidth=0.12, height=50)
+        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, image=self.imgAlterar, text=' Alterar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_alterar.place(relx=0.88, rely=0.53, relwidth=0.12, height=50)
 
-        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, image=self.imgExcluir, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9')
-        self.btn_excluir.place(relx=0.85, rely=0.65, relwidth=0.12, height=50)
+        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, image=self.imgExcluir, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_excluir.place(relx=0.88, rely=0.75, relwidth=0.12, height=50)
     
         self.listaCliente = ttk.Treeview(self.frameResTelaCliente, height=3, columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
                                                                                       'Col8', 'Col9','Col10'), show = 'headings')
@@ -242,13 +248,14 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA CATEGORIA
     def widgets_categoria(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.categoria_frame = Frame(self.frameMenu_right)
         self.categoria_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', font=('Roboto', 9, 'bold'))
         self.lbl_cod_categoria.place(relx=0.25, rely=0.08, height=20)
-        self.et_cod_categoria = Entry(self.categoria_frame, font=('Roboto', 9))
+        self.et_cod_categoria = Entry(self.categoria_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
         self.et_cod_categoria.place(relx=0.30, rely=0.08, relwidth=0.1, height=20)
 
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 9, 'bold'))
@@ -256,16 +263,16 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_desc_categoria = Entry(self.categoria_frame, font=('Roboto', 9))
         self.et_desc_categoria.place(relx=0.40, rely=0.15, width=171, height=20)
 
-        self.btn_salvar_categoria = Button(self.categoria_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
+        self.btn_salvar_categoria = Button(self.categoria_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_categoria)
         self.btn_salvar_categoria.place(relx=0.25, rely=0.2, relwidth=0.1, height=50)
 
-        self.btn_lista_categoria = Button(self.categoria_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.exibir_categoria)
+        self.btn_lista_categoria = Button(self.categoria_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_categoria)
         self.btn_lista_categoria.place(relx=0.38, rely=0.2, relwidth=0.1, height=50)
 
-        self.btn_alterar_categoria = Button(self.categoria_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.editar_categoria)
+        self.btn_alterar_categoria = Button(self.categoria_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_categoria)
         self.btn_alterar_categoria.place(relx=0.51, rely=0.2, relwidth=0.1, height=50)
 
-        self.btn_excluir_categoria = Button(self.categoria_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.excluir_categoria)
+        self.btn_excluir_categoria = Button(self.categoria_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_categoria)
         self.btn_excluir_categoria.place(relx=0.64, rely=0.2, relwidth=0.1, height=50)
 
         self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'))
@@ -287,67 +294,68 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA PRODUTO
     def widgets_produto(self):
+        self.validaEntradas()
         self.img_crud()
         self.produto_frame = Frame(self.frameMenu_right)
         self.produto_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
-        self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 10, 'bold'))
+        self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'))
         self.lbl_cod_produto.place(relx=0.22, rely=0.02)
-        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
         self.et_cod_produto.place(relx=0.22, rely=0.06, width=80, height=20)
 
-        self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 10, 'bold'))
+        self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 9, 'bold'))
         self.lbl_desc_produto.place(relx=0.33, rely=0.02)
-        self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_desc_produto.place(relx=0.33, rely=0.06, width=200, height=20)
 
-        self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 10, 'bold'))
+        self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 9, 'bold'))
         self.lbl_mode_produto.place(relx=0.22, rely=0.1)
-        self.et_mode_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_mode_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_mode_produto.place(relx=0.22, rely=0.14, width=190, height=20)
 
-        self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 10, 'bold'))
+        self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 9, 'bold'))
         self.lbl_preco_comp_produto.place(relx=0.43, rely=0.1)
-        self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 10))
+        self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 9))
         self.et_preco_comp_produto.place(relx=0.43, rely=0.14, width=100, height=20)
 
-        self.lbl_preco_ven_produto = Label(self.produto_frame, text='Preço Venda: ', font=('Roboto', 10, 'bold'))
+        self.lbl_preco_ven_produto = Label(self.produto_frame, text='Preço Venda: ', font=('Roboto', 9, 'bold'))
         self.lbl_preco_ven_produto.place(relx=0.22, rely=0.18)
-        self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_preco_ven_produto.place(relx=0.22, rely=0.22, width=80, height=20)
 
-        self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 10, 'bold'))
+        self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'))
         self.lbl_qtd_produto.place(relx=0.32, rely=0.18)
-        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_qtd_produto.place(relx=0.32, rely=0.22, width=60, height=20)
 
-        self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 10, 'bold'))
+        self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'))
         self.lbl_cat_produto.place(relx=0.41, rely=0.18)
 
         #Option Menu
         # vai armazenar a informação escolhida
-        self.TipVar = StringVar(self.produto_frame)
+        self.et_categoria = StringVar(self.produto_frame)
         # outra variavel do tipo tupla, que vamos definir as opções que o usuário pode escolher
         
         #definindo uma opção padrão que sempre vai aparecer
-        self.TipVar.set('')
+        self.et_categoria.set('')
 
         self.lista = self.exibir_categ_prod()
 
         #Variavel do option menu
-        self.popupMenu = OptionMenu(self.produto_frame, self.TipVar, *self.lista)
+        self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.41, rely=0.22, relwidth=0.12, height=25)
 
-        self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
+        self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
         self.btn_salvar_produto.place(relx=0.56, rely=0.06, relwidth=0.1, height=50)
 
-        self.btn_lista_produto = Button(self.produto_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.exibir_categoria)
+        self.btn_lista_produto = Button(self.produto_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_produto)
         self.btn_lista_produto.place(relx=0.68, rely=0.18, relwidth=0.1, height=50)
 
-        self.btn_alterar_produto = Button(self.produto_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.editar_categoria)
+        self.btn_alterar_produto = Button(self.produto_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_produto)
         self.btn_alterar_produto.place(relx=0.68, rely=0.06, relwidth=0.1, height=50)
 
-        self.btn_excluir_produto = Button(self.produto_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.excluir_categoria)
+        self.btn_excluir_produto = Button(self.produto_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_produto)
         self.btn_excluir_produto.place(relx=0.56, rely=0.18, relwidth=0.1, height=50)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
@@ -386,6 +394,7 @@ class MenuTela(Funcionalidades, Validadores):
         
     # CONFIGURAÇÕES DA TELA FORNECEDOR
     def widgets_fornecedor(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
         self.frameCadTelaFornecedor.place(relx=0, rely=0, relwidth=1, relheight=0.49)
@@ -395,7 +404,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_fornecedor.place(relx=0.02, rely=0.05, height=20)
-        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
+        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
         self.et_cod_fornecedor.place(relx=0.09, rely=0.05, width=50, height=20)
 
         self.lbl_cnpj_fornecedor = Label(self.frameCadTelaFornecedor, text='CNPJ/CPF: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -519,6 +528,7 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA SERVIÇO
     def widgets_servico(self):
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
         self.frameCadTelaServico.place(relx=0, rely=0., relwidth=1, relheight=0.48)
@@ -526,36 +536,36 @@ class MenuTela(Funcionalidades, Validadores):
         self.frameResTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
         self.frameResTelaServico.place(relx=0, rely=0.5, relwidth=1, relheight=0.5)
 
-        self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_servico.place(relx=0.04, rely=0.05, height=20)
-        self.et_cod_servico = Entry(self.frameCadTelaServico)
+        self.et_cod_servico = Entry(self.frameCadTelaServico, validate='key', validatecommand=self.tamCod)
         self.et_cod_servico.place(relx=0.04, rely=0.12, width=80, height=20)
 
-        self.lbl_desc_servico = Label(self.frameCadTelaServico, text='Descrição: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_desc_servico = Label(self.frameCadTelaServico, text='Descrição: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_desc_servico.place(relx=0.04, rely=0.22, height=20)
         self.et_desc_servico = Entry(self.frameCadTelaServico)
         self.et_desc_servico.place(relx=0.04, rely=0.29, width=250, height=20)
 
-        self.lbl_tipo_servico = Label(self.frameCadTelaServico, text='Tipo: ', font=('Roboto', 12, 'bold'),bg='#d9d9d9')
+        self.lbl_tipo_servico = Label(self.frameCadTelaServico, text='Tipo: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
         self.lbl_tipo_servico.place(relx=0.04, rely=0.4, height=20)
         self.et_tipo_servico = Entry(self.frameCadTelaServico)
         self.et_tipo_servico.place(relx=0.04, rely=0.47, width=100, height=20)
 
-        self.lbl_preco_servico = Label(self.frameCadTelaServico, text='Preço: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_preco_servico = Label(self.frameCadTelaServico, text='Preço: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_preco_servico.place(relx=0.04, rely=0.57, height=20)
         self.et_preco_servico = Entry(self.frameCadTelaServico)
         self.et_preco_servico.place(relx=0.04, rely=0.63, width=80, height=20)
 
-        self.btn_salvar_serv = Button(self.frameCadTelaServico, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_servico)
+        self.btn_salvar_serv = Button(self.frameCadTelaServico, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_servico)
         self.btn_salvar_serv.place(relx=0.04, rely=0.75, relwidth=0.12, height=50)
 
-        self.btn_listar_serv = Button(self.frameCadTelaServico, image=self.imgListar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.exibir_servico)
+        self.btn_listar_serv = Button(self.frameCadTelaServico, image=self.imgListar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_servico)
         self.btn_listar_serv.place(relx=0.18, rely=0.75, relwidth=0.12, height=50)
 
-        self.btn_alterar_serv = Button(self.frameCadTelaServico, image=self.imgAlterar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.editar_servico)
+        self.btn_alterar_serv = Button(self.frameCadTelaServico, image=self.imgAlterar, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_servico)
         self.btn_alterar_serv.place(relx=0.32, rely=0.75, relwidth=0.12, height=50)
 
-        self.btn_excluir_serv = Button(self.frameCadTelaServico, image=self.imgExcluir, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.deletar_servico)
+        self.btn_excluir_serv = Button(self.frameCadTelaServico, image=self.imgExcluir, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.deletar_servico)
         self.btn_excluir_serv.place(relx=0.46, rely=0.75, relwidth=0.12, height=50)
 
         self.listaServico = ttk.Treeview(self.frameResTelaServico, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4'), show='headings')
