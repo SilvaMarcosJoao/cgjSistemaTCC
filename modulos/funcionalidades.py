@@ -126,8 +126,11 @@ class Funcionalidades:
     def lista_cliente(self):
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarCliente()
-        for n in self.lista:
-            self.listaCliente.insert('',END, values=n)
+        if len(self.lista) == 0:
+            messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
+        else:
+            for n in self.lista:
+                self.listaCliente.insert('',END, values=n)
 
     def alterar_cliente(self):
         self.cod = self.et_cod_cliente.get()
@@ -205,14 +208,16 @@ class Funcionalidades:
     def lista_fornecedor(self):
         self.listaForne.delete(*self.listaForne.get_children())
         self.listaf = self.fornecedor.listarFornecedor()
-        for i in self.listaf:
-            self.listaForne.insert('',END, values = i)
+        if len(self.listaf) == 0:
+            messagebox.showinfo('Informação', 'Não há fornecedores cadastrados.')
+        else:
+            for i in self.listaf:
+                self.listaForne.insert('',END, values = i)
             
     def pesquisar_fornecedor(self):
         self.nome = self.et_nome_fornecedor.get()
         self.fornecedor.consultarFornecedor(self.nome)
-        self.lista_fornecedor()
-        pass
+        
     
     def alterar_fornecedor(self):
         self.cod = self.et_cod_fornecedor.get()
@@ -287,8 +292,11 @@ class Funcionalidades:
     def exibir_servico(self):
         self.listaServico.delete(*self.listaServico.get_children())
         self.exibir_serv = self.servico.listarServicos()
-        for s in self.exibir_serv:
-            self.listaServico.insert('',END, values=s)
+        if len(self.exibir_serv) == 0:
+            messagebox.showinfo('Informação', 'Não há categorias cadastradas')
+        else:
+            for s in self.exibir_serv:
+                self.listaServico.insert('',END, values=s)
 
     def editar_servico(self):
         self.cod_servico = self.et_cod_servico.get()
