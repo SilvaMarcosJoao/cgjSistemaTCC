@@ -1,13 +1,11 @@
 from modulos.dbsqlite import BancoDados
 from modulos.categoriaproduto import CategoriaProduto
 
-categoria_produto = CategoriaProduto()
-categoria_produto.get_desc_categoria_produto()
 banco = BancoDados()
 
 
 class Produto:
-    def __init__(self,cod_produto: int=None, desc_produto: str=None, modelo_produto:str=None ,preco_compra_produto:float=None, preco_venda_produto: float=None, qtd : int=None, categoria_produto :CategoriaProduto=None):
+    def __init__(self,cod_produto: int=None, desc_produto: str=None, modelo_produto:str=None ,preco_compra_produto:float=None, preco_venda_produto: float=None, qtd : int=None, categoria_produto :int=None):
 
         self.__cod_produto=cod_produto
         self.__desc_produto=desc_produto
@@ -36,7 +34,7 @@ class Produto:
     def get_qtd(self) -> int:
         return self.__qtd
 
-    def get_cod_categoria_produto(self) -> CategoriaProduto:
+    def get_cod_categoria_produto(self) -> int:
         return self.__categoria_produto
 
     def set_cod_produto(self, cod_produto):
@@ -61,11 +59,12 @@ class Produto:
         self.__cod_produto = cod_categoria_produto
 
     #cadastra os produtos 
-    def cadastrarProduto(self, cod_produto, desc_produto, mod_produto, preco_compra, preco_venda, qtd, categoria):
+    def cadastrarProduto(self, desc_produto, mod_produto, preco_compra, preco_venda, qtd, cod_categoria):
         banco.conectar()
-        banco.cursor.execute(f"""Insert into Produto(cod_produto, desc_produto, modelo_produto,
-                          preco_compra_produto, preco_venda_produto, qtd, cod_categoria_produto) 
-                          values('{cod_produto}','{desc_produto }','{mod_produto }','{preco_compra}','{preco_venda}','{qtd}','{categoria}')""")
+        banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
+                          preco_compra_produto, preco_venda_produto, qtd_estoque, cod_categoria_produto) 
+                           VALUES ('{desc_produto}','{mod_produto}',
+                           '{preco_compra}','{preco_venda}','{qtd}','{cod_categoria}') """)
         banco.conexao.commit()
         banco.desconectar()
     
@@ -85,11 +84,11 @@ class Produto:
    
                
     #mostra todos os produtos
-    def listarProduto(self):
+    def listarProduto(self) -> list:
         banco.conectar()
-        Produto=banco.cursor.execute(f"""SELECT * FROM PRODUTO""").fetchall()   
-        print(Produto)   
+        produtos=banco.cursor.execute(f"""SELECT * FROM PRODUTO""").fetchall()   
         banco.desconectar()
+        return produtos
         
     #procura um produto   
     def consultarProduto(self, cod_produto): 

@@ -30,6 +30,11 @@ class MenuTela(Funcionalidades, Validadores):
     def delete_page(self):
         for f in self.frameMenu_right.winfo_children():
             f.destroy()
+
+    def validaEntradas(self):
+        self.impCod = (self.appMenu.register(self.limitar_cod), "%P")
+        self.tamCod = (self.appMenu.register(self.limitar_tam_cod), "%P")
+        
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -123,6 +128,7 @@ class MenuTela(Funcionalidades, Validadores):
     
                   
     def widgets_cliente(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
         self.frameCadTelaCliente.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.47)
@@ -132,7 +138,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_cliente.place(relx=0.04, rely=0.05, height=20)
-        self.et_cod_cliente = Entry(self.frameCadTelaCliente)
+        self.et_cod_cliente = Entry(self.frameCadTelaCliente, validate='key', validatecommand=self.impCod)
         self.et_cod_cliente.place(relx=0.09, rely=0.05, width=220, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
@@ -242,13 +248,14 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA CATEGORIA
     def widgets_categoria(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.categoria_frame = Frame(self.frameMenu_right)
         self.categoria_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', font=('Roboto', 12, 'bold'))
         self.lbl_cod_categoria.place(relx=0.25, rely=0.08, height=20)
-        self.et_cod_categoria = Entry(self.categoria_frame)
+        self.et_cod_categoria = Entry(self.categoria_frame, validate='key', validatecommand=self.impCod)
         self.et_cod_categoria.place(relx=0.25, rely=0.11, relwidth=0.1, height=20)
 
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 12, 'bold'))
@@ -287,13 +294,14 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA PRODUTO
     def widgets_produto(self):
+        self.validaEntradas()
         self.img_crud()
         self.produto_frame = Frame(self.frameMenu_right)
         self.produto_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
 
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 10, 'bold'))
         self.lbl_cod_produto.place(relx=0.22, rely=0.02)
-        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.impCod)
         self.et_cod_produto.place(relx=0.22, rely=0.06, width=80, height=20)
 
         self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 10, 'bold'))
@@ -326,28 +334,28 @@ class MenuTela(Funcionalidades, Validadores):
 
         #Option Menu
         # vai armazenar a informação escolhida
-        self.TipVar = StringVar(self.produto_frame)
+        self.et_categoria = StringVar(self.produto_frame)
         # outra variavel do tipo tupla, que vamos definir as opções que o usuário pode escolher
         
         #definindo uma opção padrão que sempre vai aparecer
-        self.TipVar.set('')
+        self.et_categoria.set('')
 
         self.lista = self.exibir_categ_prod()
 
         #Variavel do option menu
-        self.popupMenu = OptionMenu(self.produto_frame, self.TipVar, *self.lista)
+        self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.41, rely=0.22, relwidth=0.12, height=25)
 
-        self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
+        self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_produto)
         self.btn_salvar_produto.place(relx=0.56, rely=0.06, relwidth=0.1, height=50)
 
-        self.btn_lista_produto = Button(self.produto_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.exibir_categoria)
+        self.btn_lista_produto = Button(self.produto_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.exibir_produto)
         self.btn_lista_produto.place(relx=0.68, rely=0.18, relwidth=0.1, height=50)
 
-        self.btn_alterar_produto = Button(self.produto_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.editar_categoria)
+        self.btn_alterar_produto = Button(self.produto_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.editar_produto)
         self.btn_alterar_produto.place(relx=0.68, rely=0.06, relwidth=0.1, height=50)
 
-        self.btn_excluir_produto = Button(self.produto_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.excluir_categoria)
+        self.btn_excluir_produto = Button(self.produto_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.excluir_produto)
         self.btn_excluir_produto.place(relx=0.56, rely=0.18, relwidth=0.1, height=50)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
@@ -386,6 +394,7 @@ class MenuTela(Funcionalidades, Validadores):
         
     # CONFIGURAÇÕES DA TELA FORNECEDOR
     def widgets_fornecedor(self) -> None:
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
         self.frameCadTelaFornecedor.place(relx=0, rely=0, relwidth=1, relheight=0.49)
@@ -395,7 +404,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_fornecedor.place(relx=0.27, rely=0.03, height=20)
-        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor)
+        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, validate='key', validatecommand=self.impCod)
         self.et_cod_fornecedor.place(relx=0.25, rely=0.10, width=100, height=20)
 
         self.lbl_cnpj_fornecedor = Label(self.frameCadTelaFornecedor, text='CNPJ/CPF: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -519,6 +528,7 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA SERVIÇO
     def widgets_servico(self):
+        self.validaEntradas()
         self.img_crud()
         self.frameCadTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
         self.frameCadTelaServico.place(relx=0, rely=0., relwidth=1, relheight=0.48)
@@ -528,7 +538,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_cod_servico.place(relx=0.04, rely=0.05, height=20)
-        self.et_cod_servico = Entry(self.frameCadTelaServico)
+        self.et_cod_servico = Entry(self.frameCadTelaServico, validate='key', validatecommand=self.tamCod)
         self.et_cod_servico.place(relx=0.04, rely=0.12, width=80, height=20)
 
         self.lbl_desc_servico = Label(self.frameCadTelaServico, text='Descrição: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
