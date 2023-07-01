@@ -34,7 +34,8 @@ class MenuTela(Funcionalidades, Validadores):
     def validaEntradas(self):
         self.impCod = (self.appMenu.register(self.limitar_cod), "%P")
         self.tamCod = (self.appMenu.register(self.limitar_tam_cod), "%P")
-        
+        self.valString = (self.appMenu.register(self.validarString), "%P")
+        self.valInt = (self.appMenu.register(self.validaInt), "%P")
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -260,7 +261,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 12, 'bold'))
         self.lbl_desc_categoria.place(relx=0.5, rely=0.08, height=20)
-        self.et_desc_categoria = Entry(self.categoria_frame)
+        self.et_desc_categoria = Entry(self.categoria_frame, validate='key', validatecommand=self.valString)
         self.et_desc_categoria.place(relx=0.5, rely=0.11, width=171, height=20)
 
         self.btn_salvar_categoria = Button(self.categoria_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#d9d9d9', command=self.inserir_categoria)
@@ -306,7 +307,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 10, 'bold'))
         self.lbl_desc_produto.place(relx=0.33, rely=0.02)
-        self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.valString)
         self.et_desc_produto.place(relx=0.33, rely=0.06, width=200, height=20)
 
         self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 10, 'bold'))
@@ -326,7 +327,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 10, 'bold'))
         self.lbl_qtd_produto.place(relx=0.32, rely=0.18)
-        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.valInt)
         self.et_qtd_produto.place(relx=0.32, rely=0.22, width=60, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 10, 'bold'))
