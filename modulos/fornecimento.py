@@ -41,7 +41,7 @@ class Fornecimento:
     def set_data_fornecimento(self, data_fornecimento: str) -> None:
         self.__data_fornecimento = data_fornecimento
 
-    def cadastrar_fornecimento(self) -> None:
+    def cadastrar_fornecimento(self, cnpj_cpf, cod_produto,data_fornecimento, qtd_fornecida) -> None:
         pass
 
     def alterar_fornecimento(self) -> None:
