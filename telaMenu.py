@@ -374,7 +374,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_data_fornecimento = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_data_fornecimento.place(relx=0.47, rely=0.15, width=70, height=20)
         self.btn_calendario = Button(self.produto_frame, text='Selecionar Data', font=('Roboto', 12, 'bold'), bg='#d9d9d9', command=self.calendario)
-        self.btn_calendario.place(relx=0.18, rely=0.75, width=130, height=20)
+        self.btn_calendario.place(relx=0.55, rely=0.15, width=130, height=20)
 
         self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
         self.btn_salvar_produto.place(relx=0.7, rely=0.05, relwidth=0.1, height=50)
