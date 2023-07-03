@@ -5,6 +5,7 @@ from modulos.cliente import Cliente
 from modulos.servico import Servico
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
+from modulos.fornecimento import Fornecimento
 from modulos.produto import Produto
 
 class Funcionalidades:
@@ -15,6 +16,7 @@ class Funcionalidades:
     servico = Servico()
     usuario = Usuario()
     fornecedor = Fornecedor()
+    fornecimento = Fornecimento()
     produto = Produto()
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
@@ -117,7 +119,6 @@ class Funcionalidades:
             for i in self.exibirProd:
                 self.listaProd.insert('',END, values=i)  
     
-
     def editar_produto(self):
         self.desc_produto = self.et_desc_produto.get()
         self.mod_produto = self.et_mode_produto.get()
@@ -148,7 +149,6 @@ class Funcionalidades:
             self.et_qtd_produto.insert(END, col6)
             self.et_categoria.set(col7)
             
-
     def limpa_produto(self):
         self.et_cod_produto.delete(0, END)
         self.et_desc_produto.delete(0, END) 
@@ -330,7 +330,14 @@ class Funcionalidades:
         #self.et_qtd_fornecida_fornecedor.delete(0,END)
         #self.et_data_fornecimento.delete(0,END)
        
-       
+
+    def inserir_fornecimento(self):
+        self.cnpj_obt = self.et_cnpj_fornecedor.get()
+        self.cod_prod_obt = self.et_cod_produto.get()
+        self.qtd_fornecimento = self.et_qtd_fornecida.get()
+        self.data = self.et_data_fornecimento.get()
+        self.fornecimento.cadastrar_fornecimento(self.cnpj_obt, self.cod_prod_obt, self.data, self.qtd_fornecimento)
+
 # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
     def inserir_servico(self):
         self.cod_servico = self.et_cod_servico.get()

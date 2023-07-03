@@ -1,8 +1,10 @@
 from tkinter import *
 from tkinter import ttk
+from tkcalendar import Calendar
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
+
 
 appMenu = Tk()
 
@@ -37,6 +39,20 @@ class MenuTela(Funcionalidades, Validadores):
         self.valString = (self.appMenu.register(self.validarString), "%P")
         self.valInt = (self.appMenu.register(self.validaInt), "%P")
         self.valDec = (self.appMenu.register(self.validaDecim), "%P")
+
+    #função para inserir a data no calendario
+    def inserirData(self):
+        dataIni = self.calendarioObj.get_date()
+        self.calendarioObj.destroy()
+        self.et_data_fornecimento.delete(0, END)
+        self.et_data_fornecimento.insert(END, dataIni)
+        self.calData.destroy()
+
+    def calendario(self):
+        self.calendarioObj = Calendar(self.frameCadTelaFornecedor, fg='gray75', bg='blue', font=('Arial', 9, 'bold'), locale='pt_br')
+        self.calendarioObj.place(relx=0.5, rely=0.1)
+        self.calData = Button(self.frameCadTelaFornecedor, text='Inserir Data', command=self.inserirData)
+        self.calData.place(relx=0.55, rely=0.85, width=100, height=25)
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -302,37 +318,37 @@ class MenuTela(Funcionalidades, Validadores):
         self.produto_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
 
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'))
-        self.lbl_cod_produto.place(relx=0.22, rely=0.02)
+        self.lbl_cod_produto.place(relx=0.05, rely=0.05)
         self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
         self.et_cod_produto.place(relx=0.30, rely=0.02, width=50, height=20)
 
         self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 9, 'bold'))
         self.lbl_desc_produto.place(relx=0.22, rely=0.07)
         self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10))
-        self.et_desc_produto.place(relx=0.30, rely=0.07, width=150, height=20)
+        self.et_desc_produto.place(relx=0.1, rely=0.10, width=220, height=20)
 
         self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 9, 'bold'))
-        self.lbl_mode_produto.place(relx=0.22, rely=0.12)
+        self.lbl_mode_produto.place(relx=0.05, rely=0.15)
         self.et_mode_produto = Entry(self.produto_frame, font=('Roboto', 9))
-        self.et_mode_produto.place(relx=0.30, rely=0.12, width=150, height=20)
+        self.et_mode_produto.place(relx=0.1, rely=0.15, width=220, height=20)
 
         self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 9, 'bold'))
-        self.lbl_preco_comp_produto.place(relx=0.22, rely=0.17)
+        self.lbl_preco_comp_produto.place(relx=0.01, rely=0.2)
         self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 9))
-        self.et_preco_comp_produto.place(relx=0.35, rely=0.17, width=100, height=20)
+        self.et_preco_comp_produto.place(relx=0.1, rely=0.2, width=100, height=20)
 
         self.lbl_preco_ven_produto = Label(self.produto_frame, text='Preço Venda: ', font=('Roboto', 9, 'bold'))
-        self.lbl_preco_ven_produto.place(relx=0.22, rely=0.22)
+        self.lbl_preco_ven_produto.place(relx=0.02, rely=0.25)
         self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9))
-        self.et_preco_ven_produto.place(relx=0.35, rely=0.22, width=100, height=20)
+        self.et_preco_ven_produto.place(relx=0.1, rely=0.25, width=80, height=20)
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'))
-        self.lbl_qtd_produto.place(relx=0.37, rely=0.02)
+        self.lbl_qtd_produto.place(relx=0.07, rely=0.3)
         self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
-        self.et_qtd_produto.place(relx=0.41, rely=0.02, width=42, height=20)
+        self.et_qtd_produto.place(relx=0.1, rely=0.3, width=60, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'))
-        self.lbl_cat_produto.place(relx=0.50, rely=0.02)
+        self.lbl_cat_produto.place(relx=0.405, rely=0.05)
 
         #Option Menu
         # vai armazenar a informação escolhida
@@ -346,19 +362,31 @@ class MenuTela(Funcionalidades, Validadores):
 
         #Variavel do option menu
         self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
-        self.popupMenu.place(relx=0.57, rely=0.02, relwidth=0.05, height=25)
+        self.popupMenu.place(relx=0.468, rely=0.05, width=207, height=25)
 
-        self.btn_salvar_produto = Button(self.produto_frame, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
-        self.btn_salvar_produto.place(relx=0.84, rely=0.04, relwidth=0.09, height=40)
+        self.lbl_qtd_fornecida = Label(self.produto_frame, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'))
+        self.lbl_qtd_fornecida.place(relx=0.38, rely=0.1, height=20)
+        self.et_qtd_fornecida = Entry(self.produto_frame, font=('Roboto', 9))
+        self.et_qtd_fornecida.place(relx=0.47, rely=0.1, height=20,  width=200)
 
-        self.btn_lista_produto = Button(self.produto_frame, text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_produto)
-        self.btn_lista_produto.place(relx=0.84, rely=0.12, relwidth=0.09, height=40)
+        self.lbl_data_fornecimento = Label(self.produto_frame, text='Data : ', font=('Roboto', 9, 'bold'))
+        self.lbl_data_fornecimento.place(relx=0.43, rely=0.15, height=20)
+        self.et_data_fornecimento = Entry(self.produto_frame, font=('Roboto', 9))
+        self.et_data_fornecimento.place(relx=0.47, rely=0.15, width=70, height=20)
+        self.btn_calendario = Button(self.produto_frame, text='Selecionar Data', font=('Roboto', 12, 'bold'), bg='#d9d9d9', command=self.calendario)
+        self.btn_calendario.place(relx=0.18, rely=0.75, width=130, height=20)
 
-        self.btn_alterar_produto = Button(self.produto_frame,text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_produto)
-        self.btn_alterar_produto.place(relx=0.84, rely=0.20, relwidth=0.09, height=40)
+        self.btn_salvar_produto = Button(self.produto_frame, image=self.imgSalvar, text=' Salvar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
+        self.btn_salvar_produto.place(relx=0.7, rely=0.05, relwidth=0.1, height=50)
 
-        self.btn_excluir_produto = Button(self.produto_frame, text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_produto)
-        self.btn_excluir_produto.place(relx=0.84, rely=0.28, relwidth=0.09, height=40)
+        self.btn_lista_produto = Button(self.produto_frame, image=self.imgListar,  text=' Listar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_produto)
+        self.btn_lista_produto.place(relx=0.7, rely=0.15, relwidth=0.1, height=50)
+
+        self.btn_alterar_produto = Button(self.produto_frame, image=self.imgAlterar,  text=' Editar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_produto)
+        self.btn_alterar_produto.place(relx=0.7, rely=0.25, relwidth=0.1, height=50)
+
+        self.btn_excluir_produto = Button(self.produto_frame, image=self.imgExcluir,  text=' Excluir', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_produto)
+        self.btn_excluir_produto.place(relx=0.7, rely=0.35, relwidth=0.1, height=50)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
         
@@ -380,12 +408,12 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaProd.column('#6', width=50, anchor='center')
         self.listaProd.column('#7', width=100, anchor='center')
 
-        self.listaProd.place(relx=0.03, rely=0.4, relwidth=0.9, relheight=0.5)
+        self.listaProd.place(relx=0.03, rely=0.5, relwidth=0.9, relheight=0.45)
 
         self.scrollListaProd = Scrollbar(self.produto_frame, orient='vertical')
 
         self.listaProd.configure(yscrollcommand=self.scrollListaProd.set)
-        self.scrollListaProd.place(relx=0.94, rely=0.4, relwidth= 0.02, relheight=0.5)
+        self.scrollListaProd.place(relx=0.94, rely=0.5, relwidth= 0.02, relheight=0.5)
 
         self.scrollHor = Scrollbar(self.produto_frame, orient='horizontal')
         self.listaProd.configure(xscrollcommand=self.scrollHor.set)
@@ -405,7 +433,7 @@ class MenuTela(Funcionalidades, Validadores):
         #self.frameResTelaFornecedor.place(relx=0, rely=0.51, relwidth=1, relheight=0.49)
 
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_fornecedor.place(relx=0.02, rely=0.05, height=20)
+        self.lbl_cod_fornecedor.place(relx=0.04, rely=0.05, height=20)
         self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
         self.et_cod_fornecedor.place(relx=0.09, rely=0.05, width=50, height=20)
 
