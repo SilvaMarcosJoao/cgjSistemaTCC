@@ -387,3 +387,4 @@ class Funcionalidades:
         self.et_desc_servico.delete(0, END)
         self.et_preco_servico.delete(0, END)
         self.et_tipo_servico.delete(0, END)
+
