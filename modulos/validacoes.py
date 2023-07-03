@@ -21,7 +21,7 @@ class Validadores:
             return 0 <= value <= 100000
     
     def validarString(self, texto):
-        if texto.isnumeric().strip():
+        if texto.isnumeric():
             messagebox.showwarning('Alerta', 'Não é permitido valores ')
             return False
         else:
@@ -31,17 +31,23 @@ class Validadores:
         pass
         
     def validaInt(self, num):
-        if  num.isnumeric():
-            return True
-        else:
-            messagebox.showwarning('Alerta','Digite um número inteiro')
+        if num == '': return True
+        try:
+            value = int(num)
+        except:
             return False
+        else:
+            return value
             
         
     def validaDecim(self, num):
-        if not num.isdecimal():
-            messagebox.showwarning('Alerta','Digite um número decimal')
+        if num == '': return True
+        try:
+            value = float(f'{num:.2f}')
+        except:
             return False
         else:
-            return True
+            return value
+        
+    
         

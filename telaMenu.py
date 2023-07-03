@@ -53,6 +53,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.valString = (self.appMenu.register(self.validarString), "%P")
         self.valInt = (self.appMenu.register(self.validaInt), "%P")
         self.valDec = (self.appMenu.register(self.validaDecim), "%P")
+        
 
     #função para inserir a data no calendario
     def inserirData(self):
@@ -200,7 +201,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_num_cliente = Label(self.frameCadTelaCliente, text='Número: ', font=('Roboto', 9, 'bold'), bg='#FFF')
         self.lbl_num_cliente.place(relx=0.35, rely=0.05, height=20)
-        self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#D9D9D9')
+        self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#D9D9D9', validate='key', validatecommand=self.valInt)
         self.et_num_cliente.place(relx=0.405, rely=0.05, width=60, height=20)
 
         self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#FFF')
@@ -269,11 +270,11 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.listaCliente.place(relx=0.05, rely=0.48, relwidth=0.90, relheight=0.47)
         
-        self.scrollLista = Scrollbar(self.frameCadTelaCliente, orient='vertical')
+        self.scrollLista = Scrollbar(self.frameCadTelaCliente, orient='vertical', command=self.listaCliente.yview)
         self.listaCliente.configure(yscrollcommand=self.scrollLista.set)
         self.scrollLista.place(relx=0.96, rely=0.53, relwidth= 0.02, relheight=0.40)
 
-        self.scrollHor = Scrollbar(self.frameCadTelaCliente, orient='horizontal')
+        self.scrollHor = Scrollbar(self.frameCadTelaCliente, orient='horizontal', command=self.listaCliente.xview)
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.05, rely=0.96, relwidth=0.075, relheight=0.03)
         self.listaCliente.bind("<Double-1>", self.duplo_clique_cliente)
@@ -318,7 +319,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaCategoria.column('#2', width=290, minwidth=290, stretch=NO, anchor='center')
         self.listaCategoria.place(relx=0.26, rely=0.48, relwidth=0.45, relheight=0.45)
 
-        self.scrollListaCat = Scrollbar(self.categoria_frame, orient='vertical')
+        self.scrollListaCat = Scrollbar(self.categoria_frame, orient='vertical', command=self.listaCategoria.yview)
         #informando que a barra de rolagem pertence a lista treeview e unindo os dois elementos
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
         self.scrollListaCat.place(relx=0.72, rely=0.48, relwidth= 0.02, relheight=0.45)
@@ -358,7 +359,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'))
         self.lbl_qtd_produto.place(relx=0.18, rely=0.05)
-        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.valInt)
         self.et_qtd_produto.place(relx=0.21, rely=0.05, width=60, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'))
@@ -380,7 +381,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_qtd_fornecida = Label(self.produto_frame, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'))
         self.lbl_qtd_fornecida.place(relx=0.05, rely=0.3, height=20)
-        self.et_qtd_fornecida = Entry(self.produto_frame, font=('Roboto', 9))
+        self.et_qtd_fornecida = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.valInt)
         self.et_qtd_fornecida.place(relx=0.212, rely=0.3, height=20,  width=60)
 
         self.lbl_data_fornecimento = Label(self.produto_frame, text='Data : ', font=('Roboto', 9, 'bold'))
@@ -424,7 +425,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.listaProd.place(relx=0.03, rely=0.5, relwidth=0.9, relheight=0.45)
 
-        self.scrollListaProd = Scrollbar(self.produto_frame, orient='vertical')
+        self.scrollListaProd = Scrollbar(self.produto_frame, orient='vertical', command=self.listaProd.yview)
 
         self.listaProd.configure(yscrollcommand=self.scrollListaProd.set)
         self.scrollListaProd.place(relx=0.94, rely=0.52, relwidth= 0.02, relheight=0.4)
@@ -500,16 +501,10 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_qtd_fornecida_fornecedor = Label(self.frameCadTelaFornecedor, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
         self.lbl_qtd_fornecida_fornecedor.place(relx=0.02, rely=0.35, height=20)
         self.et_qtd_fornecida_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        #self.et_qtd_fornecida_fornecedor.place(relx=0.11, rely=0.75, height=20,  width=200)
 
         self.lbl_data_fornecimento = Label(self.frameCadTelaFornecedor, text='Data do Fornecimento: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
         self.lbl_data_fornecimento.place(relx=0.02, rely=0.40, height=20)
         self.et_data_fornecimento = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-       #self.et_data_fornecimento.place(relx=0.09, rely=0.66,  width=100, height=20)
-
-       #self.btn_calendario = Button(self.frameCadTelaFornecedor, text='Selecionar Data', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-       # self.btn_calendario.place(relx=0.24, rely=0.34, width=180, height=40)
-
         
         self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor,text="Consultar",  bg="#505050")
         self.btn_consultar.place(relx=0.84, rely=0.05, relwidth=0.09, height=40)
@@ -557,16 +552,16 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaForne.column('#8', width=100, anchor='center')
         self.listaForne.column('#9', width=50, anchor='center')
         self.listaForne.column('#10', width=50, anchor='center')
-       # self.listaForne.column('#11', width=80)
-        #self.listaForne.column('#12', width=80)
+        # self.listaForne.column('#11', width=80)
+        # self.listaForne.column('#12', width=80)
 
         self.listaForne.place(relx=0.04, rely=0.5, relwidth=0.9, relheight=0.4)
 
-        self.scrollListaForne = Scrollbar(self.frameCadTelaFornecedor, orient='vertical')
+        self.scrollListaForne = Scrollbar(self.frameCadTelaFornecedor, orient='vertical', command=self.listaForne.yview)
         self.listaForne.configure(yscrollcommand=self.scrollListaForne.set)
         self.scrollListaForne.place(relx=0.95, rely=0.5, relwidth= 0.02, relheight=0.4)
 
-        self.scrollHor = Scrollbar(self.frameCadTelaFornecedor, orient='horizontal')
+        self.scrollHor = Scrollbar(self.frameCadTelaFornecedor, orient='horizontal', command=self.listaForne.xview)
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.04, rely=0.90, relwidth=0.08, relheight=0.03)
         self.listaForne.bind("<Double-1>", self.duplo_clique_for)
@@ -577,9 +572,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
         self.frameCadTelaServico.place(relx=0.12, rely=0.025, relwidth=0.75, relheight=0.95)
-
-        #self.frameResTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
-        #self.frameResTelaServico.place(relx=0, rely=0.5, relwidth=1, relheight=0.5)
 
         self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_servico.place(relx=0.2, rely=0.05, height=20)
@@ -629,11 +621,11 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.listaServico.place(relx=0.2, rely=0.45, relwidth=0.6, relheight=0.5)
         
-        self.scrollListaServico = Scrollbar(self.frameCadTelaServico, orient='vertical')
+        self.scrollListaServico = Scrollbar(self.frameCadTelaServico, orient='vertical', command=self.listaServico.yview)
         self.listaServico.configure(yscrollcommand=self.scrollListaServico.set)
         self.scrollListaServico.place(relx=0.81, rely=0.45, relwidth= 0.02, relheight=0.5)
 
-        self.scrollHor = Scrollbar(self.frameCadTelaServico, orient='horizontal')
+        self.scrollHor = Scrollbar(self.frameCadTelaServico, orient='horizontal', command=self.listaServico.xview)
         self.listaServico.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.2, rely=0.95, relwidth=0.08, relheight=0.03)
         
