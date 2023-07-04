@@ -109,9 +109,3 @@ class Produto:
                                 WHERE cod_produto='{cod_produto}'""")
         banco.conexao.commit()
         banco.desconectar()
-        
-       
-produto2 = Produto('1', 'capa', 'xs max', '20,00', '50,00', 12, 34245)
-
-#fetchall = todos
-#fetchmany = alguns
