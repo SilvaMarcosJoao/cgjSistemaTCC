@@ -84,12 +84,6 @@ class Fornecedor:
 
     def set_estado(self, estado: str) -> None:
         self.__estado = estado
-        
-   # def get_qtd_forn(self) -> int:
-    #    return self.__qtd_forn
-    
-    #def set_qtd_forn(self, qtd_forn: int) -> None:
-     #   self.__qtd_forn = qtd_forn
 
     def cadastrarFornecedor(self, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade, estado) -> None:
         banco.conectar()

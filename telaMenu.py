@@ -4,6 +4,7 @@ from tkcalendar import Calendar
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
+from telaFornecimento import FornecimentoTela
 
 
 appMenu = Tk()
@@ -390,6 +391,13 @@ class MenuTela(Funcionalidades, Validadores):
         #Variavel do option menu
         self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.472, rely=0.1, width=100, height=22)
+
+        self.lbl_fornecedor = Label(self.produto_frame, text='Fornecedor: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_fornecedor.place(relx=0.405, rely=0.15)
+        
+        self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
+        self.btn_fornecimento.place(relx=0.405, rely=0.2, width=165, height=22)
+
 
         self.lbl_qtd_fornecida = Label(self.produto_frame, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_qtd_fornecida.place(relx=0.05, rely=0.3, height=20)

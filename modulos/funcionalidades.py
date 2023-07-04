@@ -117,7 +117,8 @@ class Funcionalidades:
             messagebox.showinfo('Informação', 'Não há produtos cadastrados')
         else:
             for i in self.exibirProd:
-                self.listaProd.insert('',END, values=i)  
+                self.listaProd.insert('',END, values=i) 
+        self.inserir_fornecimento() 
     
     def editar_produto(self):
         self.desc_produto = self.et_desc_produto.get()
@@ -158,8 +159,6 @@ class Funcionalidades:
         self.et_qtd_produto.delete(0, END)
 
     
-
-
 #CRUD do Cliente
     def inserir_cliente(self):
         self.cpf = self.et_cpf_cliente.get() 
@@ -334,11 +333,12 @@ class Funcionalidades:
        
 
     def inserir_fornecimento(self):
-        self.cnpj_obt = self.et_cnpj_fornecedor.get()
+        self.res = self.fornecedor.listarFornecedor()
         self.cod_prod_obt = self.et_cod_produto.get()
         self.qtd_fornecimento = self.et_qtd_fornecida.get()
         self.data = self.et_data_fornecimento.get()
-        self.fornecimento.cadastrar_fornecimento(self.cnpj_obt, self.cod_prod_obt, self.data, self.qtd_fornecimento)
+        print(self.res)
+        #self.fornecimento.cadastrar_fornecimento(self.cnpj_obt, self.cod_prod_obt, self.data, self.qtd_fornecimento)
 
 # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
     def inserir_servico(self):
