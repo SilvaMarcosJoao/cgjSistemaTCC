@@ -86,7 +86,10 @@ class Produto:
     #mostra todos os produtos
     def listarProduto(self) -> list:
         banco.conectar()
-        produtos=banco.cursor.execute(f"""SELECT * FROM PRODUTO""").fetchall()   
+        produtos=banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
+                                      preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
+                                      FROM produto, categoria_produto 
+                                      WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()   
         banco.desconectar()
         return produtos
         
