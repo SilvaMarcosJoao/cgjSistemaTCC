@@ -157,6 +157,8 @@ class Funcionalidades:
         self.et_preco_ven_produto.delete(0, END)
         self.et_qtd_produto.delete(0, END)
 
+    
+
 
 #CRUD do Cliente
     def inserir_cliente(self):
