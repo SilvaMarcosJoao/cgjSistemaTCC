@@ -138,7 +138,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_os.place(relx=0.08, rely=0.68, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
-        self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E')
+        self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E' , command=lambda: self.indicate(self.btn_ger_os, self.widgets_venda))
         self.btn_ger_venda.place(relx=0.08, rely=0.77, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')

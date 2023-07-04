@@ -388,3 +388,22 @@ class Funcionalidades:
         self.et_preco_servico.delete(0, END)
         self.et_tipo_servico.delete(0, END)
 
+#CRUD da venda
+
+    def pegar_produto(self):
+        pass
+    
+    def pegar_cliente(self):
+        pass
+    
+    def inserir_venda(self):
+        pass
+    
+    def duplo_clique(self):
+        pass
+    
+    def excluir_venda(self):
+        pass
+    
+    def calcular_total(self):
+        pass
