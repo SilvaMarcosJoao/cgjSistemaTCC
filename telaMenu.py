@@ -344,7 +344,11 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.produto_frame = Frame(self.frameMenu_right, bg='#d9d9d9')
         self.produto_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
-
+        
+        lbl_titulo_prod = Label(self.produto_frame, text='PRODUTO', font=('Roboto', 16), bg='#d9d9d9')
+        lbl_titulo_prod.place(relx=0.025, rely=0.01)
+        
+        
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_produto.place(relx=0.05, rely=0.05)
         self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
@@ -454,7 +458,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaProd.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.03, rely=0.95, relwidth=0.1, relheight=0.03)
         
-        self.listaProd.bind("<Double-1>", self.duplo_clique_for)
+        self.listaProd.bind("<Double-1>", self.duplo_clique_prod)
 
         
     # CONFIGURAÇÕES DA TELA FORNECEDOR
