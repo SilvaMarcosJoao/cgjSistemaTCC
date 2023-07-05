@@ -159,7 +159,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.usuario_frame = Frame(self.frameMenu_right)
         self.usuario_frame.place(relx=0.15, rely=0.1, relwidth=0.5, relheight=0.8)
         
-        lbl_titulo_usuario = Label(self.usuario_frame, text='USUÁRIO', font=('Roboto', 15), bg='#FFFFFF')
+        lbl_titulo_usuario = Label(self.usuario_frame, text='USUÁRIO', font=('Roboto', 15), bg='#FFF')
         lbl_titulo_usuario.place(relx=0.025, rely=0.01)
 
         self.lbl_nova_senha = Label(self.usuario_frame, text='Nova Senha:',font=('Roboto', 10, 'bold'))
