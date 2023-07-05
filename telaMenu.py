@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-#from tkcalendar import Calendar
+from tkcalendar import Calendar
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
@@ -190,113 +190,109 @@ class MenuTela(Funcionalidades, Validadores):
         #self.frameResTelaCliente.place(relx=0.01, rely=0.50, relwidth=0.98, relheight=0.47)
         
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_cliente.place(relx=0.025, rely=0.05, height=20)
+        self.lbl_cod_cliente.place(relx=0.025, rely=0.1, height=20)
         self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.impCod, bg='#FFF')
-        self.et_cod_cliente.place(relx=0.09, rely=0.05, width=50, height=20)
+        self.et_cod_cliente.place(relx=0.09, rely=0.1, width=50, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
-        self.lbl_cpf_cliente.place(relx=0.025, rely=0.1, height=20)
+        self.lbl_cpf_cliente.place(relx=0.025, rely=0.15, height=20)
         self.et_cpf_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9),bg= '#FFF')
-        self.et_cpf_cliente.place(relx=0.09, rely=0.1, width=220, height=20)
+        self.et_cpf_cliente.place(relx=0.09, rely=0.15, width=220, height=20)
         
         self.lbl_nome_cliente = Label(self.frameCadTelaCliente, text='Nome: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_nome_cliente.place(relx=0.025, rely=0.15, height=20)
+        self.lbl_nome_cliente.place(relx=0.025, rely=0.2, height=20)
         self.et_nome_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
-        self.et_nome_cliente.place(relx=0.09, rely=0.15, width=220, height=20)
+        self.et_nome_cliente.place(relx=0.09, rely=0.2, width=220, height=20)
 
         self.lbl_email_cliente = Label(self.frameCadTelaCliente, text='E-mail: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_email_cliente.place(relx=0.025, rely=0.2, height=20)
+        self.lbl_email_cliente.place(relx=0.025, rely=0.25, height=20)
         self.et_email_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
-        self.et_email_cliente.place(relx=0.09, rely=0.2, width=220, height=20)
+        self.et_email_cliente.place(relx=0.09, rely=0.25, width=220, height=20)
 
         self.lbl_tel_cliente = Label(self.frameCadTelaCliente, text='Telefone: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_tel_cliente.place(relx=0.025, rely=0.25,  height=20)
+        self.lbl_tel_cliente.place(relx=0.025, rely=0.3,  height=20)
         self.et_tel_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
-        self.et_tel_cliente.place(relx=0.09, rely=0.25, width=220, height=20)
+        self.et_tel_cliente.place(relx=0.09, rely=0.3, width=220, height=20)
 
         self.lbl_logr_cliente = Label(self.frameCadTelaCliente, text='Endereço: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_logr_cliente.place(relx=0.025, rely=0.3, height=20)
+        self.lbl_logr_cliente.place(relx=0.025, rely=0.35, height=20)
         self.et_logr_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
-        self.et_logr_cliente.place(relx=0.09, rely=0.3, width=220, height=20)
+        self.et_logr_cliente.place(relx=0.09, rely=0.35, width=220, height=20)
 
         self.lbl_num_cliente = Label(self.frameCadTelaCliente, text='Número: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_num_cliente.place(relx=0.35, rely=0.05, height=20)
+        self.lbl_num_cliente.place(relx=0.35, rely=0.1, height=20)
         self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF', validate='key', validatecommand=self.valInt)
-        self.et_num_cliente.place(relx=0.405, rely=0.05, width=60, height=20)
+        self.et_num_cliente.place(relx=0.405, rely=0.1, width=60, height=20)
 
         self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cep_cliente.place(relx=0.49, rely=0.05, height=20)
+        self.lbl_cep_cliente.place(relx=0.49, rely=0.1, height=20)
         self.et_cep_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
-        self.et_cep_cliente.place(relx=0.525, rely=0.05, width=100, height=20)
+        self.et_cep_cliente.place(relx=0.525, rely=0.1, width=100, height=20)
 
         self.lbl_cidade_cliente = Label(self.frameCadTelaCliente, text='Cidade: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cidade_cliente.place(relx=0.355, rely=0.1, height=20)
+        self.lbl_cidade_cliente.place(relx=0.355, rely=0.15, height=20)
         self.et_cidade_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
-        self.et_cidade_cliente.place(relx=0.405, rely=0.1, width=220, height=20)
+        self.et_cidade_cliente.place(relx=0.405, rely=0.15, width=220, height=20)
 
         self.lbl_estado_cliente = Label(self.frameCadTelaCliente, text='Estado: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_estado_cliente.place(relx=0.355, rely=0.15, height=20)
+        self.lbl_estado_cliente.place(relx=0.355, rely=0.2, height=20)
         self.et_estado_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
-        self.et_estado_cliente.place(relx=0.405, rely=0.15, width=220, height=20)
+        self.et_estado_cliente.place(relx=0.405, rely=0.2, width=220, height=20)
         
-        self.btn_consultar = Button(self.frameCadTelaCliente, text=' Consultar', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
-        self.btn_consultar.place(relx=0.84, rely=0.05, relwidth=0.09, height=40)
-        self.lbl_et_consultar = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
-        self.lbl_et_consultar.place(relx=0.69, rely=0.07, width=130, height=20)
+        self.btn_consultar = Button(self.frameCadTelaCliente, text=' Consultar', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.buscar_cliente)
+        self.btn_consultar.place(relx=0.88, rely=0.065, relwidth=0.09, height=40)
+        self.lbl_pes = Label(self.frameCadTelaCliente, text='Buscar Cliente: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_pes.place(relx=0.73, rely=0.065)
+        self.et_consultar_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
+        self.et_consultar_cliente.place(relx=0.73, rely=0.1, width=130, height=20)
         
         self.btn_salvar = Button(self.frameCadTelaCliente, command=self.inserir_cliente, text=' Salvar', relief='groove', fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
-        self.btn_salvar.place(relx=0.84, rely=0.13, relwidth=0.09, height=40)
+        self.btn_salvar.place(relx=0.88, rely=0.145, relwidth=0.09, height=40)
         
         self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente,  text=' Listar', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
-        self.btn_listar.place(relx=0.84, rely=0.21, relwidth=0.09, height=40)
+        self.btn_listar.place(relx=0.88, rely=0.225, relwidth=0.09, height=40)
 
         self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, text=' Alterar', relief='groove', fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
-        self.btn_alterar.place(relx=0.84, rely=0.29, relwidth=0.09, height=40)
+        self.btn_alterar.place(relx=0.88, rely=0.305, relwidth=0.09, height=40)
 
         self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, text=' Excluir', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
-        self.btn_excluir.place(relx=0.84, rely=0.37, relwidth=0.09, height=40)
+        self.btn_excluir.place(relx=0.88, rely=0.385, relwidth=0.09, height=40)
     
         self.listaCliente = ttk.Treeview(self.frameCadTelaCliente, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
                                                                                       'Col8', 'Col9','Col10'), show = 'headings')
-
         self.listaCliente.heading("#0", text='')
         self.listaCliente.heading("#1", text='Código')
         self.listaCliente.heading('#2', text='CPF')
         self.listaCliente.heading('#3', text='Nome')
         self.listaCliente.heading('#4', text='Email')
         self.listaCliente.heading('#5', text='Telefone')
-        self.listaCliente.heading('#6', text='Enderço')
+        self.listaCliente.heading('#6', text='Endereço')
         self.listaCliente.heading('#7', text='Número')
         self.listaCliente.heading('#8', text='Cep')
         self.listaCliente.heading('#9', text='Cidade')
         self.listaCliente.heading('#10', text='Estado')
-        #Agora especificar o tamanho em largura de cada coluna
-        '''
-            A largura tem como número referência o 500, então dividimos o 500 em partes para  cada coluna
-            na coluna 1 a largura 50, equivale a 10% de 500 na coluna 2 200 equivale a 40% de 500 e assim vai.
-        '''
 
         self.listaCliente.column('#0', width=1, anchor='center')
-        self.listaCliente.column('#1', width=100, anchor='center')
-        self.listaCliente.column('#2', width=200, anchor='center')
-        self.listaCliente.column('#3', width=250, anchor='center')
-        self.listaCliente.column('#4', width=105, anchor='center')
-        self.listaCliente.column('#5', width=300, anchor='center')
-        self.listaCliente.column('#6', width=80, anchor='center')
-        self.listaCliente.column('#7', width=100, anchor='center')
+        self.listaCliente.column('#1', width=60, anchor='center')
+        self.listaCliente.column('#2', width=120, anchor='center')
+        self.listaCliente.column('#3', width=240, anchor='center')
+        self.listaCliente.column('#4', width=160, anchor='center')
+        self.listaCliente.column('#5', width=160, anchor='center')
+        self.listaCliente.column('#6', width=250, anchor='center')
+        self.listaCliente.column('#7', width=80, anchor='center')
         self.listaCliente.column('#8', width=100, anchor='center')
-        self.listaCliente.column('#9', width=50, anchor='center')
-        self.listaCliente.column('#10', width=50, anchor='center')
+        self.listaCliente.column('#9', width=80, anchor='center')
+        self.listaCliente.column('#10', width=80, anchor='center')
 
-        self.listaCliente.place(relx=0.05, rely=0.48, relwidth=0.90, relheight=0.47)
+        self.listaCliente.place(relx=0.02, rely=0.47, relwidth=0.95, relheight=0.49)
         
         self.scrollLista = Scrollbar(self.frameCadTelaCliente, orient='vertical', command=self.listaCliente.yview)
         self.listaCliente.configure(yscrollcommand=self.scrollLista.set)
-        self.scrollLista.place(relx=0.96, rely=0.53, relwidth= 0.02, relheight=0.40)
+        self.scrollLista.place(relx=0.975, rely=0.47, relwidth= 0.02, relheight=0.48)
 
         self.scrollHor = Scrollbar(self.frameCadTelaCliente, orient='horizontal', command=self.listaCliente.xview)
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
-        self.scrollHor.place(relx=0.05, rely=0.96, relwidth=0.075, relheight=0.03)
+        self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         self.listaCliente.bind("<Double-1>", self.duplo_clique_cliente)
 
     # CONFIGURAÇÕES DA TELA CATEGORIA
@@ -357,36 +353,35 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_prod = Label(self.produto_frame, text='PRODUTO', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_prod.place(relx=0.025, rely=0.01)
         
-        
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_produto.place(relx=0.05, rely=0.05)
+        self.lbl_cod_produto.place(relx=0.05, rely=0.1)
         self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
-        self.et_cod_produto.place(relx=0.12, rely=0.05, width=40, height=20)
+        self.et_cod_produto.place(relx=0.12, rely=0.1, width=40, height=20)
         
         self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_mode_produto.place(relx=0.05, rely=0.1)
+        self.lbl_mode_produto.place(relx=0.05, rely=0.15)
         self.et_mode_produto = Entry(self.produto_frame, font=('Roboto', 9))
-        self.et_mode_produto.place(relx=0.12, rely=0.1, width=150, height=20)
+        self.et_mode_produto.place(relx=0.12, rely=0.15, width=150, height=20)
         
         self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_desc_produto.place(relx=0.05, rely=0.15)
+        self.lbl_desc_produto.place(relx=0.05, rely=0.2)
         self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10))
-        self.et_desc_produto.place(relx=0.12, rely=0.15, width=150, height=20)
+        self.et_desc_produto.place(relx=0.12, rely=0.2, width=150, height=20)
 
         self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_preco_comp_produto.place(relx=0.05, rely=0.2)
+        self.lbl_preco_comp_produto.place(relx=0.05, rely=0.25)
         self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 9), validate='key', validatecommand=self.valDec)
-        self.et_preco_comp_produto.place(relx=0.17, rely=0.2, width=100, height=20)
+        self.et_preco_comp_produto.place(relx=0.17, rely=0.25, width=100, height=20)
 
         self.lbl_preco_ven_produto = Label(self.produto_frame, text='Preço Venda: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_preco_ven_produto.place(relx=0.05, rely=0.25)
+        self.lbl_preco_ven_produto.place(relx=0.05, rely=0.3)
         self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.valDec)
-        self.et_preco_ven_produto.place(relx=0.17, rely=0.25, width=100, height=20)
+        self.et_preco_ven_produto.place(relx=0.17, rely=0.3, width=100, height=20)
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_qtd_produto.place(relx=0.18, rely=0.05)
+        self.lbl_qtd_produto.place(relx=0.18, rely=0.1)
         self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.valInt)
-        self.et_qtd_produto.place(relx=0.21, rely=0.05, width=60, height=20)
+        self.et_qtd_produto.place(relx=0.21, rely=0.1, width=60, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cat_produto.place(relx=0.405, rely=0.1)
@@ -410,7 +405,6 @@ class MenuTela(Funcionalidades, Validadores):
         
         self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.405, rely=0.2, width=165, height=22)
-
 
         self.lbl_qtd_fornecida = Label(self.produto_frame, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_qtd_fornecida.place(relx=0.05, rely=0.3, height=20)
@@ -456,12 +450,12 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaProd.column('#6', width=50, anchor='center')
         self.listaProd.column('#7', width=100, anchor='center')
 
-        self.listaProd.place(relx=0.03, rely=0.5, relwidth=0.9, relheight=0.45)
+        self.listaProd.place(relx=0.02, rely=0.45, relwidth=0.95, relheight=0.48)
 
         self.scrollListaProd = Scrollbar(self.produto_frame, orient='vertical', command=self.listaProd.yview)
 
         self.listaProd.configure(yscrollcommand=self.scrollListaProd.set)
-        self.scrollListaProd.place(relx=0.94, rely=0.52, relwidth= 0.02, relheight=0.4)
+        self.scrollListaProd.place(relx=0.975, rely=0.45, relwidth= 0.02, relheight=0.48)
 
         self.scrollHor = Scrollbar(self.produto_frame, orient='horizontal')
         self.listaProd.configure(xscrollcommand=self.scrollHor.set)
@@ -480,85 +474,75 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_fornecedor = Label(self.frameCadTelaFornecedor, text='FORNECEDOR', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_fornecedor.place(relx=0.025, rely=0.01)
 
-        #self.frameResTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
-        #self.frameResTelaFornecedor.place(relx=0, rely=0.51, relwidth=1, relheight=0.49)
-        
-
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_fornecedor.place(relx=0.02, rely=0.05, height=20)
+        self.lbl_cod_fornecedor.place(relx=0.02, rely=0.1, height=20)
         self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
-        self.et_cod_fornecedor.place(relx=0.09, rely=0.05, width=50, height=20)
+        self.et_cod_fornecedor.place(relx=0.09, rely=0.1, width=50, height=20)
 
         self.lbl_cnpj_fornecedor = Label(self.frameCadTelaFornecedor, text='CNPJ/CPF: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cnpj_fornecedor.place(relx=0.02, rely=0.1, height=20)
+        self.lbl_cnpj_fornecedor.place(relx=0.02, rely=0.15, height=20)
         self.et_cnpj_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        self.et_cnpj_fornecedor.place(relx=0.09, rely=0.1, width=220, height=20)
+        self.et_cnpj_fornecedor.place(relx=0.09, rely=0.15, width=220, height=20)
 
         self.lbl_nome_fornecedor = Label(self.frameCadTelaFornecedor, text='Nome: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
-        self.lbl_nome_fornecedor.place(relx=0.02, rely=0.15, height=20)
+        self.lbl_nome_fornecedor.place(relx=0.02, rely=0.2, height=20)
         self.et_nome_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valString)
-        self.et_nome_fornecedor.place(relx=0.09, rely=0.15, width=220, height=20)
+        self.et_nome_fornecedor.place(relx=0.09, rely=0.2, width=220, height=20)
 
         self.lbl_email_fornecedor = Label(self.frameCadTelaFornecedor, text='E-mail: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_email_fornecedor.place(relx=0.02, rely=0.20, height=20)
+        self.lbl_email_fornecedor.place(relx=0.02, rely=0.25, height=20)
         self.et_email_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        self.et_email_fornecedor.place(relx=0.09, rely=0.20, width=220, height=20)
+        self.et_email_fornecedor.place(relx=0.09, rely=0.25, width=220, height=20)
 
         self.lbl_tel_fornecedor = Label(self.frameCadTelaFornecedor, text='Telefone: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_tel_fornecedor.place(relx=0.02, rely=0.25, height=20)
+        self.lbl_tel_fornecedor.place(relx=0.02, rely=0.3, height=20)
         self.et_tel_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        self.et_tel_fornecedor.place(relx=0.09, rely=0.25, width=220, height=20)
+        self.et_tel_fornecedor.place(relx=0.09, rely=0.3, width=220, height=20)
 
         self.lbl_logr_fornecedor = Label(self.frameCadTelaFornecedor, text='Endereço: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_logr_fornecedor.place(relx=0.02, rely=0.30, height=20)
+        self.lbl_logr_fornecedor.place(relx=0.02, rely=0.35, height=20)
         self.et_logr_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valString)
-        self.et_logr_fornecedor.place(relx=0.09, rely=0.30, width=220, height=20)
+        self.et_logr_fornecedor.place(relx=0.09, rely=0.35, width=220, height=20)
 
         self.lbl_num_fornecedor = Label(self.frameCadTelaFornecedor, text='Número: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_num_fornecedor.place(relx=0.35, rely=0.05, height=20)
+        self.lbl_num_fornecedor.place(relx=0.35, rely=0.1, height=20)
         self.et_num_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valInt)
-        self.et_num_fornecedor.place(relx=0.405, rely=0.05, width=60, height=20)
+        self.et_num_fornecedor.place(relx=0.405, rely=0.1, width=60, height=20)
 
         self.lbl_cep_fornecedor = Label(self.frameCadTelaFornecedor, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cep_fornecedor.place(relx=0.49, rely=0.05, height=20)
+        self.lbl_cep_fornecedor.place(relx=0.49, rely=0.1, height=20)
         self.et_cep_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        self.et_cep_fornecedor.place(relx=0.522, rely=0.05, width=100, height=20)
+        self.et_cep_fornecedor.place(relx=0.522, rely=0.1, width=107, height=20)
 
         self.lbl_cidade_fornecedor = Label(self.frameCadTelaFornecedor, text='Cidade: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cidade_fornecedor.place(relx=0.35, rely=0.1, height=20)
+        self.lbl_cidade_fornecedor.place(relx=0.35, rely=0.15, height=20)
         self.et_cidade_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valString)
-        self.et_cidade_fornecedor.place(relx=0.405, rely=0.1, width=220, height=20)
+        self.et_cidade_fornecedor.place(relx=0.405, rely=0.15, width=220, height=20)
 
         self.lbl_estado_fornecedor = Label(self.frameCadTelaFornecedor, text='Estado: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_estado_fornecedor.place(relx=0.35, rely=0.15, height=20)
+        self.lbl_estado_fornecedor.place(relx=0.35, rely=0.2, height=20)
         self.et_estado_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valString)
-        self.et_estado_fornecedor.place(relx=0.405, rely=0.15, width=220, height=20)
-
-        self.lbl_qtd_fornecida_fornecedor = Label(self.frameCadTelaFornecedor, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
-        self.lbl_qtd_fornecida_fornecedor.place(relx=0.02, rely=0.35, height=20)
-        self.et_qtd_fornecida_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-
-        self.lbl_data_fornecimento = Label(self.frameCadTelaFornecedor, text='Data do Fornecimento: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
-        self.lbl_data_fornecimento.place(relx=0.02, rely=0.40, height=20)
-        self.et_data_fornecimento = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
+        self.et_estado_fornecedor.place(relx=0.405, rely=0.2, width=220, height=20)
         
         self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor,text="Consultar",fg='#FFF',font=('Roboto', 10,'bold'),  bg="#505050")
-        self.btn_consultar.place(relx=0.84, rely=0.05, relwidth=0.09, height=40)
+        self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09, height=40)
 
-        self.et_consultar = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
-        self.et_consultar.place(relx=0.70, rely=0.07, width=130, height=20)
+        self.lbl_pes_forn = Label(self.frameCadTelaFornecedor, text='Buscar Fornecedor: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_pes_forn.place(relx=0.73, rely=0.065)
+        self.et_consultar_forne = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
+        self.et_consultar_forne.place(relx=0.73, rely=0.105, width=130, height=20)
         
         self.btn_salvar = Button(self.frameCadTelaFornecedor, command= self.inserir_fornecedor,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_salvar.place(relx=0.84, rely=0.13, relwidth=0.09, height=40)
+        self.btn_salvar.place(relx=0.88, rely=0.155, relwidth=0.09, height=40)
 
         self.btn_listar = Button(self.frameCadTelaFornecedor, command= self.lista_fornecedor,text="Listar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_listar.place(relx=0.84, rely=0.21, relwidth=0.09, height=40)
+        self.btn_listar.place(relx=0.88, rely=0.235, relwidth=0.09, height=40)
 
         self.btn_alterar = Button(self.frameCadTelaFornecedor, command= self.alterar_fornecedor,text="Alterar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_alterar.place(relx=0.84, rely=0.29, relwidth=0.09, height=40)
+        self.btn_alterar.place(relx=0.88, rely=0.315, relwidth=0.09, height=40)
 
         self.btn_excluir = Button(self.frameCadTelaFornecedor, command=self.excluir_fornecedor,text="Excluir",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_excluir.place(relx=0.84, rely=0.37, relwidth=0.09, height=40)
+        self.btn_excluir.place(relx=0.88, rely=0.395, relwidth=0.09, height=40)
 
         self.listaForne = ttk.Treeview(self.frameCadTelaFornecedor, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 
                                                                                         'Col8', 'Col9', 'Col10'), show='headings')
@@ -573,32 +557,30 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaForne.heading('#8', text='Cep')
         self.listaForne.heading('#9', text='Cidade')
         self.listaForne.heading('#10', text='Estado')
-       # self.listaForne.heading('#11', text='Qtd')
-       # self.listaForne.heading('#12', text='Data')
 
         self.listaForne.column('#0', width=1, anchor='center')
-        self.listaForne.column('#1', width=10, anchor='center')
-        self.listaForne.column('#2', width=200, anchor='center')
-        self.listaForne.column('#3', width=250, anchor='center')
-        self.listaForne.column('#4', width=105, anchor='center')
-        self.listaForne.column('#5', width=300, anchor='center')
-        self.listaForne.column('#6', width=80, anchor='center')
-        self.listaForne.column('#7', width=100, anchor='center')
-        self.listaForne.column('#8', width=100, anchor='center')
-        self.listaForne.column('#9', width=50, anchor='center')
-        self.listaForne.column('#10', width=50, anchor='center')
-        # self.listaForne.column('#11', width=80)
-        # self.listaForne.column('#12', width=80)
+        self.listaForne.column('#1', width=60, anchor='center')
+        self.listaForne.column('#2', width=80, anchor='center')
+        self.listaForne.column('#3', width=230, anchor='center')
+        self.listaForne.column('#4', width=180, anchor='center')
+        self.listaForne.column('#5', width=130, anchor='center')
+        self.listaForne.column('#6', width=220, anchor='center')
+        self.listaForne.column('#7', width=60, anchor='center')
+        self.listaForne.column('#8', width=80, anchor='center')
+        self.listaForne.column('#9', width=150, anchor='center')
+        self.listaForne.column('#10', width=150, anchor='center')
 
-        self.listaForne.place(relx=0.04, rely=0.5, relwidth=0.9, relheight=0.4)
+        self.listaForne.place(relx=0.02, rely=0.48, relwidth=0.95, relheight=0.49)
+        
 
         self.scrollListaForne = Scrollbar(self.frameCadTelaFornecedor, orient='vertical', command=self.listaForne.yview)
         self.listaForne.configure(yscrollcommand=self.scrollListaForne.set)
-        self.scrollListaForne.place(relx=0.95, rely=0.5, relwidth= 0.02, relheight=0.4)
+        self.scrollListaForne.place(relx=0.975, rely=0.48, relwidth= 0.02, relheight=0.48)
+        
 
         self.scrollHor = Scrollbar(self.frameCadTelaFornecedor, orient='horizontal', command=self.listaForne.xview)
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
-        self.scrollHor.place(relx=0.04, rely=0.90, relwidth=0.08, relheight=0.03)
+        self.scrollHor.place(relx=0.02, rely=0.97, relwidth=0.08, relheight=0.03)
         self.listaForne.bind("<Double-1>", self.duplo_clique_for)
 
     # CONFIGURAÇÕES DA TELA SERVIÇO

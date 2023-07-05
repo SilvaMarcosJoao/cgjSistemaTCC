@@ -185,6 +185,20 @@ class Funcionalidades:
             for n in self.lista:
                 self.listaCliente.insert('',END, values=n)
 
+    def buscar_cliente(self):
+        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.cli = self.et_consultar_cliente.get()
+        if len(self.cli) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resCli = self.cliente.consultarCliente(self.cli)
+            if len(self.resCli) == 0:
+                messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
+            else:
+                for v in self.resCli:
+                    self.listaCliente.insert('',END, values=v)
+        self.limpa_cliente()
+
     def alterar_cliente(self):
         self.cod = self.et_cod_cliente.get()
         self.cpf = self.et_cpf_cliente.get()
@@ -235,6 +249,7 @@ class Funcionalidades:
         self.et_cep_cliente.delete(0,END)
         self.et_cidade_cliente.delete(0,END)
         self.et_estado_cliente.delete(0,END)
+        self.et_consultar_cliente.delete(0, END)
 
 
 #CRUD do Fornecedor

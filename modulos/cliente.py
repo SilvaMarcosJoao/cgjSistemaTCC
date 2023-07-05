@@ -108,9 +108,10 @@ class Cliente:
     
     def consultarCliente(self, nome) -> list:
         banco.conectar()
-        cli = banco.cursor.execute(f"""SELECT cpf, nome_cliente, email,
+        cli = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
-                                WHERE nome_cliente='{nome}'""").fetchmany()
+                                WHERE nome_cliente like '{nome}%' """).fetchmany()
+                            
         banco.desconectar()    
         return cli
     
