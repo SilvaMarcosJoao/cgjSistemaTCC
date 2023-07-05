@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 from modulos.usuario import Usuario
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
@@ -158,6 +158,9 @@ class MenuTela(Funcionalidades, Validadores):
     def widgets_usuario(self) -> None:
         self.usuario_frame = Frame(self.frameMenu_right)
         self.usuario_frame.place(relx=0.15, rely=0.1, relwidth=0.5, relheight=0.8)
+        
+        lbl_titulo_usuario = Label(self.usuario_frame, text='USUÁRIO', font=('Roboto', 15), bg='#FFFFFF')
+        lbl_titulo_usuario.place(relx=0.025, rely=0.01)
 
         self.lbl_nova_senha = Label(self.usuario_frame, text='Nova Senha:',font=('Roboto', 10, 'bold'))
         self.lbl_nova_senha.place(relx=0.2, rely=0.2)
@@ -179,6 +182,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadTelaCliente = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
         self.frameCadTelaCliente.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_cliente = Label(self.frameCadTelaCliente, text='CLIENTE', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_cliente.place(relx=0.025, rely=0.01)
         
         #self.frameResTelaCliente = Frame(self.frameMenu_right, bd=1, background='#d9d9d9')
         #self.frameResTelaCliente.place(relx=0.01, rely=0.50, relwidth=0.98, relheight=0.47)
@@ -299,6 +305,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.categoria_frame = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
         self.categoria_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_categoria = Label(self.categoria_frame, text='CATEGORIA', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_categoria.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_categoria.place(relx=0.25, rely=0.08, height=20)
@@ -345,7 +354,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.produto_frame = Frame(self.frameMenu_right, bg='#d9d9d9')
         self.produto_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
         
-        lbl_titulo_prod = Label(self.produto_frame, text='PRODUTO', font=('Roboto', 16), bg='#d9d9d9')
+        lbl_titulo_prod = Label(self.produto_frame, text='PRODUTO', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_prod.place(relx=0.025, rely=0.01)
         
         
@@ -467,9 +476,13 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
         self.frameCadTelaFornecedor.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_fornecedor = Label(self.frameCadTelaFornecedor, text='FORNECEDOR', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_fornecedor.place(relx=0.025, rely=0.01)
 
         #self.frameResTelaFornecedor = Frame(self.frameMenu_right, bd=1, bg='#d9d9d9')
         #self.frameResTelaFornecedor.place(relx=0, rely=0.51, relwidth=1, relheight=0.49)
+        
 
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_fornecedor.place(relx=0.02, rely=0.05, height=20)
@@ -594,6 +607,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadTelaServico = Frame(self.frameMenu_right, bd=1, bg = '#d9d9d9')
         self.frameCadTelaServico.place(relx=0.12, rely=0.025, relwidth=0.75, relheight=0.95)
+        
+        lbl_titulo_servico = Label(self.frameCadTelaServico, text='SERVIÇO', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_servico.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_servico.place(relx=0.2, rely=0.05, height=20)
@@ -659,6 +675,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadOs = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
         self.frameCadOs.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_os = Label(self.frameCadOs, text='ORDEM DE SERVIÇO', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_os.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_os = Label(self.frameCadOs, text='Código:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
         self.lbl_cod_os.place(relx=0.04, rely=0.05, height=20)
@@ -707,6 +726,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_crud()
         self.frameCadTelaVenda = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
         self.frameCadTelaVenda.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_venda = Label(self.frameCadTelaVenda, text='VENDA', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_venda.place(relx=0.05, rely=0.05, height=20)
