@@ -409,3 +409,27 @@ class Funcionalidades:
     
     def calcular_total(self):
         pass
+    
+#CRUD da Ordem de Serviço
+
+    def pegar_material(self):
+        pass
+    
+    def pegar_clienteOs(self):
+        pass
+    
+    def inserir_Os(self):
+        pass
+    
+    def duplo_cliqueOs(self):
+        pass
+    
+    def excluir_Os(self):
+        pass
+    
+    def calcular_totalOS(self):
+        pass
+    
+    def exibir_serv_os(self):
+        self.ser = self.servico.listarServicos()
+        return self.ser

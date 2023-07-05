@@ -215,7 +215,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_num_cliente = Label(self.frameCadTelaCliente, text='Número: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_num_cliente.place(relx=0.35, rely=0.05, height=20)
-        self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#D9D9D9', validate='key', validatecommand=self.valInt)
+        self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF', validate='key', validatecommand=self.valInt)
         self.et_num_cliente.place(relx=0.405, rely=0.05, width=60, height=20)
 
         self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -661,33 +661,33 @@ class MenuTela(Funcionalidades, Validadores):
         self.frameCadOs.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
 
         self.lbl_cod_os = Label(self.frameCadOs, text='Código:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
-        self.lbl_cod_os.place(relx=0.04, rely=0.05, height=20)
+        self.lbl_cod_os.place(relx=0.03, rely=0.05, height=20)
         self.et_cod_os = Entry(self.frameCadOs, font=('Roboto', 9), validate='key', validatecommand=self.impCod, bg='#FFF')
         self.et_cod_os.place(relx=0.09, rely=0.05, width=50, height=20)
 
-        self.lbl_modelo_os = Label(self.frameCadOs, text='Modelo:', font=('Roboto', 9, 'bold'), bg= '#FFF')
-        self.lbl_modelo_os.place(relx=0.04, rely=0.1, height=20)
-        self.et_modelo_os = Entry(self.frameCadOs, font=('Roboto', 9), bg='#D9D9D9')
+        self.lbl_modelo_os = Label(self.frameCadOs, text='Modelo:', font=('Roboto', 9, 'bold'), bg= '#d9d9d9')
+        self.lbl_modelo_os.place(relx=0.03, rely=0.1, height=20)
+        self.et_modelo_os = Entry(self.frameCadOs, font=('Roboto', 9), bg='#FFF')
         self.et_modelo_os.place(relx=0.09, rely=0.1, width=220, height=20)
 
-        self.lbl_data_exec_servico = Label(self.frameCadOs, text='Data:', font=('Roboto', 9, 'bold'), bg= '#FFF')
-        self.lbl_data_exec_servico.place(relx=0.05, rely=0.15, height=20)
-        self.et_data_exec_servico = Entry(self.frameCadOs, font=('Roboto', 9), bg='#D9D9D9')
+        self.lbl_data_exec_servico = Label(self.frameCadOs, text='Data:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
+        self.lbl_data_exec_servico.place(relx=0.03, rely=0.15, height=20)
+        self.et_data_exec_servico = Entry(self.frameCadOs, font=('Roboto', 9), bg='#FFF')
         self.et_data_exec_servico.place(relx=0.09, rely=0.15, width=220, height=20)
 
-        self.lbl_valor_total_os = Label(self.frameCadOs, text='Total R$:', font=('Roboto', 9, 'bold'), bg= '#FFF')
+        self.lbl_valor_total_os = Label(self.frameCadOs, text='Total R$:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
         self.lbl_valor_total_os.place(relx=0.03, rely=0.20, height=20)
-        self.et_valor_total_os = Entry(self.frameCadOs, font=('Roboto', 9),  bg='#D9D9D9')
+        self.et_valor_total_os = Entry(self.frameCadOs, font=('Roboto', 9),  bg='#FFF')
         self.et_valor_total_os.place(relx=0.09, rely=0.20, width=220, height=20)
 
-        self.lbl_defeito = Label(self.frameCadOs, text='Defeito:',  font=('Roboto', 9, 'bold'), bg='#FFF')    
-        self.lbl_defeito.place(relx=0.355, rely=0.1, height=20)
-        self.et_defeito = Entry(self.frameCadOs, font=('Roboto', 9),bg= '#D9D9D9')
-        self.txt_defeito = Text(self.frameCadOs, font=('Roboto', 9),bg= '#D9D9D9')
-        self.txt_defeito.place(relx=0.41, rely=0.1, width=220, height=120)
+        self.lbl_defeito = Label(self.frameCadOs, text='Defeito:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')    
+        self.lbl_defeito.place(relx=0.38, rely=0.1, height=20)
+        self.et_defeito = Entry(self.frameCadOs, font=('Roboto', 9),bg= '#FFF')
+        self.txt_defeito = Text(self.frameCadOs, font=('Roboto', 9),bg= '#FFF')
+        self.txt_defeito.place(relx=0.44, rely=0.1, width=220, height=120)
 
-        self.lbl_situacao = Label(self.frameCadOs, text='Situação:',  font=('Roboto', 9, 'bold'), bg='#FFF')    
-        self.lbl_situacao.place(relx=0.355, rely=0.04, height=20)
+        self.lbl_situacao = Label(self.frameCadOs, text='Situação:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')    
+        self.lbl_situacao.place(relx=0.38, rely=0.04, height=20)
         
         #Option Menu
         # vai armazenar a informação escolhida
@@ -700,7 +700,108 @@ class MenuTela(Funcionalidades, Validadores):
 
         #Variavel do option menu
         self.popupSituacao = OptionMenu(self.frameCadOs, self.situacao, *self.listaSituacao)
-        self.popupSituacao.place(relx=0.420, rely=0.04, width=100, height=22)
+        self.popupSituacao.place(relx=0.44, rely=0.04, width=100, height=22)
+        
+        #Botão da listagem de serviços
+        self.lbl_servico_os = Label(self.frameCadOs, text='Serviço:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')
+        self.lbl_servico_os.place(relx=0.58, rely=0.04, height=20)
+        
+        #Option Menu
+        # vai armazenar a informação escolhida
+        self.et_servico_os = StringVar(self.frameCadTelaServico)
+    
+        #definindo uma opção padrão que sempre vai aparecer
+        self.et_servico_os.set('')
+        
+        self.listas = self.exibir_serv_os()
+
+        #Variavel do option menu
+        self.popupServicos = OptionMenu(self.frameCadOs, self.et_servico_os, *self.listas)
+        self.popupServicos.place(relx=0.64, rely=0.04, width=100, height=22)
+        
+        
+         #Botões do CRUD da Ordem de Serviço
+        self.btn_salvar_os = Button(self.frameCadOs, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_salvar_os.place(relx=0.84, rely=0.05, relwidth=0.12, height=40)
+
+        self.btn_listar_os = Button(self.frameCadOs, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_listar_os.place(relx=0.84, rely=0.14, relwidth=0.12, height=40)
+
+        self.btn_alterar_os = Button(self.frameCadOs, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_alterar_os.place(relx=0.84, rely=0.23, relwidth=0.12, height=40)
+
+        self.btn_excluir_os = Button(self.frameCadOs, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_excluir_os.place(relx=0.84, rely=0.32, relwidth=0.12, height=40)
+
+
+
+         #Botões para adicionar os componenetes da Ordem de Serviço
+        self.lbl_procuraprodt_os = Label(self.frameCadOs,text= 'Produto:',font=('Roboto', 9, 'bold'), bg='#d9d9d9' )
+        self.lbl_procuraprodt_os.place(relx=0.03, rely=0.25)
+
+        self.et_procurarprodt_os = Entry(self.frameCadOs)
+        self.et_procurarprodt_os.place(relx=0.09,rely=0.25, width=220, height=20)
+
+        self.btn_procurarprodt_os = Button(self.frameCadOs, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_procurarprodt_os.place(relx=0.35, rely=0.25, width=62, height=20)
+
+        self.lbl_procurarclie_os = Label(self.frameCadOs, text='Cliente:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_procurarclie_os.place(relx=0.03, rely=0.3)
+
+        self.et_procurarclien_os = Entry(self.frameCadOs)
+        self.et_procurarclien_os.place(relx=0.09, rely=0.3, width=220, height=20)
+
+        self.btn_procurarclien_os = Button(self.frameCadOs, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_procurarclien_os.place(relx=0.35, rely=0.3, width=62, height=20)
+
+
+        self.btn_removprodt_os = Button(self.frameCadOs, text=' Remover Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_removprodt_os.place(relx=0.7, rely=0.05, relwidth=0.12, height=40)
+
+        self.btn_addprodt_os = Button(self.frameCadOs, text=' Adicionar Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_addprodt_os.place(relx=0.7, rely=0.14, relwidth=0.12, height=40)
+
+        self.btn_addcliente_os = Button(self.frameCadOs, text=' Adicionar Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_addcliente_os.place(relx=0.7, rely=0.23, relwidth=0.12, height=40)
+
+        self.btn_removclien_os = Button(self.frameCadOs, text='Remover Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_removclien_os.place(relx=0.7, rely=0.32, relwidth=0.12, height=40)
+        
+        
+        self.listaOS = ttk.Treeview(self.frameCadOs, height= 3, columns=('col1','col2','col3','col4','col5','col6','col7','col8'), show='headings')
+        
+        self.listaOS.heading('#0', text='')
+        self.listaOS.heading('#1', text='Ordem de Serviço')
+        self.listaOS.heading('#2', text='Cliente')
+        self.listaOS.heading('#3', text='Serviços')
+        self.listaOS.heading('#4', text='Materiais')
+        self.listaOS.heading('#5', text='Preço Unit')
+        self.listaOS.heading('#6', text='Quantidade')
+        self.listaOS.heading('#7', text='Preço')
+        self.listaOS.heading('#8', text='Situação')
+
+
+        self.listaOS.column('#0', width=1, anchor='center')
+        self.listaOS.column('#1', width=5, anchor='center')
+        self.listaOS.column('#2', width=180, anchor='center')
+        self.listaOS.column('#3', width=180, anchor='center')
+        self.listaOS.column('#4', width=180, anchor='center')
+        self.listaOS.column('#5', width=80, anchor='center')
+        self.listaOS.column('#6', width=5, anchor='center')
+        self.listaOS.column('#7', width=80, anchor='center')
+        self.listaOS.column('#8', width=80, anchor='center')
+
+
+        self.listaOS.place(relx=0.05, rely=0.45, relwidth=0.9, relheight=0.5)
+        
+        self.scrollListaOS = Scrollbar(self.frameCadOs, orient='vertical',  command=self.listaOS.yview)
+        self.scrollListaOS.config(command=self.frameCadOs.winfo_y)
+        self.listaOS.configure(yscrollcommand=self.scrollListaOS.set)
+        self.scrollListaOS.place(relx=0.955, rely=0.45, relwidth= 0.02, relheight=0.5)
+
+        self.scrollHor = Scrollbar(self.frameCadOs, orient='horizontal', command=self.listaOS.xview)
+        self.listaOS.configure(xscrollcommand=self.scrollHor.set)
+        self.scrollHor.place(relx=0.05, rely=0.955, relwidth=0.08, relheight=0.03)
 
     def widgets_venda(self):
         self.validaEntradas()
@@ -794,12 +895,12 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.listaVenda.place(relx=0.05, rely=0.45, relwidth=0.9, relheight=0.5)
 
-        self.scrollListaVenda = Scrollbar(self.frameCadTelaVenda, orient='vertical')
+        self.scrollListaVenda = Scrollbar(self.frameCadTelaVenda, orient='vertical',  command=self.listaVenda.yview)
         self.scrollListaVenda.config(command=self.frameCadTelaVenda.winfo_y)
         self.listaVenda.configure(yscrollcommand=self.scrollListaVenda.set)
         self.scrollListaVenda.place(relx=0.955, rely=0.45, relwidth= 0.02, relheight=0.5)
 
-        self.scrollHor = Scrollbar(self.frameCadTelaVenda, orient='horizontal')
+        self.scrollHor = Scrollbar(self.frameCadTelaVenda, orient='horizontal', command=self.listaVenda.xview)
         self.listaVenda.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.05, rely=0.955, relwidth=0.08, relheight=0.03)
 
@@ -809,7 +910,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaVenda.heading('#0', text='')
         self.listaVenda.heading('#1', text='Venda')
         self.listaVenda.heading('#2', text='Cliente')
-        self.listaVenda.heading('#3', text='Produtos')
+        self.listaVenda.heading('#3', text='Materiais')
         self.listaVenda.heading('#4', text='Preço Unit')
         self.listaVenda.heading('#5', text='Quantidade')
         self.listaVenda.heading('#6', text='Preço')
