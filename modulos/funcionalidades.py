@@ -161,21 +161,38 @@ class Funcionalidades:
     
 #CRUD do Cliente
     def inserir_cliente(self):
-        self.cpf = self.et_cpf_cliente.get() 
-        self.nome = self.et_nome_cliente.get()
-        self.email = self.et_email_cliente.get() 
-        self.telefone = self.et_tel_cliente.get()   
-        self.logradouro = self.et_logr_cliente.get()
-        self.numero = self.et_num_cliente.get()
-        self.cep = self.et_cep_cliente.get()       
-        self.cidade = self.et_cidade_cliente.get()
-        self.estado = self.et_estado_cliente.get()
+        self.cpf = self.et_cpf_cliente.get().strip()
+        self.nome = self.et_nome_cliente.get().strip()
+        self.email = self.et_email_cliente.get().strip() 
+        self.telefone = self.et_tel_cliente.get().strip()   
+        self.logradouro = self.et_logr_cliente.get().strip()
+        self.numero = self.et_num_cliente.get().strip()
+        self.cep = self.et_cep_cliente.get().strip()       
+        self.cidade = self.et_cidade_cliente.get().strip()
+        self.estado = self.et_estado_cliente.get().strip()
 
-        self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
+        try:
+            if self.cpf == '' or self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado:
+                messagebox.showwarning('Alerta', 'Preencha os campos!')
+            else:
+                if len(self.cpf) != 9:
+                    messagebox.showwarning('Alerta', 'CPF Inválido')
+                elif len(self.nome) <= 3 or len(self.nome) > 20:
+                    messagebox.showwarning('Alerta', 'Por favor, Insira um nome válido!')
+                elif len(self.email) > 35 or '@' not in self.email:
+                    messagebox.showwarning('Alerta', 'Preencha o Email corretamente!')
+                elif len(self.telefone ) < 9 or len(self.telefone) > 14:
+                    messagebox.showwarning('Alerta', 'Por favor, Insira um telefone válido!')
+
+                else:
+                    self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
                                       self.telefone,self.logradouro,self.numero,
                                       self.cep,self.cidade,self.estado)    
-        self.limpa_cliente()
-    
+                self.limpa_cliente()
+                messagebox.showinfo('Sistema', 'Cliente cadastrado com sucesso!')
+        except:
+            messagebox.showerror('Erro', 'Houve um erro inesperado!')  
+
     def lista_cliente(self):
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarCliente()

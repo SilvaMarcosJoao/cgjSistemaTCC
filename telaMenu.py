@@ -168,7 +168,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_nova_senha.place(relx=0.42, rely=0.2, width=150, height=20)
 
         self.lbl_confir_senha = Label(self.usuario_frame, text='Confirmar Senha:', font=('Roboto', 10, 'bold'))
-        self.lbl_confir_senha.place(relx=0.2, rely=0.3)
+        self.lbl_confir_senha.place(relx=0.19, rely=0.3)
         self.et_confir_senha = Entry(self.usuario_frame, font=('Roboto', 9), show ='*')
         self.et_confir_senha.place(relx=0.42, rely =0.3, width=150, height=20)
 
@@ -370,12 +370,12 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_preco_comp_produto.place(relx=0.05, rely=0.25)
-        self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 9), validate='key', validatecommand=self.valDec)
+        self.et_preco_comp_produto = Entry(self.produto_frame,font=('Roboto', 9))
         self.et_preco_comp_produto.place(relx=0.17, rely=0.25, width=100, height=20)
 
         self.lbl_preco_ven_produto = Label(self.produto_frame, text='Preço Venda: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_preco_ven_produto.place(relx=0.05, rely=0.3)
-        self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.valDec)
+        self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_preco_ven_produto.place(relx=0.17, rely=0.3, width=100, height=20)
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -709,7 +709,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         #Option Menu
         # vai armazenar a informação escolhida
-        self.et_servico_os = StringVar(self.frameCadTelaServico)
+        self.et_servico_os = StringVar(self.frameCadOs)
     
         #definindo uma opção padrão que sempre vai aparecer
         self.et_servico_os.set('')
