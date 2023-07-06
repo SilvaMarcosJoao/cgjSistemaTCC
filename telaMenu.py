@@ -54,6 +54,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.valString = (self.appMenu.register(self.validarString), "%P")
         self.valInt = (self.appMenu.register(self.validaInt), "%P")
         self.valDec = (self.appMenu.register(self.validaDecim), "%P")
+        self.validadorSenha = (self.appMenu.register(self.validarSenha), "%P")
         
 
     #função para inserir a data no calendario
@@ -156,25 +157,25 @@ class MenuTela(Funcionalidades, Validadores):
 
     # CONFIGURAÇÕES DA TELA USUÁRIO
     def widgets_usuario(self) -> None:
+        self.validaEntradas()
         self.usuario_frame = Frame(self.frameMenu_right)
-        self.usuario_frame.place(relx=0.15, rely=0.1, relwidth=0.5, relheight=0.8)
+        self.usuario_frame.place(relx=0.25, rely=0.1, relwidth=0.5, relheight=0.8)
         
-        lbl_titulo_usuario = Label(self.usuario_frame, text='USUÁRIO', font=('Roboto', 15), bg='#FFF')
+        lbl_titulo_usuario = Label(self.usuario_frame, text='USUÁRIO', font=('Roboto', 15))
         lbl_titulo_usuario.place(relx=0.025, rely=0.01)
 
         self.lbl_nova_senha = Label(self.usuario_frame, text='Nova Senha:',font=('Roboto', 10, 'bold'))
         self.lbl_nova_senha.place(relx=0.2, rely=0.2)
-        self.et_nova_senha = Entry(self.usuario_frame, font=('Roboto', 9), show='*')
+        self.et_nova_senha = Entry(self.usuario_frame, font=('Roboto', 9), show='*', validate='key', validatecommand=self.validadorSenha)
         self.et_nova_senha.place(relx=0.42, rely=0.2, width=150, height=20)
 
         self.lbl_confir_senha = Label(self.usuario_frame, text='Confirmar Senha:', font=('Roboto', 10, 'bold'))
-        self.lbl_confir_senha.place(relx=0.19, rely=0.3)
-        self.et_confir_senha = Entry(self.usuario_frame, font=('Roboto', 9), show ='*')
-        self.et_confir_senha.place(relx=0.42, rely =0.3, width=150, height=20)
+        self.lbl_confir_senha.place(relx=0.19, rely=0.25)
+        self.et_confir_senha = Entry(self.usuario_frame, font=('Roboto', 9), show ='*', validate='key', validatecommand=self.validadorSenha)
+        self.et_confir_senha.place(relx=0.42, rely =0.25, width=150, height=20)
 
-        self.img_confirmar = PhotoImage(file='./imagens/confirmar.png')
-        self.btn_alterar_senha = Button(self.usuario_frame, image=self.img_confirmar, bg='#505050', fg='#151515', command=self.mudar_senha)
-        self.btn_alterar_senha.place(relx=0.43, rely=0.45, width=100, height=40)
+        self.btn_alterar_senha = Button(self.usuario_frame, text='Alterar', font=('Roboto', 10, 'bold'), fg='#FFF',bg='#505050', command=self.mudar_senha)
+        self.btn_alterar_senha.place(relx=0.4, rely=0.4, width=100, height=40)
     
     # CONFIGURAÇÕES DA TELA CLIENTE         
     def widgets_cliente(self) -> None:
@@ -185,13 +186,10 @@ class MenuTela(Funcionalidades, Validadores):
         
         lbl_titulo_cliente = Label(self.frameCadTelaCliente, text='CLIENTE', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_cliente.place(relx=0.025, rely=0.01)
-        
-        #self.frameResTelaCliente = Frame(self.frameMenu_right, bd=1, background='#d9d9d9')
-        #self.frameResTelaCliente.place(relx=0.01, rely=0.50, relwidth=0.98, relheight=0.47)
-        
+         
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_cliente.place(relx=0.025, rely=0.1, height=20)
-        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), validate='key', validatecommand=self.impCod, bg='#FFF')
+        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
         self.et_cod_cliente.place(relx=0.09, rely=0.1, width=50, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
@@ -252,10 +250,10 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_listar = Button(self.frameCadTelaCliente, command=self.lista_cliente,  text=' Listar', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
         self.btn_listar.place(relx=0.88, rely=0.225, relwidth=0.09, height=40)
 
-        self.btn_alterar = Button(self.frameCadTelaCliente, command= self.alterar_cliente, text=' Alterar', relief='groove', fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_alterar = Button(self.frameCadTelaCliente, command=self.alterar_cliente, text=' Alterar', relief='groove', fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
         self.btn_alterar.place(relx=0.88, rely=0.305, relwidth=0.09, height=40)
 
-        self.btn_excluir = Button(self.frameCadTelaCliente, command= self.excluir_cliente, text=' Excluir', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.btn_excluir = Button(self.frameCadTelaCliente, command=self.excluir_cliente, text=' Excluir', relief='groove',fg='#FFF', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
         self.btn_excluir.place(relx=0.88, rely=0.385, relwidth=0.09, height=40)
     
         self.listaCliente = ttk.Treeview(self.frameCadTelaCliente, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
@@ -306,9 +304,10 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_categoria.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_categoria = Label(self.categoria_frame, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_categoria.place(relx=0.25, rely=0.08, height=20)
+        self.lbl_cod_categoria.place(relx=0.25, rely=0.1, height=20)
         self.et_cod_categoria = Entry(self.categoria_frame, font=('Roboto', 9), validate='key', validatecommand=self.impCod, bg='#FFF')
-        self.et_cod_categoria.place(relx=0.30, rely=0.08, width=50, height=20)
+        self.et_cod_categoria.config(state='readonly')
+        self.et_cod_categoria.place(relx=0.30, rely=0.1, width=50, height=20)
 
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 9, 'bold') , bg='#d9d9d9')
         self.lbl_desc_categoria.place(relx=0.25, rely=0.15, height=20)
@@ -336,11 +335,11 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaCategoria.column('#0', width=1)
         self.listaCategoria.column('#1', width=120, minwidth=100, stretch=NO, anchor='center')
         self.listaCategoria.column('#2', width=290, minwidth=290, stretch=NO, anchor='center')
-        self.listaCategoria.place(relx=0.26, rely=0.48, relwidth=0.45, relheight=0.45)
+        self.listaCategoria.place(relx=0.26, rely=0.48, relwidth=0.45, relheight=0.5)
 
         self.scrollListaCat = Scrollbar(self.categoria_frame, orient='vertical', command=self.listaCategoria.yview)
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
-        self.scrollListaCat.place(relx=0.72, rely=0.48, relwidth= 0.02, relheight=0.45)
+        self.scrollListaCat.place(relx=0.72, rely=0.48, relwidth= 0.02, relheight=0.5)
         self.listaCategoria.bind("<Double-1>", self.duplo_clique_cat)
 
     # CONFIGURAÇÕES DA TELA PRODUTO

@@ -1,5 +1,12 @@
 from tkinter import messagebox
 class Validadores:       
+
+
+    def validarSenha(self, senha):
+        if len(senha) > 8:
+            return False
+        return True
+    
     def limitar_cod(self, valor):
         if valor == '': return True
         try:
