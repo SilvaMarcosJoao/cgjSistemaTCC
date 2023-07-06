@@ -3,6 +3,7 @@ from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
 from modulos.servico import Servico
+from modulos.ordemservico import OS
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
 from modulos.fornecimento import Fornecimento
@@ -18,6 +19,8 @@ class Funcionalidades:
     fornecedor = Fornecedor()
     fornecimento = Fornecimento()
     produto = Produto()
+    os = OS()
+
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def mudar_senha(self) -> None:
@@ -451,12 +454,23 @@ class Funcionalidades:
         pass
     
     def inserir_Os(self):
+        self.cod = self.et_cod_os.get()
+        self.modelo = self.et_modelo_os.get()
+        self.data = self.et_data_exec_servico.get()
+        self.valorttl = self.et_valor_total_os.get()
+        self.defeito = self.et_defeito.get()
+        self.situacao = self.et_situacao.get()
+        
+        self.os.registrarOS(self.cod, self.modelo, self.data, self.valorttl, self.defeito, self.situacao)
         pass
     
     def duplo_cliqueOs(self):
         pass
     
     def excluir_Os(self):
+        pass
+
+    def limpa_Os(self):
         pass
     
     def calcular_totalOS(self):

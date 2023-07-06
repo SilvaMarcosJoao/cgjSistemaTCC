@@ -1,9 +1,12 @@
+from modulos.produto import Produto
+from modulos.servico import Servico
+from modulos.dbsqlite import BancoDados
 
 
 banco = BancoDados()
 
 class ServicosOS:
-    def __init__(self, cod_serv_os: int, cod_os: int, servico: list):
+    def __init__(self, cod_serv_os: int, cod_os: int, servico: list ):
         self.__cod_serv_os=cod_serv_os
         self.__cod_os=cod_os
         self.__servico = []
@@ -30,9 +33,8 @@ class ServicosOS:
     def adicionarServicoOs(self, servico):
         banco.conectar()
         servico = []
-
-        Serv=banco.cursor.execute(f"""INSERT INTO ServicosOS(servico)
-                                 values =('{servico : []}')""")
+        Serv=banco.cursor.execute(f"""INSERT INTO ServicosOS(servico), cod_os
+                                 values =('{servico : []}'), ('{cod_os}')""")
         banco.commit()
         banco.desconectar()
         

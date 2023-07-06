@@ -399,17 +399,9 @@ class MenuTela(Funcionalidades, Validadores):
         #Variavel do option menu
         self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.472, rely=0.1, width=100, height=22)
-
-        self.lbl_fornecedor = Label(self.produto_frame, text='Fornecedor: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_fornecedor.place(relx=0.405, rely=0.15)
         
         self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.405, rely=0.2, width=165, height=22)
-
-        self.lbl_qtd_fornecida = Label(self.produto_frame, text='Qtd Fornecida: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_qtd_fornecida.place(relx=0.05, rely=0.3, height=20)
-        self.et_qtd_fornecida = Entry(self.produto_frame, font=('Roboto', 9), validate='key', validatecommand=self.valInt)
-        self.et_qtd_fornecida.place(relx=0.212, rely=0.3, height=20,  width=60)
 
         self.lbl_data_fornecimento = Label(self.produto_frame, text='Data : ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_data_fornecimento.place(relx=0.405, rely=0.05, height=20)
@@ -722,7 +714,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         
          #Botões do CRUD da Ordem de Serviço
-        self.btn_salvar_os = Button(self.frameCadOs, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_salvar_os = Button(self.frameCadOs, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_Os)
         self.btn_salvar_os.place(relx=0.84, rely=0.05, relwidth=0.12, height=40)
 
         self.btn_listar_os = Button(self.frameCadOs, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')

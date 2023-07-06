@@ -1,18 +1,21 @@
 from modulos.dbsqlite import BancoDados
+from modulos.servicosos import ServicosOS
 banco = BancoDados()
 
 
 class OS:
-    def __init__(self,cod_os : int=None, cod_cliente: int=None, defeito: str= None, modelo: str= int,
-                 data_exec_serv: str= None, valorTotal: float= None, cod_serv: str= None, cod_produto: int= None):
+    def __init__(self,cod_os : int=None, cod_cliente: int=None, defeito: str= None, modelo: str= None,
+                 data_exec_serv: str= None, situacao: str = None, valorTotal: float= None, cod_serv_os: int = None):
+    
         self.__cod_os=cod_os
         self.__cod_cliente =cod_cliente
         self.__defeito=defeito
         self.__modelo=modelo
         self.__data_exec_serv=data_exec_serv
+        self.__situacao=situacao
         self.__valorTotal=valorTotal
-        self.__cod_serv = cod_serv
-        self.__cod_produto = cod_produto
+        self.__cod_serv_os = cod_serv_os
+
         
         
     def get_cod_os(self) -> int:
@@ -30,11 +33,14 @@ class OS:
     def get_data_exec_serv(self) -> str:
         return self.__data_exec_serv
     
+    def get_situacao(self) -> str:
+        return self.__situacao
+
     def get_valorTotal(self) -> float:
         return self.__valorTotal
     
-    def get_cod_serv(self) -> str:
-        return self.__cod_serv
+    def get_cod_serv_os(self) -> str:
+        return self.__cod_serv_os
     
     
     def set_cod_os(self, cod_os):
@@ -51,47 +57,52 @@ class OS:
     
     def set_data_exec_serv(self, data_exec_serv):
         self.__data_exec_serv=data_exec_serv
+
+    def set_situacao(self, situacao):
+        self.__situacao = situacao
         
     def set_valorTotal(self, valorTotal):
         self.__valorTotal=valorTotal
         
-    def set_cod_serv(self, cod_serv):
-        self.__cod_serv=cod_serv
-        
-    def set_cod_produto(self, cod_produto):
-        self.__cod_produto = cod_produto
+    def set_cod_serv_os(self, cod_serv_os):
+        self.__cod_serv_os=cod_serv_os
     
             
-    def RegistrarOS(self):
+    def registrarOS(self):
         banco.conectar()
         banco.cursor.execute(f"""Insert into OS(cod_os, cod_cliente, defeito,
-                          modelo, data_exec_serv, valorTotal, cod_serv, cod_produto) 
+                          modelo, data_exec_serv, situacao, valorTotal) 
                           values('{self.__cod_os }','{self.__cod_cliente}',
                           '{self.__defeito}','{self.__modelo}',
-                          '{self.__data_exec_serv}','{self.__valorTotal}', 
-                          '{self.__cod_serv}','{self.__cod_produto}')""")
+                          '{self.__data_exec_serv}','{self.__situacao}','{self.__valorTotal}'""")
         banco.conexao.commit()
         banco.desconectar()
         
-    def alterarOS(self, cod_os, cliente, defeito,
-                          modelo, data_exec_serv, valorTotal):
+    def alterarOS(self, cod_os, cod_cliente, defeito,
+                          modelo, data_exec_serv, valorTotal, cod_serv_os):
         banco.conectar()
-        banco.cursor.execute(f"""UPDATE OS
-                                SET 
+        banco.cursor.execute(f"""UPDATE OS SET 
+
                                  defeito = ('{defeito}'), 
-                                 cliente = ('{cliente}') ,
+                                 cod_cliente = ('{cod_cliente}') ,
                                  modelo = ('{modelo}'),
                                  data_exec_serv = ('{data_exec_serv}'),
                                  valorTotal= ('{valorTotal}'),
+                                 cod_serv_os= ('{cod_serv_os}')
+
                                 WHERE cod_os='{cod_os}'""")
         banco.conexao.commit()
         banco.desconectar()
         
-    def listarOS(self):
+    def listarOS(self) -> list:
         banco.conectar()
-        OS=banco.cursor.execute(f"""SELECT * FROM OS""").fetchall()   
-        print(OS)   
+        OS = banco.cursor.execute(f"""SELECT cod_os, cliente.nome_cliente, defeito,
+                                      modelo, data_exec_serv, valorTotal
+                                    FROM produto, servico, cliente, ordemservico
+                                    WHERE cliente.cod_cliente =  ordem_servico.cod_cliente """).fetchall()   
         banco.desconectar()
+        return OS   
+        
         
     def consultarOS(self, cod_os):
         banco.conectar()
