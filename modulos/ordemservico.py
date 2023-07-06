@@ -1,21 +1,25 @@
-
+from modulos.dbsqlite import BancoDados
+banco = BancoDados()
 
 
 class OS:
-    def __init__(self,cod_os : int, cliente: Cliente, defeito: str, modelo: str,
-                 data_exec_serv: str, valorTotal: float):
+    def __init__(self,cod_os : int=None, cod_cliente: int=None, defeito: str= None, modelo: str= int,
+                 data_exec_serv: str= None, valorTotal: float= None, cod_serv: str= None, cod_produto: int= None):
         self.__cod_os=cod_os
-        self.__cliente = cliente
+        self.__cod_cliente =cod_cliente
         self.__defeito=defeito
         self.__modelo=modelo
         self.__data_exec_serv=data_exec_serv
         self.__valorTotal=valorTotal
+        self.__cod_serv = cod_serv
+        self.__cod_produto = cod_produto
+        
         
     def get_cod_os(self) -> int:
         return self.__cod_os
     
-    def get_cliente(self) -> Cliente:
-        return self.__cliente 
+    def get_cod_cliente(self) -> int:
+        return self.__cod_cliente 
     
     def get_defeito(self) -> str:
         return self.__defeito
@@ -29,11 +33,15 @@ class OS:
     def get_valorTotal(self) -> float:
         return self.__valorTotal
     
+    def get_cod_serv(self) -> str:
+        return self.__cod_serv
+    
+    
     def set_cod_os(self, cod_os):
         self.__cod_os=cod_os
         
-    def set_cliente(self, cliente: Cliente):
-        self.__cliente = cliente
+    def set_cliente(self, cod_cliente):
+        self.__cod_cliente = cod_cliente
     
     def set_defeito(self, defeito):
         self.__defeito=defeito
@@ -47,13 +55,21 @@ class OS:
     def set_valorTotal(self, valorTotal):
         self.__valorTotal=valorTotal
         
+    def set_cod_serv(self, cod_serv):
+        self.__cod_serv=cod_serv
+        
+    def set_cod_produto(self, cod_produto):
+        self.__cod_produto = cod_produto
     
+            
     def RegistrarOS(self):
         banco.conectar()
-        banco.cursor.execute(f"""Insert into OS(cod_os, cliente, defeito,
-                          modelo, data_exec_serv, valorTotal) 
-                          values('{self.__cod_os }','{self.__cliente}','{self.__defeito}','{self.__modelo}',
-                          '{self.__data_exec_serv}','{self.__valorTotal}')""")
+        banco.cursor.execute(f"""Insert into OS(cod_os, cod_cliente, defeito,
+                          modelo, data_exec_serv, valorTotal, cod_serv, cod_produto) 
+                          values('{self.__cod_os }','{self.__cod_cliente}',
+                          '{self.__defeito}','{self.__modelo}',
+                          '{self.__data_exec_serv}','{self.__valorTotal}', 
+                          '{self.__cod_serv}','{self.__cod_produto}')""")
         banco.conexao.commit()
         banco.desconectar()
         
@@ -80,8 +96,8 @@ class OS:
     def consultarOS(self, cod_os):
         banco.conectar()
         OS = banco.cursor.execute(f"""SELECT cod_os, cod_cliente, defeito,
-                          modelo, data_exec_serv, valorTotal estado FROM OS
-                                WHERE cod_os='{cod_os}'""").fetchmany()
+                          modelo, data_exec_serv, valorTotal, cod_serv, cod_produto
+                           FROM OS WHERE cod_os='{cod_os}'""").fetchmany()
         print(OS)
         banco.desconectar()    
     
