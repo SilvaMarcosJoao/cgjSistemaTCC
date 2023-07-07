@@ -3,6 +3,7 @@ from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
 from modulos.servico import Servico
+from modulos.ordemservico import OS
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
 from modulos.fornecimento import Fornecimento
@@ -18,31 +19,32 @@ class Funcionalidades:
     fornecedor = Fornecedor()
     fornecimento = Fornecimento()
     produto = Produto()
+    os = OS()
+
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def mudar_senha(self) -> None:
-        if self.et_nova_senha.get() == '' or self.et_confir_senha.get() == '':
+        self.senha = self.et_nova_senha.get().strip()
+        self.conf = self.et_confir_senha.get().strip()
+        if self.senha == '' or self.conf == '':
             messagebox.showwarning('Alerta', 'Preencha os campos')
-        elif len(self.et_nova_senha.get()) != 8 or len(self.et_confir_senha.get()) != 8:
+        elif len(self.senha) != 8 or len(self.conf) != 8:
             messagebox.showwarning('Alerta', 'A senha deve conter 8 caracteres')
-        elif self.et_nova_senha.get() != self.et_confir_senha.get():
-            messagebox.showinfo('Alerta', 'Senhas diferentes')     
+        elif self.senha != self.conf:
+            messagebox.showwarning('Alerta', 'Senhas diferentes')     
         else:
-            self.senha = self.et_nova_senha.get()
-            self.conf = self.et_confir_senha.get()
             self.usuario.alterar_senha(self.senha)
-            self.msg_avi = 'Senha alterada com sucesso!'
-            messagebox.showinfo('Aviso', self.msg_avi)
+            messagebox.showinfo('Sistema', 'Senha alterada com sucesso!')
             self.limpa_usuario()     
     
     def limpa_usuario(self):
         self.et_nova_senha.delete(0, END)
         self.et_confir_senha.delete(0, END)
         
-#CRUD de Categoria
+    # CRUD de Categoria
 
     def inserir_categoria(self):
-        self.desc = self.et_desc_categoria.get()
+        self.desc = self.et_desc_categoria.get().strip()
         if self.desc == '':
             messagebox.showwarning('Alerta', 'Insira da descrição da categoria')
         else:
@@ -53,30 +55,36 @@ class Funcionalidades:
     def exibir_categoria(self):
         self.listaCategoria.delete(*self.listaCategoria.get_children())
         self.exibir = self.categoria.listarCategoria()
+        self.et_cod_categoria.config(state='normal')
         if len(self.exibir) == 0:
-            messagebox.showinfo('Informação', 'Não há categorias cadastradas')
+            messagebox.showinfo('Informação', 'Não há categoria cadastrada!')
         else:
             for i in self.exibir:
-                self.listaCategoria.insert('',END, values=i)  
-    
+                self.et_cod_categoria.config(state='normal') 
+                self.listaCategoria.insert('',END, values=i) 
 
     def editar_categoria(self):
-        self.cod = self.et_cod_categoria.get()
-        self.desc = self.et_desc_categoria.get()
+        self.cod = self.et_cod_categoria.get().strip()
+        self.desc = self.et_desc_categoria.get().strip()
         if self.desc == '':
-            messagebox.showwarning('Alerta', 'Insira da descrição da categoria')
+            messagebox.showwarning('Alerta', 'Exiba as categorias para editar e selecione')
+        elif len(self.desc) > 15:
+            messagebox.showwarning('Alerta','Preencha a descrição de categoria corretamente!')
         else:
             self.categoria.alterarCategoria(self.cod, self.desc)
             messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
             self.limpa_categoria()
-        self.exibir_categoria()
+            self.exibir_categoria()
 
     def excluir_categoria(self):
-        self.cod = self.et_cod_categoria.get()
-        self.categoria.deletarCategoria(self.cod)
-        messagebox.showinfo('Info', 'Categoria excluída com sucesso!')
-        self.limpa_categoria()
-        self.exibir_categoria()
+        self.cod = self.et_cod_categoria.get().strip()
+        if len(self.cod) == 0:
+            messagebox.showerror('Erro', 'Não foi possível deletar a categoria')
+            self.categoria.deletarCategoria(self.cod)
+        else:
+            messagebox.showinfo('Info', 'Categoria excluída com sucesso!')
+            self.limpa_categoria()
+            self.exibir_categoria()
 
     def duplo_clique_cat(self, event):
         self.limpa_categoria()
@@ -183,7 +191,12 @@ class Funcionalidades:
                     messagebox.showwarning('Alerta', 'Preencha o Email corretamente!')
                 elif len(self.telefone ) < 9 or len(self.telefone) > 14:
                     messagebox.showwarning('Alerta', 'Por favor, Insira um telefone válido!')
-
+                elif len(self.logradouro) > 40:
+                    messagebox.showwarning('Alerta','Digite um endereço válido!')
+                elif len(self.cidade) <= 3 or len(self.cidade) > 40:
+                    messagebox.showwarning('Alerta', 'Preencha o campo de cidade corretamente!')
+                elif len(self.estado) < 3 or len(self.estado) > 40:
+                    messagebox.showwarning('Alerta', 'Preencha o campo de estado corretamente!')
                 else:
                     self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
                                       self.telefone,self.logradouro,self.numero,
@@ -227,17 +240,23 @@ class Funcionalidades:
         self.cep = self.et_cep_cliente.get()
         self.cidade = self.et_cidade_cliente.get()
         self.estado = self.et_estado_cliente.get()
-        self.cliente.alterarCliente(self.cod,self.cpf,self.nome,self.email,self.telefone,
-                                    self.logradouro,self.numero,self.cep,self.cidade,
-                                    self.estado)       
-        self.lista_cliente()
     
+        self.cliente.alterarCliente(self.cpf,self.nome,self.email,
+                                      self.telefone,self.logradouro,self.numero,
+                                      self.cep,self.cidade,self.estado)    
+        self.limpa_cliente()
+        messagebox.showinfo('Sistema', 'Dados Alterados com sucesso!')
+
     def excluir_cliente(self):
         self.codigo = self.et_cod_cliente.get()
-        self.cliente.deletarCliente(self.codigo)
-        self.limpa_cliente()
-        self.lista_cliente()
-        
+        try:
+            if len(self.codigo) != 0:
+                self.cliente.deletarCliente(self.codigo)
+                messagebox.showinfo('Sistema', 'Cliente deletado com sucesso!')
+            self.limpa_cliente()
+            self.lista_cliente()
+        except:
+            messagebox.showerror('Erro', 'Não foi possível deletar o cliente')
 
     def duplo_clique_cliente(self, event):
         self.limpa_cliente()
@@ -451,12 +470,23 @@ class Funcionalidades:
         pass
     
     def inserir_Os(self):
+        self.cod = self.et_cod_os.get()
+        self.modelo = self.et_modelo_os.get()
+        self.data = self.et_data_exec_servico.get()
+        self.valorttl = self.et_valor_total_os.get()
+        self.defeito = self.et_defeito.get()
+        self.situacao = self.et_situacao.get()
+        
+        self.os.registrarOS(self.cod, self.modelo, self.data, self.valorttl, self.defeito, self.situacao)
         pass
     
     def duplo_cliqueOs(self):
         pass
     
     def excluir_Os(self):
+        pass
+
+    def limpa_Os(self):
         pass
     
     def calcular_totalOS(self):

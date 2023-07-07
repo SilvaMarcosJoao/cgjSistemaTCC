@@ -110,7 +110,7 @@ class Cliente:
         banco.conectar()
         cli = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
-                                WHERE nome_cliente like '{nome}%' """).fetchmany()
+                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()
                             
         banco.desconectar()    
         return cli

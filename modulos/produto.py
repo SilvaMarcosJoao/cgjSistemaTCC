@@ -1,5 +1,4 @@
 from modulos.dbsqlite import BancoDados
-from modulos.categoriaproduto import CategoriaProduto
 
 banco = BancoDados()
 
@@ -89,7 +88,7 @@ class Produto:
         produtos=banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
                                       preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
                                       FROM produto, categoria_produto 
-                                      WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()   
+                                      WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()
         banco.desconectar()
         return produtos
         
