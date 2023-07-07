@@ -1,1 +1,0 @@
-self.et_cod_cliente.config(state='readonly')

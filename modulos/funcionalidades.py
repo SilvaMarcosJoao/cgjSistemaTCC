@@ -110,12 +110,16 @@ class Funcionalidades:
         self.qtd_produto = self.et_qtd_produto.get()
         self.cat = self.et_categoria.get()
         self.cod_cat = [self.cat]
-        self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
-        messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')
-        print(self.cod_cat[0][1])
-        '''for c in range(0, 2):
-            self.grava = {'Codigo': self.res[c][0]}
-            print(self.grava)'''
+        try:
+            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
+                messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
+        except:
+            self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
+            messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')
+            print(self.cod_cat[0][1])
+            '''for c in range(0, 2):
+                self.grava = {'Codigo': self.res[c][0]}
+                print(self.grava)'''
 
 
     def exibir_produto(self):
@@ -126,7 +130,7 @@ class Funcionalidades:
         else:
             for i in self.exibirProd:
                 self.listaProd.insert('',END, values=i) 
-        self.inserir_fornecimento() 
+        
     
     def editar_produto(self):
         self.desc_produto = self.et_desc_produto.get()
