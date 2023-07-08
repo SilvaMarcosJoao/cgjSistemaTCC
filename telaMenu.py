@@ -319,7 +319,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_lista_categoria = Button(self.categoria_frame,  text=' Listar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_categoria)
         self.btn_lista_categoria.place(relx=0.84, rely=0.18, relwidth=0.1, height=40)
 
-        self.btn_alterar_categoria = Button(self.categoria_frame,  text=' Editar', relief='groove', fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_categoria)
+        self.btn_alterar_categoria = Button(self.categoria_frame,  text=' Alterar', relief='groove', fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_categoria)
         self.btn_alterar_categoria.place(relx=0.84, rely=0.26, relwidth=0.1, height=40)
 
         self.btn_excluir_categoria = Button(self.categoria_frame,  text=' Excluir', relief='groove',fg='#fff', font=('Roboto',10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_categoria)
@@ -392,9 +392,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.35, rely=0.2, width=206, height=23)
 
-
-        
-
         self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
         self.btn_consulta_produto.place(relx=0.87, rely=0.075, relwidth=0.1, height=40)
 
@@ -404,7 +401,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_lista_produto = Button(self.produto_frame,   text=' Listar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.exibir_produto)
         self.btn_lista_produto.place(relx=0.87, rely=0.235, relwidth=0.1, height=40)
 
-        self.btn_alterar_produto = Button(self.produto_frame, text=' Editar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_produto)
+        self.btn_alterar_produto = Button(self.produto_frame, text=' Alterar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.editar_produto)
         self.btn_alterar_produto.place(relx=0.87, rely=0.315, relwidth=0.1, height=40)
 
         self.btn_excluir_produto = Button(self.produto_frame,  text=' Excluir', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.excluir_produto)
@@ -575,12 +572,12 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_servico = Label(self.frameCadTelaServico, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_servico.place(relx=0.2, rely=0.05, height=20)
-        self.et_cod_servico = Entry(self.frameCadTelaServico, validate='key', validatecommand=self.tamCod, state='disabled')
+        self.et_cod_servico = Entry(self.frameCadTelaServico, validate='key', state='disabled')
         self.et_cod_servico.place(relx=0.29, rely=0.05, width=55, height=20)
         
         self.lbl_preco_servico = Label(self.frameCadTelaServico, text='Preço: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_preco_servico.place(relx=0.2, rely=0.1, height=20)
-        self.et_preco_servico = Entry(self.frameCadTelaServico, validate='key', validatecommand=self.valDec)
+        self.et_preco_servico = Entry(self.frameCadTelaServico)
         self.et_preco_servico.place(relx=0.29, rely=0.1, width=80, height=20)
         
         self.lbl_tipo_servico = Label(self.frameCadTelaServico, text='Tipo: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')

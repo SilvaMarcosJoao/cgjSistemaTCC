@@ -65,7 +65,6 @@ class Servico:
         """)
         banco.conexao.commit()
         banco.desconectar()
-        print('Alterado com sucesso!')
 
     def excluirServico(self, cod_servico: str) -> None:
         banco.conectar()
