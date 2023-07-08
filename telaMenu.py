@@ -188,7 +188,7 @@ class MenuTela(Funcionalidades, Validadores):
          
         self.lbl_cod_cliente = Label(self.frameCadTelaCliente, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_cliente.place(relx=0.025, rely=0.1, height=20)
-        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
+        self.et_cod_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF', state='disabled')
         self.et_cod_cliente.place(relx=0.09, rely=0.1, width=50, height=20)
         
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
