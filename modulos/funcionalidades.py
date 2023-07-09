@@ -156,7 +156,21 @@ class Funcionalidades:
             
             
     def consu_produto(self):
-        pass
+        """
+        """
+        self.listaProd.delete(*self.listaProd.get_children())
+        self.prod = self.et_consulta_produto.get()
+        if len(self.prod) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resProd = self.produto.consultarProduto(self.prod)
+            if len(self.resProd) == 0:
+                messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
+            else:
+                for v in self.resProd:
+                    self.listaProd.insert('',END, values=v)
+                self.limpa_produto()
+        
 
     def editar_produto(self):
         """
