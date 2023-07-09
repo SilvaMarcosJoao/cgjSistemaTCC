@@ -299,8 +299,6 @@ class Funcionalidades:
         self.cep = self.et_cep_fornecedor.get()
         self.cidade = self.et_cidade_fornecedor.get()
         self.estado = self.et_estado_fornecedor.get()
-        #self.qtd = self.et_qtd_fornecida_fornecedor.get()
-        #self.data = self.et_data_fornecimento.get()
         
         self.fornecedor.cadastrarFornecedor(self.cnpj,self.nome,
                                              self.email, self.telefone, 
