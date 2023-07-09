@@ -101,14 +101,16 @@ class Fornecedor:
         banco.desconectar()
         return fornecedores
 
-    def consultarFornecedor(self, nome_fornecedor: str) -> None:
+    def consultarFornecedor(self, nome_fornecedor: str) -> list:
         banco.conectar()
-        forn = banco.cursor.execute(f"""SELECT cnpj_cpf, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade, estado 
-        FROM fornecedor  WHERE nome_fornecedor = '{nome_fornecedor}'""").fetchall()
-        print(forn)
+        forn = banco.cursor.execute(f"""SELECT cnpj_cpf, nome_fornecedor,
+                                    email, telefone, logradouro, numero, 
+                                    cep, cidade, estado FROM fornecedor 
+                                    WHERE nome_fornecedor like '{nome_fornecedor[0]}%' """).fetchall()
         banco.desconectar()
+        return forn
 
-    def alterarFornecedor(self,cod_fornecedor, cnpj, nome_fornecedor: str, email, telefone, logradouro, numero, cep, cidade, estado) -> None:
+    def alterarFornecedor(self,cod_fornecedor, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade, estado) -> None:
         banco.conectar()
         banco.cursor.execute(f"""UPDATE fornecedor 
         SET cnpj_cpf = '{cnpj}',
