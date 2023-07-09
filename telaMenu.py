@@ -56,19 +56,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.validadorSenha = (self.appMenu.register(self.validarSenha), "%P")
         
 
-    #função para inserir a data no calendario
-    def inserirData(self):
-        dataIni = self.calendarioObj.get_date()
-        self.calendarioObj.destroy()
-        self.et_data_fornecimento.delete(0, END)
-        self.et_data_fornecimento.insert(END, dataIni)
-        self.calData.destroy()
-
-    def calendario(self):
-        self.calendarioObj = Calendar(self.frameMenu_right, fg='gray75', bg='blue', font=('Arial', 9, 'bold'), locale='pt_br')
-        self.calendarioObj.place(relx=0.5, rely=0.1)
-        self.calData = Button(self.frameMenu_right, text='Inserir Data', command=self.inserirData)
-        self.calData.place(relx=0.5, rely=0.45, width=100, height=25)
 
     def inserirDatave(self):
         dataIniv = self.calendarioObj.get_date()
@@ -107,19 +94,19 @@ class MenuTela(Funcionalidades, Validadores):
     # FRAME DE EXIBIÇÃO DAS TELAS
     def widgets_menu_left(self) -> None:
         self.img_inicio = PhotoImage(file='./imagens/inicio.png', width=60)
-        self.btn_inicio = Button(self.frameMenu_left, image=self.img_inicio, text='Início',relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_inicio, self.widgets_inicio))
+        self.btn_inicio = Button(self.frameMenu_left, image=self.img_inicio, text='Início',relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_inicio, self.widgets_inicio))
         self.btn_inicio.place(relx=0.08, rely=0.05, width=150, height=50)
 
         self.img_ger_usu = PhotoImage(file='./imagens/usuario.png')
-        self.btn_ger_usuario = Button(self.frameMenu_left, image=self.img_ger_usu, text=' Usuário', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_ger_usuario, self.widgets_usuario))
+        self.btn_ger_usuario = Button(self.frameMenu_left, image=self.img_ger_usu, text=' Usuário', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_ger_usuario, self.widgets_usuario))
         self.btn_ger_usuario.place(relx=0.08, rely=0.14, width=150, height=50)
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
-        self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
+        self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
         self.btn_ger_cliente.place(relx=0.08, rely=0.23, width=150, height=50)
 
         self.img_ger_cat = PhotoImage(file='./imagens/categoria.png')
-        self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
+        self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
         self.btn_ger_categoria.place(relx=0.08, rely=0.32, width=150, height=50)
 
         self.img_ger_produto = PhotoImage(file='./imagens/produto.png')
@@ -131,19 +118,19 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_fornecedor.place(relx=0.08, rely=0.5, width=150, height=50)
 
         self.img_ger_serv = PhotoImage(file='./imagens/servico.png')
-        self.btn_ger_servico = Button(self.frameMenu_left, image=self.img_ger_serv, text=' Serviço', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_servico, self.widgets_servico))
+        self.btn_ger_servico = Button(self.frameMenu_left, image=self.img_ger_serv, text=' Serviço', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_servico, self.widgets_servico))
         self.btn_ger_servico.place(relx=0.08, rely=0.59, width=150, height=50)
 
         self.img_os = PhotoImage(file='./imagens/OS.png')
-        self.btn_ger_os = Button(self.frameMenu_left, image=self.img_os, text='Ordem de Serviço', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_os, self.widgets_os))
+        self.btn_ger_os = Button(self.frameMenu_left, image=self.img_os, text='Ordem de Serviço', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_os, self.widgets_os))
         self.btn_ger_os.place(relx=0.08, rely=0.68, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
-        self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Verdana', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
+        self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
         self.btn_ger_venda.place(relx=0.08, rely=0.77, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
-        self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Verdana', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
+        self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
         self.btn_sair.place(relx=0.08, rely=0.86, width=150, height=50)
 
     # CONFIGURAÇÕES DA TELA INICIO
@@ -353,7 +340,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_produto.place(relx=0.02, rely=0.1)
-        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), state='disabled')
+        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_cod_produto.place(relx=0.09, rely=0.1, width=50, height=20)
         
         self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -378,7 +365,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_qtd_produto.place(relx=0.15, rely=0.1)
-        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), validate='key', validatecommand=self.valInt)
+        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
         self.et_qtd_produto.place(relx=0.18, rely=0.1, width=63, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -392,7 +379,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.35, rely=0.2, width=206, height=23)
 
-        self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
+        self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
         self.btn_consulta_produto.place(relx=0.87, rely=0.075, relwidth=0.1, height=40)
 
         self.btn_salvar_produto = Button(self.produto_frame, text=' Salvar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
@@ -426,6 +413,8 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaProd.column('#5', width=60, anchor='center')
         self.listaProd.column('#6', width=50, anchor='center')
         self.listaProd.column('#7', width=100, anchor='center')
+        
+        self.et_preco_comp_produto.getdouble(s=0)
 
         self.listaProd.place(relx=0.02, rely=0.48, relwidth=0.95, relheight=0.48)
 
@@ -437,9 +426,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrollHor = Scrollbar(self.produto_frame, orient='horizontal')
         self.listaProd.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.965, relwidth=0.1, relheight=0.03)
-        
         self.listaProd.bind("<Double-1>", self.duplo_clique_prod)
-
         
     # CONFIGURAÇÕES DA TELA FORNECEDOR
     def widgets_fornecedor(self) -> None:

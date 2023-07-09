@@ -15,28 +15,29 @@ class Servico:
     def get_cod_servico(self) -> str:
         return self.__cod_servico
 
-    def set_cod_servico(self, cod_servico: str) -> None:
+    def set_cod_servico(self, cod_servico:str) -> None:
         self.__cod_servico = cod_servico
 
     def get_descricao_servico(self) -> str:
         return self.__descricao_servico
 
-    def set_descricao_servico(self, descricao: str) -> None:
+    def set_descricao_servico(self, descricao:str) -> None:
         self.__descricao_servico = descricao
 
     def get_preco_servico(self) -> float:
         return self.__preco_servico
 
-    def set_preco_servico(self, preco: float) -> None:
+    def set_preco_servico(self, preco:float) -> None:
         self.__preco_servico = preco
 
     def get_tipo(self) -> str:
         return self.__tipo
 
-    def set_tipo(self, tipo: str) -> None:
+    def set_tipo(self, tipo:str) -> None:
         self.__tipo = tipo
 
-    def cadastrarServico(self, codigo, descricao, preco, tipo) -> None:
+
+    def cadastrarServico(self, codigo:str, descricao:str, preco:float, tipo:float) -> None:
         banco.conectar()
         try:
             banco.cursor.execute(f"""INSERT INTO servico(cod_servico, descricao_servico, preco_servico, tipo)
@@ -55,27 +56,18 @@ class Servico:
         except ConnectionError:
             print('Nenhum produto encontrado')
 
-    def alterarServico(self, cod_servico, descricao, preco, tipo) -> None:
+    def alterarServico(self, cod_servico:str, descricao:str, preco:float, tipo:str) -> None:
         banco.conectar()
         banco.cursor.execute(f"""UPDATE servico                     
                                  SET descricao_servico = '{descricao}',
                                  preco_servico = '{preco}',
                                  tipo = '{tipo}'
-                                 WHERE cod_servico = '{cod_servico}'
-        """)
+                                 WHERE cod_servico ='{cod_servico}'""")
         banco.conexao.commit()
         banco.desconectar()
 
-    def excluirServico(self, cod_servico: str) -> None:
+    def excluirServico(self, cod_servico:str) -> None:
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM servico WHERE cod_servico = '{cod_servico}' """)
         banco.conexao.commit()
         banco.desconectar()
-
-serv = Servico('MN02', 'Formatar ', 100, 'Instalação')
-
-serv.excluirServico('MN02')
-
-
-
-
