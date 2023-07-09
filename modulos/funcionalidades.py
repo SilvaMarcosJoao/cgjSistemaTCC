@@ -620,46 +620,84 @@ class Funcionalidades:
         pass
     
 #CRUD da Ordem de Serviço
+    def inserir_Os(self):
+        
+        self.cod_os = self.et_cod_os.get()
+        self.modelo = self.et_modelo_os.get()
+        self.data = self.et_data_exec_servico.get()
+        self.valorttl = self.et_valor_total_os.get()
+        self.defeito = self.et_defeito.get()
+        self.situacao = self.et_situacao.get()
+        self.os.registrarOS(self.cod_os, self.modelo, 
+                            self.data, self.valorttl,
+                            self.defeito, self.situacao)
 
+    def excluir_Os(self):
+        """
+        """
+        self.cod = self.et_cod_os.get()
+        try:
+            if len(self.cod) == 0:
+                messagebox.showerror("Alerta", "OS não encontrada, impossível deletar.")
+            else:
+                self.os.deletarOS(self.cod)
+                messagebox.showinfo('Sistema, OS deletada com sucesso.')
+                self.limpa_Os()
+                self.lista_Os()
+        except: 
+            messagebox.showerror('Erro', 'Não foi possível deletar a OS.')
+            
+    def lista_Os(self):
+        """
+        """
+        self.listaOS.delete(*self.listaOS.get_children())
+        self.listarOs = self.os.listarOS()
+        if len(self.listarOs) == 0:
+            messagebox.showinfo('Informação', 'Não há Ordens de Serviço cadastradas.')
+        else:
+            for s in self.listarOs:
+                self.et_cod_os.config(state='normal')
+                self.listaOS.insert('',END, values=s)    
+
+    def limpa_Os(self):
+        """
+        """
+        self.et_cod_os.delete(0, END)
+        self.et_modelo_os.delete(0, END)
+        self.et_data_exec_servico.delete(0,END)
+        self.et_valor_total_os.delete(0, END)
+        self.et_defeito.delete(0, END)
+        self.et_situacao.delete(0, END)
+    
+ 
+    def duplo_cliqueOs(self, event):
+        """
+        """
+        self.limpa_Os()
+        self.listaOS.selection()
+        for i in self.listaOS.selection():
+            col1,col2,col3,col4,col5,col6= self.listaOs.item(i, 'values')
+            self.et_cod_os.delete(END, col1)
+            self.et_modelo_os.delete(END, col2)
+            self.et_data_exec_servico.delete(END, col3)
+            self.et_valor_total_os.delete(END, col4)
+            self.et_defeito.delete(END, col5)
+            self.et_situacao.delete(END, col6)
+        
+
+                
+                
+    def calcular_totalOS(self):
+        """
+        """
+        pass
+    
     def pegar_material(self):
         """
         """
         pass
     
     def pegar_clienteOs(self):
-        """
-        """
-        pass
-    
-    def inserir_Os(self):
-        """
-        """
-        self.cod = self.et_cod_os.get()
-        self.modelo = self.et_modelo_os.get()
-        self.data = self.et_data_exec_servico.get()
-        self.valorttl = self.et_valor_total_os.get()
-        self.defeito = self.et_defeito.get()
-        self.situacao = self.et_situacao.get()
-        
-        self.os.registrarOS(self.cod, self.modelo, self.data, self.valorttl, self.defeito, self.situacao)
-        pass
-    
-    def duplo_cliqueOs(self):
-        """
-        """
-        pass
-    
-    def excluir_Os(self):
-        """
-        """
-        pass
-
-    def limpa_Os(self):
-        """
-        """
-        pass
-    
-    def calcular_totalOS(self):
         """
         """
         pass

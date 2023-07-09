@@ -68,20 +68,20 @@ class OS:
         self.__cod_serv_os=cod_serv_os
     
             
-    def registrarOS(self):
+    def registrarOS(self, cod_os, defeito, modelo, data_exec_serv, situacao, valorTotal):
         banco.conectar()
-        banco.cursor.execute(f"""Insert into OS(cod_os, cod_cliente, defeito,
-                          modelo, data_exec_serv, situacao, valorTotal) 
-                          values('{self.__cod_os }','{self.__cod_cliente}',
-                          '{self.__defeito}','{self.__modelo}',
-                          '{self.__data_exec_serv}','{self.__situacao}','{self.__valorTotal}'""")
+        banco.cursor.execute(f""" INSERT INTO ordem_servico (cod_os,defeito,
+                          modelo, data_exec_servico, situacao, valor_total_os) 
+                          VALUES ('{cod_os}',
+                          '{defeito}','{modelo}',
+                          '{data_exec_serv}','{situacao}','{valorTotal}')""")
         banco.conexao.commit()
         banco.desconectar()
         
     def alterarOS(self, cod_os, cod_cliente, defeito,
                           modelo, data_exec_serv, valorTotal, cod_serv_os):
         banco.conectar()
-        banco.cursor.execute(f"""UPDATE OS SET 
+        banco.cursor.execute(f"""UPDATE ordem_servico SET 
 
                                  defeito = ('{defeito}'), 
                                  cod_cliente = ('{cod_cliente}') ,
@@ -97,8 +97,8 @@ class OS:
     def listarOS(self) -> list:
         banco.conectar()
         OS = banco.cursor.execute(f"""SELECT cod_os, cliente.nome_cliente, defeito,
-                                      modelo, data_exec_serv, valorTotal
-                                    FROM produto, servico, cliente, ordemservico
+                                      modelo, data_exec_servico, valor_total_os, situacao
+                                    FROM produto, servico, cliente, ordem_servico
                                     WHERE cliente.cod_cliente =  ordem_servico.cod_cliente """).fetchall()   
         banco.desconectar()
         return OS   
@@ -108,13 +108,13 @@ class OS:
         banco.conectar()
         OS = banco.cursor.execute(f"""SELECT cod_os, cod_cliente, defeito,
                           modelo, data_exec_serv, valorTotal, cod_serv, cod_produto
-                           FROM OS WHERE cod_os='{cod_os}'""").fetchmany()
+                           FROM ordem_servico WHERE cod_os='{cod_os}'""").fetchmany()
         print(OS)
         banco.desconectar()    
     
     def deletarOS(self, cod_os):
         banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM OS
+        banco.cursor.execute(f"""DELETE FROM ordem_servico
                                 WHERE cod_os='{cod_os}'""")
         banco.conexao.commit()
         banco.desconectar()

@@ -669,15 +669,15 @@ class MenuTela(Funcionalidades, Validadores):
         
         #Option Menu
         # vai armazenar a informação escolhida
-        self.situacao = StringVar(self.frameCadOs)
+        self.et_situacao = StringVar(self.frameCadOs)
         # outra variavel do tipo tupla, que vamos definir as opções que o usuário pode escolher
     
         self.listaSituacao = ('Concluído', 'Em aberto')
         #definindo uma opção padrão que sempre vai aparecer
-        self.situacao.set('')
+        self.et_situacao.set('')
 
         #Variavel do option menu
-        self.popupSituacao = OptionMenu(self.frameCadOs, self.situacao, *self.listaSituacao)
+        self.popupSituacao = OptionMenu(self.frameCadOs, self.et_situacao, *self.listaSituacao)
         self.popupSituacao.place(relx=0.44, rely=0.04, width=100, height=22)
         
         #Botão da listagem de serviços
@@ -702,13 +702,13 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_salvar_os = Button(self.frameCadOs, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_Os)
         self.btn_salvar_os.place(relx=0.84, rely=0.05, relwidth=0.12, height=40)
 
-        self.btn_listar_os = Button(self.frameCadOs, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_listar_os = Button(self.frameCadOs, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.lista_Os)
         self.btn_listar_os.place(relx=0.84, rely=0.14, relwidth=0.12, height=40)
 
         self.btn_alterar_os = Button(self.frameCadOs, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_alterar_os.place(relx=0.84, rely=0.23, relwidth=0.12, height=40)
 
-        self.btn_excluir_os = Button(self.frameCadOs, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_excluir_os = Button(self.frameCadOs, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_Os)
         self.btn_excluir_os.place(relx=0.84, rely=0.32, relwidth=0.12, height=40)
 
 
