@@ -94,11 +94,11 @@ class Produto:
         return produtos
         
     #procura um produto   
-    def consultarProduto(self, cod_produto:int): 
+    def consultarProduto(self, desc_produto:str): 
         banco.conectar()
         prod = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, qtd_estoque , cod_categoria_produto FROM produto
-                            WHERE cod_produto='{cod_produto}'""").fetchmany()
+                            WHERE desc_produto like '{desc_produto[0]}%'""").fetchall()
         print(prod)
         banco.desconectar()  
 

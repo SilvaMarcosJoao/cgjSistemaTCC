@@ -340,7 +340,7 @@ class MenuTela(Funcionalidades, Validadores):
         
         self.lbl_cod_produto = Label(self.produto_frame, text='Código: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_produto.place(relx=0.02, rely=0.1)
-        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9))
+        self.et_cod_produto = Entry(self.produto_frame, font=('Roboto', 9), state='disabled')
         self.et_cod_produto.place(relx=0.09, rely=0.1, width=50, height=20)
         
         self.lbl_mode_produto = Label(self.produto_frame, text='Modelo: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -379,7 +379,11 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.35, rely=0.2, width=206, height=23)
 
-        self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050')
+        self.lbl_consulta_produto = Label(self.produto_frame, text='Buscar Produto: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_consulta_produto.place(relx=0.72, rely=0.07)
+        self.et_consulta_produto = Entry(self.produto_frame, font=('Roboto', 9), bg='#FFF')
+        self.et_consulta_produto.place(relx=0.72, rely=0.11, width=130, height=20)
+        self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.consu_produto)
         self.btn_consulta_produto.place(relx=0.87, rely=0.075, relwidth=0.1, height=40)
 
         self.btn_salvar_produto = Button(self.produto_frame, text=' Salvar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_produto)
