@@ -38,7 +38,6 @@ class FornecimentoTela:
         self.popupProduto.place(relx=0.15, rely=0.05, width=100, height=22)
 
 
-
         self.lbl_produto = Label(self.fornecimento_frame, text='Fornecedor: ')
         self.lbl_produto.place(relx=0.03, rely=0.15, height=20)
 
@@ -51,6 +50,13 @@ class FornecimentoTela:
 
         self.popupFornecedor = OptionMenu(self.fornecimento_frame, self.et_fornecedor, *self.listaFornecedor)
         self.popupFornecedor.place(relx=0.15, rely=0.15, width=100, height=22)
+
+        self.lbl_data_fornecimento = Label(self.fornecimento_frame, text='Data : ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_data_fornecimento.place(relx=0.405, rely=0.1, height=20)
+        self.et_data_fornecimento = Entry(self.fornecimento_frame)
+        self.et_data_fornecimento.place(relx=0.445, rely=0.1, width=60, height=20)
+        self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
+        self.btn_calendario.place(relx=0.51, rely=0.1, width=62, height=20)
 
         
 

@@ -70,14 +70,14 @@ class Produto:
     #Atualizar produto    
     def alterarProduto(self, cod_produto, desc_produto, modelo_produto, preco_compra_produto, preco_venda_produto, qtd , cod_categoria_produto):
         banco.conectar()
-        banco.cursor.execute(f"""UPDATE Produto
+        banco.cursor.execute(f"""UPDATE produto
                                 SET desc_produto = ('{desc_produto }') ,
                                 modelo_produto = ('{modelo_produto }'),
                                 preco_compra_produto = ('{preco_compra_produto }'),
-                                preco_venda_produto = ('{preco_venda_produto }'),
-                                qtd = ('{qtd }'),
-                                cod_categoria_produto = ('{cod_categoria_produto }'), 
-                                WHERE cod_produto='{cod_produto}'""")
+                                preco_venda_produto =('{preco_venda_produto }'),
+                                qtd_estoque =('{qtd }'),
+                                cod_categoria_produto =('{cod_categoria_produto }') 
+                                WHERE cod_produto ='{cod_produto}'""")
         banco.conexao.commit()
         banco.desconectar()
    
