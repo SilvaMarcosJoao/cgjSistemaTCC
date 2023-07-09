@@ -129,7 +129,7 @@ class Funcionalidades:
         self.preco_venda = self.et_preco_ven_produto.get().strip()
         self.qtd_produto = self.et_qtd_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
-        self.cod_cat = [self.cat].strip()
+        self.cod_cat = [self.cat]
         try:
             if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
@@ -141,17 +141,18 @@ class Funcionalidades:
                 self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
                 self.limpa_produto()
                 messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')  
-        except:
+        except Exception as erro:
             messagebox.showerror('Erro', 'Não foi possível cadastrar o produto')
-            
+            print(erro)
+
     def exibir_produto(self):
         """
         """
         self.listaProd.delete(*self.listaProd.get_children())
         self.exibirProd = self.produto.listarProduto()
-        for e in self.exibirProd:
+        for i in self.exibirProd:
             self.et_cod_produto.config(state='normal')
-            self.listaProd.insert('',END, values=e) 
+            self.listaProd.insert('',END, values=i) 
             
             
     def consu_produto(self):
@@ -169,21 +170,23 @@ class Funcionalidades:
         self.cat = self.et_categoria.get().strip()
         self.cod_cat = [self.cat]
         try:
-            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
+            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
                 messagebox.showwarning('Alerta', 'Por favor, Selecione um produto para alterar')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                self.produto.alterarProduto(self.cod_produto, self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
+                self.produto.alterarProduto(self.cod_produto, self.desc_produto, 
+                                            self.mod_produto, self.preco_compra, 
+                                            self.preco_venda, self.qtd_produto, self.cod_cat[0][0])
                 self.limpa_produto()
                 messagebox.showinfo('Informação', 'Produto alterado com sucesso!')
+                self.exibir_produto()
         except Exception as error:
             print(f'Erro', 'Não foi possível alterar o produto:' )
             print(error)
         
-
     def excluir_produto(self):
         """
         """
@@ -196,8 +199,10 @@ class Funcionalidades:
                 messagebox.showinfo('Info', 'Produto deletado com sucesso!')
             else:
                 messagebox.showwarning('Alerta','Nenhum produto encontrado, não foi possível excluir')
-        except:
+        except Exception as erro:
             messagebox.showerror('Erro', 'Houve um erro ao excluir o produto')
+            print(erro)
+
     def duplo_clique_prod(self, event):
         """
         """
@@ -233,7 +238,7 @@ class Funcionalidades:
         self.telefone = self.et_tel_cliente.get().strip()   
         self.logradouro = self.et_logr_cliente.get().strip()
         self.numero = self.et_num_cliente.get().strip()
-        self.cep = self.et_cep_cliente.get().strip()       
+        self.cep = self.et_cep_cliente.get().strip()      
         self.cidade = self.et_cidade_cliente.get().strip()
         self.estado = self.et_estado_cliente.get().strip()
 
@@ -331,8 +336,10 @@ class Funcionalidades:
                                       self.cep,self.cidade,self.estado)    
                 messagebox.showinfo('Sistema', 'Dados Alterados com sucesso!')
                 self.limpa_cliente()
+                self.lista_cliente()
         except:
             messagebox.showerror('Erro', 'Houve um erro inesperado!') 
+
     def excluir_cliente(self):
         """
         """
@@ -499,7 +506,7 @@ class Funcionalidades:
         self.preco_servico = self.et_preco_servico.get().strip()
         self.tipo_servico = self.et_tipo_servico.get().strip()
         try:
-            if self.cod_servico == '' or self.desc_servico == '' or self.preco_servico == '' or self.tipo_servico == '':
+            if self.desc_servico == '' or self.preco_servico == '' or self.tipo_servico == '':
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
             elif len(self.cod_servico) > 5:
                 messagebox.showwarning('Alerta', 'Insira um código válido!')
@@ -548,9 +555,9 @@ class Funcionalidades:
                 messagebox.showinfo('Info', 'Serviço alterado com sucesso!')
                 self.limpa_servico()
                 self.exibir_servico()
-        except:
+        except Exception as erros:
             messagebox.showerror('Erro', 'Erro ao tentar salvar as alterações')
-        
+            print(erros)
 
     def deletar_servico(self):
         """

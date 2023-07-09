@@ -9,12 +9,7 @@ class CategoriaProduto:
         self.__produto = produto
         self.__desc_categoria_produto=desc_categoria_produto
         
-    def adicionarProdutoCategoria(self,produto) -> None:
-        self.__produto.append(produto)
-
-    def removerProdutoCategoria(self, produto) -> None:
-        self.__produto.remove(produto)
-
+    # Getters e Setters
     def get_cod_categoria_produto(self) -> int:
         return self.__cod_categoria_produto
     
@@ -27,18 +22,18 @@ class CategoriaProduto:
     def set_desc_categoria_produto(self, desc_categoria_produto) -> None:
         self.__desc_categoria_produto = desc_categoria_produto
 
-    
-    def cadastrarCategoria(self, desc_categoria) -> None:
+
+    def cadastrarCategoria(self, desc_categoria:str) -> None:
         banco.conectar()
         banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
         VALUES ('{desc_categoria}')""")
         banco.conexao.commit()
         banco.desconectar()
         
-    def alterarCategoria(self, cod, desc) -> None:
+    def alterarCategoria(self, cod_categoria_produto:int, desc_categoria:str) -> None:
         banco.conectar()
-        banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc}')
-                                WHERE cod_categoria_produto = ('{cod}') """) 
+        banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc_categoria}')
+                                WHERE cod_categoria_produto = ('{cod_categoria_produto}') """) 
         banco.conexao.commit()
         banco.desconectar()
 
@@ -47,25 +42,11 @@ class CategoriaProduto:
         categoria =banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
         banco.desconectar()
         return categoria
-
-    def consultarCategoria(self):
-        banco.conectar()
-        cate = banco.cursor.execute(f"""SELECT desc_categoria_produto
-                                FROM categoria_produto """).fetchall()
-        banco.desconectar()    
-        return cate
     
-    def deletarCategoria(self, cod_categoria_produto):
+    def deletarCategoria(self, cod_categoria_produto:int) -> None:
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM categoria_produto
                                 WHERE cod_categoria_produto = '{cod_categoria_produto}' """)
         banco.conexao.commit()
         banco.desconectar()
         
-        
-
-
-
-
-
-

@@ -14,6 +14,7 @@ class Cliente:
         self.__cidade=cidade
         self.__estado=estado
 
+    # Getters e Setters
     def get_cod_cliente(self) -> int:
         return self.__cod_cliente
     
@@ -44,37 +45,38 @@ class Cliente:
     def get_estado(self) -> str:
         return self.__estado
     
-    def set_cod_cliente(self, cod: int )-> None:
+    def set_cod_cliente(self, cod:int )-> None:
         self.__cod_cliente = cod
 
-    def set_nome_cliente(self, nome_cliente):
+    def set_nome_cliente(self, nome_cliente:str) -> None:
         self.__nome_cliente = nome_cliente
 
-    def set_logradouro(self, logradouro):
+    def set_logradouro(self, logradouro:str) -> None:
         self.__logradouro = logradouro
 
-    def set_cpf(self, cpf):
+    def set_cpf(self, cpf: str) -> None:
         self.__cpf = cpf
 
-    def set_telefone(self, telefone):
+    def set_telefone(self, telefone:str) -> None:
         self.__telefone = telefone
 
-    def set_email(self, email):
+    def set_email(self, email:str) -> None:
         self.__email = email
 
-    def set_numero(self, numero):
+    def set_numero(self, numero:int) -> None:
         self.__numero = numero
 
-    def set_cep(self, cep):
+    def set_cep(self, cep:int) -> None:
         self.__cep = cep
 
-    def set_cidade(self, cidade):
+    def set_cidade(self, cidade:str) -> None:
         self.__cidade = cidade
 
-    def set_estado(self, estado):
+    def set_estado(self, estado:str) -> None:
         self.__estado = estado
 
-    def cadastrarCliente(self, cpf,nome_cliente,email,telefone,logradouro,numero,cep,cidade,estado):
+
+    def cadastrarCliente(self, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         banco.conectar()
         banco.cursor.execute(f"""Insert into Cliente(cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado) 
@@ -84,7 +86,7 @@ class Cliente:
         banco.conexao.commit()
         banco.desconectar()
         
-    def alterarCliente(self, cod_cliente, cpf, nome_cliente, email, telefone, logradouro, numero, cep, cidade, estado):
+    def alterarCliente(self, cod_cliente:int, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         banco.conectar()
         banco.cursor.execute(f"""UPDATE Cliente
                                 SET cpf = ('{cpf }'), 
@@ -106,16 +108,15 @@ class Cliente:
         banco.desconectar()
         return clientes 
     
-    def consultarCliente(self, nome) -> list:
+    def consultarCliente(self, nome:str) -> list:
         banco.conectar()
         cli = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
-                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()
-                            
+                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()              
         banco.desconectar()    
         return cli
     
-    def deletarCliente(self, cod_cliente):
+    def deletarCliente(self, cod_cliente:int) -> None:
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM Cliente
                                 WHERE cod_cliente='{cod_cliente}'""")
