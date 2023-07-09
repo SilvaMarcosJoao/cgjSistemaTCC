@@ -333,6 +333,7 @@ class Funcionalidades:
                 self.limpa_cliente()
         except:
             messagebox.showerror('Erro', 'Houve um erro inesperado!') 
+            
     def excluir_cliente(self):
         """
         """
@@ -386,21 +387,47 @@ class Funcionalidades:
     def inserir_fornecedor(self):
         """
         """
-        self.cnpj = self.et_cnpj_fornecedor.get()
-        self.nome = self.et_nome_fornecedor.get()
-        self.email = self.et_email_fornecedor.get()
-        self.telefone = self.et_tel_fornecedor.get()
-        self.logradouro = self.et_logr_fornecedor.get()
-        self.numero = self.et_num_fornecedor.get()
-        self.cep = self.et_cep_fornecedor.get()
-        self.cidade = self.et_cidade_fornecedor.get()
-        self.estado = self.et_estado_fornecedor.get()
-        self.fornecedor.cadastrarFornecedor(self.cnpj,self.nome,
+        self.cnpj = self.et_cnpj_fornecedor.get().strip()
+        self.nome = self.et_nome_fornecedor.get().strip()
+        self.email = self.et_email_fornecedor.get().strip()
+        self.telefone = self.et_tel_fornecedor.get().strip()
+        self.logradouro = self.et_logr_fornecedor.get().strip()
+        self.numero = self.et_num_fornecedor.get().strip()
+        self.cep = self.et_cep_fornecedor.get().strip()
+        self.cidade = self.et_cidade_fornecedor.get().strip()
+        self.estado = self.et_estado_fornecedor.get().strip()
+        
+        try:
+            
+            if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
+                messagebox.showwarning('Alerta', 'Preencha os campos!')
+            elif len(self.cnpj) != 11:
+                messagebox.showwarning('Alerta', 'CPF/CNPJ Inválido')
+            elif len(self.nome) <= 3 or len(self.nome) > 20:
+                messagebox.showwarning('Alerta', 'Por favor, Insira um nome válido!')
+                if self.nome == '':
+                    messagebox.showwarning('Alerta', 'Preencha o campo nome!')
+            elif len(self.email) > 35 or '@' not in self.email:
+                messagebox.showwarning('Alerta', 'Preencha o Email corretamente!')
+            elif len(self.telefone ) < 9 or len(self.telefone) > 14:
+                messagebox.showwarning('Alerta', 'Por favor, Insira um telefone válido!')
+            elif len(self.logradouro) > 40:
+                messagebox.showwarning('Alerta','Digite um endereço válido!')
+            elif len(self.cidade) <= 3 or len(self.cidade) > 40:
+                messagebox.showwarning('Alerta', 'Preencha o campo de cidade corretamente!')
+            elif len(self.estado) < 3 or len(self.estado) > 40:
+                messagebox.showwarning('Alerta', 'Preencha o campo de estado corretamente!')
+            else:
+                messagebox.showinfo('Sistema', 'Fornecedor cadastrado com sucesso!')
+                self.fornecedor.cadastrarFornecedor(self.cnpj,self.nome,
                                              self.email, self.telefone, 
                                              self.logradouro, self.numero, 
                                              self.cep,self.cidade, 
                                              self.estado)
-        self.limpa_fornecedor()
+                self.limpa_fornecedor()
+                
+        except:
+            messagebox.showerror('Erro', 'Houve um erro inesperado!')
                 
     def lista_fornecedor(self):
         """
@@ -416,37 +443,78 @@ class Funcionalidades:
     def pesquisar_fornecedor(self):
         """
         """
-        self.nome = self.et_nome_fornecedor.get()
-        self.fornecedor.consultarFornecedor(self.nome)
+        self.listaForne.delete(*self.listaForne.get_children())
+        self.forne = self.et_consultar_forne.get()
+        if len(self.forne) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resForne = self.fornecedor.consultarFornecedor(self.forne)
+            if len(self.resForne) ==0:
+                messagebox.showinfo("Informação", "Nenhum Fornecedor encontrado.")
+            else:
+                for r in self.resForne:
+                    self.listaForne.insert('', END, values=r)
+        self.limpa_fornecedor()
         
     def alterar_fornecedor(self):
         """
         """
-        self.cod = self.et_cod_fornecedor.get()
-        self.cnpj = self.et_cnpj_fornecedor.get()
-        self.nome = self.et_nome_fornecedor.get()
-        self.email = self.et_email_fornecedor.get()
-        self.telefone = self.et_tel_fornecedor.get()
-        self.logradouro = self.et_logr_fornecedor.get()
-        self.numero = self.et_num_fornecedor.get()
-        self.cep = self.et_cep_fornecedor.get()
-        self.cidade = self.et_cidade_fornecedor.get()
-        self.estado = self.et_estado_fornecedor.get()
-        self.fornecedor.alterarFornecedor(self.cod,self.cnpj,self.nome,
+        self.cod = self.et_cod_fornecedor.get().strip()
+        self.cnpj = self.et_cnpj_fornecedor.get().strip()
+        self.nome = self.et_nome_fornecedor.get().strip()
+        self.email = self.et_email_fornecedor.get().strip()
+        self.telefone = self.et_tel_fornecedor.get().strip()
+        self.logradouro = self.et_logr_fornecedor.get().strip()
+        self.numero = self.et_num_fornecedor.get().strip()
+        self.cep = self.et_cep_fornecedor.get().strip()
+        self.cidade = self.et_cidade_fornecedor.get().strip()
+        self.estado = self.et_estado_fornecedor.get().strip()
+        try:
+            
+            if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
+                messagebox.showwarning('Alerta', 'Preencha os campos!')
+            elif len(self.cnpj) != 11:
+                messagebox.showwarning('Alerta', 'CPF Inválido')
+            elif len(self.nome) <= 3 or len(self.nome) > 20:
+                messagebox.showwarning('Alerta', 'Por favor, Insira um nome válido!')
+                if self.nome == '':
+                    messagebox.showwarning('Alerta', 'Preencha o campo nome!')
+            elif len(self.email) > 35 or '@' not in self.email:
+                messagebox.showwarning('Alerta', 'Preencha o Email corretamente!')
+            elif len(self.telefone ) < 9 or len(self.telefone) > 14:
+                messagebox.showwarning('Alerta', 'Por favor, Insira um telefone válido!')
+            elif len(self.logradouro) > 40:
+                messagebox.showwarning('Alerta','Digite um endereço válido!')
+            elif len(self.cidade) <= 3 or len(self.cidade) > 40:
+                messagebox.showwarning('Alerta', 'Preencha o campo de cidade corretamente!')
+            elif len(self.estado) < 3 or len(self.estado) > 40:
+                messagebox.showwarning('Alerta', 'Preencha o campo de estado corretamente!')
+            else:
+                self.fornecedor.alterarFornecedor(self.cod,self.cnpj,self.nome,
                                              self.email, self.telefone, 
                                              self.logradouro, self.numero, 
                                              self.cep,self.cidade, 
                                              self.estado)
-        self.lista_fornecedor()
+                messagebox.showinfo('Sistema', 'Dados alterados com sucesso.')
+                self.lista_fornecedor()
+        except:
+            messagebox.showerror('Sistema', 'Houve um erro inesperado.')
     
     def excluir_fornecedor(self):
         """
         """
         self.cod = self.et_cod_fornecedor.get()
-        self.fornecedor.excluirFornecedor(self.cod)
-        self.limpa_fornecedor()
-        self.lista_fornecedor()
-        
+        try:
+            if len(self.cod) == 0:
+                messagebox.showwarning('Alerta', 'Fornecedor não encontrado, impossível deletar.')
+            else:
+                self.fornecedor.excluirFornecedor(self.cod)
+                messagebox.showinfo('Sistema', 'Fornecedor deletado com sucesso')
+                self.limpa_fornecedor()
+                self.lista_fornecedor()
+        except:
+            messagebox.showerror('Erro', 'Não foi possível deletar o fornecedor.'
+                                 )
     def duplo_clique_for(self, event):
         """
         """
