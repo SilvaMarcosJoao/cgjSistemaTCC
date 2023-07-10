@@ -153,8 +153,7 @@ class Funcionalidades:
         for i in self.exibirProd:
             self.et_cod_produto.config(state='normal')
             self.listaProd.insert('',END, values=i) 
-            
-            
+              
     def consu_produto(self):
         """
         """
@@ -167,10 +166,10 @@ class Funcionalidades:
             if len(self.resProd) == 0:
                 messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
             else:
-                for v in self.resProd:
-                    self.listaProd.insert('',END, values=v)
-                self.limpa_produto()
-        
+                for i in self.resProd:
+                    self.listaProd.insert('',END, values=i)
+        self.limpa_produto()
+
 
     def editar_produto(self):
         """
@@ -182,9 +181,10 @@ class Funcionalidades:
         self.preco_venda = self.et_preco_ven_produto.get().strip()
         self.qtd_produto = self.et_qtd_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
-        self.cod_cat = [self.cat]
+        self.cod_categoria = [self.cat]
+        print(self.cat)
         try:
-            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
+            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_categoria == '':
                 messagebox.showwarning('Alerta', 'Por favor, Selecione um produto para alterar')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
@@ -193,7 +193,8 @@ class Funcionalidades:
             else:
                 self.produto.alterarProduto(self.cod_produto, self.desc_produto, 
                                             self.mod_produto, self.preco_compra, 
-                                            self.preco_venda, self.qtd_produto, self.cod_cat[0][0])
+                                            self.preco_venda, self.qtd_produto)
+                
                 self.limpa_produto()
                 messagebox.showinfo('Informação', 'Produto alterado com sucesso!')
                 self.exibir_produto()
@@ -241,6 +242,7 @@ class Funcionalidades:
         self.et_preco_comp_produto.delete(0, END)
         self.et_preco_ven_produto.delete(0, END)
         self.et_qtd_produto.delete(0, END)
+        self.et
 
     # FUNÇÕES DOS BOTÕES DA TELA DE CLIENTE
     def inserir_cliente(self):
@@ -458,6 +460,7 @@ class Funcionalidades:
             messagebox.showinfo('Informação', 'Não há fornecedores cadastrados.')
         else:
             for i in self.listaf:
+                self.et_cod_fornecedor.config(state='normal')
                 self.listaForne.insert('',END, values = i)
             
     def pesquisar_fornecedor(self):
@@ -567,16 +570,34 @@ class Funcionalidades:
         self.et_cidade_fornecedor.delete(0,END)
         self.et_estado_fornecedor.delete(0,END)
        
+
+    def fornecimentoProduto(self):
+        self.dadosProd = self.produto.listarProduto()
+        self.exibirProdutos = []
+        for i in range(0, len(self.dadosProd)):
+            self.exibirProdutos.append(self.dadosProd[i][1])
+        return self.exibirProdutos
+    
+    def fornecimentoFornecedor(self):
+        self.dadosForn = self.fornecedor.listarFornecedor()
+        self.exibirDados = []
+        for c in range(0, len(self.dadosForn)):
+            self.exibirDados.append(self.dadosForn[c][2])
+        return self.exibirDados
+
     def inserir_fornecimento(self):
         """
         """
-        self.res = self.fornecedor.listarFornecedor()
-        self.cod_prod_obt = self.et_cod_produto.get()
-        self.qtd_fornecimento = self.et_qtd_fornecida.get()
-        self.data = self.et_data_fornecimento.get()
-        print(self.res)
-        #self.fornecimento.cadastrar_fornecimento(self.cnpj_obt, self.cod_prod_obt, self.data, self.qtd_fornecimento)
+        self.resProduto = self.fornecimentoProduto()
+        self.fornecimento.adicionarProduto(self.resProduto)
 
+        self.resFornecedor = self.comboxFornecedor.get()
+        self.fornecimentoFornecedor()
+        print(self.resFornecedor)
+        self.fornecimento.adicionarFornecedor(self.resFornecedor)
+
+        self.qtd_fornecida = self.et_qtd_fornecida.get()
+        self.data = self.et_data_fornecimento.get()
 
     # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
     def inserir_servico(self):

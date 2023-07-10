@@ -103,7 +103,7 @@ class Fornecedor:
 
     def consultarFornecedor(self, nome_fornecedor: str) -> list:
         banco.conectar()
-        forn = banco.cursor.execute(f"""SELECT cnpj_cpf, nome_fornecedor,
+        forn = banco.cursor.execute(f"""SELECT cod_fornecedor, cnpj_cpf, nome_fornecedor,
                                     email, telefone, logradouro, numero, 
                                     cep, cidade, estado FROM fornecedor 
                                     WHERE nome_fornecedor like '{nome_fornecedor[0]}%' """).fetchall()

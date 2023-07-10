@@ -153,6 +153,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_nova_senha = Label(self.usuario_frame, text='Nova Senha:',font=('Roboto', 10, 'bold'))
         self.lbl_nova_senha.place(relx=0.2, rely=0.2)
         self.et_nova_senha = Entry(self.usuario_frame, font=('Roboto', 9), show='*', validate='key', validatecommand=self.validadorSenha)
+        self.et_nova_senha.focus()
         self.et_nova_senha.place(relx=0.42, rely=0.2, width=150, height=20)
 
         self.lbl_confir_senha = Label(self.usuario_frame, text='Confirmar Senha:', font=('Roboto', 10, 'bold'))
@@ -181,6 +182,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_cpf_cliente = Label(self.frameCadTelaCliente, text='CPF:',  font=('Roboto', 9, 'bold'), bg='#d9d9d9')    
         self.lbl_cpf_cliente.place(relx=0.025, rely=0.15, height=20)
         self.et_cpf_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9),bg= '#FFF')
+        self.et_cpf_cliente.focus()
         self.et_cpf_cliente.place(relx=0.09, rely=0.15, width=220, height=20)
         
         self.lbl_nome_cliente = Label(self.frameCadTelaCliente, text='Nome: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -298,6 +300,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 9, 'bold') , bg='#d9d9d9')
         self.lbl_desc_categoria.place(relx=0.25, rely=0.15, height=20)
         self.et_desc_categoria = Entry(self.categoria_frame, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
+        self.et_desc_categoria.focus()
         self.et_desc_categoria.place(relx=0.40, rely=0.15, width=171, height=20)
 
         self.btn_salvar_categoria = Button(self.categoria_frame, text=' Salvar', relief='groove',fg='#fff', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#505050', command=self.inserir_categoria)
@@ -351,6 +354,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_desc_produto = Label(self.produto_frame, text='Descrição: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_desc_produto.place(relx=0.02, rely=0.2)
         self.et_desc_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_desc_produto.focus()
         self.et_desc_produto.place(relx=0.09, rely=0.2, width=150, height=20)
 
         self.lbl_preco_comp_produto = Label(self.produto_frame, text='Preço Compra: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -444,12 +448,13 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_fornecedor = Label(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_fornecedor.place(relx=0.02, rely=0.1, height=20)
-        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.impCod)
+        self.et_cod_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), state='disabled')
         self.et_cod_fornecedor.place(relx=0.09, rely=0.1, width=50, height=20)
 
         self.lbl_cnpj_fornecedor = Label(self.frameCadTelaFornecedor, text='CNPJ/CPF: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cnpj_fornecedor.place(relx=0.02, rely=0.15, height=20)
         self.et_cnpj_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
+        self.et_cnpj_fornecedor.focus()
         self.et_cnpj_fornecedor.place(relx=0.09, rely=0.15, width=220, height=20)
 
         self.lbl_nome_fornecedor = Label(self.frameCadTelaFornecedor, text='Nome: ', font=('Roboto', 9, 'bold'),bg='#d9d9d9')
@@ -665,7 +670,7 @@ class MenuTela(Funcionalidades, Validadores):
     
         self.listaSituacao = ('Concluído', 'Em aberto')
         #definindo uma opção padrão que sempre vai aparecer
-        self.et_situacao.set('')
+        self.et_situacao.set(self.listaSituacao[1])
 
         #Variavel do option menu
         self.popupSituacao = OptionMenu(self.frameCadOs, self.et_situacao, *self.listaSituacao)
@@ -792,12 +797,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_data_venda.place(relx=0.445, rely=0.05, width=60, height=20)
         self.btn_calendario = Button(self.frameCadTelaVenda, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendariove)
         self.btn_calendario.place(relx=0.51, rely=0.05, width=62, height=20)
-
-        #self.lbl_qtdprodt_venda = Label(self.frameCadTelaVenda, text="Qtd", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        #self.lbl_qtdprodt_venda.place(relx=0.1, rely=0.4, height=20)
-        #self.et_qtdprodt_venda = Entry(self.frameCadTelaVenda)
-        #self.et_qtdprodt_venda.place(relx=0.16, rely=0.4, width=55, height=20)
-
 
 
         #Botões do CRUD da venda

@@ -69,15 +69,14 @@ class Produto:
         banco.desconectar()
     
     #Atualizar produto    
-    def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float, qtd:int, cod_categoria_produto: int) -> None:
+    def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float, qtd:int) -> None:
         banco.conectar()
         banco.cursor.execute(f"""UPDATE produto
                                 SET desc_produto =('{desc_produto}'),
                                 modelo_produto =('{modelo_produto}'),
                                 preco_compra_produto =('{preco_compra_produto}'),
                                 preco_venda_produto =('{preco_venda_produto}'),
-                                qtd_estoque =('{qtd}'),
-                                cod_categoria_produto =('{cod_categoria_produto}') 
+                                qtd_estoque =('{qtd}') 
                                 WHERE cod_produto =('{cod_produto}')""")
         banco.conexao.commit()
         banco.desconectar()
@@ -94,13 +93,19 @@ class Produto:
         return produtos
         
     #procura um produto   
-    def consultarProduto(self, desc_produto:str): 
+    def consultarProduto(self, desc_produto:str) -> list: 
         banco.conectar()
-        prod = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
+        produto = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, qtd_estoque , cod_categoria_produto FROM produto
                             WHERE desc_produto like '{desc_produto[0]}%'""").fetchall()
-        print(prod)
         banco.desconectar()  
+        return produto
+    '''
+    def consultaProdutoFornecimento(self) -> list:
+        banco.conectar()
+        listaPdt = banco.cursor.execute(f"""SELECT cod_produto, desc_produto from produto """).fetchall()
+        banco.desconectar()
+        return listaPdt'''
 
     #apaga produtos
     def deletarProduto(self, cod_produto:int) -> None:
