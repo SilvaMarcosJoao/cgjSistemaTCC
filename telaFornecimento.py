@@ -60,7 +60,6 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
         self.comboxFornecedor = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosFornecedor)
         self.comboxFornecedor.place(relx=0.25, rely=0.15, width=120, height=22)
 
-
         self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.qtd_fornecida.place(relx=0.02, rely=0.25, height=20)
 
