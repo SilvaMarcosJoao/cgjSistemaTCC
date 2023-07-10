@@ -150,10 +150,13 @@ class Funcionalidades:
         """
         self.listaProd.delete(*self.listaProd.get_children())
         self.exibirProd = self.produto.listarProduto()
-        for i in self.exibirProd:
-            self.et_cod_produto.config(state='normal')
-            self.listaProd.insert('',END, values=i) 
-              
+        if len(self.exibirProd) == 0:
+            messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
+        else:
+            for i in self.exibirProd:
+                self.et_cod_produto.config(state='normal')
+                self.listaProd.insert('',END, values=i) 
+            
     def consu_produto(self):
         """
         """
@@ -166,10 +169,10 @@ class Funcionalidades:
             if len(self.resProd) == 0:
                 messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
             else:
-                for i in self.resProd:
-                    self.listaProd.insert('',END, values=i)
-        self.limpa_produto()
-
+                for v in self.resProd:
+                    self.listaProd.insert('',END, values=v)
+                self.limpa_produto()
+        
 
     def editar_produto(self):
         """
@@ -698,10 +701,11 @@ class Funcionalidades:
 
 
     #CRUD da venda
-    def pegar_produto(self):
-        """
-        """
-        pass
+    def adicionar_produto_venda(self, produto):
+        self.produtos.append(produto)
+
+    def remover_produto_venda(self, produto):
+        self.produtos.remove(produto)
     
     def pegar_cliente(self):
         """
