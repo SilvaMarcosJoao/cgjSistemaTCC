@@ -38,23 +38,27 @@ class TelaProduto(Funcionalidades, Produto):
         self.et_consulta_produto = Entry(self.produto_frame, font=('Roboto', 9), bg='#FFF')
         self.et_consulta_produto.place(relx=0.2, rely=0.07, width=180, height=20)
         
-        self.btn_consulta_produto = Button(self.produto_frame, text=' Procurar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.consu_produto)
+        self.btn_consulta_produto = Button(self.produto_frame, text=' Procurar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.consuper_produto)
         self.btn_consulta_produto.place(relx=0.55, rely=0.07, width=62, height=20)
         
-        self.btn_lista_produto = Button(self.produto_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.exibir_produto)
+        self.btn_lista_produto = Button(self.produto_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listaper_produto)
         self.btn_lista_produto.place(relx=0.87, rely=0.07, width=62, height=20)
         
-        self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3'), show='headings')
+        self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'col4', 'col5'), show='headings')
         
         self.listaProd.heading("#0", text='')
-        self.listaProd.heading('#1', text='Descrição')
-        self.listaProd.heading('#2', text='Modelo')
-        self.listaProd.heading('#3', text='Preço Venda')
+        self.listaProd.heading('#1', text='Código')
+        self.listaProd.heading('#2', text='Descrição')
+        self.listaProd.heading('#3', text='Modelo')
+        self.listaProd.heading('#4', text='Preço venda')
+        self.listaProd.heading('#5', text='Qtd Estoque')
         
         self.listaProd.column('#0', width=1, anchor='center')
         self.listaProd.column('#1', width=50, anchor='center')
         self.listaProd.column('#2', width=50, anchor='center')
         self.listaProd.column('#3', width=50, anchor='center')
+        self.listaProd.column('#4', width=50, anchor='center')
+        self.listaProd.column('#5', width=50, anchor='center')
         
         self.listaProd.place(relx=0.02, rely=0.3, relwidth=0.95, relheight=0.66)
 

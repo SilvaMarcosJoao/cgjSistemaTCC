@@ -103,7 +103,7 @@ class Produto:
     '''
     def consultaProdutoFornecimento(self) -> list:
         banco.conectar()
-        listaPdt = banco.cursor.execute(f"""SELECT cod_produto, desc_produto from produto """).fetchall()
+        listaPdt = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, preco_venda from produto """).fetchall()
         banco.desconectar()
         return listaPdt'''
 
@@ -114,3 +114,23 @@ class Produto:
                                 WHERE cod_produto='{cod_produto}'""")
         banco.conexao.commit()
         banco.desconectar()
+
+
+# Métodos personalizados para telaCliente
+
+    def listaperProduto(self):
+        banco.conectar()
+        produtos=banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
+                                      preco_venda_produto, qtd_estoque
+                                      FROM PRODUTO """).fetchall()
+        banco.desconectar()                              
+        return produtos
+        
+
+    def consultaperProduto(self, desc_produto: str) -> list:
+        banco.conectar()
+        produto=banco.cursor.execute(f"""SELECT cod_produto, desc_produto,
+                                         modelo_produto, preco_venda_produto,qtd_estoque FROM PRODUTO 
+                                           WHERE desc_produto like '{desc_produto[0]}%'""").fetchall()   
+        banco.desconectar()
+        return produto

@@ -875,7 +875,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaVenda.heading('#1', text='Venda')
         self.listaVenda.heading('#2', text='Cliente')
         self.listaVenda.heading('#3', text='Materiais')
-        self.listaVenda.heading('#4', text='Preço Unit')
+        self.listaVenda.heading('#4', text='Preço Venda')
         self.listaVenda.heading('#5', text='Quantidade')
         self.listaVenda.heading('#6', text='Preço')
 

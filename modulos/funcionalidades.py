@@ -172,7 +172,6 @@ class Funcionalidades:
                 for v in self.resProd:
                     self.listaProd.insert('',END, values=v)
                 self.limpa_produto()
-        
 
     def editar_produto(self):
         """
@@ -247,6 +246,34 @@ class Funcionalidades:
         self.et_qtd_produto.delete(0, END)
         self.et
 
+    def listaper_produto(self):
+        """
+        """
+        self.listaProd.delete(*self.listaProd.get_children())
+        self.listaPr = self.produto.listaperProduto()
+        if len(self.listaPr) == 0:
+            messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
+        else:
+            for i in self.listaPr:
+                self.listaProd.insert('',END, values=i) 
+
+
+    def consuper_produto(self):
+        """
+        """
+        self.listaProd.delete(*self.listaProd.get_children())
+        self.prod = self.et_consulta_produto.get()
+        if len(self.prod) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resProd = self.produto.consultaperProduto(self.prod)
+            if len(self.resProd) == 0:
+                messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
+            else:
+                for v in self.resProd:
+                    self.listaProd.insert('',END, values=v)
+                
+
     # FUNÇÕES DOS BOTÕES DA TELA DE CLIENTE
     def inserir_cliente(self):
         """
@@ -300,6 +327,7 @@ class Funcionalidades:
             for n in self.lista:
                 self.et_cod_cliente.config(state='normal')
                 self.listaCliente.insert('',END, values=n)
+
 
     def buscar_cliente(self):
         """
@@ -406,6 +434,35 @@ class Funcionalidades:
         self.et_cidade_cliente.delete(0,END)
         self.et_estado_cliente.delete(0,END)
         self.et_consultar_cliente.delete(0, END)
+    
+    #Métodos de busca e listagem personalizados para telaCliente
+
+    def listaper_cliente(self):
+        """
+        """
+        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.listaP = self.cliente.listaperCliente()
+        if len(self.listaP) == 0:
+            messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
+        else:
+            for n in self.listaP:
+                self.listaCliente.insert('',END, values=n)
+
+    def buscaper_cliente(self):
+        """
+        """
+        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.cli = self.et_consultar_cliente.get()
+        if len(self.cli) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resCli = self.cliente.consultaperCliente(self.cli)
+            if len(self.resCli) == 0:
+                messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
+            else:
+                for v in self.resCli:
+                    self.listaCliente.insert('',END, values=v)
+        
 
 
     # FUNÇÕES DOS BOTÕES DA TELA FORNECEDOR
@@ -782,7 +839,6 @@ class Funcionalidades:
         self.et_defeito.delete(0, END)
         self.et_situacao.delete(0, END)
     
- 
     def duplo_cliqueOs(self, event):
         """
         """
@@ -796,10 +852,7 @@ class Funcionalidades:
             self.et_valor_total_os.delete(END, col4)
             self.et_defeito.delete(END, col5)
             self.et_situacao.delete(END, col6)
-        
-
-                
-                
+                  
     def calcular_totalOS(self):
         """
         """

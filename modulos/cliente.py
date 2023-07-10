@@ -122,3 +122,20 @@ class Cliente:
                                 WHERE cod_cliente='{cod_cliente}'""")
         banco.conexao.commit()
         banco.desconectar()
+
+    
+    #MÉTODOS PERSONALIZADOS para telaCliente
+
+    def listaperCliente(self) -> list:
+        banco.conectar()
+        cliente=banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM CLIENTE""").fetchall()   
+        banco.desconectar()
+        return cliente
+    
+    def consultaperCliente(self, nome:str) -> list:
+        banco.conectar()
+        clis = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM Cliente
+                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()
+        banco.desconectar()    
+        return clis
+    

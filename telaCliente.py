@@ -36,10 +36,10 @@ class TelaCliente(Funcionalidades, Cliente):
         self.et_consultar_cliente = Entry(self.cliente_frame, font=('Roboto', 9), bg='#FFF')
         self.et_consultar_cliente.place(relx=0.2, rely=0.07, width=180, height=20)
         
-        self.btn_consultar_cliente = Button(self.cliente_frame, text=' Procurar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.buscar_cliente)
+        self.btn_consultar_cliente = Button(self.cliente_frame, text=' Procurar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.buscaper_cliente)
         self.btn_consultar_cliente.place(relx=0.55, rely=0.07, width=62, height=20)
         
-        self.btn_lista_cliente = Button(self.cliente_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command=self.lista_cliente)
+        self.btn_lista_cliente = Button(self.cliente_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command=self.listaper_cliente)
         self.btn_lista_cliente.place(relx=0.87, rely=0.07, width=62, height=20)
         
         self.listaCliente = ttk.Treeview(self.cliente_frame, height=3 ,columns=('Col1','Col2', 'Col3'), show = 'headings')
@@ -63,4 +63,6 @@ class TelaCliente(Funcionalidades, Cliente):
         self.scrollHor = Scrollbar(self.cliente_frame, orient='horizontal', command=self.listaCliente.xview)
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
+        
+
         
