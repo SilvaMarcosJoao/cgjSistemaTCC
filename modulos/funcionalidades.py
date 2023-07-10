@@ -633,6 +633,7 @@ class Funcionalidades:
 
     def fornecimentoProduto(self):
         self.dadosProd = self.produto.listarProduto()
+        
         self.exibirProdutos = []
         for i in range(0, len(self.dadosProd)):
             self.exibirProdutos.append(self.dadosProd[i][1])
@@ -646,18 +647,26 @@ class Funcionalidades:
         return self.exibirDados
 
     def inserir_fornecimento(self):
+        [(1, 'nome', ''), ()]
         """
         """
+        self.cod_prod = None
+        self.cnpj_forn = None
         self.resProduto = self.fornecimentoProduto()
-        self.fornecimento.adicionarProduto(self.resProduto)
+        for v in self.dadosProd:
+            if self.resProduto in v:
+                self.cod_prod = v[0]
 
         self.resFornecedor = self.comboxFornecedor.get()
         self.fornecimentoFornecedor()
-        print(self.resFornecedor)
-        self.fornecimento.adicionarFornecedor(self.resFornecedor)
-
+        for i in self.dadosForn:
+            if self.resFornecedor in i:
+                self.cnpj_forn = i[1]
+        
         self.qtd_fornecida = self.et_qtd_fornecida.get()
         self.data = self.et_data_fornecimento.get()
+        
+        self.fornecimento.cadastrar_fornecimento (self.cod_prod, self.cnpj_forn, self.data, self.qtd_fornecida)
 
     # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
     def inserir_servico(self):
