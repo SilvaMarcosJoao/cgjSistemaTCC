@@ -37,7 +37,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_cliente.config(bg='#6E6E6E')
         self.btn_inicio.config(bg='#6E6E6E')
         self.btn_ger_servico.config(bg='#6E6E6E')
-        self.btn_ger_os.config(bg='#6E6E6E')
 
     def indicate(self, btn, page):
         self.mudaCorBtnMenu()
@@ -101,39 +100,35 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.img_ger_usu = PhotoImage(file='./imagens/usuario.png')
         self.btn_ger_usuario = Button(self.frameMenu_left, image=self.img_ger_usu, text=' Usuário', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_ger_usuario, self.widgets_usuario))
-        self.btn_ger_usuario.place(relx=0.08, rely=0.14, width=150, height=50)
+        self.btn_ger_usuario.place(relx=0.08, rely=0.55, width=150, height=50)
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
         self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
-        self.btn_ger_cliente.place(relx=0.08, rely=0.23, width=150, height=50)
+        self.btn_ger_cliente.place(relx=0.08, rely=0.25, width=150, height=50)
 
         self.img_ger_cat = PhotoImage(file='./imagens/categoria.png')
         self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
-        self.btn_ger_categoria.place(relx=0.08, rely=0.32, width=150, height=50)
+        self.btn_ger_categoria.place(relx=0.08, rely=0.15, width=150, height=50)
 
         self.img_ger_produto = PhotoImage(file='./imagens/produto.png')
         self.btn_ger_produto = Button(self.frameMenu_left, image=self.img_ger_produto, text=' Produto', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_produto, self.widgets_produto))
-        self.btn_ger_produto.place(relx=0.08, rely=0.41, width=150, height=50)
+        self.btn_ger_produto.place(relx=0.08, rely=0.45, width=150, height=50)
         
         self.img_ger_forn = PhotoImage(file='./imagens/fornecedor.png')
         self.btn_ger_fornecedor = Button(self.frameMenu_left, image=self.img_ger_forn, text=' Fornecedor', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecedor, self.widgets_fornecedor))
-        self.btn_ger_fornecedor.place(relx=0.08, rely=0.5, width=150, height=50)
+        self.btn_ger_fornecedor.place(relx=0.08, rely=0.35, width=150, height=50)
 
         self.img_ger_serv = PhotoImage(file='./imagens/servico.png')
         self.btn_ger_servico = Button(self.frameMenu_left, image=self.img_ger_serv, text=' Serviço', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_servico, self.widgets_servico))
-        self.btn_ger_servico.place(relx=0.08, rely=0.59, width=150, height=50)
-
-        self.img_os = PhotoImage(file='./imagens/OS.png')
-        self.btn_ger_os = Button(self.frameMenu_left, image=self.img_os, text='Ordem de Serviço', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_os, self.widgets_os))
-        self.btn_ger_os.place(relx=0.08, rely=0.68, width=150, height=50)
+        self.btn_ger_servico.place(relx=0.08, rely=0.65, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
         self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
-        self.btn_ger_venda.place(relx=0.08, rely=0.77, width=150, height=50)
+        self.btn_ger_venda.place(relx=0.08, rely=0.75, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
-        self.btn_sair.place(relx=0.08, rely=0.86, width=150, height=50)
+        self.btn_sair.place(relx=0.08, rely=0.85, width=150, height=50)
 
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
@@ -625,157 +620,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrollHor.place(relx=0.2, rely=0.9, relwidth=0.08, relheight=0.03)
         
         self.listaServico.bind("<Double-1>", self.duplo_clique_servico)
-
-    # CONFIGURAÇÕES DA TELA DE ORDEM DE SERVIÇO
-    def widgets_os(self):
-        self.validaEntradas()
-        self.img_crud()
-        self.frameCadOs = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
-        self.frameCadOs.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
-        
-        lbl_titulo_os = Label(self.frameCadOs, text='ORDEM DE SERVIÇO', font=('Roboto', 12), bg='#d9d9d9')
-        lbl_titulo_os.place(relx=0.01, rely=0.01)
-
-        self.lbl_cod_os = Label(self.frameCadOs, text='Código:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
-        self.lbl_cod_os.place(relx=0.03, rely=0.05, height=20)
-        self.et_cod_os = Entry(self.frameCadOs, font=('Roboto', 9), validate='key', validatecommand=self.impCod, bg='#FFF')
-        self.et_cod_os.place(relx=0.09, rely=0.05, width=50, height=20)
-
-        self.lbl_modelo_os = Label(self.frameCadOs, text='Modelo:', font=('Roboto', 9, 'bold'), bg= '#d9d9d9')
-        self.lbl_modelo_os.place(relx=0.03, rely=0.1, height=20)
-        self.et_modelo_os = Entry(self.frameCadOs, font=('Roboto', 9), bg='#FFF')
-        self.et_modelo_os.place(relx=0.09, rely=0.1, width=220, height=20)
-
-        self.lbl_data_exec_servico = Label(self.frameCadOs, text='Data:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
-        self.lbl_data_exec_servico.place(relx=0.03, rely=0.15, height=20)
-        self.et_data_exec_servico = Entry(self.frameCadOs, font=('Roboto', 9), bg='#FFF')
-        self.et_data_exec_servico.place(relx=0.09, rely=0.15, width=220, height=20)
-
-        self.lbl_valor_total_os = Label(self.frameCadOs, text='Total R$:', font=('Roboto', 9, 'bold'), bg= '#D9D9D9')
-        self.lbl_valor_total_os.place(relx=0.03, rely=0.20, height=20)
-        self.et_valor_total_os = Entry(self.frameCadOs, font=('Roboto', 9),  bg='#FFF')
-        self.et_valor_total_os.place(relx=0.09, rely=0.20, width=220, height=20)
-
-        self.lbl_defeito = Label(self.frameCadOs, text='Defeito:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')    
-        self.lbl_defeito.place(relx=0.38, rely=0.1, height=20)
-        self.et_defeito = Entry(self.frameCadOs, font=('Roboto', 9),bg= '#FFF')
-        self.txt_defeito = Text(self.frameCadOs, font=('Roboto', 9),bg= '#FFF')
-        self.txt_defeito.place(relx=0.44, rely=0.1, width=220, height=120)
-
-        self.lbl_situacao = Label(self.frameCadOs, text='Situação:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')    
-        self.lbl_situacao.place(relx=0.58, rely=0.04, height=20)
-        
-        #Option Menu
-        # vai armazenar a informação escolhida
-        self.et_situacao = StringVar(self.frameCadOs)
-        # outra variavel do tipo tupla, que vamos definir as opções que o usuário pode escolher
-    
-        self.listaSituacao = ('Concluído', 'Em aberto')
-        #definindo uma opção padrão que sempre vai aparecer
-        self.et_situacao.set(self.listaSituacao[1])
-
-        #Variavel do option menu
-        self.popupSituacao = OptionMenu(self.frameCadOs, self.et_situacao, *self.listaSituacao)
-        self.popupSituacao.place(relx=0.64, rely=0.04, width=100, height=22)
-        
-        #Botão da listagem de serviços
-        self.lbl_servico_os = Label(self.frameCadOs, text='Serviço:',  font=('Roboto', 9, 'bold'), bg='#D9D9D9')
-        self.lbl_servico_os.place(relx=0.38, rely=0.04, height=20)
-        
-        #Option Menu
-        # vai armazenar a informação escolhida
-        self.et_servico_os = StringVar(self.frameCadOs)
-    
-        #definindo uma opção padrão que sempre vai aparecer
-        self.et_servico_os.set('')
-        
-        self.listas = self.exibir_serv_os()
-
-        #Variavel do option menu
-        self.popupServicos = OptionMenu(self.frameCadOs, self.et_servico_os, *self.listas)
-        self.popupServicos.place(relx=0.44, rely=0.04, width=100, height=22)
-        
-        
-         #Botões do CRUD da Ordem de Serviço
-        self.btn_salvar_os = Button(self.frameCadOs, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_Os)
-        self.btn_salvar_os.place(relx=0.84, rely=0.05, relwidth=0.12, height=40)
-
-        self.btn_listar_os = Button(self.frameCadOs, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.lista_Os)
-        self.btn_listar_os.place(relx=0.84, rely=0.14, relwidth=0.12, height=40)
-
-        self.btn_alterar_os = Button(self.frameCadOs, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_alterar_os.place(relx=0.84, rely=0.23, relwidth=0.12, height=40)
-
-        self.btn_excluir_os = Button(self.frameCadOs, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_Os)
-        self.btn_excluir_os.place(relx=0.84, rely=0.32, relwidth=0.12, height=40)
-
-         #Botões para adicionar os componenetes da Ordem de Serviço
-        self.lbl_procuraprodt_os = Label(self.frameCadOs,text= 'Produto:',font=('Roboto', 9, 'bold'), bg='#d9d9d9' )
-        self.lbl_procuraprodt_os.place(relx=0.03, rely=0.25)
-
-        self.et_procurarprodt_os = Entry(self.frameCadOs)
-        self.et_procurarprodt_os.place(relx=0.09,rely=0.25, width=220, height=20)
-
-        self.btn_procurarprodt_os = Button(self.frameCadOs, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_procurarprodt_os.place(relx=0.35, rely=0.25, width=62, height=20)
-
-        self.lbl_procurarclie_os = Label(self.frameCadOs, text='Cliente:', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_procurarclie_os.place(relx=0.03, rely=0.3)
-
-        self.et_procurarclien_os = Entry(self.frameCadOs)
-        self.et_procurarclien_os.place(relx=0.09, rely=0.3, width=220, height=20)
-
-        self.btn_procurarclien_os = Button(self.frameCadOs, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_procurarclien_os.place(relx=0.35, rely=0.3, width=62, height=20)
-
-
-        self.btn_removprodt_os = Button(self.frameCadOs, text=' Remover Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_removprodt_os.place(relx=0.7, rely=0.05, relwidth=0.12, height=40)
-
-        self.btn_addprodt_os = Button(self.frameCadOs, text=' Adicionar Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addprodt_os.place(relx=0.7, rely=0.14, relwidth=0.12, height=40)
-
-        self.btn_addcliente_os = Button(self.frameCadOs, text=' Adicionar Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addcliente_os.place(relx=0.7, rely=0.23, relwidth=0.12, height=40)
-
-        self.btn_removclien_os = Button(self.frameCadOs, text='Remover Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_removclien_os.place(relx=0.7, rely=0.32, relwidth=0.12, height=40)
-        
-        
-        self.listaOS = ttk.Treeview(self.frameCadOs, height= 3, columns=('col1','col2','col3','col4','col5','col6','col7','col8'), show='headings')
-        
-        self.listaOS.heading('#0', text='')
-        self.listaOS.heading('#1', text='Ordem de Serviço')
-        self.listaOS.heading('#2', text='Cliente')
-        self.listaOS.heading('#3', text='Serviços')
-        self.listaOS.heading('#4', text='Materiais')
-        self.listaOS.heading('#5', text='Preço Unit')
-        self.listaOS.heading('#6', text='Quantidade')
-        self.listaOS.heading('#7', text='Preço')
-        self.listaOS.heading('#8', text='Situação')
-
-
-        self.listaOS.column('#0', width=1, anchor='center')
-        self.listaOS.column('#1', width=5, anchor='center')
-        self.listaOS.column('#2', width=180, anchor='center')
-        self.listaOS.column('#3', width=180, anchor='center')
-        self.listaOS.column('#4', width=180, anchor='center')
-        self.listaOS.column('#5', width=80, anchor='center')
-        self.listaOS.column('#6', width=5, anchor='center')
-        self.listaOS.column('#7', width=80, anchor='center')
-        self.listaOS.column('#8', width=80, anchor='center')
-
-
-        self.listaOS.place(relx=0.05, rely=0.45, relwidth=0.9, relheight=0.5)
-        
-        self.scrollListaOS = Scrollbar(self.frameCadOs, orient='vertical',  command=self.listaOS.yview)
-        self.scrollListaOS.config(command=self.frameCadOs.winfo_y)
-        self.listaOS.configure(yscrollcommand=self.scrollListaOS.set)
-        self.scrollListaOS.place(relx=0.955, rely=0.45, relwidth= 0.02, relheight=0.5)
-
-        self.scrollHor = Scrollbar(self.frameCadOs, orient='horizontal', command=self.listaOS.xview)
-        self.listaOS.configure(xscrollcommand=self.scrollHor.set)
-        self.scrollHor.place(relx=0.05, rely=0.955, relwidth=0.08, relheight=0.03)
 
     def widgets_venda(self):
         self.validaEntradas()
