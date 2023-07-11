@@ -7,6 +7,7 @@ from modulos.ordemservico import OS
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
 from modulos.fornecimento import Fornecimento
+from modulos.venda import Venda
 from modulos.produto import Produto
 
 class Funcionalidades:
@@ -20,6 +21,7 @@ class Funcionalidades:
     fornecimento = Fornecimento()
     produto = Produto()
     os = OS()
+    venda = Venda()
 
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
@@ -767,30 +769,75 @@ class Funcionalidades:
 
 
     #CRUD da venda
-    def adicionar_produto_venda(self, produto):
-        self.produtos.append(produto)
+    
+    #métodos para adicionar cliente e produto a venda
+    def produtosVenda(self):
+        self.prodVenda = self.produto.listarProduto()
+        
+        self.exibirProdutos = []
+        for i in range(0, len(self.prodVenda)):
+            self.exibirProdutos.append(self.prodVenda[i][1])
+        return self.exibirProdutos
+        
+    def clienteVenda(self):
+        self.cliVenda = self.cliente.listarCliente()
+        
+        self.exibirDados = []
+        for c in range(0, len(self.cliVenda)):
+            self.exibirDados.append(self.cliVenda[c][2])
+        return self.exibirDados
+        
+        
+    def adiciona_atoresvenda(self):
+        [(1, 'nome', ''), ()]
+        """
+        """
+        self.cod_prod = None
+        self.cod_cliente = None
+        self.resProduto = self.produtosVenda()
+        for v in self.prodVenda:
+            if self.resProduto in v:
+                self.cod_prod = v[0]
+
+        self.resCliente = self.comboxCliente.get()
+        self.clienteVenda()
+        for i in self.cliVenda:
+            if self.resCliente in i:
+                self.cod_cliente = i[1]
+
 
     def remover_produto_venda(self, produto):
         self.produtos.remove(produto)
-    
-    def pegar_cliente(self):
-        """
-        """
-        pass
     
     def inserir_venda(self):
         """
         """
         pass
     
-    def duplo_clique(self):
+    def duplo_cliqueCliV(self, event):
         """
         """
-        pass
+        self.listaCliente.selection()
+        for i in self.listaCliente.selection():
+            col1, col2, col3 = self.listaCliente.item(i, 'values')
+            self.et_cod_cliente.insert(END, col1)
+            self.et_nome_cliente.insert(END, col2)
+            self.et_cpf_cliente.insert(END, col3)
+
     
     def excluir_venda(self):
         """
         """
+        self.cod = self.et_cod_venda.get()
+        try:
+            if len(self.cod) == 0:
+                messagebox.showerror("Alerta", "Venda não encontrada, impossível deletar.")
+            else:
+                self.venda.excluirVenda(self.cod)
+                messagebox.showinfo('Sistema, Venda deletada com sucesso.')
+                self.lista_Venda()
+        except: 
+            messagebox.showerror('Erro', 'Não foi possível deletar a Venda.')
         pass
     
     def calcular_total(self):

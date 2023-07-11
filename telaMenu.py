@@ -800,7 +800,7 @@ class MenuTela(Funcionalidades, Validadores):
 
 
         #Botões do CRUD da venda
-        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text=' Salvar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.84, rely=0.05, relwidth=0.12, height=40)
 
         self.btn_listar_venda = Button(self.frameCadTelaVenda, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
@@ -809,12 +809,12 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_alterar_venda = Button(self.frameCadTelaVenda, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_alterar_venda.place(relx=0.84, rely=0.23, relwidth=0.12, height=40)
 
-        self.btn_excluir_venda = Button(self.frameCadTelaVenda, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_excluir_venda = Button(self.frameCadTelaVenda, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_venda)
         self.btn_excluir_venda.place(relx=0.84, rely=0.32, relwidth=0.12, height=40)
 
 
 
-         #Botões para adicionar os componenetes da venda
+        #Botões para adicionar os componenetes da venda
 
         self.lbl_procuraprodt_venda = Label(self.frameCadTelaVenda,text= 'Produto:',font=('Roboto', 9, 'bold'), bg='#d9d9d9' )
         self.lbl_procuraprodt_venda.place(relx=0.05, rely=0.1)
@@ -830,13 +830,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.btn_removprodt_venda = Button(self.frameCadTelaVenda, text=' Remover Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_removprodt_venda.place(relx=0.6, rely=0.05, relwidth=0.12, height=40)
-
-        self.btn_addprodt_venda = Button(self.frameCadTelaVenda, text=' Adicionar Produto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addprodt_venda.place(relx=0.6, rely=0.14, relwidth=0.12, height=40)
-
-        self.btn_addcliente_venda = Button(self.frameCadTelaVenda, text=' Adicionar Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addcliente_venda.place(relx=0.6, rely=0.23, relwidth=0.12, height=40)
-
+    
         self.btn_removclien_venda = Button(self.frameCadTelaVenda, text='Remover Cliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_removclien_venda.place(relx=0.6, rely=0.32, relwidth=0.12, height=40)
 
