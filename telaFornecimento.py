@@ -76,7 +76,7 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
         self.btn_salvarFornecedor = Button(self.fornecimento_frame, command=self.inserir_fornecimento,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
         self.btn_salvarFornecedor.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_listarFornecedor = Button(self.fornecimento_frame,text="Listar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
+        self.btn_listarFornecedor = Button(self.fornecimento_frame,text="Listar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
         self.btn_listarFornecedor.place(relx=0.88, rely=0.2, relwidth=0.09, height=40)
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')

@@ -10,19 +10,19 @@ class Fornecimento:
     fornecedor = Fornecedor()
     prod = Produto()
 
-    def __init__(self, cnpj=None, cod_produto=None, qtd_fornecida=None, data_fornecimento=None) -> None:
-        self.__cnpj = cnpj
+    def __init__(self, cod_fornecedor=None, cod_produto=None, qtd_fornecida=None, data_fornecimento=None) -> None:
+        self.__cod_fornecedor= cod_fornecedor
         self.__cod_produto = cod_produto
         self.__qtd_fornecida = qtd_fornecida
         self.__data_fornecimento = data_fornecimento
 
     # Getters e Setters
 
-    def get_cnpj(self) -> str:
-        return self.__cnpj 
+    def get_cod_fornecedor(self) -> int:
+        return self.__cod_fornecedor 
 
-    def set_cnpj(self, cnpj) -> None:
-        self.__cnpj = cnpj
+    def set_cnpj(self, cod_fornecedor) -> None:
+        self.__cod_fornecedor = cod_fornecedor
 
     def get_cod_produto(self) -> int:
         return self.__cod_produto
@@ -44,9 +44,16 @@ class Fornecimento:
 
     
 
-    def cadastrar_fornecimento(self, cnpj, cod_produto, qtd, data) -> None:
+    def cadastrar_fornecimento(self, cod_produto, cod_fornecedor, data, qtd) -> None:
         self.banco.conectar()
-        self.banco.cursor.execute(f"""INSERT INTO fornecimento(cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)
-                                  VALUES ('{cod_produto}'), ('{cnpj}'), ('{qtd}'), ('{data}') """)
+        self.banco.cursor.execute(f"""INSERT INTO fornecimento (cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)
+                                  VALUES ('{cod_produto}', '{cod_fornecedor}', '{data}', '{qtd}')""")
         self.banco.conexao.commit()
         self.banco.desconectar()
+    
+    def listar_fornecimento(self) -> list:
+        self.banco.conectar()
+        forneci = list(self.banco.cursor.execute(f""" SELECT * FROM fornecimento """).fetchall())
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        return forneci

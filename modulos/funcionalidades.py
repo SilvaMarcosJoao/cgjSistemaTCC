@@ -647,12 +647,13 @@ class Funcionalidades:
         return self.exibirDados
 
     def inserir_fornecimento(self):
-        [(1, 'nome', ''), ()]
         """
         """
         self.cod_prod = None
         self.cnpj_forn = None
-        self.resProduto = self.fornecimentoProduto()
+        self.resProduto = self.comboxProduto.get()
+        self.fornecimentoProduto()
+
         for v in self.dadosProd:
             if self.resProduto in v:
                 self.cod_prod = v[0]
@@ -661,13 +662,42 @@ class Funcionalidades:
         self.fornecimentoFornecedor()
         for i in self.dadosForn:
             if self.resFornecedor in i:
-                self.cnpj_forn = i[1]
+                self.cod_fornece = i[0]
         
-        self.qtd_fornecida = self.et_qtd_fornecida.get()
+        self.qtdfornecida = self.et_qtd_fornecida.get()
         self.data = self.et_data_fornecimento.get()
         
-        self.fornecimento.cadastrar_fornecimento (self.cod_prod, self.cnpj_forn, self.data, self.qtd_fornecida)
+        self.fornecimento.cadastrar_fornecimento (self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
+        self.limpa_fornecimento()
 
+    def exibir_fornecimento(self):
+        """
+        """
+        self.substituiCod_fornecedor = None
+        self.resbancoCod_fornecedor = []
+        self.listaFornecimento.delete(*self.listaFornecimento.get_children())
+        self.resultadoForn = self.fornecimento.listar_fornecimento()
+        self.fornecimentoFornecedor()
+        for v in range(0, len(self.resultadoForn)):
+            self.resbancoCod_fornecedor.append(self.resultadoForn[v][1])
+        for val in self.dadosForn:
+            if self.resbancoCod_fornecedor in val:
+                self.substituiCod_fornecedor = val[2]
+        for ind in range(0, len(self.resultadoForn)):
+            self.resultadoForn[ind][1] = self.substituiCod_fornecedor
+        for r in self.resultadoForn:
+            self.listaFornecimento.insert('', END, values=r)
+
+
+
+        
+        
+    def limpa_fornecimento(self):
+        self.comboxProduto.delete(0, END)
+        self.comboxFornecedor.delete(0, END)
+        self.et_qtd_fornecida.delete(0, END)
+        self.et_data_fornecimento.delete(0, END)
+  
     # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
     def inserir_servico(self):
         """
