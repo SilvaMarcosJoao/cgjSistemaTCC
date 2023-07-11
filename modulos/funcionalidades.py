@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 from modulos.categoriaproduto import CategoriaProduto
 from modulos.cliente import Cliente
-from modulos.servico import Servico
-from modulos.ordemservico import OS
 from modulos.usuario import Usuario
 from modulos.fornecedor import Fornecedor
 from modulos.fornecimento import Fornecimento
@@ -15,12 +13,10 @@ class Funcionalidades:
     # OBJETOS DAS CLASSES 
     categoria = CategoriaProduto()
     cliente = Cliente()
-    servico = Servico()
     usuario = Usuario()
     fornecedor = Fornecedor()
     fornecimento = Fornecimento()
     produto = Produto()
-    os = OS()
     venda = Venda()
 
     
@@ -686,106 +682,9 @@ class Funcionalidades:
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
   
-    # FUNÇÕES DOS BOTÕES DA TELA DE SERVIÇO
-    def inserir_servico(self):
-        """
-        """
-        self.cod_servico = self.et_cod_servico.get().strip()
-        self.desc_servico = self.et_desc_servico.get().strip()
-        self.preco_servico = self.et_preco_servico.get().strip()
-        self.tipo_servico = self.et_tipo_servico.get().strip()
-        try:
-            if self.desc_servico == '' or self.preco_servico == '' or self.tipo_servico == '':
-                messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
-            elif len(self.cod_servico) > 5:
-                messagebox.showwarning('Alerta', 'Insira um código válido!')
-            elif len(self.desc_servico) < 4 or len(self.desc_servico) > 40:
-                messagebox.showwarning('Alerta', 'Preencha uma descrição válida')
-            elif len(self.tipo_servico) < 4 or len(self.tipo_servico) > 25:
-                messagebox.showwarning('Alerta', 'Prencha um tipo válido')
-            else:
-                self.servico.cadastrarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
-                self.limpa_servico()
-                messagebox.showinfo('Info', 'Serviço cadastrado com sucesso!')
-        except:
-            messagebox.showerror('Erro', 'Não foi possível concluir o cadastro de serviço')
-        
-
-    def exibir_servico(self):
-        """
-        """
-        self.listaServico.delete(*self.listaServico.get_children())
-        self.exibir_serv = self.servico.listarServicos()
-        if len(self.exibir_serv) == 0:
-            messagebox.showinfo('Informação', 'Não há servico cadastrado')
-        else:
-            for s in self.exibir_serv:
-                self.et_cod_servico.config(state='normal')
-                self.listaServico.insert('',END, values=s)
-
-    def editar_servico(self):
-        """
-        """
-        self.cod_servico = self.et_cod_servico.get().strip()
-        self.desc_servico = self.et_desc_servico.get().strip()
-        self.preco_servico = self.et_preco_servico.get().strip()
-        self.tipo_servico = self.et_tipo_servico.get().strip()
-        try:
-            if self.cod_servico == '' or self.desc_servico == '' or self.preco_servico == '' or self.tipo_servico == '':
-                messagebox.showwarning('Alerta', 'Selecione um serviço, para alterá-lo')
-            elif len(self.cod_servico) > 5:
-                messagebox.showwarning('Alerta', 'Insira um código válido!')
-            elif len(self.desc_servico) < 4 or len(self.desc_servico) > 40:
-                messagebox.showwarning('Alerta', 'Preencha uma descrição válida')
-            elif len(self.tipo_servico) < 4 or len(self.tipo_servico) > 25:
-                messagebox.showwarning('Alerta', 'Prencha um tipo válido')
-            else:
-                self.servico.alterarServico(self.cod_servico, self.desc_servico, self.preco_servico, self.tipo_servico)
-                messagebox.showinfo('Info', 'Serviço alterado com sucesso!')
-                self.limpa_servico()
-                self.exibir_servico()
-        except Exception as erros:
-            messagebox.showerror('Erro', 'Erro ao tentar salvar as alterações')
-            print(erros)
-
-    def deletar_servico(self):
-        """
-        """
-        self.cod_servico = self.et_cod_servico.get().strip()
-        try:
-            if len(self.cod_servico) == 0:
-                messagebox.showwarning('Alerta', 'Não foi possível deletar, serviço não encontrado')
-            else:
-                messagebox.showinfo('Info', 'Serviço deletado com sucesso!')
-                self.servico.excluirServico(self.cod_servico)
-                self.limpa_servico()
-                self.exibir_servico()
-        except:
-            messagebox.showerror('Erro', 'Erro ao tentar deletar o serviço')
-
-    def duplo_clique_servico(self, event):
-        """
-        """
-        self.limpa_servico()
-        self.listaServico.selection()
-        for i in self.listaServico.selection():
-            col1, col2, col3, col4 = self.listaServico.item(i, 'values')
-            self.et_cod_servico.insert(END, col1)
-            self.et_desc_servico.insert(END, col2) 
-            self.et_preco_servico.insert(END, col3)
-            self.et_tipo_servico.insert(END, col4)
-    
-    def limpa_servico(self):
-        """
-        """
-        self.et_cod_servico.delete(0, END)
-        self.et_desc_servico.delete(0, END)
-        self.et_preco_servico.delete(0, END)
-        self.et_tipo_servico.delete(0, END)
 
 
     #CRUD da venda
-    
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
         self.prodVenda = self.produto.listarProduto()
@@ -861,87 +760,3 @@ class Funcionalidades:
         """
         pass
     
-#CRUD da Ordem de Serviço
-    def inserir_Os(self):
-        
-        self.cod_os = self.et_cod_os.get()
-        self.modelo = self.et_modelo_os.get()
-        self.data = self.et_data_exec_servico.get()
-        self.valorttl = self.et_valor_total_os.get()
-        self.defeito = self.et_defeito.get()
-        self.situacao = self.et_situacao.get()
-        self.os.registrarOS(self.cod_os, self.modelo, 
-                            self.data, self.valorttl,
-                            self.defeito, self.situacao)
-
-    def excluir_Os(self):
-        """
-        """
-        self.cod = self.et_cod_os.get()
-        try:
-            if len(self.cod) == 0:
-                messagebox.showerror("Alerta", "OS não encontrada, impossível deletar.")
-            else:
-                self.os.deletarOS(self.cod)
-                messagebox.showinfo('Sistema, OS deletada com sucesso.')
-                self.limpa_Os()
-                self.lista_Os()
-        except: 
-            messagebox.showerror('Erro', 'Não foi possível deletar a OS.')
-            
-    def lista_Os(self):
-        """
-        """
-        self.listaOS.delete(*self.listaOS.get_children())
-        self.listarOs = self.os.listarOS()
-        if len(self.listarOs) == 0:
-            messagebox.showinfo('Informação', 'Não há Ordens de Serviço cadastradas.')
-        else:
-            for s in self.listarOs:
-                self.et_cod_os.config(state='normal')
-                self.listaOS.insert('',END, values=s)    
-
-    def limpa_Os(self):
-        """
-        """
-        self.et_cod_os.delete(0, END)
-        self.et_modelo_os.delete(0, END)
-        self.et_data_exec_servico.delete(0,END)
-        self.et_valor_total_os.delete(0, END)
-        self.et_defeito.delete(0, END)
-        self.et_situacao.delete(0, END)
-    
-    def duplo_cliqueOs(self, event):
-        """
-        """
-        self.limpa_Os()
-        self.listaOS.selection()
-        for i in self.listaOS.selection():
-            col1,col2,col3,col4,col5,col6= self.listaOs.item(i, 'values')
-            self.et_cod_os.delete(END, col1)
-            self.et_modelo_os.delete(END, col2)
-            self.et_data_exec_servico.delete(END, col3)
-            self.et_valor_total_os.delete(END, col4)
-            self.et_defeito.delete(END, col5)
-            self.et_situacao.delete(END, col6)
-                  
-    def calcular_totalOS(self):
-        """
-        """
-        pass
-    
-    def pegar_material(self):
-        """
-        """
-        pass
-    
-    def pegar_clienteOs(self):
-        """
-        """
-        pass
-    
-    def exibir_serv_os(self):
-        """
-        """
-        self.ser = self.servico.listarServicos()
-        return self.ser
