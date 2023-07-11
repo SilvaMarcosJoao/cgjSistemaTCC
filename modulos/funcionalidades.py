@@ -246,7 +246,7 @@ class Funcionalidades:
         self.et_preco_comp_produto.delete(0, END)
         self.et_preco_ven_produto.delete(0, END)
         self.et_qtd_produto.delete(0, END)
-        self.et
+        
 
     def listaper_produto(self):
         """
@@ -669,31 +669,17 @@ class Funcionalidades:
         self.qtdfornecida = self.et_qtd_fornecida.get()
         self.data = self.et_data_fornecimento.get()
         
-        self.fornecimento.cadastrar_fornecimento (self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
+        self.fornecimento.cadastrar_fornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
         self.limpa_fornecimento()
 
     def exibir_fornecimento(self):
         """
         """
-        self.substituiCod_fornecedor = None
-        self.resbancoCod_fornecedor = []
         self.listaFornecimento.delete(*self.listaFornecimento.get_children())
         self.resultadoForn = self.fornecimento.listar_fornecimento()
-        self.fornecimentoFornecedor()
-        for v in range(0, len(self.resultadoForn)):
-            self.resbancoCod_fornecedor.append(self.resultadoForn[v][1])
-        for val in self.dadosForn:
-            if self.resbancoCod_fornecedor in val:
-                self.substituiCod_fornecedor = val[2]
-        for ind in range(0, len(self.resultadoForn)):
-            self.resultadoForn[ind][1] = self.substituiCod_fornecedor
         for r in self.resultadoForn:
             self.listaFornecimento.insert('', END, values=r)
 
-
-
-        
-        
     def limpa_fornecimento(self):
         self.comboxProduto.delete(0, END)
         self.comboxFornecedor.delete(0, END)

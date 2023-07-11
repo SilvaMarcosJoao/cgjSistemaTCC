@@ -45,28 +45,28 @@ class TelaCliente(Funcionalidades, Cliente):
         self.btn_add_cliente = Button(self.cliente_frame,   text=' Inserir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command=self.clienteVenda)
         self.btn_add_cliente.place(relx=0.87, rely=0.15, width=62, height=20)
         
-        self.listaCliente = ttk.Treeview(self.cliente_frame, height=3 ,columns=('Col1','Col2', 'Col3'), show = 'headings')
+        self.listaClienteTela = ttk.Treeview(self.cliente_frame, height=3 ,columns=('Col1','Col2', 'Col3'), show = 'headings')
         
-        self.listaCliente.heading("#0", text='')
-        self.listaCliente.heading("#1", text='Código')
-        self.listaCliente.heading('#2', text='CPF')
-        self.listaCliente.heading('#3', text='Nome')
+        self.listaClienteTela.heading("#0", text='')
+        self.listaClienteTela.heading("#1", text='Código')
+        self.listaClienteTela.heading('#2', text='CPF')
+        self.listaClienteTela.heading('#3', text='Nome')
 
-        self.listaCliente.column('#0', width=1, anchor='center')
-        self.listaCliente.column('#1', width=60, anchor='center')
-        self.listaCliente.column('#2', width=120, anchor='center')
-        self.listaCliente.column('#3', width=240, anchor='center')
+        self.listaClienteTela.column('#0', width=1, anchor='center')
+        self.listaClienteTela.column('#1', width=60, anchor='center')
+        self.listaClienteTela.column('#2', width=120, anchor='center')
+        self.listaClienteTela.column('#3', width=240, anchor='center')
 
-        self.listaCliente.place(relx=0.02, rely=0.47, relwidth=0.95, relheight=0.49)
+        self.listaClienteTela.place(relx=0.02, rely=0.47, relwidth=0.95, relheight=0.49)
         
         self.scrollLista = Scrollbar(self.cliente_frame, orient='vertical', command=self.listaCliente.yview)
-        self.listaCliente.configure(yscrollcommand=self.scrollLista.set)
+        self.listaClienteTela.configure(yscrollcommand=self.scrollLista.set)
         self.scrollLista.place(relx=0.975, rely=0.47, relwidth= 0.02, relheight=0.48)
 
         self.scrollHor = Scrollbar(self.cliente_frame, orient='horizontal', command=self.listaCliente.xview)
-        self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
+        self.listaClienteTela.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         
-        self.listaCliente.bind("<Double-1>", self.duplo_cliqueCliV)
+        self.listaClienteTela.bind("<Double-1>", self.duplo_cliqueCliV)
 
         

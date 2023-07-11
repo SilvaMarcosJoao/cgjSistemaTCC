@@ -53,7 +53,10 @@ class Fornecimento:
     
     def listar_fornecimento(self) -> list:
         self.banco.conectar()
-        forneci = list(self.banco.cursor.execute(f""" SELECT * FROM fornecimento """).fetchall())
+        forneci = list(self.banco.cursor.execute(f""" SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida 
+                                                 FROM produto, fornecedor, fornecimento
+                                                 WHERE fornecimento.cod_produto = produto.cod_produto and 
+                                                 fornecimento.cod_fornecedor = fornecedor.cod_fornecedor""").fetchall())
         self.banco.conexao.commit()
         self.banco.desconectar()
         return forneci

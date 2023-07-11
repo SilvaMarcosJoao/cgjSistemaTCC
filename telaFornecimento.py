@@ -83,8 +83,8 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
         self.listaFornecimento.heading("#0", text='')
         self.listaFornecimento.heading("#1", text='Produto')
         self.listaFornecimento.heading('#2', text='Fornecedor')
-        self.listaFornecimento.heading('#3', text='Qtd Fornecida')
-        self.listaFornecimento.heading('#4', text='Data Fornecimento')
+        self.listaFornecimento.heading('#3', text='Data Fornecimento')
+        self.listaFornecimento.heading('#4', text='Qtd Fornecida')
 
         self.listaFornecimento.column('#0', width=1, anchor='center')
         self.listaFornecimento.column('#1', width=120, anchor='center')

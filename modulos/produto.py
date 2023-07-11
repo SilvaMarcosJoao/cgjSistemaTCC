@@ -85,7 +85,7 @@ class Produto:
     #mostra todos os produtos
     def listarProduto(self) -> list:
         banco.conectar()
-        produtos=banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
+        produtos=banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
                                       preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
                                       FROM categoria_produto, produto 
                                       WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()
@@ -96,8 +96,9 @@ class Produto:
     def consultarProduto(self, desc_produto:str) -> list: 
         banco.conectar()
         produto = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
-                          preco_compra_produto, preco_venda_produto, qtd_estoque , cod_categoria_produto FROM produto
-                            WHERE desc_produto like '{desc_produto[0]}%'""").fetchall()
+                          preco_compra_produto, preco_venda_produto, qtd_estoque , categoria_produto.desc_categoria_produto 
+                          FROM categoria_produto, produto
+                            WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto and desc_produto like '{desc_produto[0]}%'""").fetchall()
         banco.desconectar()  
         return produto
     '''
