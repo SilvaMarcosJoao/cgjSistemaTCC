@@ -42,6 +42,9 @@ class TelaCliente(Funcionalidades, Cliente):
         self.btn_lista_cliente = Button(self.cliente_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command=self.listaper_cliente)
         self.btn_lista_cliente.place(relx=0.87, rely=0.07, width=62, height=20)
         
+        self.btn_add_cliente = Button(self.cliente_frame,   text=' Inserir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command=self.clienteVenda)
+        self.btn_add_cliente.place(relx=0.87, rely=0.15, width=62, height=20)
+        
         self.listaCliente = ttk.Treeview(self.cliente_frame, height=3 ,columns=('Col1','Col2', 'Col3'), show = 'headings')
         
         self.listaCliente.heading("#0", text='')
@@ -64,5 +67,6 @@ class TelaCliente(Funcionalidades, Cliente):
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         
+        self.listaCliente.bind("<Double-1>", self.duplo_cliqueCliV)
 
         

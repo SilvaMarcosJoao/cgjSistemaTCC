@@ -44,6 +44,9 @@ class TelaProduto(Funcionalidades, Produto):
         self.btn_lista_produto = Button(self.produto_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listaper_produto)
         self.btn_lista_produto.place(relx=0.87, rely=0.07, width=62, height=20)
         
+        self.btn_add_produto = Button(self.produto_frame,   text=' Adicionar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.produtosVenda)
+        self.btn_add_produto.place(relx=0.87, rely=0.15, width=62, height=20)
+        
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'col4', 'col5'), show='headings')
         
         self.listaProd.heading("#0", text='')
