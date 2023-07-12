@@ -556,10 +556,30 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_venda = Label(self.frameCadTelaVenda, text='VENDA', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
-        self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_venda.place(relx=0.05, rely=0.05, height=20)
-        self.et_cod_venda = Entry(self.frameCadTelaVenda, validate='key', validatecommand=self.tamCod)
-        self.et_cod_venda.place(relx=0.11, rely=0.05, width=55, height=20)
+        self.lbl_codprodt_venda = Label(self.frameCadTelaVenda, text="Código Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_codprodt_venda.place(relx=0.025, rely=0.1, height=20)
+        self.et_codprodt_venda = Entry(self.frameCadTelaVenda)
+        self.et_codprodt_venda.place(relx=0.125, rely=0.1, width=55, height=20)
+
+        self.lbl_prodt_venda = Label(self.frameCadTelaVenda, text="Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_prodt_venda.place(relx=0.2, rely=0.1) 
+        self.comboxProdt_venda = ttk.Combobox(self.frameCadTelaVenda, values=[])
+        self.comboxProdt_venda.place(relx=0.255, rely=0.1, width=150, height=20)
+
+        self.lbl_codclien_venda = Label(self.frameCadTelaVenda, text="Código Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_codclien_venda.place(relx=0.025, rely=0.15, height=20)
+        self.et_codclien_venda = Entry(self.frameCadTelaVenda)
+        self.et_codclien_venda.place(relx=0.125, rely=0.15, width=55, height=20)
+
+        self.lbl_nome_clien_venda = Label(self.frameCadTelaVenda, text="Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_nome_clien_venda.place(relx=0.2, rely=0.15) 
+        self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=[])
+        self.comboxClien_venda.place(relx=0.255, rely=0.15, width=150, height=20)
+
+        self.lbl_qtd_venda = Label(self.frameCadTelaVenda, text="Quantidade: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_qtd_venda.place(relx=0.44, rely=0.1) 
+        self.et_qtd_venda = Entry(self.frameCadTelaVenda,)
+        self.et_qtd_venda.place(relx=0.515, rely=0.1, width=84, height=20) 
 
         self.lbl_data_venda = Label(self.frameCadTelaVenda, text='Data : ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_data_venda.place(relx=0.44, rely=0.15, height=20)
@@ -598,7 +618,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_procurarprodt_venda.place(relx=0.11, rely=0.1, width=62, height=20)
 
         
-
         self.btn_procurarclien_venda = Button(self.frameCadTelaVenda, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command= TelaCliente)
         self.btn_procurarclien_venda.place(relx=0.11, rely=0.15, width=62, height=20)'''
         

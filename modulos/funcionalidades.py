@@ -25,17 +25,19 @@ class Funcionalidades:
         """
         """
         self.senha = self.et_nova_senha.get().strip()
-        self.conf = self.et_confir_senha.get().strip()
-        if self.senha == '' or self.conf == '':
+        self.usuario.set_senha(self.et_confir_senha.get().strip())
+        if self.senha == '' or self.usuario.get_senha() == '':
             messagebox.showwarning('Alerta', 'Preencha os campos')
-        elif len(self.senha) != 8 or len(self.conf) != 8:
+        elif len(self.senha) != 8 or len(self.usuario.get_senha()) != 8:
             messagebox.showwarning('Alerta', 'A senha deve conter 8 caracteres')
-        elif self.senha != self.conf:
+        elif self.senha != self.usuario.get_senha():
             messagebox.showwarning('Alerta', 'Senhas diferentes')     
         else:
-            self.usuario.alterar_senha(self.senha)
+            self.usuario.alterar_senha(self.usuario.get_senha())
             messagebox.showinfo('Sistema', 'Senha alterada com sucesso!')
-            self.limpa_usuario()     
+            self.limpa_usuario()   
+
+            print(self.usuario.get_senha())  
     
     def limpa_usuario(self):
         """
