@@ -60,3 +60,16 @@ class Fornecimento:
         self.banco.conexao.commit()
         self.banco.desconectar()
         return forneci
+    
+    def alterar_fornecimento(self, cod_produto, cod_fornecedor):
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" UPDATE fornecimento SET qtd_fornecida, data_fornecimento
+                                  WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def deletar_fornecimento(self, cod_produto, cod_fornecedor):
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" DELETE fornecimento WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()

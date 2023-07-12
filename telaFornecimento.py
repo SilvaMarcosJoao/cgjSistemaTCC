@@ -2,10 +2,9 @@ from tkinter import *
 from tkcalendar import Calendar
 from tkinter import ttk
 from modulos.funcionalidades import Funcionalidades
-from modulos.fornecedor import Fornecedor
 
-class FornecimentoTela(Funcionalidades, Fornecedor):
-    fornece = Fornecedor()
+
+class FornecimentoTela(Funcionalidades):
     def __init__(self) -> None:
         self.appFornecimento  = Toplevel()
         self.config_tela_fornecimento()
@@ -62,7 +61,6 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
 
         self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.qtd_fornecida.place(relx=0.02, rely=0.25, height=20)
-
         self.et_qtd_fornecida = Entry(self.fornecimento_frame)
         self.et_qtd_fornecida.place(relx=0.25, rely=0.25, width=120, height=20)
 
@@ -73,11 +71,14 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
         self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
         self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
 
-        self.btn_salvarFornecedor = Button(self.fornecimento_frame, command=self.inserir_fornecimento,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_salvarFornecedor.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+        self.btn_salvarFornecedor = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
+        self.btn_salvarFornecedor.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_listarFornecedor = Button(self.fornecimento_frame,text="Listar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
-        self.btn_listarFornecedor.place(relx=0.88, rely=0.2, relwidth=0.09, height=40)
+        self.btn_listarFornecedor = Button(self.fornecimento_frame, text="Listar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
+        self.btn_listarFornecedor.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+
+        self.btn_alterarFornecedor = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
+        self.btn_alterarFornecedor.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
         self.listaFornecimento.heading("#0", text='')
@@ -97,3 +98,4 @@ class FornecimentoTela(Funcionalidades, Fornecedor):
         self.scrollListaFornecimento = Scrollbar(self.fornecimento_frame, orient='vertical', command=self.listaFornecimento.yview)
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
+    

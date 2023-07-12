@@ -207,7 +207,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_num_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF', validate='key', validatecommand=self.valInt)
         self.et_num_cliente.place(relx=0.405, rely=0.15, width=60, height=20)
 
-        self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_cep_cliente = Label(self.frameCadTelaCliente, text='CEP: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cep_cliente.place(relx=0.49, rely=0.15, height=20)
         self.et_cep_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
         self.et_cep_cliente.place(relx=0.525, rely=0.15, width=100, height=20)
@@ -377,7 +377,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.435, rely=0.15, width=126, height=22)
         
-        self.btn_fornecimento = Button(self.produto_frame, text='Selecionar Fornecedor', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
+        self.btn_fornecimento = Button(self.produto_frame, text='Associar Fornecedor ao Produto', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=FornecimentoTela)
         self.btn_fornecimento.place(relx=0.35, rely=0.2, width=206, height=23)
 
         self.lbl_consulta_produto = Label(self.produto_frame, text='Buscar Produto: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -479,7 +479,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_num_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9), validate='key', validatecommand=self.valInt)
         self.et_num_fornecedor.place(relx=0.405, rely=0.1, width=60, height=20)
 
-        self.lbl_cep_fornecedor = Label(self.frameCadTelaFornecedor, text='Cep: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_cep_fornecedor = Label(self.frameCadTelaFornecedor, text='CEP: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cep_fornecedor.place(relx=0.49, rely=0.1, height=20)
         self.et_cep_fornecedor = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
         self.et_cep_fornecedor.place(relx=0.522, rely=0.1, width=107, height=20)
@@ -497,7 +497,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_consultar = Button(self.frameCadTelaFornecedor, command=self.pesquisar_fornecedor,text="Consultar",font=('Roboto', 10,'bold'),  bg="#f3f3f3")
         self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09, height=40)
 
-        self.lbl_pes_forn = Label(self.frameCadTelaFornecedor, text='Buscar Fornecedor: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_pes_forn = Label(self.frameCadTelaFornecedor, text='Buscar Nome: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_pes_forn.place(relx=0.73, rely=0.065)
         self.et_consultar_forne = Entry(self.frameCadTelaFornecedor, font=('Roboto', 9))
         self.et_consultar_forne.place(relx=0.73, rely=0.105, width=130, height=20)

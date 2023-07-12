@@ -125,18 +125,17 @@ class Funcionalidades:
         self.mod_produto = self.et_mode_produto.get().strip()
         self.preco_compra = self.et_preco_comp_produto.get().strip()
         self.preco_venda = self.et_preco_ven_produto.get().strip()
-        self.qtd_produto = self.et_qtd_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
         self.cod_cat = [self.cat]
         try:
-            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_cat == '':
+            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_cat == '':
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.qtd_produto, self.cod_cat[0][1])
+                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.cod_cat[0][1])
                 self.limpa_produto()
                 messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')  
         except Exception as erro:
@@ -594,8 +593,8 @@ class Funcionalidades:
                 self.limpa_fornecedor()
                 self.lista_fornecedor()
         except:
-            messagebox.showerror('Erro', 'Não foi possível deletar o fornecedor.'
-                                 )
+            messagebox.showerror('Erro', 'Não foi possível deletar o fornecedor.')
+
     def duplo_clique_for(self, event):
         """
         """
@@ -666,6 +665,7 @@ class Funcionalidades:
         self.data = self.et_data_fornecimento.get()
         
         self.fornecimento.cadastrar_fornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
+        self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
         self.limpa_fornecimento()
 
     def exibir_fornecimento(self):
@@ -674,16 +674,31 @@ class Funcionalidades:
         self.listaFornecimento.delete(*self.listaFornecimento.get_children())
         self.resultadoForn = self.fornecimento.listar_fornecimento()
         for r in self.resultadoForn:
-            self.listaFornecimento.insert('', END, values=r)
+            self.listaFornecimento.insert('', END,values=r)
+
+
+
+    def editar_fornecimento(self):
+        pass
+    
+    def duplo_clique_fornecimento(self, evento):
+        self.limpa_fornecimento()
+        self.listaFornecimento.selection()
+        for c in self.listaFornecimento.selection():
+            col1, col2, col3, col4 = self.listaFornecimento.item(c, 'value')
+            self.comboxProduto.insert(END, col1)
+            self.comboxFornecedor.insert(END, col2)
+            self.et_qtd_fornecida.insert(END, col3)
+            self.et_data_fornecimento.insert(END, col4)
+
+    
 
     def limpa_fornecimento(self):
         self.comboxProduto.delete(0, END)
         self.comboxFornecedor.delete(0, END)
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
-  
-
-
+    
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):

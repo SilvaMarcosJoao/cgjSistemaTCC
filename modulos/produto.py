@@ -59,24 +59,23 @@ class Produto:
 
 
     #cadastra os produtos 
-    def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, qtd:int, cod_categoria:int) -> None:
+    def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, cod_categoria:int) -> None:
         banco.conectar()
         banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
-                          preco_compra_produto, preco_venda_produto, qtd_estoque, cod_categoria_produto) 
+                          preco_compra_produto, preco_venda_produto, cod_categoria_produto) 
                            VALUES ('{desc_produto}','{mod_produto}',
-                           '{preco_compra}','{preco_venda}','{qtd}','{cod_categoria}') """)
+                           '{preco_compra}','{preco_venda}','{cod_categoria}') """)
         banco.conexao.commit()
         banco.desconectar()
     
     #Atualizar produto    
-    def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float, qtd:int) -> None:
+    def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float) -> None:
         banco.conectar()
         banco.cursor.execute(f"""UPDATE produto
                                 SET desc_produto =('{desc_produto}'),
                                 modelo_produto =('{modelo_produto}'),
                                 preco_compra_produto =('{preco_compra_produto}'),
-                                preco_venda_produto =('{preco_venda_produto}'),
-                                qtd_estoque =('{qtd}') 
+                                preco_venda_produto =('{preco_venda_produto}')
                                 WHERE cod_produto =('{cod_produto}')""")
         banco.conexao.commit()
         banco.desconectar()
@@ -96,17 +95,11 @@ class Produto:
     def consultarProduto(self, desc_produto:str) -> list: 
         banco.conectar()
         produto = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
-                          preco_compra_produto, preco_venda_produto, qtd_estoque , categoria_produto.desc_categoria_produto 
+                          preco_compra_produto, preco_venda_produto, categoria_produto.desc_categoria_produto 
                           FROM categoria_produto, produto
                             WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto and desc_produto like '{desc_produto[0]}%'""").fetchall()
         banco.desconectar()  
         return produto
-    '''
-    def consultaProdutoFornecimento(self) -> list:
-        banco.conectar()
-        listaPdt = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, preco_venda from produto """).fetchall()
-        banco.desconectar()
-        return listaPdt'''
 
     #apaga produtos
     def deletarProduto(self, cod_produto:int) -> None:
@@ -116,6 +109,12 @@ class Produto:
         banco.conexao.commit()
         banco.desconectar()
 
+    def atualizaEstoqueProd(self, cod_produto, qtd):
+        banco.conectar()
+        banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
+                    WHERE cod_produto = {cod_produto} """)
+        banco.conexao.commit()
+        banco.desconectar()
 
 # Métodos personalizados para telaCliente
 
