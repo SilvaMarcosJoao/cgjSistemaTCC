@@ -559,7 +559,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_venda.place(relx=0.05, rely=0.05, height=20)
-        self.et_cod_venda = Entry(self.frameCadTelaVenda, validate='key', validatecommand=self.tamCod)
+        self.et_cod_venda = Entry(self.frameCadTelaVenda, validate='key', validatecommand=self.tamCod, state='disabled')
         self.et_cod_venda.place(relx=0.11, rely=0.05, width=55, height=20)
 
         self.lbl_data_venda = Label(self.frameCadTelaVenda, text='Data : ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')

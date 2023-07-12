@@ -246,19 +246,19 @@ class Funcionalidades:
     def listaper_produto(self):
         """
         """
-        self.listaProd.delete(*self.listaProd.get_children())
+        self.listaProdTela.delete(*self.listaProdTela.get_children())
         self.listaPr = self.produto.listaperProduto()
         if len(self.listaPr) == 0:
             messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
         else:
             for i in self.listaPr:
-                self.listaProd.insert('',END, values=i) 
+                self.listaProdTela.insert('',END, values=i) 
 
 
     def consuper_produto(self):
         """
         """
-        self.listaProd.delete(*self.listaProd.get_children())
+        self.listaProdTela.delete(*self.listaProdTela.get_children())
         self.prod = self.et_consulta_produto.get()
         if len(self.prod) == 0:
             messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
@@ -268,7 +268,7 @@ class Funcionalidades:
                 messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
             else:
                 for v in self.resProd:
-                    self.listaProd.insert('',END, values=v)
+                    self.listaProdtela.insert('',END, values=v)
                 
 
     # FUNÇÕES DOS BOTÕES DA TELA DE CLIENTE
@@ -437,18 +437,18 @@ class Funcionalidades:
     def listaper_cliente(self):
         """
         """
-        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.listaClienteTela.delete(*self.listaClienteTela.get_children())
         self.listaP = self.cliente.listaperCliente()
         if len(self.listaP) == 0:
             messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
         else:
             for n in self.listaP:
-                self.listaCliente.insert('',END, values=n)
+                self.listaClienteTela.insert('',END, values=n)
 
     def buscaper_cliente(self):
         """
         """
-        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.listaClienteTela.delete(*self.listaClienteTela.get_children())
         self.cli = self.et_consultar_cliente.get()
         if len(self.cli) == 0:
             messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
@@ -458,7 +458,7 @@ class Funcionalidades:
                 messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
             else:
                 for v in self.resCli:
-                    self.listaCliente.insert('',END, values=v)
+                    self.listaClienteTela.insert('',END, values=v)
         
 
 
@@ -747,14 +747,27 @@ class Funcionalidades:
     def duplo_cliqueCliV(self, event):
         """
         """
-        self.listaCliente.selection()
-        for i in self.listaCliente.selection():
-            col1, col2, col3 = self.listaCliente.item(i, 'values')
+        self.listaClienteTela.selection()
+        for i in self.listaClienteTela.selection():
+            col1, col2, col3 = self.listaClienteTela.item(i, 'values')
             self.et_cod_cliente.insert(END, col1)
             self.et_nome_cliente.insert(END, col2)
             self.et_cpf_cliente.insert(END, col3)
 
-    
+    def duplo_cliqueProdV(self, event):
+        """
+        """
+        self.listaProdTela.selection()
+        for i in self.listaProdTela.selection():
+            col1,col2,col3, col4, col5 = self.listaProdTela.item(i, 'values')
+            self.et_cod_prod.insert(None, col1)
+            self.et_desc_prod.insert(END, col2)
+            self.et_modelo_prod.insert(END, col3)
+            self.et_preco_ven_produto.insert(END, col4)
+            self.et_qtd_produto.delete(END, col5)
+            
+            
+            
     def excluir_venda(self):
         """
         """

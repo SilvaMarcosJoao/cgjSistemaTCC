@@ -59,14 +59,12 @@ class TelaCliente(Funcionalidades, Cliente):
 
         self.listaClienteTela.place(relx=0.02, rely=0.47, relwidth=0.95, relheight=0.49)
         
-        self.scrollLista = Scrollbar(self.cliente_frame, orient='vertical', command=self.listaCliente.yview)
+        self.scrollLista = Scrollbar(self.cliente_frame, orient='vertical', command=self.listaClienteTela.yview)
         self.listaClienteTela.configure(yscrollcommand=self.scrollLista.set)
         self.scrollLista.place(relx=0.975, rely=0.47, relwidth= 0.02, relheight=0.48)
 
-        self.scrollHor = Scrollbar(self.cliente_frame, orient='horizontal', command=self.listaCliente.xview)
+        self.scrollHor = Scrollbar(self.cliente_frame, orient='horizontal', command=self.listaClienteTela.xview)
         self.listaClienteTela.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         
         self.listaClienteTela.bind("<Double-1>", self.duplo_cliqueCliV)
-
-        
