@@ -437,13 +437,13 @@ class Funcionalidades:
     def listaper_cliente(self):
         """
         """
-        self.listaCliente.delete(*self.listaCliente.get_children())
+        self.listaClienteTela.delete(*self.listaClienteTela.get_children())
         self.listaP = self.cliente.listaperCliente()
         if len(self.listaP) == 0:
             messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
         else:
             for n in self.listaP:
-                self.listaCliente.insert('',END, values=n)
+                self.listaClienteTela.insert('',END, values=n)
 
     def buscaper_cliente(self):
         """
@@ -691,13 +691,12 @@ class Funcionalidades:
             self.et_qtd_fornecida.insert(END, col3)
             self.et_data_fornecimento.insert(END, col4)
 
-    
-
     def limpa_fornecimento(self):
         self.comboxProduto.delete(0, END)
         self.comboxFornecedor.delete(0, END)
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
+
     
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
@@ -747,14 +746,12 @@ class Funcionalidades:
     def duplo_cliqueCliV(self, event):
         """
         """
-        self.listaCliente.selection()
-        for i in self.listaCliente.selection():
-            col1, col2, col3 = self.listaCliente.item(i, 'values')
-            self.et_cod_cliente.insert(END, col1)
-            self.et_nome_cliente.insert(END, col2)
-            self.et_cpf_cliente.insert(END, col3)
+        self.listaClienteTela.delete(*self.listaClienteTela.get_children())
+        self.listaClienteTela.selection()
 
-    
+        for i in self.listaClienteTela.selection():
+            self.listaVenda.insert('', END,values=i)
+            
     def excluir_venda(self):
         """
         """

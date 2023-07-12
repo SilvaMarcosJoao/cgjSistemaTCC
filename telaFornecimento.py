@@ -71,14 +71,17 @@ class FornecimentoTela(Funcionalidades):
         self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
         self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
 
-        self.btn_salvarFornecedor = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
-        self.btn_salvarFornecedor.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
+        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
+        self.btn_salvarFornecimento.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_listarFornecedor = Button(self.fornecimento_frame, text="Listar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
-        self.btn_listarFornecedor.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
+        self.btn_listarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_alterarFornecedor = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
-        self.btn_alterarFornecedor.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
+        self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
+        self.btn_alterarFornecimento.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
+
+        self.btn_excluirFornecimento = Button(self.fornecimento_frame, text="Excluir", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
+        self.btn_excluirFornecimento.place(relx=0.88, rely=0.2, relwidth=0.09, height=40)
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
         self.listaFornecimento.heading("#0", text='')
@@ -94,6 +97,7 @@ class FornecimentoTela(Funcionalidades):
         self.listaFornecimento.column('#4', width=80, anchor='center')
 
         self.listaFornecimento.place(relx=0.02, rely=0.46, relwidth=0.95, relheight=0.5)
+        self.listaFornecimento.bind("<Double-1>", self.duplo_clique_fornecimento)
 
         self.scrollListaFornecimento = Scrollbar(self.fornecimento_frame, orient='vertical', command=self.listaFornecimento.yview)
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
