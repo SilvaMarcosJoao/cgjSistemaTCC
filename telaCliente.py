@@ -68,5 +68,3 @@ class TelaCliente(Funcionalidades, Cliente):
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         
         self.listaClienteTela.bind("<Double-1>", self.duplo_cliqueCliV)
-
-        
