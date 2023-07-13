@@ -43,7 +43,6 @@ class Fornecimento:
         self.__data_fornecimento = data_fornecimento
 
     
-
     def cadastrar_fornecimento(self, cod_produto, cod_fornecedor, data, qtd) -> None:
         self.banco.conectar()
         self.banco.cursor.execute(f"""INSERT INTO fornecimento (cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)

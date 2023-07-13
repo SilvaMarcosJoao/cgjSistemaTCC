@@ -346,15 +346,18 @@ class Funcionalidades:
         """
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.cli = self.et_consultar_cliente.get()
-        if len(self.cli) == 0:
-            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
-        else:
-            self.resCli = self.cliente.consultarCliente(self.cli)
-            if len(self.resCli) == 0:
-                messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
+        try:
+            if len(self.cli) == 0:
+                messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
             else:
-                for v in self.resCli:
-                    self.listaCliente.insert('',END, values=v)
+                self.resCli = self.cliente.consultarCliente(self.cli)
+                if len(self.resCli) == 0:
+                    messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
+                else:
+                    for v in self.resCli:
+                        self.listaCliente.insert('',END, values=v)
+        except:
+            messagebox.showerror('Erro', 'Erro a buscar cliente')
         self.limpa_cliente()
 
     def alterar_cliente(self):
@@ -696,9 +699,21 @@ class Funcionalidades:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
     def editar_fornecimento(self):
-        
-        pass
-
+        self.alt_cod_fornece = None
+        try:
+            self.resForn = self.comboxFornecedor.get().strip()
+            self.fornecimentoFornecedor()
+            for i in self.dadosForn:
+                if self.resForn in i:
+                    self.alt_cod_fornece = i[0]
+                self.fornecimento.set_cod_produto(self.alt_cod_fornece)
+                self.fornecimento.set_qtd_fornecida(self.et_qtd_fornecida.get().strip())
+                if len(self.fornecimento.get_cod_fornecedor()) == 0 and len(self.fornecimento.get_qtd_fornecida()) == 0:
+                    messagebox.showwarning('Alerta', 'Selecione, para alterar')
+                else:
+                    self.fornecimento.alterar_fornecimento(self.fornecimento.get_cod_fornecedor(), self.fornecimento.get_qtd_fornecida)
+        except:
+            messagebox.showerror('Erro', 'Erro na alteração.')
         
     def duplo_clique_fornecimento(self, event):
         self.limpa_fornecimento()
@@ -721,8 +736,6 @@ class Funcionalidades:
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
         self.prodVenda = self.produto.listarProduto()
-        
-
         self.exibirProdutos = []
         for i in range(0, len(self.prodVenda)):
             self.exibirProdutos.append(self.prodVenda[i][1:3])
