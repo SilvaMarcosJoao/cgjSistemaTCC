@@ -103,30 +103,30 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
         self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
-        self.btn_ger_cliente.place(relx=0.08, rely=0.29, width=150, height=50)
+        self.btn_ger_cliente.place(relx=0.08, rely=0.25, width=150, height=50)
 
         self.img_ger_cat = PhotoImage(file='./imagens/categoria.png')
         self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
-        self.btn_ger_categoria.place(relx=0.08, rely=0.17, width=150, height=50)
+        self.btn_ger_categoria.place(relx=0.08, rely=0.15, width=150, height=50)
 
         self.img_ger_produto = PhotoImage(file='./imagens/produto.png')
         self.btn_ger_produto = Button(self.frameMenu_left, image=self.img_ger_produto, text=' Produto', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_produto, self.widgets_produto))
-        self.btn_ger_produto.place(relx=0.08, rely=0.53, width=150, height=50)
+        self.btn_ger_produto.place(relx=0.08, rely=0.55, width=150, height=50)
         
         self.img_ger_forn = PhotoImage(file='./imagens/fornecedor.png')
         self.btn_ger_fornecedor = Button(self.frameMenu_left, image=self.img_ger_forn, text=' Fornecedor', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecedor, self.widgets_fornecedor))
-        self.btn_ger_fornecedor.place(relx=0.08, rely=0.41, width=150, height=50)
+        self.btn_ger_fornecedor.place(relx=0.08, rely=0.35, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
         self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
-        self.btn_ger_venda.place(relx=0.08, rely=0.65, width=150, height=50)
+        self.btn_ger_venda.place(relx=0.08, rely=0.75, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
-        self.btn_sair.place(relx=0.08, rely=0.77, width=150, height=50)
+        self.btn_sair.place(relx=0.08, rely=0.85, width=150, height=50)
     
         self.btn_ger_fornecimento = Button(self.frameMenu_left, text=' Fornecimento', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecimento, self.widgets_fornecimento))
-        self.btn_ger_fornecimento.place(relx=0.08, rely=0.87, width=150, height=50)
+        self.btn_ger_fornecimento.place(relx=0.08, rely=0.45, width=150, height=50)
 
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
@@ -671,19 +671,19 @@ class MenuTela(Funcionalidades, Validadores):
         self.dadosRecebidosProduto = self.fornecimentoProduto()
 
         self.comboxProduto = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosProduto)
-        self.comboxProduto.place(relx=0.25, rely=0.05, width=120, height=22)
+        self.comboxProduto.place(relx=0.10, rely=0.05, width=120, height=22)
         
         self.lbl_fornecedor_fornecimento = Label(self.fornecimento_frame, text='Fornecedor: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.lbl_fornecedor_fornecimento.place(relx=0.02, rely=0.15, height=20)
         self.dadosRecebidosFornecedor = self.fornecimentoFornecedor()
         
         self.comboxFornecedor = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosFornecedor)
-        self.comboxFornecedor.place(relx=0.25, rely=0.15, width=120, height=22)
+        self.comboxFornecedor.place(relx=0.11, rely=0.15, width=120, height=22)
 
         self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.qtd_fornecida.place(relx=0.02, rely=0.25, height=20)
         self.et_qtd_fornecida = Entry(self.fornecimento_frame)
-        self.et_qtd_fornecida.place(relx=0.25, rely=0.25, width=120, height=20)
+        self.et_qtd_fornecida.place(relx=0.13, rely=0.25, width=120, height=20) 
 
         self.lbl_data_fornecimento = Label(self.fornecimento_frame, text='Data Fornecimento: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.lbl_data_fornecimento.place(relx=0.02, rely=0.35, height=20)
