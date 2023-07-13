@@ -55,19 +55,34 @@ class Venda:
         
     def listarVendas(self) -> list:
         banco.conectar()
-        vendas = banco.cursor.execute(f""" SELECT * FROM VENDA """).fetchall()
+        vendas = banco.cursor.execute(f""" SELECT cod_venda, nome_cliente, cpf,
+                                      produto.nome_produto, valor_total, data_venda
+                                      FROM Venda, Cliente ,Produto
+                                      WHERE venda.cod_produto = produto.cod_produto 
+                                      AND venda.cod_cliente = cliente.cod_cliente""").fetchall()
         banco.desconectar()
         return vendas
     
+    def alterarVenda(self, cod_venda,cod_produto, cod_cliente, valor_total, data_venda):
+        banco.conectar()
+        banco.cursor.execute(f""" UPDATE Venda 
+                             SET cod_cliente =('{cod_cliente}'),
+                             cod_produto = ('{cod_produto}'),
+                             valor_total= ('{valor_total}'),
+                             data_venda= ('{data_venda}')
+                             WHERE  cod_venda=('{cod_venda}')""")
+    
     def consultarVenda(self, cod_venda):
         banco.conectar()
-        vend = banco.cursor.execute(f"""SELECT cod_venda, cod_cliente, cod_produto
-                                    valor_total, data_venda FROM Venda
-                                    WHERE cod_venda='{cod_venda}'""").fetchmany()
+        vend = banco.cursor.execute(f"""SELECT cod_venda, cliente.nome_cliente,
+                                    cliente.cpf, desc_produto,
+                                    modelo_produto, valor_total, data_venda
+                                    FROM cliente, produto, venda
+                                    WHERE venda.cod_cliente = cliente.cod_cliente 
+                                      AND venda.cod_produto = produto.cod_produto and cod_venda like '{cod_venda}'""").fetchmany()
         banco.desconectar()
-
-    def excluirVenda(self, cod_venda):
-        banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM Venda 
-                             WHERE cod_venda='{cod_venda}'""")
-        banco.desconectar()
+        return vend
+        
+        
+    def listarVendaDia():
+        pass
