@@ -3,7 +3,6 @@ from tkinter import ttk
 #from tkcalendar import Calendar
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
-from telaFornecimento import FornecimentoTela
 #from telaCliente import TelaCliente
 from telaHistorico import TelaHistorico
 
@@ -689,7 +688,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_data_fornecimento.place(relx=0.02, rely=0.35, height=20)
         self.et_data_fornecimento = Entry(self.fornecimento_frame)
         self.et_data_fornecimento.place(relx=0.25, rely=0.35, width=62, height=20)
-       # self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
+        #self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
         #self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
 
         self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
