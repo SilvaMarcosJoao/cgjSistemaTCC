@@ -24,20 +24,28 @@ class Funcionalidades:
     def efetuarLogin(self) -> None:
         self.captusuario = self.et_usuario.get().strip()
         self.captsenha = self.et_senha.get().strip()
+
+         
+        
         
         try:
             if len(self.captusuario) == 0 and len(self.captsenha) == 0:
                 messagebox.showwarning('Alerta', 'Preencha os campos para logar')
             elif len(self.captusuario) < 2 or len(self.captusuario) > 20:
                 messagebox.showwarning('Alerta', 'O usuário não atende aos requisitos')
-            elif len(self.capsenha) != 8:
+            elif len(self.captsenha) != 8:
                 messagebox.showwarning('Alerta', 'A senha não atende aos requisitos')
+            elif self.captusuario != '' or self.captsenha != '':
+                 messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
             else:
                 if self.captusuario != '' or self.captsenha != '':
                     messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
+                    
+            
         except:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
 
+           
 
     def mudar_senha(self) -> None:
         """
@@ -785,7 +793,7 @@ class Funcionalidades:
         
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
-            self.exibirDados.append(self.cliVenda[c][2])
+            self.exibirDados.append(self.cliVenda[c][0:3])
         return self.exibirDados
         
         
