@@ -1,5 +1,5 @@
 from tkinter import *
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 from tkinter import ttk
 from modulos.funcionalidades import Funcionalidades
 

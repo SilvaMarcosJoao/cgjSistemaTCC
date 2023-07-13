@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
 from telaFornecimento import FornecimentoTela
@@ -34,6 +34,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_produto.config(bg='#6E6E6E')
         self.btn_ger_usuario.config(bg='#6E6E6E')
         self.btn_ger_cliente.config(bg='#6E6E6E')
+        self.btn_ger_fornecimento.config(bg='#6E6E6E')
         self.btn_inicio.config(bg='#6E6E6E')
 
     def indicate(self, btn, page):
@@ -98,31 +99,34 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.img_ger_usu = PhotoImage(file='./imagens/usuario.png')
         self.btn_ger_usuario = Button(self.frameMenu_left, image=self.img_ger_usu, text=' Usuário', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_ger_usuario, self.widgets_usuario))
-        self.btn_ger_usuario.place(relx=0.08, rely=0.55, width=150, height=50)
+        self.btn_ger_usuario.place(relx=0.08, rely=0.65, width=150, height=50)
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
         self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
-        self.btn_ger_cliente.place(relx=0.08, rely=0.25, width=150, height=50)
+        self.btn_ger_cliente.place(relx=0.08, rely=0.29, width=150, height=50)
 
         self.img_ger_cat = PhotoImage(file='./imagens/categoria.png')
         self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
-        self.btn_ger_categoria.place(relx=0.08, rely=0.15, width=150, height=50)
+        self.btn_ger_categoria.place(relx=0.08, rely=0.17, width=150, height=50)
 
         self.img_ger_produto = PhotoImage(file='./imagens/produto.png')
         self.btn_ger_produto = Button(self.frameMenu_left, image=self.img_ger_produto, text=' Produto', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_produto, self.widgets_produto))
-        self.btn_ger_produto.place(relx=0.08, rely=0.45, width=150, height=50)
+        self.btn_ger_produto.place(relx=0.08, rely=0.53, width=150, height=50)
         
         self.img_ger_forn = PhotoImage(file='./imagens/fornecedor.png')
         self.btn_ger_fornecedor = Button(self.frameMenu_left, image=self.img_ger_forn, text=' Fornecedor', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecedor, self.widgets_fornecedor))
-        self.btn_ger_fornecedor.place(relx=0.08, rely=0.35, width=150, height=50)
+        self.btn_ger_fornecedor.place(relx=0.08, rely=0.41, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
         self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
-        self.btn_ger_venda.place(relx=0.08, rely=0.75, width=150, height=50)
+        self.btn_ger_venda.place(relx=0.08, rely=0.65, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
-        self.btn_sair.place(relx=0.08, rely=0.85, width=150, height=50)
+        self.btn_sair.place(relx=0.08, rely=0.77, width=150, height=50)
+    
+        self.btn_ger_fornecimento = Button(self.frameMenu_left, text=' Fornecimento', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecimento, self.widgets_fornecimento))
+        self.btn_ger_fornecimento.place(relx=0.08, rely=0.87, width=150, height=50)
 
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
@@ -597,39 +601,13 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.025, rely=0.93)
 
-        self.lbl_exibi_total = Label(self.frameCadTelaVenda, textvariable=self.re, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
   
         
         #Botões do CRUD da venda
-        
-        '''
-        self.btn_listar_venda = Button(self.frameCadTelaVenda, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_listar_venda.place(relx=0.84, rely=0.14, relwidth=0.09, height=40)
-
-        self.btn_alterar_venda = Button(self.frameCadTelaVenda, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_alterar_venda.place(relx=0.84, rely=0.23, relwidth=0.09, height=40)
-
-        self.btn_excluir_venda = Button(self.frameCadTelaVenda, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_venda)
-        self.btn_excluir_venda.place(relx=0.84, rely=0.32, relwidth=0.09, height=40)
-        '''
         #Botões para adicionar os componenetes da venda
-        '''
-        self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código Venda: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_venda.place(relx=0.025, rely=0.1, height=20)
-        self.et_cod_venda = Entry(self.frameCadTelaVenda, )
-        self.et_cod_venda.place(relx=0.09, rely=0.1, width=55, height=20)
-
-        self.lbl_procuraprodt_venda = Label(self.frameCadTelaVenda,text= 'Produto:',font=('Roboto', 9, 'bold'), bg='#d9d9d9' )
-        self.lbl_procuraprodt_venda.place(relx=0.05, rely=0.1)
-
-        self.btn_procurarprodt_venda = Button(self.frameCadTelaVenda, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command= TelaProduto)
-        self.btn_procurarprodt_venda.place(relx=0.11, rely=0.1, width=62, height=20)
-
-        
-        self.btn_procurarclien_venda = Button(self.frameCadTelaVenda, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command= TelaCliente)
-        self.btn_procurarclien_venda.place(relx=0.11, rely=0.15, width=62, height=20)'''
         
         self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=40)
@@ -678,27 +656,69 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaVenda.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.025, rely=0.855, relwidth=0.08, relheight=0.03)
 
-        '''
-        self.listaVenda = ttk.Treeview(self.frameCadTelaVenda, height= 3, columns=('col1','col2','col3','col4','col5','col6'), show='headings')
+
+
+    def widgets_fornecimento(self):
+        self.validaEntradas()
+        self.img_crud()
+        self.fornecimento_frame = Frame(self.frameMenu_right, bd=1,background='#D9D9D9')
+        self.fornecimento_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+
+        self.prod = StringVar()
+
+        self.lbl_produto = Label(self.fornecimento_frame, text='Produto: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
+        self.lbl_produto.place(relx=0.02, rely=0.05, height=20)
+        self.dadosRecebidosProduto = self.fornecimentoProduto()
+
+        self.comboxProduto = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosProduto)
+        self.comboxProduto.place(relx=0.25, rely=0.05, width=120, height=22)
         
-        self.listaVenda.heading('#0', text='')
-        self.listaVenda.heading('#1', text='Venda')
-        self.listaVenda.heading('#2', text='Cliente')
-        self.listaVenda.heading('#3', text='Materiais')
-        self.listaVenda.heading('#4', text='Preço Venda')
-        self.listaVenda.heading('#5', text='Quantidade')
-        self.listaVenda.heading('#6', text='Preço')
+        self.lbl_fornecedor_fornecimento = Label(self.fornecimento_frame, text='Fornecedor: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
+        self.lbl_fornecedor_fornecimento.place(relx=0.02, rely=0.15, height=20)
+        self.dadosRecebidosFornecedor = self.fornecimentoFornecedor()
+        
+        self.comboxFornecedor = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosFornecedor)
+        self.comboxFornecedor.place(relx=0.25, rely=0.15, width=120, height=22)
 
-        self.listaVenda.column('#0', width=1, anchor='center')
-        self.listaVenda.column('#1', width=5, anchor='center')
-        self.listaVenda.column('#2', width=180, anchor='center')
-        self.listaVenda.column('#3', width=180, anchor='center')
-        self.listaVenda.column('#4', width=80, anchor='center')
-        self.listaVenda.column('#5', width=5, anchor='center')
-        self.listaVenda.column('#6', width=80, anchor='center')
+        self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
+        self.qtd_fornecida.place(relx=0.02, rely=0.25, height=20)
+        self.et_qtd_fornecida = Entry(self.fornecimento_frame)
+        self.et_qtd_fornecida.place(relx=0.25, rely=0.25, width=120, height=20)
 
-        self.listaVenda.bind("<Double-1>", self.duplo_cliqueCliV)
+        self.lbl_data_fornecimento = Label(self.fornecimento_frame, text='Data Fornecimento: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
+        self.lbl_data_fornecimento.place(relx=0.02, rely=0.35, height=20)
+        self.et_data_fornecimento = Entry(self.fornecimento_frame)
+        self.et_data_fornecimento.place(relx=0.25, rely=0.35, width=62, height=20)
+       # self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
+        #self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
 
-        self.listaVenda.place(relx=0.05, rely=0.99, relwidth=0.9, relheight=0.5)'''
+        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
+        self.btn_salvarFornecimento.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
 
+        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
+        self.btn_listarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+
+        self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
+        self.btn_alterarFornecimento.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
+
+        self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
+        self.listaFornecimento.heading("#0", text='')
+        self.listaFornecimento.heading("#1", text='Produto')
+        self.listaFornecimento.heading('#2', text='Fornecedor')
+        self.listaFornecimento.heading('#3', text='Data Fornecimento')
+        self.listaFornecimento.heading('#4', text='Qtd Fornecida')
+
+        self.listaFornecimento.column('#0', width=1, anchor='center')
+        self.listaFornecimento.column('#1', width=120, anchor='center')
+        self.listaFornecimento.column('#2', width=120, anchor='center')
+        self.listaFornecimento.column('#3', width=80, anchor='center')
+        self.listaFornecimento.column('#4', width=80, anchor='center')
+
+        self.listaFornecimento.place(relx=0.025, rely=0.35, relwidth=0.95, relheight=0.5)
+        self.listaFornecimento.bind("<Double-1>", self.duplo_clique_fornecimento)
+
+        self.scrollListaFornecimento = Scrollbar(self.fornecimento_frame, orient='vertical', command=self.listaFornecimento.yview)
+        self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
+        self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
+    
 MenuTela()
