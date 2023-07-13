@@ -793,7 +793,7 @@ class Funcionalidades:
         
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
-            self.exibirDados.append(self.cliVenda[c][2])
+            self.exibirDados.append(self.cliVenda[c][0:3])
         return self.exibirDados
         
         

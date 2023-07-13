@@ -36,6 +36,8 @@ class Usuario:
 
     def logar(self, usuario:str, senha:str) -> None:
         """
+        :param:
+        :return:
         """
         bancoDado.conectar()
         res = bancoDado.cursor.execute(f""" SELECT usuario, senha FROM usuario
@@ -44,6 +46,8 @@ class Usuario:
     
     def alterar_senha(self, senha:str) -> None:
             """
+            :param:
+            :return:
             """
             bancoDado.conectar()
             bancoDado.cursor.execute(f""" UPDATE usuario SET senha= '{senha}' WHERE cod_usuario = 1 """)
