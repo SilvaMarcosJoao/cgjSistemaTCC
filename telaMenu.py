@@ -360,7 +360,7 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_qtd_produto.place(relx=0.15, rely=0.1)
-        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10))
+        self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), state='readonly')
         self.et_qtd_produto.place(relx=0.18, rely=0.1, width=63, height=20)
 
         self.lbl_cat_produto = Label(self.produto_frame, text='Categoria: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -536,12 +536,10 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.listaForne.place(relx=0.02, rely=0.48, relwidth=0.95, relheight=0.49)
         
-
         self.scrollListaForne = Scrollbar(self.frameCadTelaFornecedor, orient='vertical', command=self.listaForne.yview)
         self.listaForne.configure(yscrollcommand=self.scrollListaForne.set)
         self.scrollListaForne.place(relx=0.975, rely=0.48, relwidth= 0.02, relheight=0.48)
         
-
         self.scrollHor = Scrollbar(self.frameCadTelaFornecedor, orient='horizontal', command=self.listaForne.xview)
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.97, relwidth=0.08, relheight=0.03)
@@ -568,8 +566,10 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_prodt_venda = Label(self.frameCadTelaVenda, text="Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_prodt_venda.place(relx=0.2, rely=0.1) 
-        self.comboxProdt_venda = ttk.Combobox(self.frameCadTelaVenda, values=[])
+        self.prodRecebidos = self.produtosVenda()
+        self.comboxProdt_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.prodRecebidos)
         self.comboxProdt_venda.place(relx=0.255, rely=0.1, width=150, height=20)
+        
 
         self.lbl_codclien_venda = Label(self.frameCadTelaVenda, text="Código Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_codclien_venda.place(relx=0.025, rely=0.15, height=20)
@@ -578,7 +578,8 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_nome_clien_venda = Label(self.frameCadTelaVenda, text="Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_nome_clien_venda.place(relx=0.2, rely=0.15) 
-        self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=[])
+        self.cliRecebidos = self.clienteVenda()
+        self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.cliRecebidos)
         self.comboxClien_venda.place(relx=0.255, rely=0.15, width=150, height=20)
 
         self.lbl_qtd_venda = Label(self.frameCadTelaVenda, text="Quantidade: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
@@ -596,6 +597,10 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.025, rely=0.93)
 
+        self.lbl_exibi_total = Label(self.frameCadTelaVenda, textvariable=self.re, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_exibi_total.place(relx=0.5, rely=0.93)
+        
+  
         
         #Botões do CRUD da venda
         
