@@ -21,6 +21,24 @@ class Funcionalidades:
 
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
+    def efetuarLogin(self) -> None:
+        self.captusuario = self.et_usuario.get().strip()
+        self.captsenha = self.et_senha.get().strip()
+        
+        try:
+            if len(self.captusuario) == 0 and len(self.captsenha) == 0:
+                messagebox.showwarning('Alerta', 'Preencha os campos para logar')
+            elif len(self.captusuario) < 2 or len(self.captusuario) > 20:
+                messagebox.showwarning('Alerta', 'O usuário não atende aos requisitos')
+            elif len(self.capsenha) != 8:
+                messagebox.showwarning('Alerta', 'A senha não atende aos requisitos')
+            else:
+                if self.captusuario != '' or self.captsenha != '':
+                    messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
+        except:
+            messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
+
+
     def mudar_senha(self) -> None:
         """
         Captura a senha digitada pelo usuário, verifica e envia a
@@ -49,6 +67,7 @@ class Funcionalidades:
         """
         self.et_nova_senha.delete(0, END)
         self.et_confir_senha.delete(0, END)
+
         
     # FUNÇÕES DOS BOTÕES DA TELA CATEGORIA DE PRODUTO
     def inserir_categoria(self):
@@ -71,27 +90,33 @@ class Funcionalidades:
         """
         self.listaCategoria.delete(*self.listaCategoria.get_children())
         self.exibir = self.categoria.listarCategoria()
-        if len(self.exibir) == 0:
-            messagebox.showinfo('Informação', 'Não há categoria cadastrada!')
-        else:
-            for i in self.exibir:
-                self.et_cod_categoria.config(state='normal') 
-                self.listaCategoria.insert('',END, values=i) 
+        try:
+            if len(self.exibir) == 0:
+                messagebox.showinfo('Informação', 'Não há categoria cadastrada!')
+            else:
+                for i in self.exibir:
+                    self.et_cod_categoria.config(state='normal') 
+                    self.listaCategoria.insert('',END, values=i) 
+        except:
+            messagebox.showerror('Erro', 'Houve um erro na listagem de categoria')
 
     def editar_categoria(self):
         """
         """
         self.cod = self.et_cod_categoria.get().strip()
         self.categoria.set_desc_categoria_produto(self.et_desc_categoria.get().strip())
-        if self.categoria.get_desc_categoria_produto() == '':
-            messagebox.showwarning('Alerta', 'Exiba as categorias para editar e selecione')
-        elif len(self.categoria.get_desc_categoria_produto()) > 15:
-            messagebox.showwarning('Alerta','Preencha a descrição de categoria corretamente!')
-        else:
-            self.categoria.alterarCategoria(self.cod, self.categoria.get_desc_categoria_produto())
-            messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
-            self.limpa_categoria()
-            self.exibir_categoria()
+        try:
+            if self.categoria.get_desc_categoria_produto() == '':
+                messagebox.showwarning('Alerta', 'Exiba as categorias para editar e selecione')
+            elif len(self.categoria.get_desc_categoria_produto()) > 15:
+                messagebox.showwarning('Alerta','Preencha a descrição de categoria corretamente!')
+            else:
+                self.categoria.alterarCategoria(self.cod, self.categoria.get_desc_categoria_produto())
+                messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
+                self.limpa_categoria()
+                self.exibir_categoria() 
+        except:
+            messagebox.showerror('Erro', 'Houve um erro nas alterações')
 
     def excluir_categoria(self):
         """
@@ -248,6 +273,9 @@ class Funcionalidades:
             
     def limpa_produto(self):
         """
+        Realiza a limpeza dos campos da tela produto.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.et_cod_produto.delete(0, END)
         self.et_desc_produto.delete(0, END) 
@@ -437,6 +465,9 @@ class Funcionalidades:
     
     def limpa_cliente(self):
         """
+        Realiza a limpeza dos campos da tela cliente.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.et_cod_cliente.delete(0,END)
         self.et_cpf_cliente.delete(0,END)
@@ -451,7 +482,6 @@ class Funcionalidades:
         self.et_consultar_cliente.delete(0, END)
     
     #Métodos de busca e listagem personalizados para telaCliente
-
     def listaper_cliente(self):
         """
         """
@@ -644,6 +674,7 @@ class Funcionalidades:
         self.et_estado_fornecedor.delete(0,END)
        
 
+    # FUNÇÕES DOS BOTÕES DA SUBTELA FORNECIMENTO
     def fornecimentoProduto(self):
         self.dadosProd = self.produto.listarProduto()
         
@@ -716,6 +747,8 @@ class Funcionalidades:
             messagebox.showerror('Erro', 'Erro na alteração.')
         
     def duplo_clique_fornecimento(self, event):
+        """
+        """
         self.limpa_fornecimento()
         self.listaFornecimento.selection()
         for c in self.listaFornecimento.selection():
@@ -726,12 +759,18 @@ class Funcionalidades:
             self.et_data_fornecimento.insert(END, col4)
 
     def limpa_fornecimento(self):
+        """
+        Realiza a limpeza dos campos da subtela fornecimento.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
+        """
         self.comboxProduto.delete(0, END)
         self.comboxFornecedor.delete(0, END)
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
 
     
+
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):

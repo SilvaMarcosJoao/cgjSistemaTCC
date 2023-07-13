@@ -34,17 +34,20 @@ class Usuario:
     def set_senha(self, senha:str) -> None:
         self.__senha = senha
 
-    def logar(self) -> None:
+    def logar(self, nome:str, senha:str) -> None:
+        """
+        """
         bancoDado.conectar()
-        res = bancoDado.cursor.execute(f""" SELECT * FROM usuario""").fetchall()
-        print(res)
-
-    def alterar_senha(self, senha: str) -> None:
+        res = bancoDado.cursor.execute(f""" SELECT nome, senha FROM usuario
+                                       WHERE nome = ({nome}) and senha = ({senha})""").fetchall()
+        return res
+    
+    def alterar_senha(self, senha:str) -> None:
+            """
+            """
             bancoDado.conectar()
             bancoDado.cursor.execute(f""" UPDATE usuario SET senha= '{senha}' WHERE cod_usuario = 1 """)
             bancoDado.conexao.commit()
         
-      
     def sair(self):
         pass
-

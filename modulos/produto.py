@@ -60,6 +60,8 @@ class Produto:
 
     #cadastra os produtos 
     def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, cod_categoria:int) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, cod_categoria_produto) 
@@ -70,6 +72,8 @@ class Produto:
     
     #Atualizar produto    
     def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""UPDATE produto
                                 SET desc_produto =('{desc_produto}'),
@@ -83,6 +87,8 @@ class Produto:
                
     #mostra todos os produtos
     def listarProduto(self) -> list:
+        """
+        """
         banco.conectar()
         produtos=banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
                                       preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 

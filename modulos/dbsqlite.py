@@ -8,6 +8,8 @@ class BancoDados:
         self.cursor = None
 
     def conectar(self) -> None:
+        """
+        """
         try:
             self.conexao = sqlite3.connect(self.__nome)
             self.cursor = self.conexao.cursor()
@@ -15,6 +17,8 @@ class BancoDados:
             print(f'Houve um erro: {error}')
 
     def desconectar(self) -> None:
+        """
+        """
         try:
             self.conexao.close()
         except Exception as erro:

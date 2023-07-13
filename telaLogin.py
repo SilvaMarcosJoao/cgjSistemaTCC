@@ -41,7 +41,6 @@ class LoginTela:
         self.lbl_senha = Label(self.appLogin, text="Senha:",fg='#FFF')
         self.lbl_senha.place(relx=0.32, rely=0.45)
         self.lbl_senha.configure(background='#585858',font=("Roboto", 12))
-
         self.et_senha = Entry(self.appLogin, font=('Roboto', 12), show="*")  
         self.et_senha.place(relx=0.43, rely=0.46, width=120)
 

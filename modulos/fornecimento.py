@@ -44,6 +44,8 @@ class Fornecimento:
 
     
     def cadastrar_fornecimento(self, cod_produto, cod_fornecedor, data, qtd) -> None:
+        """
+        """
         self.banco.conectar()
         self.banco.cursor.execute(f"""INSERT INTO fornecimento (cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)
                                   VALUES ('{cod_produto}', '{cod_fornecedor}', '{data}', '{qtd}')""")
@@ -51,6 +53,8 @@ class Fornecimento:
         self.banco.desconectar()
     
     def listar_fornecimento(self) -> list:
+        """
+        """
         self.banco.conectar()
         forneci = list(self.banco.cursor.execute(f""" SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida 
                                                  FROM produto, fornecedor, fornecimento
@@ -61,6 +65,8 @@ class Fornecimento:
         return forneci
     
     def alterar_fornecimento(self, cod_produto, cod_fornecedor):
+        """
+        """
         self.banco.conectar()
         self.banco.cursor.execute(f""" UPDATE fornecimento SET qtd_fornecida, data_fornecimento
                                   WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
@@ -68,6 +74,8 @@ class Fornecimento:
         self.banco.desconectar()
 
     def deletar_fornecimento(self, cod_produto, cod_fornecedor):
+        """
+        """
         self.banco.conectar()
         self.banco.cursor.execute(f""" DELETE fornecimento WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
         self.banco.conexao.commit()

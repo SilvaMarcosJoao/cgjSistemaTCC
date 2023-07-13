@@ -77,6 +77,11 @@ class Cliente:
 
 
     def cadastrarCliente(self, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        Efetua o cadastro dos clientes.
+        :param: .
+        :return: Não tem retorno.
+        """
         banco.conectar()
         banco.cursor.execute(f"""Insert into Cliente(cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado) 
@@ -87,6 +92,8 @@ class Cliente:
         banco.desconectar()
         
     def alterarCliente(self, cod_cliente:int, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""UPDATE Cliente
                                 SET cpf = ('{cpf }'), 
@@ -102,13 +109,17 @@ class Cliente:
         banco.conexao.commit()
         banco.desconectar()
         
-    def listarCliente(self) -> list :
+    def listarCliente(self) -> list:
+        """
+        """
         banco.conectar()
         clientes=banco.cursor.execute(f"""SELECT * FROM CLIENTE""").fetchall()   
         banco.desconectar()
         return clientes 
     
     def consultarCliente(self, nome:str) -> list:
+        """
+        """
         banco.conectar()
         cli = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
@@ -117,6 +128,8 @@ class Cliente:
         return cli
     
     def deletarCliente(self, cod_cliente:int) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM Cliente
                                 WHERE cod_cliente='{cod_cliente}'""")
@@ -127,12 +140,16 @@ class Cliente:
     #MÉTODOS PERSONALIZADOS para telaCliente
 
     def listaperCliente(self) -> list:
+        """
+        """
         banco.conectar()
         cliente=banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM CLIENTE""").fetchall()   
         banco.desconectar()
         return cliente
     
     def consultaperCliente(self, nome:str) -> list:
+        """
+        """
         banco.conectar()
         clis = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM Cliente
                          WHERE nome_cliente like '{nome[0]}%' """).fetchall()

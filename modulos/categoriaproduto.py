@@ -24,6 +24,8 @@ class CategoriaProduto:
 
 
     def cadastrarCategoria(self, desc_categoria:str) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
         VALUES ('{desc_categoria}')""")
@@ -31,6 +33,8 @@ class CategoriaProduto:
         banco.desconectar()
         
     def alterarCategoria(self, cod_categoria_produto:int, desc_categoria:str) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc_categoria}')
                                 WHERE cod_categoria_produto = ('{cod_categoria_produto}') """) 
@@ -38,12 +42,16 @@ class CategoriaProduto:
         banco.desconectar()
 
     def listarCategoria(self) -> list:
+        """
+        """
         banco.conectar()
         categoria =banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
         banco.desconectar()
         return categoria
     
     def deletarCategoria(self, cod_categoria_produto:int) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM categoria_produto
                                 WHERE cod_categoria_produto = '{cod_categoria_produto}' """)

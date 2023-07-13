@@ -1,7 +1,9 @@
 
 class ItensVenda:
     def __init__(self) -> None:
-        pass
+        self.__cod_produto = ''
+        self.__qtd = ''
+        
     
     
     
