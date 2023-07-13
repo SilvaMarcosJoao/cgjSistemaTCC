@@ -842,8 +842,9 @@ class Funcionalidades:
         else:
             for i in self.listav:
                 self.et_cod_venda.config(state='normal')
-                self.listaHistTela.insert('',END, values = i)
-    
+                self.listaHistTela.insert('',END, values = i)   
+
+
     def listar_vendas_por_dia(self, data):
         vendas_dia = []
         for venda in self.vendas:
@@ -857,3 +858,11 @@ class Funcionalidades:
             if venda[1].month == mes and venda[1].year == ano:
                 vendas_mes.append(venda)
         return vendas_mes
+
+
+    def adicionar(self):
+        self.cod_prod = self.et_cod_produto
+        self.qtd = self.qtd_venda
+
+        
+

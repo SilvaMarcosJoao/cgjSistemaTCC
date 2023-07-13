@@ -1,3 +1,4 @@
+from typing import List
 from modulos.dbsqlite import BancoDados
 from modulos.cliente import Cliente
 from modulos.produto import Produto
@@ -55,11 +56,10 @@ class Venda:
         
     def listarVendas(self) -> list:
         banco.conectar()
-        vendas = banco.cursor.execute(f""" SELECT cod_venda, nome_cliente, cpf,
-                                      produto.nome_produto, valor_total, data_venda
+        vendas = banco.cursor.execute(f""" SELECT cod_venda, cliente.cod_cliente, cliente.nome_cliente,
+                                        valor_total, data_venda
                                       FROM Venda, Cliente ,Produto
-                                      WHERE venda.cod_produto = produto.cod_produto 
-                                      AND venda.cod_cliente = cliente.cod_cliente""").fetchall()
+                                      WHERE venda.cod_cliente = cliente.cod_cliente""").fetchall()
         banco.desconectar()
         return vendas
     
@@ -84,5 +84,8 @@ class Venda:
         return vend
         
         
-    def listarVendaDia():
-        pass
+    def listarData(self) -> List:
+        banco.conectar()
+        venD = banco.cursor.execute("""SELECT * FROM Venda WHERE data_venda like '{data_venda}' """).fetchmany()
+        banco.desconectar()
+        return venD
