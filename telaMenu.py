@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter import ttk
-from tkcalendar import Calendar
+#from tkcalendar import Calendar
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
 from telaFornecimento import FornecimentoTela
 #from telaCliente import TelaCliente
-from telaHistorico import TelaHistorico
+from telaAdItens import TelaItens
 
 
 appMenu = Tk()
@@ -555,117 +555,54 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
         self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código:", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_venda.place(relx=0.025, rely=0.06, height=20)
+        self.lbl_cod_venda.place(relx=0.025, rely=0.1, height=20)
         self.et_cod_venda = Entry(self.frameCadTelaVenda, state='disabled')
-        self.et_cod_venda.place(relx=0.125, rely=0.05, width=55, height=20)
+        self.et_cod_venda.place(relx=0.08, rely=0.1, width=55, height=20)
 
-        self.lbl_codprodt_venda = Label(self.frameCadTelaVenda, text="Código Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_codprodt_venda.place(relx=0.025, rely=0.1, height=20)
-        self.et_codprodt_venda = Entry(self.frameCadTelaVenda)
-        self.et_codprodt_venda.place(relx=0.125, rely=0.1, width=55, height=20)
-
-        self.lbl_prodt_venda = Label(self.frameCadTelaVenda, text="Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_prodt_venda.place(relx=0.2, rely=0.1) 
-        self.prodRecebidos = self.produtosVenda()
-        self.comboxProdt_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.prodRecebidos)
-        self.comboxProdt_venda.place(relx=0.255, rely=0.1, width=150, height=20)
         
-
-        self.lbl_codclien_venda = Label(self.frameCadTelaVenda, text="Código Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_codclien_venda.place(relx=0.025, rely=0.15, height=20)
-        self.et_codclien_venda = Entry(self.frameCadTelaVenda)
-        self.et_codclien_venda.place(relx=0.125, rely=0.15, width=55, height=20)
-
         self.lbl_nome_clien_venda = Label(self.frameCadTelaVenda, text="Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_nome_clien_venda.place(relx=0.2, rely=0.15) 
+        self.lbl_nome_clien_venda.place(relx=0.025, rely=0.15) 
         self.cliRecebidos = self.clienteVenda()
         self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.cliRecebidos)
-        self.comboxClien_venda.place(relx=0.255, rely=0.15, width=150, height=20)
+        self.comboxClien_venda.place(relx=0.08, rely=0.15, width=300, height=20)
 
-        self.lbl_qtd_venda = Label(self.frameCadTelaVenda, text="Quantidade: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_qtd_venda.place(relx=0.44, rely=0.1) 
-        self.et_qtd_venda = Entry(self.frameCadTelaVenda,)
-        self.et_qtd_venda.place(relx=0.515, rely=0.1, width=84, height=20) 
 
-        self.lbl_data_venda = Label(self.frameCadTelaVenda, text='Data : ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_data_venda.place(relx=0.44, rely=0.15, height=20)
+        self.lbl_data_venda = Label(self.frameCadTelaVenda, text='Data Venda: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_data_venda.place(relx=0.18, rely=0.1, height=20)
         self.et_data_venda = Entry(self.frameCadTelaVenda)
-        self.et_data_venda.place(relx=0.48, rely=0.15, width=60, height=20)
+        self.et_data_venda.place(relx=0.255, rely=0.1, width=60, height=20)
         self.btn_calendario = Button(self.frameCadTelaVenda, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendariove)
-        self.btn_calendario.place(relx=0.545, rely=0.15, width=58, height=20)
+        self.btn_calendario.place(relx=0.325, rely=0.1, width=62, height=20)
 
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.025, rely=0.93)
 
-        self.lbl_exibi_total = Label(self.frameCadTelaVenda, textvariable=self.re, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
-  
-        
-        #Botões do CRUD da venda
-        
-        '''
-        self.btn_listar_venda = Button(self.frameCadTelaVenda, text=' Listar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_listar_venda.place(relx=0.84, rely=0.14, relwidth=0.09, height=40)
-
-        self.btn_alterar_venda = Button(self.frameCadTelaVenda, text=' Alterar', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_alterar_venda.place(relx=0.84, rely=0.23, relwidth=0.09, height=40)
-
-        self.btn_excluir_venda = Button(self.frameCadTelaVenda, text=' Excluir', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_venda)
-        self.btn_excluir_venda.place(relx=0.84, rely=0.32, relwidth=0.09, height=40)
-        '''
-        #Botões para adicionar os componenetes da venda
-        '''
-        self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código Venda: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_cod_venda.place(relx=0.025, rely=0.1, height=20)
-        self.et_cod_venda = Entry(self.frameCadTelaVenda, )
-        self.et_cod_venda.place(relx=0.09, rely=0.1, width=55, height=20)
-
-        self.lbl_procuraprodt_venda = Label(self.frameCadTelaVenda,text= 'Produto:',font=('Roboto', 9, 'bold'), bg='#d9d9d9' )
-        self.lbl_procuraprodt_venda.place(relx=0.05, rely=0.1)
-
-        self.btn_procurarprodt_venda = Button(self.frameCadTelaVenda, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command= TelaProduto)
-        self.btn_procurarprodt_venda.place(relx=0.11, rely=0.1, width=62, height=20)
-
-        
-        self.btn_procurarclien_venda = Button(self.frameCadTelaVenda, text='Procurar' ,relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3',  command= TelaCliente)
-        self.btn_procurarclien_venda.place(relx=0.11, rely=0.15, width=62, height=20)'''
-        
         self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
-        self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=40)
+        self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=50)
 
-        self.btn_hist_venda = Button(self.frameCadTelaVenda, text='Histórico de \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=TelaHistorico)
-        self.btn_hist_venda.place(relx=0.88, rely=0.215, relwidth=0.09, height=40)
+        self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
+        self.btn_limpar_venda.place(relx=0.88, rely=0.215, relwidth=0.09, height=50)
 
-        self.btn_addprodt_venda = Button(self.frameCadTelaVenda, text='Adicionar \nProduto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addprodt_venda.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
+        self.btn_add_itens = Button(self.frameCadTelaVenda, text='Inserir \nItens', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=TelaItens)
+        self.btn_add_itens.place(relx=0.4, rely=0.1, relwidth=0.09, height=50)
 
-        self.btn_removprodt_venda = Button(self.frameCadTelaVenda, text='Remover \nProduto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_removprodt_venda.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
-    
-        self.btn_addclien_venda = Button(self.frameCadTelaVenda, text='Adicionar \nCliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_addclien_venda.place(relx=0.78, rely=0.13, relwidth=0.09, height=40)
-
-        self.btn_removclien_venda = Button(self.frameCadTelaVenda, text='Remover \nCliente', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_removclien_venda.place(relx=0.88, rely=0.13, relwidth=0.09, height=40)
-
-
-
-        self.listaVenda = ttk.Treeview(self.frameCadTelaVenda, height= 3, columns=('col1','col2','col3','col4','col5'), show='headings')
+        self.listaVenda = ttk.Treeview(self.frameCadTelaVenda, height=3, columns=('col1','col2','col3','col4'), show='headings')
         
         self.listaVenda.heading('#0', text='')
-        self.listaVenda.heading('#1', text='Cliente')
-        self.listaVenda.heading('#2', text='Produtos')
-        self.listaVenda.heading('#3', text='Preço Unit')
-        self.listaVenda.heading('#4', text='Quantidade')
-        self.listaVenda.heading('#5', text='Preço')
+        self.listaVenda.heading('#1', text='Cód Venda')
+        self.listaVenda.heading('#2', text='Cliente')
+        self.listaVenda.heading('#3', text='Data Venda')
+        self.listaVenda.heading('#4', text='Valor Total')
 
-        self.listaVenda.column('#0', width=1, anchor='center')
-        self.listaVenda.column('#1', width=180, anchor='center')
-        self.listaVenda.column('#2', width=180, anchor='center')
+
+        self.listaVenda.column('#0', width=10, anchor='center')
+        self.listaVenda.column('#1', width=60, anchor='center')
+        self.listaVenda.column('#2', width=400, anchor='center')
         self.listaVenda.column('#3', width=80, anchor='center')
-        self.listaVenda.column('#4', width=5, anchor='center')
-        self.listaVenda.column('#5', width=80, anchor='center')
+        self.listaVenda.column('#4', width=100, anchor='center')
 
         self.listaVenda.place(relx=0.025, rely=0.35, relwidth=0.95, relheight=0.5)
 
@@ -677,28 +614,5 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrollHor = Scrollbar(self.frameCadTelaVenda, orient='horizontal', command=self.listaVenda.xview)
         self.listaVenda.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.025, rely=0.855, relwidth=0.08, relheight=0.03)
-
-        '''
-        self.listaVenda = ttk.Treeview(self.frameCadTelaVenda, height= 3, columns=('col1','col2','col3','col4','col5','col6'), show='headings')
-        
-        self.listaVenda.heading('#0', text='')
-        self.listaVenda.heading('#1', text='Venda')
-        self.listaVenda.heading('#2', text='Cliente')
-        self.listaVenda.heading('#3', text='Materiais')
-        self.listaVenda.heading('#4', text='Preço Venda')
-        self.listaVenda.heading('#5', text='Quantidade')
-        self.listaVenda.heading('#6', text='Preço')
-
-        self.listaVenda.column('#0', width=1, anchor='center')
-        self.listaVenda.column('#1', width=5, anchor='center')
-        self.listaVenda.column('#2', width=180, anchor='center')
-        self.listaVenda.column('#3', width=180, anchor='center')
-        self.listaVenda.column('#4', width=80, anchor='center')
-        self.listaVenda.column('#5', width=5, anchor='center')
-        self.listaVenda.column('#6', width=80, anchor='center')
-
-        self.listaVenda.bind("<Double-1>", self.duplo_cliqueCliV)
-
-        self.listaVenda.place(relx=0.05, rely=0.99, relwidth=0.9, relheight=0.5)'''
 
 MenuTela()

@@ -99,6 +99,8 @@ class Produto:
         
     #procura um produto   
     def consultarProduto(self, desc_produto:str) -> list: 
+        """
+        """
         banco.conectar()
         produto = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, categoria_produto.desc_categoria_produto 
@@ -109,6 +111,8 @@ class Produto:
 
     #apaga produtos
     def deletarProduto(self, cod_produto:int) -> None:
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""DELETE FROM produto
                                 WHERE cod_produto='{cod_produto}'""")
@@ -116,6 +120,8 @@ class Produto:
         banco.desconectar()
 
     def atualizaEstoqueProd(self, cod_produto, qtd):
+        """
+        """
         banco.conectar()
         banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
                     WHERE cod_produto = {cod_produto} """)
