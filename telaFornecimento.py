@@ -80,9 +80,6 @@ class FornecimentoTela(Funcionalidades):
         self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
         self.btn_alterarFornecimento.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
 
-        self.btn_excluirFornecimento = Button(self.fornecimento_frame, text="Excluir", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050')
-        self.btn_excluirFornecimento.place(relx=0.88, rely=0.2, relwidth=0.09, height=40)
-
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
         self.listaFornecimento.heading("#0", text='')
         self.listaFornecimento.heading("#1", text='Produto')

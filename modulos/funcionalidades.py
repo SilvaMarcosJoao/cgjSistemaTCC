@@ -23,6 +23,10 @@ class Funcionalidades:
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def mudar_senha(self) -> None:
         """
+        Captura a senha digitada pelo usuário, verifica e envia a
+        função de alterar senha da classe usuário.
+        :param : não tem parâmetro.
+        :return: não tem retorno.
         """
         self.senha = self.et_nova_senha.get().strip()
         self.usuario.set_senha(self.et_confir_senha.get().strip())
@@ -36,11 +40,12 @@ class Funcionalidades:
             self.usuario.alterar_senha(self.usuario.get_senha())
             messagebox.showinfo('Sistema', 'Senha alterada com sucesso!')
             self.limpa_usuario()   
-
-            print(self.usuario.get_senha())  
     
     def limpa_usuario(self):
         """
+        Realiza a limpeza dos campos da tela usuário.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.et_nova_senha.delete(0, END)
         self.et_confir_senha.delete(0, END)
@@ -48,12 +53,16 @@ class Funcionalidades:
     # FUNÇÕES DOS BOTÕES DA TELA CATEGORIA DE PRODUTO
     def inserir_categoria(self):
         """
+        Captura os dados do campo descrição da tela categoria, verifica 
+        e envia para a função de cadastro da classe Categoria_produto.
+        :param: Não tem parâmetro.
+        :param: Não tem retorno.
         """
-        self.desc = self.et_desc_categoria.get().strip()
-        if self.desc == '':
+        self.categoria.set_desc_categoria_produto(self.et_desc_categoria.get().strip())
+        if self.categoria.get_desc_categoria_produto() == '':
             messagebox.showwarning('Alerta', 'Insira da descrição da categoria')
         else:
-            self.categoria.cadastrarCategoria(self.desc)
+            self.categoria.cadastrarCategoria(self.categoria.get_desc_categoria_produto())
             messagebox.showinfo('Info', 'Categoria de produto cadastrada com sucesso!')
             self.limpa_categoria()
 
@@ -73,23 +82,24 @@ class Funcionalidades:
         """
         """
         self.cod = self.et_cod_categoria.get().strip()
-        self.desc = self.et_desc_categoria.get().strip()
-        if self.desc == '':
+        self.categoria.set_desc_categoria_produto(self.et_desc_categoria.get().strip())
+        if self.categoria.get_desc_categoria_produto() == '':
             messagebox.showwarning('Alerta', 'Exiba as categorias para editar e selecione')
-        elif len(self.desc) > 15:
+        elif len(self.categoria.get_desc_categoria_produto()) > 15:
             messagebox.showwarning('Alerta','Preencha a descrição de categoria corretamente!')
         else:
-            self.categoria.alterarCategoria(self.cod, self.desc)
+            self.categoria.alterarCategoria(self.cod, self.categoria.get_desc_categoria_produto())
             messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
             self.limpa_categoria()
             self.exibir_categoria()
 
     def excluir_categoria(self):
         """
+
         """
         self.cod = self.et_cod_categoria.get().strip()
         if len(self.cod) == 0:
-            messagebox.showerror('Erro', 'Não foi possível deletar a categoria')
+            messagebox.showwarning('Erro', 'Não foi possível deletar a categoria, \nselecione-a antes de excluir.')
         else:
             self.categoria.deletarCategoria(self.cod)
             messagebox.showinfo('Info', 'Categoria excluída com sucesso!')
@@ -108,6 +118,9 @@ class Funcionalidades:
              
     def limpa_categoria(self):
         """
+        Realiza a limpeza dos campos da tela categoria.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.et_cod_categoria.delete(0, END)
         self.et_desc_categoria.delete(0, END)
@@ -180,12 +193,11 @@ class Funcionalidades:
         self.mod_produto = self.et_mode_produto.get().strip()
         self.preco_compra = self.et_preco_comp_produto.get().strip()
         self.preco_venda = self.et_preco_ven_produto.get().strip()
-        self.qtd_produto = self.et_qtd_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
         self.cod_categoria = [self.cat]
         print(self.cat)
         try:
-            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.qtd_produto == '' or self.cod_categoria == '':
+            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_categoria == '':
                 messagebox.showwarning('Alerta', 'Por favor, Selecione um produto para alterar')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
@@ -194,7 +206,7 @@ class Funcionalidades:
             else:
                 self.produto.alterarProduto(self.cod_produto, self.desc_produto, 
                                             self.mod_produto, self.preco_compra, 
-                                            self.preco_venda, self.qtd_produto)
+                                            self.preco_venda)
                 
                 self.limpa_produto()
                 messagebox.showinfo('Informação', 'Produto alterado com sucesso!')
@@ -286,7 +298,6 @@ class Funcionalidades:
         self.cep = self.et_cep_cliente.get().strip()      
         self.cidade = self.et_cidade_cliente.get().strip()
         self.estado = self.et_estado_cliente.get().strip()
-
         try:
             if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
                 messagebox.showwarning('Alerta', 'Preencha os campos!')
@@ -320,13 +331,15 @@ class Funcionalidades:
         """
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarCliente()
-        if len(self.lista) == 0:
-            messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
-        else:
-            for n in self.lista:
-                self.et_cod_cliente.config(state='normal')
-                self.listaCliente.insert('',END, values=n)
-
+        try:
+            if len(self.lista) == 0:
+                messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
+            else:
+                for n in self.lista:
+                    self.et_cod_cliente.config(state='normal')
+                    self.listaCliente.insert('',END, values=n)
+        except:
+            messagebox.showerror('Erro', 'Erro ao listar clientes')
 
     def buscar_cliente(self):
         """
@@ -505,8 +518,7 @@ class Funcionalidades:
                                              self.logradouro, self.numero, 
                                              self.cep,self.cidade, 
                                              self.estado)
-                self.limpa_fornecedor()
-                
+                self.limpa_fornecedor()  
         except:
             messagebox.showerror('Erro', 'Houve um erro inesperado!')
                 
@@ -552,7 +564,6 @@ class Funcionalidades:
         self.cidade = self.et_cidade_fornecedor.get().strip()
         self.estado = self.et_estado_fornecedor.get().strip()
         try:
-            
             if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
                 messagebox.showwarning('Alerta', 'Preencha os campos!')
             elif len(self.cnpj) != 11:
@@ -675,19 +686,25 @@ class Funcionalidades:
         """
         self.listaFornecimento.delete(*self.listaFornecimento.get_children())
         self.resultadoForn = self.fornecimento.listar_fornecimento()
-        for r in self.resultadoForn:
-            self.listaFornecimento.insert('', END,values=r)
-
-
+        try:
+            if len(self.resultadoForn) == 0:
+                messagebox.showwarning('Alerta', 'Não fornecimento registrado')
+            else:
+                for r in self.resultadoForn:
+                    self.listaFornecimento.insert('', END,values=r)
+        except:
+            messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
     def editar_fornecimento(self):
+        
         pass
-    
-    def duplo_clique_fornecimento(self, evento):
+
+        
+    def duplo_clique_fornecimento(self, event):
         self.limpa_fornecimento()
         self.listaFornecimento.selection()
         for c in self.listaFornecimento.selection():
-            col1, col2, col3, col4 = self.listaFornecimento.item(c, 'value')
+            col1, col2, col3, col4 = self.listaFornecimento.item(c, 'values')
             self.comboxProduto.insert(END, col1)
             self.comboxFornecedor.insert(END, col2)
             self.et_qtd_fornecida.insert(END, col3)
@@ -705,9 +722,10 @@ class Funcionalidades:
     def produtosVenda(self):
         self.prodVenda = self.produto.listarProduto()
         
+
         self.exibirProdutos = []
         for i in range(0, len(self.prodVenda)):
-            self.exibirProdutos.append(self.prodVenda[i][1])
+            self.exibirProdutos.append(self.prodVenda[i][1:3])
         return self.exibirProdutos
         
     def clienteVenda(self):
@@ -773,9 +791,6 @@ class Funcionalidades:
             self.et_modelo_prod.insert(END, col3)
             self.et_preco_ven_produto.insert(END, col4)
             self.et_qtd_produto.delete(END, col5)
-            
-            
-
             
     def excluir_venda(self):
         """
