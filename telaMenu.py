@@ -5,7 +5,7 @@ from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
 from telaFornecimento import FornecimentoTela
 #from telaCliente import TelaCliente
-from telaProduto import TelaProduto
+from telaHistorico import TelaHistorico
 
 
 appMenu = Tk()
@@ -556,6 +556,11 @@ class MenuTela(Funcionalidades, Validadores):
         lbl_titulo_venda = Label(self.frameCadTelaVenda, text='VENDA', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
+        self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código:", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_cod_venda.place(relx=0.025, rely=0.06, height=20)
+        self.et_cod_venda = Entry(self.frameCadTelaVenda, state='disabled')
+        self.et_cod_venda.place(relx=0.125, rely=0.05, width=55, height=20)
+
         self.lbl_codprodt_venda = Label(self.frameCadTelaVenda, text="Código Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_codprodt_venda.place(relx=0.025, rely=0.1, height=20)
         self.et_codprodt_venda = Entry(self.frameCadTelaVenda)
@@ -624,7 +629,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=40)
 
-        self.btn_hist_venda = Button(self.frameCadTelaVenda, text='Histórico de \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=TelaProduto)
+        self.btn_hist_venda = Button(self.frameCadTelaVenda, text='Histórico de \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=TelaHistorico)
         self.btn_hist_venda.place(relx=0.88, rely=0.215, relwidth=0.09, height=40)
 
         self.btn_addprodt_venda = Button(self.frameCadTelaVenda, text='Adicionar \nProduto', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
@@ -690,6 +695,5 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaVenda.bind("<Double-1>", self.duplo_cliqueCliV)
 
         self.listaVenda.place(relx=0.05, rely=0.99, relwidth=0.9, relheight=0.5)'''
-
 
 MenuTela()

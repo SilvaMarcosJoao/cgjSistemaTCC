@@ -743,57 +743,47 @@ class Funcionalidades:
     def inserir_venda(self):
         """
         """
-        pass
-    
-    def duplo_cliqueCliV(self, event):
-        """
-        """
-
-        self.listaClienteTela.delete(*self.listaClienteTela.get_children())
-        self.listaClienteTela.selection()
-
-        for i in self.listaClienteTela.selection():
-            self.listaVenda.insert('', END,values=i)
-
-        self.listaClienteTela.selection()
-        for i in self.listaClienteTela.selection():
-            col1, col2, col3 = self.listaClienteTela.item(i, 'values')
-            self.et_cod_cliente.insert(END, col1)
-            self.et_nome_cliente.insert(END, col2)
-            self.et_cpf_cliente.insert(END, col3)
-
-    def duplo_cliqueProdV(self, event):
-        """
-        """
-        self.listaProdTela.selection()
-        for i in self.listaProdTela.selection():
-            col1,col2,col3, col4, col5 = self.listaProdTela.item(i, 'values')
-            self.et_cod_prod.insert(None, col1)
-            self.et_desc_prod.insert(END, col2)
-            self.et_modelo_prod.insert(END, col3)
-            self.et_preco_ven_produto.insert(END, col4)
-            self.et_qtd_produto.delete(END, col5)
-            
-            
-
-            
-    def excluir_venda(self):
-        """
-        """
-        self.cod = self.et_cod_venda.get()
-        try:
-            if len(self.cod) == 0:
-                messagebox.showerror("Alerta", "Venda não encontrada, impossível deletar.")
-            else:
-                self.venda.excluirVenda(self.cod)
-                messagebox.showinfo('Sistema, Venda deletada com sucesso.')
-                self.lista_Venda()
-        except: 
-            messagebox.showerror('Erro', 'Não foi possível deletar a Venda.')
-        pass
+        pass 
     
     def calcular_total(self):
         """
         """
         pass
     
+    def consultarVenda(self):
+        self.listaHistTela.delete(*self.listaHistTela.get_children())
+        self.codv = self.et_consulta_venda.get()
+        if len(self.codv) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resVen = self.venda.consultarVenda(self.codv)
+            if len(self.resVen) == 0:
+                messagebox.showinfo('Informação', 'Nenhuma venda encontrada.')
+            else:
+                for v in self.resVen:
+                    self.listaHistTela.insert('',END, values=v)
+    
+    
+    def listarVenda(self):
+        self.listaHistTela.delete(*self.listaHistTela.get_children())
+        self.listav = self.venda.listarVendas()
+        if len(self.listav) == 0:
+            messagebox.showinfo('Informação', 'Não há vendas cadastrados.')
+        else:
+            for i in self.listav:
+                self.et_cod_venda.config(state='normal')
+                self.listaHistTela.insert('',END, values = i)
+    
+    def listar_vendas_por_dia(self, data):
+        vendas_dia = []
+        for venda in self.vendas:
+            if venda[1].date() == data.date():
+                vendas_dia.append(venda)
+        return vendas_dia
+    
+    def listar_vendas_por_mes(self, mes, ano):
+        vendas_mes = []
+        for venda in self.vendas:
+            if venda[1].month == mes and venda[1].year == ano:
+                vendas_mes.append(venda)
+        return vendas_mes
