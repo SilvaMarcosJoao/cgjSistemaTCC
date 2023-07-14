@@ -793,10 +793,10 @@ class Funcionalidades:
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
-        self.prodVenda = self.produto.listarProduto()
+        self.prodVenda = self.produto.consultaProdutoVenda()
         self.exibirProdutos = []
         for i in range(0, len(self.prodVenda)):
-            self.exibirProdutos.append(self.prodVenda[i][0:3])
+            self.exibirProdutos.append(self.prodVenda[i])
         return self.exibirProdutos
         
     def clienteVenda(self):
@@ -809,23 +809,39 @@ class Funcionalidades:
         
     def adicionaItens_venda(self):
         """
-        """
-        self.res = self.produtosVenda()
+        
+        self.produtosVenda()
+        self.res = self.prodVenda
         for i  in range(0, len(self.res)):
             self.busc = self.res[i][0]
             self.produtoadd = self.produto.consultaProdutoVenda(self.busc)
 
         for v in self.produtoadd:
             self.listaAddItens.insert('', END, values=v)
+        print(self.res)"""
+        self.produtoadd = [self.comboxProdt_venda.get()]
+        self.exibiProd = []
+        
+
+        for c in range(0, len(self.produtoadd)):
+            self.exibiProd.append(self.produtoadd[c])
+            
+        for p in self.exibiProd:
+            self.listaAddItens.insert('', END, values=p)
+            
+            
 
 
+        #for v in self.produtoadd:
+        #   self.listaAddItens.insert('', END, values=v)
 
 
-
-
-
-
-
+    def remover_produto_venda(self):
+        self.listaAddItens.selection()
+        for i in self.listaAddItens.selection():
+         
+            self.listaAddItens.delete(i)
+        
 
 
 

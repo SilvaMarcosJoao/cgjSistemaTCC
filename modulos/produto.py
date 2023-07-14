@@ -133,10 +133,10 @@ class Produto:
         return produtos
         
 
-    def consultaProdutoVenda(self, cod: int) -> list:
+    def consultaProdutoVenda(self) -> list:
         banco.conectar()
         produto=banco.cursor.execute(f"""SELECT cod_produto, desc_produto,
-                                         modelo_produto, preco_venda_produto,qtd_estoque FROM PRODUTO 
-                                           WHERE cod_produto ='{cod}' """).fetchall()   
+                                         modelo_produto, preco_venda_produto FROM PRODUTO 
+                                         """).fetchall()   
         banco.desconectar()
         return produto

@@ -52,7 +52,7 @@ class TelaItens(Funcionalidades, Venda):
         self.btn_add_prod.place(relx=0.87, rely=0.01, relwidth=0.08, height=40)
         
         #self.imgRemov = PhotoImage(file="../imagens/remover.png")
-        self.btn_remov_prod = Button(self.add_frame, text='Remover', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_remov_prod = Button(self.add_frame, text='Remover', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.remover_produto_venda)
         self.btn_remov_prod.place(relx=0.87, rely=0.1, relwidth=0.08, height=40)
         
         #self.btn_lista_vendaM = Button(self.add_frame,   text='Encerrar Compra', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listar_vendas_por_mes)
