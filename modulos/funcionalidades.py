@@ -8,7 +8,6 @@ from modulos.fornecimento import Fornecimento
 from modulos.venda import Venda
 from modulos.produto import Produto
 
-
 class Funcionalidades:
 
     # OBJETOS DAS CLASSES 
@@ -44,7 +43,7 @@ class Funcionalidades:
                  messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
             else:
                 if self.resUser[0] == self.captusuario and self.resUser[1] == self.captsenha:
-                   messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!') 
+                    pass
                 else:
                     messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
         except:
@@ -797,7 +796,7 @@ class Funcionalidades:
         self.prodVenda = self.produto.listarProduto()
         self.exibirProdutos = []
         for i in range(0, len(self.prodVenda)):
-            self.exibirProdutos.append(self.prodVenda[i][1:3])
+            self.exibirProdutos.append(self.prodVenda[i][0:3])
         return self.exibirProdutos
         
     def clienteVenda(self):
@@ -808,23 +807,36 @@ class Funcionalidades:
         return self.exibirDados
         
         
-    def adiciona_venda(self):
+    def adicionaItens_venda(self):
         """
         """
-        self.cod_prod = None
-        self.cod_cliente = None
-        self.resProduto = self.produtosVenda()
-        self.inserir
+        self.res = self.produtosVenda()
+        for i  in range(0, len(self.res)):
+            self.busc = self.res[i][0]
+            self.produtoadd = self.produto.consultaProdutoVenda(self.busc)
+
+        for v in self.produtoadd:
+            self.listaAddItens.insert('', END, values=v)
 
 
-        self.resCliente = self.comboxCliente.get()
-        self.clienteVenda()
-        for i in self.cliVenda:
-            if self.resCliente in i:
-                self.cod_cliente = i[1]
-                self.self.listaVenda.insert('', END, values=self.resCliente)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
     def remover_produto_venda(self, produto):
         self.produtos.remove(produto)
     
@@ -881,3 +893,4 @@ class Funcionalidades:
     def adicionar(self):
         self.cod_prod = self.et_cod_produto
         self.qtd = self.qtd_venda
+'''

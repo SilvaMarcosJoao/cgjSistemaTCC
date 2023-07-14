@@ -7,13 +7,12 @@ from modulos.validacoes import Validadores
 from telaAdItens import TelaItens
 
 
-appMenu = Tk()
 
 class MenuTela(Funcionalidades, Validadores):
 
     lmtsen = None
     def __init__(self) -> None:
-        self.appMenu = appMenu
+        self.appMenu = Toplevel()
         self.configTelamenu()
         self.frame_menu()
         self.widgets_menu_left()
@@ -567,10 +566,10 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
-        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
+        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=50)
 
-        self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
+        self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_limpar_venda.place(relx=0.88, rely=0.215, relwidth=0.09, height=50)
 
      
@@ -666,4 +665,4 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
     
-MenuTela()
+#MenuTela()

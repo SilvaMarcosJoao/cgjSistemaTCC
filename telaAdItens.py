@@ -47,12 +47,12 @@ class TelaItens(Funcionalidades, Venda):
         self.et_qtd_venda = Entry(self.add_frame)
         self.et_qtd_venda.place(relx=0.12, rely=0.16, width=70, height=20) 
 
-        self.imgAdd = PhotoImage(file="imagens/adicionar.png")
-        self.btn_add_prod = Button(self.add_frame, image=self.imgAdd, relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listarVenda)
+        #self.imgAdd = PhotoImage(file="../imagens/adicionar.png")
+        self.btn_add_prod = Button(self.add_frame, text='Adicionar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.adicionaItens_venda)
         self.btn_add_prod.place(relx=0.87, rely=0.01, relwidth=0.08, height=40)
         
-        self.imgRemov = PhotoImage(file="imagens/remover.png")
-        self.btn_remov_prod = Button(self.add_frame, image=self.imgRemov, relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listar_vendas_por_dia)
+        #self.imgRemov = PhotoImage(file="../imagens/remover.png")
+        self.btn_remov_prod = Button(self.add_frame, text='Remover', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_remov_prod.place(relx=0.87, rely=0.1, relwidth=0.08, height=40)
         
         #self.btn_lista_vendaM = Button(self.add_frame,   text='Encerrar Compra', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.listar_vendas_por_mes)
@@ -64,8 +64,8 @@ class TelaItens(Funcionalidades, Venda):
         self.listaAddItens.heading('#1', text='Cód produto')
         self.listaAddItens.heading('#2', text='Descrição')
         self.listaAddItens.heading('#3', text='Modelo')
-        self.listaAddItens.heading('#4', text='Quantidade')
-        self.listaAddItens.heading('#5', text='Valor')
+        self.listaAddItens.heading('#4', text='Valor Unitário')
+        self.listaAddItens.heading('#5', text='Quantidade')
         
         
         self.listaAddItens.column('#0', width=1, anchor='center')

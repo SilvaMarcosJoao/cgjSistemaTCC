@@ -1,6 +1,6 @@
 from tkinter import *
 from telaMudaSenha import MudarSenhaTela
-
+from telaMenu import MenuTela
 
 appLogin = Tk()
 
@@ -27,25 +27,25 @@ class LoginTela:
         self.appLogin.resizable(False, False)
         
         self.titulo_login = Label(self.appLogin, text="SGZurc",fg='#FFF')
-        self.titulo_login.place(relx=0.4, rely=0.12)
+        self.titulo_login.place(relx=0.4, rely=0.1)
         self.titulo_login.configure(background='#585858',font=("Roboto", 24,"bold"))
 
     def widgets_tela_login(self):
         # Criação dos widgets (rótulos, campos de entrada e botão)
         self.lbl_usuario = Label(self.appLogin, text="Usuário:",fg='#FFF')
-        self.lbl_usuario.place(relx=0.3, rely=0.31)
-        self.lbl_usuario.configure(background='#585858',font=("Roboto", 12))
+        self.lbl_usuario.place(relx=0.3, rely=0.3)
+        self.lbl_usuario.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_usuario = Entry(appLogin, font=('Roboto', 12))
-        self.et_usuario.place(relx=0.43, rely=0.32, width=120)
+        self.et_usuario.place(relx=0.42, rely=0.3, width=120)
 
         self.lbl_senha = Label(self.appLogin, text="Senha:",fg='#FFF')
-        self.lbl_senha.place(relx=0.32, rely=0.45)
-        self.lbl_senha.configure(background='#585858',font=("Roboto", 12))
+        self.lbl_senha.place(relx=0.32, rely=0.4)
+        self.lbl_senha.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_senha = Entry(self.appLogin, font=('Roboto', 12), show="*")  
-        self.et_senha.place(relx=0.43, rely=0.46, width=120)
+        self.et_senha.place(relx=0.42, rely=0.4, width=120)
 
         self.img_logar = PhotoImage(file="imagens/logar.png")
-        self.btn_login = Button(self.appLogin, image=self.img_logar,bg="#FFF")
+        self.btn_login = Button(self.appLogin, image=self.img_logar,bg="#FFF", command=MenuTela)
         self.btn_login.place(relx=0.44, rely=0.59, width=90, height=50)
 
         self.img_mudar_senha = PhotoImage(file="imagens/alterar_senha.png")
