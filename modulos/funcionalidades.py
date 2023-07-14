@@ -8,6 +8,7 @@ from modulos.fornecimento import Fornecimento
 from modulos.venda import Venda
 from modulos.produto import Produto
 
+
 class Funcionalidades:
 
     # OBJETOS DAS CLASSES 
@@ -22,12 +23,16 @@ class Funcionalidades:
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def efetuarLogin(self) -> None:
+        """
+        Captura o usuario e senha digitada nos campos de login, envia
+        para a função da classe usuário verificar esses dados e autorizar
+        o login.
+        :param : não tem parâmetro.
+        :return: não tem retorno.
+        """
         self.captusuario = self.et_usuario.get().strip()
         self.captsenha = self.et_senha.get().strip()
-
-         
-        
-        
+        self.resUser = self.usuario.logar()
         try:
             if len(self.captusuario) == 0 and len(self.captsenha) == 0:
                 messagebox.showwarning('Alerta', 'Preencha os campos para logar')
@@ -38,15 +43,14 @@ class Funcionalidades:
             elif self.captusuario != '' or self.captsenha != '':
                  messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
             else:
-                if self.captusuario != '' or self.captsenha != '':
+                if self.resUser[0] == self.captusuario and self.resUser[1] == self.captsenha:
+                   messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!') 
+                else:
                     messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
-                    
-            
         except:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
 
-           
-
+    
     def mudar_senha(self) -> None:
         """
         Captura a senha digitada pelo usuário, verifica e envia a
@@ -669,6 +673,9 @@ class Funcionalidades:
     
     def limpa_fornecedor(self):
         """
+        Realiza a limpeza dos campos da tela fornecedor.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.et_cod_fornecedor.delete(0,END)
         self.et_cnpj_fornecedor.delete(0,END)
@@ -682,16 +689,19 @@ class Funcionalidades:
         self.et_estado_fornecedor.delete(0,END)
        
 
-    # FUNÇÕES DOS BOTÕES DA SUBTELA FORNECIMENTO
+    # FUNÇÕES DOS BOTÕES DA TELA FORNECIMENTO
     def fornecimentoProduto(self):
+        """
+        """
         self.dadosProd = self.produto.listarProduto()
-        
         self.exibirProdutos = []
         for i in range(0, len(self.dadosProd)):
-            self.exibirProdutos.append(self.dadosProd[i][1])
+            self.exibirProdutos.append(self.dadosProd[i][1:3])
         return self.exibirProdutos
     
     def fornecimentoFornecedor(self):
+        """
+        """
         self.dadosForn = self.fornecedor.listarFornecedor()
         self.exibirDados = []
         for c in range(0, len(self.dadosForn)):
@@ -738,6 +748,8 @@ class Funcionalidades:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
     def editar_fornecimento(self):
+        """
+        """
         self.alt_cod_fornece = None
         try:
             self.resForn = self.comboxFornecedor.get().strip()
@@ -763,8 +775,8 @@ class Funcionalidades:
             col1, col2, col3, col4 = self.listaFornecimento.item(c, 'values')
             self.comboxProduto.insert(END, col1)
             self.comboxFornecedor.insert(END, col2)
-            self.et_qtd_fornecida.insert(END, col3)
-            self.et_data_fornecimento.insert(END, col4)
+            self.et_data_fornecimento.insert(END, col3)
+            self.et_qtd_fornecida.insert(END, col4)
 
     def limpa_fornecimento(self):
         """
@@ -777,7 +789,7 @@ class Funcionalidades:
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
 
-    
+
 
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
@@ -789,30 +801,28 @@ class Funcionalidades:
         return self.exibirProdutos
         
     def clienteVenda(self):
-        self.cliVenda = self.cliente.listarCliente()
-        
+        self.cliVenda = self.cliente.listarCliente() 
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
             self.exibirDados.append(self.cliVenda[c][0:3])
         return self.exibirDados
         
         
-    def adiciona_atoresvenda(self):
-        [(1, 'nome', ''), ()]
+    def adiciona_venda(self):
         """
         """
         self.cod_prod = None
         self.cod_cliente = None
         self.resProduto = self.produtosVenda()
-        for v in self.prodVenda:
-            if self.resProduto in v:
-                self.cod_prod = v[0]
+        self.inserir
+
 
         self.resCliente = self.comboxCliente.get()
         self.clienteVenda()
         for i in self.cliVenda:
             if self.resCliente in i:
                 self.cod_cliente = i[1]
+                self.self.listaVenda.insert('', END, values=self.resCliente)
 
 
     def remover_produto_venda(self, produto):
@@ -871,6 +881,3 @@ class Funcionalidades:
     def adicionar(self):
         self.cod_prod = self.et_cod_produto
         self.qtd = self.qtd_venda
-
-        
-
