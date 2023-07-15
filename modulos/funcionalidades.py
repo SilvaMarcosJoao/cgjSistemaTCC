@@ -808,17 +808,6 @@ class Funcionalidades:
         
         
     def adicionaItens_venda(self):
-        """
-        
-        self.produtosVenda()
-        self.res = self.prodVenda
-        for i  in range(0, len(self.res)):
-            self.busc = self.res[i][0]
-            self.produtoadd = self.produto.consultaProdutoVenda(self.busc)
-
-        for v in self.produtoadd:
-            self.listaAddItens.insert('', END, values=v)
-        print(self.res)"""
         self.produtoadd = [self.comboxProdt_venda.get()]
         self.exibiProd = []
         
@@ -828,12 +817,6 @@ class Funcionalidades:
             
         for p in self.exibiProd:
             self.listaAddItens.insert('', END, values=p)
-            
-            
-
-
-        #for v in self.produtoadd:
-        #   self.listaAddItens.insert('', END, values=v)
 
 
     def remover_produto_venda(self):
@@ -841,72 +824,3 @@ class Funcionalidades:
         for i in self.listaAddItens.selection():
          
             self.listaAddItens.delete(i)
-        
-
-
-
-
-
-
-
-
-
-
-'''
-    def remover_produto_venda(self, produto):
-        self.produtos.remove(produto)
-    
-    def inserir_venda(self):
-        """
-        """
-        pass 
-    
-    def calcular_total(self):
-        """
-        """
-        pass
-    
-    def consultarVenda(self):
-        self.listaHistTela.delete(*self.listaHistTela.get_children())
-        self.codv = self.et_consulta_venda.get()
-        if len(self.codv) == 0:
-            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
-        else:
-            self.resVen = self.venda.consultarVenda(self.codv)
-            if len(self.resVen) == 0:
-                messagebox.showinfo('Informação', 'Nenhuma venda encontrada.')
-            else:
-                for v in self.resVen:
-                    self.listaHistTela.insert('',END, values=v)
-    
-    
-    def listarVenda(self):
-        self.listaHistTela.delete(*self.listaHistTela.get_children())
-        self.listav = self.venda.listarVendas()
-        if len(self.listav) == 0:
-            messagebox.showinfo('Informação', 'Não há vendas cadastrados.')
-        else:
-            for i in self.listav:
-                self.et_cod_venda.config(state='normal')
-                self.listaHistTela.insert('',END, values = i)   
-
-
-    def listar_vendas_por_dia(self, data):
-        vendas_dia = []
-        for venda in self.vendas:
-            if venda[1].date() == data.date():
-                vendas_dia.append(venda)
-        return vendas_dia
-    
-    def listar_vendas_por_mes(self, mes, ano):
-        vendas_mes = []
-        for venda in self.vendas:
-            if venda[1].month == mes and venda[1].year == ano:
-                vendas_mes.append(venda)
-        return vendas_mes
-
-
-    def adicionar(self):
-        self.cod_prod = self.et_cod_produto
-        self.qtd = self.qtd_venda
-'''

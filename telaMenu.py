@@ -665,4 +665,4 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
     
-#MenuTela()
+MenuTela()
