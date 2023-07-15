@@ -1,11 +1,13 @@
 from tkinter import *
 from telaMudaSenha import MudarSenhaTela
+from tkinter import messagebox
 from telaMenu import MenuTela
+from modulos.usuario import Usuario
 
 appLogin = Tk()
 
-class LoginTela:
-
+class LoginTela():
+    usuario = Usuario()
     def __init__(self) -> None:
         self.appLogin = appLogin
         self.config_tela_login()
@@ -45,13 +47,49 @@ class LoginTela:
         self.et_senha.place(relx=0.42, rely=0.4, width=120)
 
         self.img_logar = PhotoImage(file="imagens/logar.png")
-        self.btn_login = Button(self.appLogin, image=self.img_logar,bg="#FFF", command=MenuTela)
+        self.btn_login = Button(self.appLogin, image=self.img_logar,bg="#FFF", command=self.efetuarLogin)
         self.btn_login.place(relx=0.44, rely=0.59, width=90, height=50)
 
         self.img_mudar_senha = PhotoImage(file="imagens/alterar_senha.png")
         self.btn_alterarsenha = Button(self.appLogin, bd=0, image=self.img_mudar_senha, bg='#FFF', fg='#FFF', command=MudarSenhaTela)
         self.btn_alterarsenha.place(relx=0.44, rely=0.8, width=90, height=50)
-
+    
+    def efetuarLogin(self) -> None:
+        """
+        Captura o usuario e senha digitada nos campos de login, envia
+        para a função da classe usuário verificar esses dados e autorizar
+        o login.
+        :param : não tem parâmetro.
+        :return: não tem retorno.
+        """
+        self.captusuario = self.et_usuario.get().strip()
+        self.captsenha = self.et_senha.get().strip()
+        self.resUser = self.usuario.logar()
+        try:
+            if len(self.captusuario) == 0 and len(self.captsenha) == 0:
+                messagebox.showwarning('Alerta', 'Preencha os campos para logar')
+            elif len(self.captusuario) < 2 or len(self.captusuario) > 20:
+                messagebox.showwarning('Alerta', 'O usuário não atende aos requisitos')
+            elif len(self.captsenha) != 8:
+                messagebox.showwarning('Alerta', 'A senha não atende aos requisitos')
+            else:
+                if self.resUser[0][0] == self.captusuario and self.resUser[0][1] == self.captsenha:
+                    self.limpa_usuario()
+                    
+                    MenuTela()
+                    self.appLogin.destroy()
+                else:
+                    print(self.resUser[0])
+                    messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
+                    self.limpa_usuario()
+        except:
+            messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
+        
+        
+    def limpa_usuario(self):
+        self.et_usuario.delete(0,END)
+        self.et_senha.delete(0,END)
+    
 LoginTela()
    
 

@@ -34,7 +34,7 @@ class Usuario:
     def set_senha(self, senha:str) -> None:
         self.__senha = senha
 
-    def logar(self, usuario:str, senha:str) -> list:
+    def logar(self) -> list:
         """
         :param:
         :return:
