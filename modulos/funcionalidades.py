@@ -8,6 +8,8 @@ from modulos.fornecimento import Fornecimento
 from modulos.venda import Venda
 from modulos.produto import Produto
 
+
+
 class Funcionalidades:
 
     # OBJETOS DAS CLASSES 
@@ -21,35 +23,9 @@ class Funcionalidades:
 
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
-    def efetuarLogin(self) -> None:
-        """
-        Captura o usuario e senha digitada nos campos de login, envia
-        para a função da classe usuário verificar esses dados e autorizar
-        o login.
-        :param : não tem parâmetro.
-        :return: não tem retorno.
-        """
-        self.captusuario = self.et_usuario.get().strip()
-        self.captsenha = self.et_senha.get().strip()
-        self.resUser = self.usuario.logar()
-        try:
-            if len(self.captusuario) == 0 and len(self.captsenha) == 0:
-                messagebox.showwarning('Alerta', 'Preencha os campos para logar')
-            elif len(self.captusuario) < 2 or len(self.captusuario) > 20:
-                messagebox.showwarning('Alerta', 'O usuário não atende aos requisitos')
-            elif len(self.captsenha) != 8:
-                messagebox.showwarning('Alerta', 'A senha não atende aos requisitos')
-            elif self.captusuario != '' or self.captsenha != '':
-                 messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
-            else:
-                if self.resUser[0] == self.captusuario and self.resUser[1] == self.captsenha:
-                    pass
-                else:
-                    messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
-        except:
-            messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
+    def finalizar(self) -> None:
+        self.appMenu.destroy()
 
-    
     def mudar_senha(self) -> None:
         """
         Captura a senha digitada pelo usuário, verifica e envia a
@@ -793,34 +769,44 @@ class Funcionalidades:
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
+        
         self.prodVenda = self.produto.consultaProdutoVenda()
+
         self.exibirProdutos = []
+
         for i in range(0, len(self.prodVenda)):
             self.exibirProdutos.append(self.prodVenda[i])
         return self.exibirProdutos
+        
         
     def clienteVenda(self):
         self.cliVenda = self.cliente.listarCliente() 
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
-            self.exibirDados.append(self.cliVenda[c][0:3])
+            self.exibirDados.append(self.cliVenda[c])
         return self.exibirDados
         
         
     def adicionaItens_venda(self):
-        self.produtoadd = [self.comboxProdt_venda.get()]
+        self.produtoadd = [self.comboxProdt_venda.get().split()]
         self.exibiProd = []
         
-
         for c in range(0, len(self.produtoadd)):
             self.exibiProd.append(self.produtoadd[c])
+            self.exibiProd.append(self.et_qtd_venda.get())
             
         for p in self.exibiProd:
             self.listaAddItens.insert('', END, values=p)
+
+        print(self.exibiProd)
+        #self.et_qtd_venda.get()
+
+
+        #for v in self.produtoadd:
+        #   self.listaAddItens.insert('', END, values=v)
 
 
     def remover_produto_venda(self):
         self.listaAddItens.selection()
         for i in self.listaAddItens.selection():
-         
             self.listaAddItens.delete(i)
