@@ -510,7 +510,6 @@ class Funcionalidades:
         self.cep = self.et_cep_fornecedor.get().strip()
         self.cidade = self.et_cidade_fornecedor.get().strip()
         self.estado = self.et_estado_fornecedor.get().strip()
-        
         try:
             
             if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
@@ -710,6 +709,9 @@ class Funcionalidades:
 
     def exibir_fornecimento(self):
         """
+        Exibe os dados retornados pela função de consulta da classe fornecimento.
+        :param: Não ná parâmetro.
+        :return: Não há retorno.
         """
         self.listaFornecimento.delete(*self.listaFornecimento.get_children())
         self.resultadoForn = self.fornecimento.listar_fornecimento()
@@ -769,14 +771,13 @@ class Funcionalidades:
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
-        
         self.prodVenda = self.produto.consultaProdutoVenda()
-
         self.exibirProdutos = []
+
 
         for i in range(0, len(self.prodVenda)):
             self.exibirProdutos.append(self.prodVenda[i])
-        return self.exibirProdutos
+        return self.prodVenda
         
         
     def clienteVenda(self):
@@ -788,38 +789,35 @@ class Funcionalidades:
         
         
     def adicionaItens_venda(self):
-        self.produtoadd = [self.comboxProdt_venda.get().split()]
+        self.produtoadd = [self.comboxProdt_venda.get()]
         self.exibiProd = []
         
+        self.produtos = self.produtosVenda()
         for c in range(0, len(self.produtoadd)):
             self.exibiProd.append(self.produtoadd[c])
-            self.exibiProd.append(self.et_qtd_venda.get())
             
         for p in self.exibiProd:
             self.listaAddItens.insert('', END, values=p)
 
-        print(self.exibiProd)
-        #self.et_qtd_venda.get()
+        for v in self.exibiProd:
+            for pr in self.produtos:
+                if v[0] == pr[0]:
+                    self.produtos.append(self.et_qtd_venda.get())
+        print(self.produtos)
 
-
-        #for v in self.produtoadd:
-        #   self.listaAddItens.insert('', END, values=v)
+        
 
 
     def remover_produto_venda(self):
+        """
+        Remove os itens do carrinho.
+        :param: Não tem parâmetros.
+        :return: Não tem retorno.
+        """
         self.listaAddItens.selection()
         for i in self.listaAddItens.selection():
             self.listaAddItens.delete(i)
         
-
-
-
-
-
-
-
-
-
 
 '''
     def inserir_venda(self):
@@ -871,8 +869,4 @@ class Funcionalidades:
                 vendas_mes.append(venda)
         return vendas_mes
 
-
-    def adicionar(self):
-        self.cod_prod = self.et_cod_produto
-        self.qtd = self.qtd_venda
 '''

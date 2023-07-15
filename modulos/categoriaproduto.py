@@ -25,6 +25,9 @@ class CategoriaProduto:
 
     def cadastrarCategoria(self, desc_categoria:str) -> None:
         """
+        Cadastra a categoria dos produtos.
+        :param: desc_categoria. 
+        :return: Não há retorno. 
         """
         banco.conectar()
         banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
@@ -43,6 +46,9 @@ class CategoriaProduto:
 
     def listarCategoria(self) -> list:
         """
+        Exibe as categorias cadastradas.
+        :param: não há parâmetros.
+        :return: retorna uma lista com as categorias.
         """
         banco.conectar()
         categoria =banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     

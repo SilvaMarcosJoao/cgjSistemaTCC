@@ -45,12 +45,10 @@ class Usuario:
     
     def alterar_senha(self, senha:str) -> None:
             """
-            :param:
-            :return:
+            Altera a senha do usuário do sistema.
+            :param: senha, digitada pelo usuário.
+            :return: não há retorno.
             """
             bancoDado.conectar()
             bancoDado.cursor.execute(f""" UPDATE usuario SET senha= '{senha}' WHERE cod_usuario = 1 """)
             bancoDado.conexao.commit()
-        
-    def sair(self):
-        pass
