@@ -1,12 +1,12 @@
 from tkinter import *
 from telaMudaSenha import MudarSenhaTela
 from tkinter import messagebox
-from telaMenu import MenuTela
 from modulos.usuario import Usuario
+from modulos.funcionalidades import Funcionalidades
 
 appLogin = Tk()
 
-class LoginTela():
+class LoginTela(Funcionalidades):
     usuario = Usuario()
     def __init__(self) -> None:
         self.appLogin = appLogin
@@ -15,7 +15,7 @@ class LoginTela():
         self.appLogin.mainloop()
         
     def config_tela_login(self) -> None:
-        self.appLogin.title('Sistema de Gerenciamento (SGZurc)') 
+        self.appLogin.title('Sistema de Gerenciamento (SGZurc) - LOGIN') 
         self.appLogin.configure(bg='#585858')
         self.larTela = 600
         self.altTela = 350
@@ -35,24 +35,24 @@ class LoginTela():
     def widgets_tela_login(self):
         # Criação dos widgets (rótulos, campos de entrada e botão)
         self.lbl_usuario = Label(self.appLogin, text="Usuário:",fg='#FFF')
-        self.lbl_usuario.place(relx=0.3, rely=0.3)
+        self.lbl_usuario.place(relx=0.32, rely=0.3)
         self.lbl_usuario.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_usuario = Entry(appLogin, font=('Roboto', 12))
-        self.et_usuario.place(relx=0.42, rely=0.3, width=120)
+        self.et_usuario.place(relx=0.44, rely=0.3, width=120)
 
         self.lbl_senha = Label(self.appLogin, text="Senha:",fg='#FFF')
-        self.lbl_senha.place(relx=0.32, rely=0.4)
+        self.lbl_senha.place(relx=0.34, rely=0.4)
         self.lbl_senha.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_senha = Entry(self.appLogin, font=('Roboto', 12), show="*")  
-        self.et_senha.place(relx=0.42, rely=0.4, width=120)
+        self.et_senha.place(relx=0.44, rely=0.4, width=120)
 
         self.img_logar = PhotoImage(file="imagens/logar.png")
         self.btn_login = Button(self.appLogin, image=self.img_logar,bg="#FFF", command=self.efetuarLogin)
-        self.btn_login.place(relx=0.44, rely=0.59, width=90, height=50)
+        self.btn_login.place(relx=0.34, rely=0.59, width=180, height=50)
 
         self.img_mudar_senha = PhotoImage(file="imagens/alterar_senha.png")
         self.btn_alterarsenha = Button(self.appLogin, bd=0, image=self.img_mudar_senha, bg='#FFF', fg='#FFF', command=MudarSenhaTela)
-        self.btn_alterarsenha.place(relx=0.44, rely=0.8, width=90, height=50)
+        self.btn_alterarsenha.place(relx=0.34, rely=0.78, width=180, height=50)
     
     def efetuarLogin(self) -> None:
         """
@@ -75,15 +75,17 @@ class LoginTela():
             else:
                 if self.resUser[0][0] == self.captusuario and self.resUser[0][1] == self.captsenha:
                     self.limpa_usuario()
-                    
-                    MenuTela()
+            
                     self.appLogin.destroy()
+                    from telaMenu import MenuTela
+                    
                 else:
                     print(self.resUser[0])
                     messagebox.showwarning('Atenção', 'Usuário ou senha inválidos!')
                     self.limpa_usuario()
-        except:
+        except Exception as e:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
+            print(e)
         
         
     def limpa_usuario(self):

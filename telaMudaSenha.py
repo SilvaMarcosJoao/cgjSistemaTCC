@@ -32,18 +32,19 @@ class MudarSenhaTela(Funcionalidades):
     # Criação dos widgets (rótulos, campos de entrada e botão)
     def widgets_tela_muda_senha(self) -> None:
 
-        self.titulo_login = Label(self.mudasenhatela, text="SGZurc",fg='#FFFFFF')
-        self.titulo_login.place(relx=0.47, rely=0.15)
-        self.titulo_login.configure(background='#585858',font=("Roboto", 15,"bold"))
+        self.titulo_login_senha = Label(self.mudasenhatela, text="SGZurc",fg='#FFFFFF')
+        self.titulo_login_senha.place(relx=0.4, rely=0.1)
+        
+        self.titulo_login_senha.configure(background='#585858',font=("Roboto", 24,"bold"))
 
-        self.nova_senha = Label(self.mudasenhatela, text="Nova senha:",fg='#FFFFFF')
-        self.nova_senha.place(relx=0.26, rely=0.31)
+        self.nova_senha = Label(self.mudasenhatela, text="Nova senha:",fg='#FFFFFF', font=('Roboto', 12,'bold'))
+        self.nova_senha.place(relx=0.29, rely=0.31)
         self.nova_senha.configure(background='#585858',font=("Roboto", 12))
         self.et_nova_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')
         self.et_nova_senha.place(relx=0.44, rely=0.32, width=120)
 
         self.confirmar_senha = Label(self.mudasenhatela, text="Confirmar senha:",fg='#FFFFFF')
-        self.confirmar_senha.place(relx=0.19, rely=0.45)
+        self.confirmar_senha.place(relx=0.25, rely=0.45)
         self.confirmar_senha.configure(background='#585858',font=("Roboto", 12))
         self.et_confir_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')  
         self.et_confir_senha.place(relx=0.44, rely=0.46, width=120)

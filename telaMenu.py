@@ -6,13 +6,13 @@ from modulos.validacoes import Validadores
 #from telaCliente import TelaCliente
 from telaAdItens import TelaItens
 
-
+appMenu = Tk()
 
 class MenuTela(Funcionalidades, Validadores):
 
     lmtsen = None
     def __init__(self) -> None:
-        self.appMenu = Toplevel()
+        self.appMenu = appMenu
         self.configTelamenu()
         self.frame_menu()
         self.widgets_menu_left()
@@ -112,7 +112,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_venda.place(relx=0.08, rely=0.75, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
-        self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.appMenu.destroy)
+        self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.finalizar)
         self.btn_sair.place(relx=0.08, rely=0.85, width=150, height=50)
 
         self.img_ger_fornecimen = PhotoImage(file='./imagens/fornecimento.png')
@@ -665,4 +665,4 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
     
-#MenuTela()
+MenuTela()

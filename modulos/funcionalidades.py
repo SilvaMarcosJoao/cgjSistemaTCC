@@ -9,6 +9,7 @@ from modulos.venda import Venda
 from modulos.produto import Produto
 
 
+
 class Funcionalidades:
 
     # OBJETOS DAS CLASSES 
@@ -22,7 +23,9 @@ class Funcionalidades:
 
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
-    
+    def finalizar(self) -> None:
+        self.appMenu.destroy()
+
     def mudar_senha(self) -> None:
         """
         Captura a senha digitada pelo usuário, verifica e envia a
