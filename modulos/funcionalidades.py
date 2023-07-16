@@ -819,12 +819,38 @@ class Funcionalidades:
 
 
     
-'''
+
     def inserir_venda(self):
         """
         """
-        pass 
-    
+        self.cod_cliente = [self.cliRecebidos]
+        self.valor_total = [self.calcular_total]
+        self.data = self.et_data_venda.get()
+        self.venda.cadastrarVenda(self.cod_cliente, self.valor_total, self.data)
+
+
+
+#exemplo do CHATGPT
+        """produtos = []
+
+        def adicionar_produto(nome, preco_venda, quantidade):
+            produto = {'nome': nome, 'preco_venda': preco_venda, 'quantidade': quantidade}
+            produtos.append(produto)
+
+        def calcular_valor_total():
+            for produto in produtos:
+                valor_total = produto['preco_venda'] * produto['quantidade']
+                print(f"Produto: {produto['nome']}, Valor Total: R${valor_total:.2f}")
+
+        # Exemplo de uso
+        adicionar_produto('Produto 1', 10.99, 5)
+        adicionar_produto('Produto 2', 5.49, 3)
+        adicionar_produto('Produto 3', 7.99, 2)
+
+        calcular_valor_total()
+        """
+
+'''   
     def calcular_total(self):
         """
         """

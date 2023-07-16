@@ -3,7 +3,6 @@ from tkinter import ttk
 from tkcalendar import Calendar
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
-#from telaCliente import TelaCliente
 from telaAdItens import TelaItens
 
 appMenu = Tk()
@@ -566,7 +565,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
-        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=50)
 
         self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
