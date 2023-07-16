@@ -787,7 +787,6 @@ class Funcionalidades:
             self.exibirDados.append(self.cliVenda[c])
         return self.exibirDados
         
-        
     def adicionaItens_venda(self):
         self.produtoadd = [self.comboxProdt_venda.get()]
         self.lista = []
@@ -795,28 +794,13 @@ class Funcionalidades:
         for v in self.produtosBanco:
             print(f'Código: {v[0]}: TIPO: {type(v[0])}')
             if int(self.produtoadd[0][0]) == v[0]:
-                self.lista.append(list(v))    
+                self.lista.append(list(v))
 
-        print(self.lista)
-        #print(f'{self.produtoadd[0][0]} = tipo {type(self.produtoadd[0][0])}')
-        
-        
-            
-            
-
-
-
-
-
-
-        for p in self.produtoadd:
-            self.listaAddItens.insert('', END, values=p)
-
-        
-        
-        
-        
-
+        for l in self.lista:
+            l.append(self.et_qtd_venda.get())
+            for i in self.lista:
+                self.listaAddItens.insert('', END, values=i)
+                self.limpaItens()
 
     def remover_produto_venda(self):
         """
@@ -829,6 +813,12 @@ class Funcionalidades:
             self.listaAddItens.delete(i)
         
 
+    def limpaItens(self):
+        self.comboxProdt_venda.delete(0, END)
+        self.et_qtd_venda.delete(0, END)
+
+
+    
 '''
     def inserir_venda(self):
         """
