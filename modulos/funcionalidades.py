@@ -790,21 +790,31 @@ class Funcionalidades:
         
     def adicionaItens_venda(self):
         self.produtoadd = [self.comboxProdt_venda.get()]
-        self.exibiProd = []
+        self.lista = []
+        self.produtosBanco = self.produtosVenda()
+        for v in self.produtosBanco:
+            print(f'Código: {v[0]}: TIPO: {type(v[0])}')
+            if int(self.produtoadd[0][0]) == v[0]:
+                self.lista.append(list(v))    
+
+        print(self.lista)
+        #print(f'{self.produtoadd[0][0]} = tipo {type(self.produtoadd[0][0])}')
         
-        self.produtos = self.produtosVenda()
-        for c in range(0, len(self.produtoadd)):
-            self.exibiProd.append(self.produtoadd[c])
+        
             
-        for p in self.exibiProd:
+            
+
+
+
+
+
+
+        for p in self.produtoadd:
             self.listaAddItens.insert('', END, values=p)
 
-        for v in self.exibiProd:
-            for pr in self.produtos:
-                if v[0] == pr[0]:
-                    self.produtos.append(self.et_qtd_venda.get())
-        print(self.produtos)
-
+        
+        
+        
         
 
 
