@@ -1,16 +1,14 @@
 from modulos.dbsqlite import BancoDados
 
-banco = BancoDados()
-
-
 
 class Fornecedor:
-    # Construtor
-    def __init__(self,cod_fornecedor: int=None, cpnj_cpf:str=None, nome_fornecedor:str=None, 
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self,cod_fornecedor:int=None, cpnj_cpf:str=None, nome_fornecedor:str=None, 
                  email:str=None, telefone:str=None, logradouro:str=None, numero:int=None, cep:int=None,
                  cidade:str=None, estado:str=None) -> None:
         
-        # Atributos (privado)
+        # ATRIBUTOS
         self.__cod_fornecedor = cod_fornecedor
         self.__cnpj_cpf = cpnj_cpf
         self.__nome_fornecedor = nome_fornecedor
@@ -21,10 +19,8 @@ class Fornecedor:
         self.__cep = cep
         self.__cidade = cidade
         self.__estado = estado
-       # self.__qtd_forn = qtd_forn
 
-    # Getters e Setters
-    
+    # GETTERS E SETTERS
     def get_cod_fornecedor(self) -> int:
         return self.__cod_fornecedor
 
@@ -82,37 +78,46 @@ class Fornecedor:
     def get_estado(self) -> str:
         return self.__estado
 
-    def set_estado(self, estado: str) -> None:
+    def set_estado(self, estado:str) -> None:
         self.__estado = estado
 
-    def cadastrarFornecedor(self, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade, estado) -> None:
-        banco.conectar()
-        banco.cursor.execute(f""" INSERT INTO fornecedor (cnpj_cpf, 
+    # MÉTODOS DE CRUD DA CLASSE FORNECEDOR
+    def cadastrarFornecedor(self, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" INSERT INTO fornecedor (cnpj_cpf, 
                                  nome_fornecedor, email, telefone, logradouro, 
                                  numero, cep, cidade, estado)
                                  VALUES ('{cnpj}', '{nome_fornecedor}', '{email}', '{telefone}', '{logradouro}', '{numero}', '{cep}', 
                                  '{cidade}', '{estado}')""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
     def listarFornecedor(self) -> list:
-        banco.conectar()
-        fornecedores=banco.cursor.execute(f"""SELECT * FROM FORNECEDOR""").fetchall()   
-        banco.desconectar()
+        """
+        """
+        self.banco.conectar()
+        fornecedores=self.banco.cursor.execute(f"""SELECT * FROM FORNECEDOR""").fetchall()   
+        self.banco.desconectar()
         return fornecedores
 
-    def consultarFornecedor(self, nome_fornecedor: str) -> list:
-        banco.conectar()
-        forn = banco.cursor.execute(f"""SELECT cod_fornecedor, cnpj_cpf, nome_fornecedor,
+    def consultarFornecedor(self, nome_fornecedor:str) -> list:
+        """
+        """
+        self.banco.conectar()
+        forn = self.banco.cursor.execute(f"""SELECT cod_fornecedor, cnpj_cpf, nome_fornecedor,
                                     email, telefone, logradouro, numero, 
                                     cep, cidade, estado FROM fornecedor 
                                     WHERE nome_fornecedor like '{nome_fornecedor[0]}%' """).fetchall()
-        banco.desconectar()
+        self.banco.desconectar()
         return forn
 
-    def alterarFornecedor(self,cod_fornecedor, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade, estado) -> None:
-        banco.conectar()
-        banco.cursor.execute(f"""UPDATE fornecedor 
+    def alterarFornecedor(self,cod_fornecedor:int, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE fornecedor 
         SET cnpj_cpf = '{cnpj}',
         nome_fornecedor = '{nome_fornecedor}',
         email = '{email}',
@@ -123,12 +128,14 @@ class Fornecedor:
         cidade = '{cidade}',
         estado = '{estado}'
         WHERE cod_fornecedor = '{cod_fornecedor}' """)
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
-    def excluirFornecedor(self, cod_fornecedor):
-        banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM fornecedor 
+    def excluirFornecedor(self, cod_fornecedor:int) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM fornecedor 
                                  WHERE cod_fornecedor = {cod_fornecedor}""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()

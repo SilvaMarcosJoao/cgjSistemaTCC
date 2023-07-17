@@ -1,11 +1,11 @@
 from modulos.dbsqlite import BancoDados
 
-banco = BancoDados()
-
 
 class Produto:
+    banco = BancoDados()
+    # CONSTRUTOR
     def __init__(self,cod_produto: int=None, desc_produto: str=None, modelo_produto:str=None ,preco_compra_produto:float=None, preco_venda_produto: float=None, qtd : int=None, categoria_produto :int=None):
-
+        # ATRIBUTOS
         self.__cod_produto=cod_produto
         self.__desc_produto=desc_produto
         self.__modelo_produto=modelo_produto
@@ -14,7 +14,7 @@ class Produto:
         self.__qtd =qtd 
         self.__categoria_produto=categoria_produto
 
-    # Getters e Setters
+    # GETTERS E SETTERS
     def get_cod_produto(self) -> int:
         return self.__cod_produto
 
@@ -58,85 +58,85 @@ class Produto:
         self.__cod_produto = cod_categoria_produto
 
 
-    #cadastra os produtos 
+    # MÉTODOS DE CRUD DA CLASSE PRODUTO
     def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, cod_categoria:int) -> None:
         """
         """
-        banco.conectar()
-        banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, cod_categoria_produto) 
                            VALUES ('{desc_produto}','{mod_produto}',
                            '{preco_compra}','{preco_venda}','{cod_categoria}') """)
-        banco.conexao.commit()
-        banco.desconectar()
-    
-    #Atualizar produto    
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+       
     def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float) -> None:
         """
         """
-        banco.conectar()
-        banco.cursor.execute(f"""UPDATE produto
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE produto
                                 SET desc_produto =('{desc_produto}'),
                                 modelo_produto =('{modelo_produto}'),
                                 preco_compra_produto =('{preco_compra_produto}'),
                                 preco_venda_produto =('{preco_venda_produto}')
                                 WHERE cod_produto =('{cod_produto}')""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
    
-               
-    #mostra todos os produtos
-    def listarProduto(self) -> list:
+    def listarProdutos(self) -> list:
         """
         """
-        banco.conectar()
-        produtos=banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
+        self.banco.conectar()
+        self.produtos = self.banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
                                       preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
                                       FROM categoria_produto, produto 
                                       WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()
-        banco.desconectar()
-        return produtos
+        self.banco.desconectar()
+        return self.produtos
         
-    #procura um produto   
     def consultarProduto(self, desc_produto:str) -> list: 
-        banco.conectar()
-        produto = banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
+        """
+        """
+        self.banco.conectar()
+        produto = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, categoria_produto.desc_categoria_produto 
                           FROM categoria_produto, produto
                             WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto and desc_produto like '{desc_produto[0]}%'""").fetchall()
-        banco.desconectar()  
+        self.banco.desconectar()  
         return produto
 
-    #apaga produtos
-    def deletarProduto(self, cod_produto:int) -> None:
-        banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM produto
+    def excluirProduto(self, cod_produto:int) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM produto
                                 WHERE cod_produto='{cod_produto}'""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
-    def atualizaEstoqueProd(self, cod_produto, qtd):
-        banco.conectar()
-        banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
+    def atualizaEstoqueProd(self, cod_produto:int, qtd:int) -> None:
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
                     WHERE cod_produto = {cod_produto} """)
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
 
 # Métodos personalizados para telaCliente
-
     def listaperProduto(self):
-        banco.conectar()
-        produtos=banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
+        self.banco.conectar()
+        self.produtos = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
                                       preco_venda_produto, qtd_estoque
                                       FROM PRODUTO """).fetchall()
-        banco.desconectar()                              
-        return produtos
+        self.banco.desconectar()                              
+        return self.produtos
         
-
     def consultaProdutoVenda(self) -> list:
-        banco.conectar()
-        produto=banco.cursor.execute(f"""SELECT cod_produto, desc_produto,
+        """
+        """
+        self.banco.conectar()
+        self.produto = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto,
                                          modelo_produto, preco_venda_produto FROM PRODUTO 
                                          """).fetchall()   
-        banco.desconectar()
-        return produto
+        self.banco.desconectar()
+        return self.produto

@@ -2,11 +2,14 @@ import sqlite3
 
 
 class BancoDados:
+    # CONSTRUTOR
     def __init__(self) -> None:
+        # ATRIBUTOS
         self.__nome = './dados/zurcBanco.db'
         self.conexao = None
         self.cursor = None
 
+    # MÉTODOS DE CONEXÃO E DESCONEXÃO DA CLASSE BANCO DADOS
     def conectar(self) -> None:
         """
         """

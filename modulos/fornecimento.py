@@ -1,23 +1,17 @@
 from modulos.dbsqlite import BancoDados
-from modulos.fornecedor import Fornecedor
-from modulos.produto import  Produto
-
 
 
 class Fornecimento:
-    # Construtor
     banco = BancoDados()
-    fornecedor = Fornecedor()
-    prod = Produto()
-
+    # CONSTRUTOR
     def __init__(self, cod_fornecedor=None, cod_produto=None, qtd_fornecida=None, data_fornecimento=None) -> None:
+        # ATRIBUTOS
         self.__cod_fornecedor= cod_fornecedor
         self.__cod_produto = cod_produto
         self.__qtd_fornecida = qtd_fornecida
         self.__data_fornecimento = data_fornecimento
 
-    # Getters e Setters
-
+    # GETTERS E SETTERS
     def get_cod_fornecedor(self) -> int:
         return self.__cod_fornecedor 
 
@@ -42,9 +36,12 @@ class Fornecimento:
     def set_data_fornecimento(self, data_fornecimento: str) -> None:
         self.__data_fornecimento = data_fornecimento
 
-    
-    def cadastrar_fornecimento(self, cod_produto, cod_fornecedor, data, qtd) -> None:
+    # MÉTODOS DE CRUD DA CLASSE FORNECIMENTO
+    def cadastrarFornecimento(self, cod_produto:int, cod_fornecedor:int, data:str, qtd:int) -> None:
         """
+        Insere os dados na tabela fornecimento.
+        :param: cod_produto, cod_fornecedor, data e qtd.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f"""INSERT INTO fornecimento (cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)
@@ -52,31 +49,26 @@ class Fornecimento:
         self.banco.conexao.commit()
         self.banco.desconectar()
     
-    def listar_fornecimento(self) -> list:
+    def listarFornecimentos(self) -> list:
         """
+        Exibe a lista de fornecedores e os produtos fornecidos por eles.
+        :param: Não há parâmetro.
+        :return: retorna uma lista com dados.
         """
         self.banco.conectar()
-        forneci = list(self.banco.cursor.execute(f""" SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida 
+        self.forneci = list(self.banco.cursor.execute(f""" SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida 
                                                  FROM produto, fornecedor, fornecimento
                                                  WHERE fornecimento.cod_produto = produto.cod_produto and 
                                                  fornecimento.cod_fornecedor = fornecedor.cod_fornecedor""").fetchall())
         self.banco.conexao.commit()
         self.banco.desconectar()
-        return forneci
+        return self.forneci
     
-    def alterar_fornecimento(self, cod_produto, cod_fornecedor):
+    def alterar_fornecimento(self, cod_produto:int, cod_fornecedor:int) -> None:
         """
         """
         self.banco.conectar()
         self.banco.cursor.execute(f""" UPDATE fornecimento SET qtd_fornecida, data_fornecimento
                                   WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
-        self.banco.conexao.commit()
-        self.banco.desconectar()
-
-    def deletar_fornecimento(self, cod_produto, cod_fornecedor):
-        """
-        """
-        self.banco.conectar()
-        self.banco.cursor.execute(f""" DELETE fornecimento WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
         self.banco.conexao.commit()
         self.banco.desconectar()
