@@ -7,6 +7,7 @@ from modulos.fornecedor import Fornecedor
 from modulos.fornecimento import Fornecimento
 from modulos.venda import Venda
 from modulos.produto import Produto
+from modulos.itensvenda import ItensVenda
 
 
 
@@ -20,7 +21,7 @@ class Funcionalidades:
     fornecimento = Fornecimento()
     produto = Produto()
     venda = Venda()
-
+    itensVenda = ItensVenda()
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def finalizar(self) -> None:
@@ -667,7 +668,7 @@ class Funcionalidades:
     def fornecimentoProduto(self):
         """
         """
-        self.dadosProd = self.produto.listarProduto()
+        self.dadosProd = self.produto.listarProdutos()
         self.exibirProdutos = []
         for i in range(0, len(self.dadosProd)):
             self.exibirProdutos.append(self.dadosProd[i][1:3])
@@ -779,7 +780,7 @@ class Funcionalidades:
         
         
     def clienteVenda(self):
-        self.cliVenda = self.cliente.listarCliente() 
+        self.cliVenda = self.cliente.listarClientes() 
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
             self.exibirDados.append(self.cliVenda[c][0:3])
@@ -787,22 +788,25 @@ class Funcionalidades:
         
     def adicionaItens_venda(self):
         self.produtoadd = [self.comboxProdt_venda.get()]
+        
         self.lista = []
         self.produtoEscolhido = []
         self.produtosBanco = self.produtosVenda()
         for v in self.produtosBanco:
             if int(self.produtoadd[0][0]) == v[0]:
                 self.lista.append(list(v))
-        print(self.lista)
+
         for l in self.lista:
             l.append(int(self.et_qtd_venda.get()))
             l.append(l[3] * l[4])
             for i in self.lista:
                 self.listaAddItens.insert('', END, values=i)
                 self.limpaItens()
+            self.itensVenda.itens.append(l)
+            return self.itensVenda.itens
         
-        
-        
+    def enviarItens(self):
+        return self.adicionaItens_venda
 
     def remover_produto_venda(self):
         """
@@ -820,21 +824,28 @@ class Funcionalidades:
         self.et_qtd_venda.delete(0, END)
 
     def exibirdadosTelaVenda(self):
-        '''
+        self.listaItens = self.enviarItens()
+
+        
         self.clienteadd = [self.comboxClien_venda.get()]
         self.dataVen = self.et_data_venda.get()
-        self.cli = self.cliente.listarCliente() 
-        self.itens = self.adicionaItens_venda()
+        self.cli = self.cliente.listarClientes() 
         self.vendaSele = []
         for c in self.cli:
             if int(self.clienteadd[0][0:2]) == c[0]: 
-                self.vendaSele.append(c)
+
+                self.vendaSele.append(c[2])
+                self.vendaSele.append(self.dataVen)
+                
+                
 
         for v in self.vendaSele:
-            self.listaVenda.insert('', END, values=v)
-        '''
-        self.itens = self.adicionaItens_venda()
-        print(self.itens)
+            print(v)
+            #self.listaVenda.insert('', END, values=v)
+        print(self.vendaSele)
+        
+     
+        
 
     def inserir_venda(self):
         """

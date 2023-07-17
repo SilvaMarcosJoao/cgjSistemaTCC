@@ -7,7 +7,6 @@ class Fornecedor:
     def __init__(self,cod_fornecedor:int=None, cpnj_cpf:str=None, nome_fornecedor:str=None, 
                  email:str=None, telefone:str=None, logradouro:str=None, numero:int=None, cep:int=None,
                  cidade:str=None, estado:str=None) -> None:
-        
         # ATRIBUTOS
         self.__cod_fornecedor = cod_fornecedor
         self.__cnpj_cpf = cpnj_cpf
@@ -84,6 +83,9 @@ class Fornecedor:
     # MÉTODOS DE CRUD DA CLASSE FORNECEDOR
     def cadastrarFornecedor(self, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         """
+        Cadastra um fornecedor.
+        :param: cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f""" INSERT INTO fornecedor (cnpj_cpf, 
@@ -96,6 +98,9 @@ class Fornecedor:
 
     def listarFornecedor(self) -> list:
         """
+        Retorna uma lista com fornecedores.
+        :param: Não tem parâmetro.
+        :return: retorna uma lista com dados.
         """
         self.banco.conectar()
         fornecedores=self.banco.cursor.execute(f"""SELECT * FROM FORNECEDOR""").fetchall()   
@@ -104,6 +109,9 @@ class Fornecedor:
 
     def consultarFornecedor(self, nome_fornecedor:str) -> list:
         """
+        Exibe os dados de um fornecedor específico.
+        :param: nome_fornecedor.
+        :return: retorna uma lista com os dados do fornecedor.
         """
         self.banco.conectar()
         forn = self.banco.cursor.execute(f"""SELECT cod_fornecedor, cnpj_cpf, nome_fornecedor,
@@ -115,6 +123,9 @@ class Fornecedor:
 
     def alterarFornecedor(self,cod_fornecedor:int, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         """
+        Altera os dados de um fornecedor específico.
+        :param: cod_fornecedor, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f"""UPDATE fornecedor 
@@ -133,6 +144,9 @@ class Fornecedor:
 
     def excluirFornecedor(self, cod_fornecedor:int) -> None:
         """
+        Exclui um fornecedor específico.
+        :param: cod_fornecedor.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f"""DELETE FROM fornecedor 

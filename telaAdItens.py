@@ -55,7 +55,7 @@ class TelaItens(Funcionalidades, Venda):
         self.btn_remov_prod = Button(self.add_frame, text='Remover', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.remover_produto_venda)
         self.btn_remov_prod.place(relx=0.87, rely=0.09, relwidth=0.12, height=20)
         
-        self.btn_fecha_prod = Button(self.add_frame,   text='Encerrar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_fecha_prod = Button(self.add_frame,   text='Encerrar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.enviarItens)
         self.btn_fecha_prod.place(relx=0.87, rely=0.15, relwidth=0.12, height=20)
         
         self.listaAddItens = ttk.Treeview(self.add_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'col4', 'col5'), show='headings')

@@ -37,18 +37,20 @@ class MudarSenhaTela(Funcionalidades):
         
         self.titulo_login_senha.configure(background='#585858',font=("Roboto", 24,"bold"))
 
-        self.nova_senha = Label(self.mudasenhatela, text="Nova senha:",fg='#FFFFFF', font=('Roboto', 12,'bold'))
-        self.nova_senha.place(relx=0.29, rely=0.31)
-        self.nova_senha.configure(background='#585858',font=("Roboto", 12))
+        self.nova_senha = Label(self.mudasenhatela, text="Nova senha:",fg='#FFFFFF')
+        self.nova_senha.place(relx=0.32, rely=0.31)
+        self.nova_senha.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_nova_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')
-        self.et_nova_senha.place(relx=0.44, rely=0.32, width=120)
+        self.et_nova_senha.place(relx=0.49, rely=0.32, width=120)
 
         self.confirmar_senha = Label(self.mudasenhatela, text="Confirmar senha:",fg='#FFFFFF')
-        self.confirmar_senha.place(relx=0.25, rely=0.45)
-        self.confirmar_senha.configure(background='#585858',font=("Roboto", 12))
+        self.confirmar_senha.place(relx=0.26, rely=0.45)
+        self.confirmar_senha.configure(background='#585858',font=("Roboto", 12, 'bold'))
         self.et_confir_senha = Entry(self.mudasenhatela, font=('Roboto', 12), show='*')  
-        self.et_confir_senha.place(relx=0.44, rely=0.46, width=120)
+        self.et_confir_senha.place(relx=0.49, rely=0.46, width=120)
 
-        self.btn_alterar = Button(self.mudasenhatela, text="Alterar", bg="#FFFFFF", fg="#151515", command=self.mudar_senha)
-        self.btn_alterar.place(relx=0.45, rely=0.59, width=90, height=50)
+        self.btn_alterar = Button(self.mudasenhatela, text="Alterar", relief='groove', compound='left',bg="#FFFFFF", fg="#151515", command=self.mudar_senha)
+        self.btn_alterar.configure(font=('Roboto',14, 'bold'))
+        self.btn_alterar.place(relx=0.4, rely=0.59, width=90, height=50)
+        
     

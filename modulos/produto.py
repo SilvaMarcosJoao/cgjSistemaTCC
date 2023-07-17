@@ -61,6 +61,9 @@ class Produto:
     # MÉTODOS DE CRUD DA CLASSE PRODUTO
     def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, cod_categoria:int) -> None:
         """
+        Realiza o cadastro de produto.
+        :param: desc_produto, mod_produto, preco_compra, preco_venda e cod_categoria.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
@@ -85,6 +88,9 @@ class Produto:
    
     def listarProdutos(self) -> list:
         """
+        Exibe um lista com todos os produtos cadastrados.
+        :param: Não tem parâmetro.
+        :return: Retorna uma lista com os produtos.
         """
         self.banco.conectar()
         self.produtos = self.banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
@@ -107,6 +113,9 @@ class Produto:
 
     def excluirProduto(self, cod_produto:int) -> None:
         """
+        Exclui um produto específico.
+        :param: cod_produto.
+        :return: Não tem retorno.
         """
         self.banco.conectar()
         self.banco.cursor.execute(f"""DELETE FROM produto
@@ -115,6 +124,8 @@ class Produto:
         self.banco.desconectar()
 
     def atualizaEstoqueProd(self, cod_produto:int, qtd:int) -> None:
+        """
+        """
         self.banco.conectar()
         self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
                     WHERE cod_produto = {cod_produto} """)
