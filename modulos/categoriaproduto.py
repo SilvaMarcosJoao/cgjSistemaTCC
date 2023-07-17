@@ -1,15 +1,15 @@
 from modulos.dbsqlite import BancoDados
 
-banco = BancoDados()
-
 
 class CategoriaProduto:
-    def __init__(self, cod_categoria_produto: int=None, produto: list=None, desc_categoria_produto:str=None) -> None:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_categoria_produto: int=None, desc_categoria_produto:str=None) -> None:
+        # ATRIBUTOS
         self.__cod_categoria_produto = cod_categoria_produto
-        self.__produto = produto
         self.__desc_categoria_produto=desc_categoria_produto
         
-    # Getters e Setters
+    # GETTERS E SETTERS
     def get_cod_categoria_produto(self) -> int:
         return self.__cod_categoria_produto
     
@@ -22,27 +22,30 @@ class CategoriaProduto:
     def set_desc_categoria_produto(self, desc_categoria_produto) -> None:
         self.__desc_categoria_produto = desc_categoria_produto
 
-
+    # MÉTODOS DE CRUD DA CLASSE CATEGORIA PRODUTO
     def cadastrarCategoria(self, desc_categoria:str) -> None:
         """
         Cadastra a categoria dos produtos.
         :param: desc_categoria. 
         :return: Não há retorno. 
         """
-        banco.conectar()
-        banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
         VALUES ('{desc_categoria}')""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
         
     def alterarCategoria(self, cod_categoria_produto:int, desc_categoria:str) -> None:
         """
+        Altera a descrição de uma categoria.
+        :param: cod_categoria_produto do tipo inteiro e desc_categoria do tipo string.
+        :return: Não tem retorno
         """
-        banco.conectar()
-        banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc_categoria}')
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc_categoria}')
                                 WHERE cod_categoria_produto = ('{cod_categoria_produto}') """) 
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
     def listarCategoria(self) -> list:
         """
@@ -50,17 +53,25 @@ class CategoriaProduto:
         :param: não há parâmetros.
         :return: retorna uma lista com as categorias.
         """
-        banco.conectar()
-        categoria =banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
-        banco.desconectar()
+        self.banco.conectar()
+        categoria = self.banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
+        self.banco.desconectar()
         return categoria
     
-    def deletarCategoria(self, cod_categoria_produto:int) -> None:
+    def excluirCategoria(self, cod_categoria_produto:int) -> None:
         """
+        Deleta uma categoria.
+        :param: cód_categoria_produto do tipo inteiro.
+        :return: Não tem retorno.
         """
-        banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM categoria_produto
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM categoria_produto
                                 WHERE cod_categoria_produto = '{cod_categoria_produto}' """)
-        banco.conexao.commit()
-        banco.desconectar()
-        
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def buscaQtdCodigoCategoria(self) -> int:
+        self.banco.conectar()
+        self.qtdcRegis = self.banco.cursor.execute(f""" SELECT count(cod_categoria_produto)  from categoria_produto""")
+
+        return self.qtdcRegis

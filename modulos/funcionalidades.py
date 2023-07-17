@@ -105,7 +105,7 @@ class Funcionalidades:
         except:
             messagebox.showerror('Erro', 'Houve um erro nas alterações')
 
-    def excluir_categoria(self):
+    def deletar_categoria(self):
         """
 
         """
@@ -113,7 +113,7 @@ class Funcionalidades:
         if len(self.cod) == 0:
             messagebox.showwarning('Erro', 'Não foi possível deletar a categoria, \nselecione-a antes de excluir.')
         else:
-            self.categoria.deletarCategoria(self.cod)
+            self.categoria.excluirCategoria(self.cod)
             messagebox.showinfo('Info', 'Categoria excluída com sucesso!')
             self.limpa_categoria()
             self.exibir_categoria()
@@ -173,7 +173,7 @@ class Funcionalidades:
         """
         """
         self.listaProd.delete(*self.listaProd.get_children())
-        self.exibirProd = self.produto.listarProduto()
+        self.exibirProd = self.produto.listarProdutos()
         if len(self.exibirProd) == 0:
             messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
         else:
@@ -227,13 +227,13 @@ class Funcionalidades:
             print(f'Erro', 'Não foi possível alterar o produto:' )
             print(error)
         
-    def excluir_produto(self):
+    def deletar_produto(self):
         """
         """
         self.cod_prod = self.et_cod_produto.get().strip()
         try:
             if len(self.cod_prod) != 0:
-                self.produto.deletarProduto(self.cod_prod)
+                self.produto.excluirProduto(self.cod_prod)
                 self.exibir_produto()
                 self.limpa_produto()
                 messagebox.showinfo('Info', 'Produto deletado com sucesso!')
@@ -345,7 +345,7 @@ class Funcionalidades:
         """
         """
         self.listaCliente.delete(*self.listaCliente.get_children())
-        self.lista = self.cliente.listarCliente()
+        self.lista = self.cliente.listarClientes()
         try:
             if len(self.lista) == 0:
                 messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
@@ -417,7 +417,7 @@ class Funcionalidades:
         except:
             messagebox.showerror('Erro', 'Houve um erro inesperado!') 
             
-    def excluir_cliente(self):
+    def deletar_cliente(self):
         """
         """
         self.codigo = self.et_cod_cliente.get()
@@ -425,7 +425,7 @@ class Funcionalidades:
             if len(self.codigo) == 0:
                 messagebox.showwarning('Alerta', 'Cliente não encontrado, impossível deletar')
             else:
-                self.cliente.deletarCliente(self.codigo)
+                self.cliente.excluirCliente(self.codigo)
                 messagebox.showinfo('Sistema', 'Cliente deletado com sucesso!')
                 self.limpa_cliente()
                 self.lista_cliente()
@@ -703,7 +703,7 @@ class Funcionalidades:
         self.qtdfornecida = self.et_qtd_fornecida.get()
         self.data = self.et_data_fornecimento.get()
         
-        self.fornecimento.cadastrar_fornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
+        self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
         self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
         self.limpa_fornecimento()
 
@@ -714,7 +714,7 @@ class Funcionalidades:
         :return: Não há retorno.
         """
         self.listaFornecimento.delete(*self.listaFornecimento.get_children())
-        self.resultadoForn = self.fornecimento.listar_fornecimento()
+        self.resultadoForn = self.fornecimento.listarFornecimentos()
         try:
             if len(self.resultadoForn) == 0:
                 messagebox.showwarning('Alerta', 'Não fornecimento registrado')
@@ -767,13 +767,11 @@ class Funcionalidades:
         self.et_data_fornecimento.delete(0, END)
 
 
-
     #CRUD da venda
     #métodos para adicionar cliente e produto a venda
     def produtosVenda(self):
         self.prodVenda = self.produto.consultaProdutoVenda()
         self.exibirProdutos = []
-
 
         for i in range(0, len(self.prodVenda)):
             self.exibirProdutos.append(self.prodVenda[i])
@@ -784,23 +782,27 @@ class Funcionalidades:
         self.cliVenda = self.cliente.listarCliente() 
         self.exibirDados = []
         for c in range(0, len(self.cliVenda)):
-            self.exibirDados.append(self.cliVenda[c])
+            self.exibirDados.append(self.cliVenda[c][0:3])
         return self.exibirDados
         
     def adicionaItens_venda(self):
         self.produtoadd = [self.comboxProdt_venda.get()]
         self.lista = []
+        self.produtoEscolhido = []
         self.produtosBanco = self.produtosVenda()
         for v in self.produtosBanco:
-            print(f'Código: {v[0]}: TIPO: {type(v[0])}')
             if int(self.produtoadd[0][0]) == v[0]:
                 self.lista.append(list(v))
-
+        print(self.lista)
         for l in self.lista:
-            l.append(self.et_qtd_venda.get())
+            l.append(int(self.et_qtd_venda.get()))
+            l.append(l[3] * l[4])
             for i in self.lista:
                 self.listaAddItens.insert('', END, values=i)
                 self.limpaItens()
+        
+        
+        
 
     def remover_produto_venda(self):
         """
@@ -817,8 +819,22 @@ class Funcionalidades:
         self.comboxProdt_venda.delete(0, END)
         self.et_qtd_venda.delete(0, END)
 
+    def exibirdadosTelaVenda(self):
+        '''
+        self.clienteadd = [self.comboxClien_venda.get()]
+        self.dataVen = self.et_data_venda.get()
+        self.cli = self.cliente.listarCliente() 
+        self.itens = self.adicionaItens_venda()
+        self.vendaSele = []
+        for c in self.cli:
+            if int(self.clienteadd[0][0:2]) == c[0]: 
+                self.vendaSele.append(c)
 
-    
+        for v in self.vendaSele:
+            self.listaVenda.insert('', END, values=v)
+        '''
+        self.itens = self.adicionaItens_venda()
+        print(self.itens)
 
     def inserir_venda(self):
         """

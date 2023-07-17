@@ -1,8 +1,11 @@
 from modulos.dbsqlite import BancoDados
-banco = BancoDados()
+
 
 class Cliente:
-    def __init__(self, cod_cliente: int=None, cpf: str=None, nome_cliente: str=None, email: str=None ,telefone: str=None, logradouro: str=None, numero : int=None, cep : int=None, cidade: str=None, estado: str=None):
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_cliente:int=None, cpf:str=None, nome_cliente:str=None, email:str=None ,telefone:str=None, logradouro:str=None, numero:int=None, cep:int=None, cidade:str=None, estado:str=None):
+        # ATRIBUTOS
         self._cod_cliente=cod_cliente
         self.__nome_cliente=nome_cliente
         self.__logradouro=logradouro
@@ -14,7 +17,7 @@ class Cliente:
         self.__cidade=cidade
         self.__estado=estado
 
-    # Getters e Setters
+    # GETTERS E SETTERS
     def get_cod_cliente(self) -> int:
         return self.__cod_cliente
     
@@ -75,27 +78,30 @@ class Cliente:
     def set_estado(self, estado:str) -> None:
         self.__estado = estado
 
-
+    # MÉTODOS DE CRUD DA CLASSE CLIENTE
     def cadastrarCliente(self, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         """
         Efetua o cadastro dos clientes.
         :param: .
         :return: Não tem retorno.
         """
-        banco.conectar()
-        banco.cursor.execute(f"""Insert into Cliente(cpf, nome_cliente, email,
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""Insert into Cliente(cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado) 
                           values('{cpf }','{nome_cliente }','{email }','{telefone }',
                           '{logradouro }','{numero }','{cep }','{cidade }',
                           '{estado }')""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
         
     def alterarCliente(self, cod_cliente:int, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
         """
+        Altera os dados de um cliente.
+        :param:cod_cliente, cpf, nome_cliente, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
         """
-        banco.conectar()
-        banco.cursor.execute(f"""UPDATE Cliente
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE Cliente
                                 SET cpf = ('{cpf }'), 
                                 nome_cliente = ('{nome_cliente }') ,
                                 email = ('{email }'),
@@ -106,35 +112,44 @@ class Cliente:
                                 cidade= ('{cidade }'), 
                                 estado = ('{estado }')
                                 WHERE cod_cliente='{cod_cliente}'""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
         
-    def listarCliente(self) -> list:
+    def listarClientes(self) -> list:
         """
+        Exibe uma lista de clientes.
+        :param: Não tem parâmetro.
+        :return: retorna uma lista com clientes.
         """
-        banco.conectar()
-        clientes=banco.cursor.execute(f"""SELECT * FROM CLIENTE""").fetchall()   
-        banco.desconectar()
+        self.banco.conectar()
+        clientes=self.banco.cursor.execute(f"""SELECT * FROM CLIENTE""").fetchall()   
+        self.banco.desconectar()
         return clientes 
     
     def consultarCliente(self, nome:str) -> list:
         """
+        Exibe um cliente especifico.
+        :param: nome.
+        :param: retorna uma lista com os dados do cliente.
         """
-        banco.conectar()
-        cli = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
+        self.banco.conectar()
+        cli = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
                           telefone, logradouro, numero, cep, cidade, estado FROM Cliente
                          WHERE nome_cliente like '{nome[0]}%' """).fetchall()              
-        banco.desconectar()    
+        self.banco.desconectar()    
         return cli
     
-    def deletarCliente(self, cod_cliente:int) -> None:
+    def excluirCliente(self, cod_cliente:int) -> None:
         """
+        Deleta um cliente especifica.
+        :param: cod_cliente.
+        :return: Não tem retorno.
         """
-        banco.conectar()
-        banco.cursor.execute(f"""DELETE FROM Cliente
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM Cliente
                                 WHERE cod_cliente='{cod_cliente}'""")
-        banco.conexao.commit()
-        banco.desconectar()
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
     
     #MÉTODOS PERSONALIZADOS para telaCliente
@@ -142,17 +157,16 @@ class Cliente:
     def listaperCliente(self) -> list:
         """
         """
-        banco.conectar()
-        cliente=banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM CLIENTE""").fetchall()   
-        banco.desconectar()
+        self.banco.conectar()
+        cliente = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM CLIENTE""").fetchall()   
+        self.banco.desconectar()
         return cliente
     
     def consultaperCliente(self, nome:str) -> list:
         """
         """
-        banco.conectar()
-        clis = banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM Cliente
+        self.banco.conectar()
+        clis = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM Cliente
                          WHERE nome_cliente like '{nome[0]}%' """).fetchall()
-        banco.desconectar()    
+        self.banco.desconectar()    
         return clis
-    

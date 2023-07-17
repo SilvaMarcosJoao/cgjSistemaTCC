@@ -225,7 +225,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_alterar = Button(self.frameCadTelaCliente, command=self.alterar_cliente, text=' Alterar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_alterar.place(relx=0.88, rely=0.305, relwidth=0.09, height=40)
 
-        self.btn_excluir = Button(self.frameCadTelaCliente, command=self.excluir_cliente, text=' Excluir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        self.btn_excluir = Button(self.frameCadTelaCliente, command=self.deletar_cliente, text=' Excluir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
         self.btn_excluir.place(relx=0.88, rely=0.385, relwidth=0.09, height=40)
     
         self.listaCliente = ttk.Treeview(self.frameCadTelaCliente, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
@@ -295,7 +295,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_alterar_categoria = Button(self.categoria_frame,  text=' Alterar', relief='groove',  font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.editar_categoria)
         self.btn_alterar_categoria.place(relx=0.84, rely=0.26, relwidth=0.1, height=40)
 
-        self.btn_excluir_categoria = Button(self.categoria_frame,  text=' Excluir', relief='groove',font=('Roboto',10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_categoria)
+        self.btn_excluir_categoria = Button(self.categoria_frame,  text=' Excluir', relief='groove',font=('Roboto',10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.deletar_categoria)
         self.btn_excluir_categoria.place(relx=0.84, rely=0.34, relwidth=0.1, height=40)
 
         self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'))
@@ -378,7 +378,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_alterar_produto = Button(self.produto_frame, text=' Alterar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.editar_produto)
         self.btn_alterar_produto.place(relx=0.87, rely=0.315, relwidth=0.1, height=40)
 
-        self.btn_excluir_produto = Button(self.produto_frame,  text=' Excluir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.excluir_produto)
+        self.btn_excluir_produto = Button(self.produto_frame,  text=' Excluir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.deletar_produto)
         self.btn_excluir_produto.place(relx=0.87, rely=0.395, relwidth=0.1, height=40)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
@@ -565,7 +565,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
-        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
+        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.exibirdadosTelaVenda)
         self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=50)
 
         self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
