@@ -25,6 +25,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_ger_usuario.config(bg='#6E6E6E')
         self.btn_ger_cliente.config(bg='#6E6E6E')
         self.btn_ger_fornecimento.config(bg='#6E6E6E')
+        self.btn_ger_relatorio.config(bg='#6E6E6E')
         self.btn_inicio.config(bg='#6E6E6E')
 
     def indicate(self, btn, page):
@@ -112,12 +113,15 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.finalizar)
-        self.btn_sair.place(relx=0.08, rely=0.85, width=150, height=50)
+        self.btn_sair.place(relx=0.08, rely=0.95, width=150, height=50)
 
         self.img_ger_fornecimen = PhotoImage(file='./imagens/fornecimento.png')
         self.btn_ger_fornecimento = Button(self.frameMenu_left, image=self.img_ger_fornecimen, text=' Fornecimento', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecimento, self.widgets_fornecimento))
         self.btn_ger_fornecimento.place(relx=0.08, rely=0.45, width=150, height=50)
-
+        
+        self.btn_ger_relatorio = Button(self.frameMenu_left, text='Relatório', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg= '#6E6E6E', command=lambda: self.indicate(self.btn_ger_relatorio, self.widgets_relatorio))
+        self.btn_ger_relatorio.place(relx=0.08, rely=0.85,  width=150, height=50)
+        
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
         self.lbl_titulo_inicio = Label(self.frameMenu_right, text='SGZurc', bg='#505050', font=('Roboto', 40, 'bold'))
@@ -663,5 +667,53 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrollListaFornecimento = Scrollbar(self.fornecimento_frame, orient='vertical', command=self.listaFornecimento.yview)
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
-    
+        
+        
+    def widgets_relatorio(self) ->None:
+        self.relatorio_frame = Frame(self.frameMenu_right, bd=1, bg='#D9D9D9')
+        self.relatorio_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        
+        lbl_titulo_relatorio = Label(self.relatorio_frame, text='RELATÓRIO', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_relatorio.place(relx=0.015, rely=0.01)
+        
+        self.lbl_consultar = Label(self.relatorio_frame, text='Buscar Venda:', font=('Roboto', 10,'bold'), bg='#d9d9d9')
+        self.lbl_consultar.place(relx=0.73, rely=0.065)
+        
+        self.et_consultar = Entry(self.relatorio_frame, font=('Roboto', 9))
+        self.et_consultar.place(relx=0.73, rely=0.105, width=130, height=20)
+        
+        self.btn_consultar = Button(self.relatorio_frame ,command=self.consultarVenda,text="Consultar", relief='groove', font=('Roboto', 10,'bold'),  bg="#f3f3f3")
+        self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09, height=40)
+        
+        self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3', command=self.listarVenda)
+        self.btn_listar.place(relx= 0.88, rely= 0.15, relwidth=0.09, height=40)
+        
+        
+        self.btn_listarD = Button(self.relatorio_frame, command=self.listar_vendas_por_dia, text='Listar Por Dia',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
+        self.btn_listarD.place(relx=0.88, rely=0.225, relwidth=0.09, height=40)
+        
+        
+        self.btn_listarM = Button(self.relatorio_frame, command=self.listar_vendas_por_mes, text='Listar Por Mês',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
+        self.btn_listarM.place(relx=0.88, rely=0.298, relwidth=0.09, height=40)
+        
+        self.listaRelatorio = ttk.Treeview(self.relatorio_frame, height= 3, columns= ('Col1', 'Col2', 'Col3', 'Col4'), show= 'headings')
+        self.listaRelatorio.heading("#0", text='')
+        self.listaRelatorio.heading("#1", text='Código da Venda')
+        self.listaRelatorio.heading("#2", text='Cliente')
+        self.listaRelatorio.heading("#3", text='Valor')
+        self.listaRelatorio.heading("#4", text='Data da Venda')
+        
+        self.listaRelatorio.column("#0", width=1 ,anchor='center')
+        self.listaRelatorio.column("#1", width=120 ,anchor='center')
+        self.listaRelatorio.column("#2", width=120 ,anchor='center')
+        self.listaRelatorio.column("#3", width=80 ,anchor='center')
+        self.listaRelatorio.column("#4", width=90 ,anchor='center')
+        
+        self.listaRelatorio.place(relx=0.025, rely=0.46, relwidth=0.95, relheight=0.5)
+        
+        self.scrolllistaRelatorio = Scrollbar(self.relatorio_frame, orient='vertical', command=self.listaRelatorio.yview)
+        self.listaRelatorio.configure(yscrollcommand= self.scrolllistaRelatorio.set)
+        self.scrolllistaRelatorio.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
+        
+        pass    
 MenuTela()

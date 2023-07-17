@@ -850,14 +850,10 @@ class Funcionalidades:
         calcular_valor_total()
         """
 
-'''   
-    def calcular_total(self):
-        """
-        """
-        pass
-    
+  
+ 
     def consultarVenda(self):
-        self.listaHistTela.delete(*self.listaHistTela.get_children())
+        self.listaRelatorio.delete(*self.listaRelatorio.get_children())
         self.codv = self.et_consulta_venda.get()
         if len(self.codv) == 0:
             messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
@@ -867,18 +863,18 @@ class Funcionalidades:
                 messagebox.showinfo('Informação', 'Nenhuma venda encontrada.')
             else:
                 for v in self.resVen:
-                    self.listaHistTela.insert('',END, values=v)
+                    self.listaRelatorio.insert('',END, values=v)
     
     
     def listarVenda(self):
-        self.listaHistTela.delete(*self.listaHistTela.get_children())
+        self.listarRelatorio.delete(*self.listaRelatorio.get_children())
         self.listav = self.venda.listarVendas()
         if len(self.listav) == 0:
             messagebox.showinfo('Informação', 'Não há vendas cadastrados.')
         else:
             for i in self.listav:
                 self.et_cod_venda.config(state='normal')
-                self.listaHistTela.insert('',END, values = i)   
+                self.listaRelatorio.insert('',END, values = i)   
 
 
     def listar_vendas_por_dia(self, data):
@@ -895,4 +891,3 @@ class Funcionalidades:
                 vendas_mes.append(venda)
         return vendas_mes
 
-'''
