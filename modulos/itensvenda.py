@@ -1,5 +1,8 @@
+from modulos.dbsqlite import BancoDados
+
 
 class ItensVenda:
+    banco = BancoDados()
     # CONSTRUTOR
     def __init__(self, cod_produto = None, qtd = None, cod_venda = None, valor = None) -> None:
         # ATRIBUTOS
@@ -35,5 +38,11 @@ class ItensVenda:
         self.__valorCompra = valorcompra
 
     # MÉTODOS DE CRUD DA CLASSE ITENS VENDA
-    def cadastrarItens(self, cod_venda, cod_produto, qtd, valorCompra) -> None:
-        pass
+    def cadastrarItens(self, cod_venda:int, cod_produto:int, qtd:int, valorCompra:float) -> None:
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" INSERT INTO itens_venda (cod_venda, cod_produto, qtd, valorCompra)
+                                    VALUES('{cod_venda}', '{cod_produto}', '{qtd}', '{valorCompra}' ) """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    

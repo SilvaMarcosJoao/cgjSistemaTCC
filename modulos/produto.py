@@ -133,15 +133,7 @@ class Produto:
         self.banco.desconectar()
 
 
-# Métodos personalizados para telaCliente
-    def listaperProduto(self):
-        self.banco.conectar()
-        self.produtos = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
-                                      preco_venda_produto, qtd_estoque
-                                      FROM PRODUTO """).fetchall()
-        self.banco.desconectar()                              
-        return self.produtos
-        
+    # Métodos personalizados para telaCliente
     def consultaProdutoVenda(self) -> list:
         """
         """

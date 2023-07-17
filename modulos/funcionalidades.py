@@ -75,6 +75,9 @@ class Funcionalidades:
 
     def exibir_categoria(self):
         """
+        Exibe na tela as categorias retornadas pelo método listarCategoria da classe Categoria_Produto
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.listaCategoria.delete(*self.listaCategoria.get_children())
         self.exibir = self.categoria.listarCategoria()
@@ -172,6 +175,9 @@ class Funcionalidades:
 
     def exibir_produto(self):
         """
+        Exibe os dados retornado pelo método listarProdutos da classe Produto.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.listaProd.delete(*self.listaProd.get_children())
         self.exibirProd = self.produto.listarProdutos()
@@ -344,6 +350,9 @@ class Funcionalidades:
 
     def lista_cliente(self):
         """
+        Exibe a lista de cliente retornada pelo método listarClientes da classe Cliente.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.listaCliente.delete(*self.listaCliente.get_children())
         self.lista = self.cliente.listarClientes()
@@ -833,12 +842,11 @@ class Funcionalidades:
         self.vendaSele = []
         for c in self.cli:
             if int(self.clienteadd[0][0:2]) == c[0]: 
-
+                self.vendaSele.append(self.listaItens[c])
                 self.vendaSele.append(c[2])
                 self.vendaSele.append(self.dataVen)
                 
                 
-
         for v in self.vendaSele:
             print(v)
             #self.listaVenda.insert('', END, values=v)
@@ -849,11 +857,15 @@ class Funcionalidades:
 
     def inserir_venda(self):
         """
+
         """
         self.cod_cliente = [self.cliRecebidos]
         self.valor_total = [self.calcular_total]
+
         self.data = self.et_data_venda.get()
         self.venda.cadastrarVenda(self.cod_cliente, self.valor_total, self.data)
+        self.itensVenda.cadastrarItens()
+        
 
 
 

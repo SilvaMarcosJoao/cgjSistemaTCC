@@ -118,8 +118,9 @@ class MenuTela(Funcionalidades, Validadores):
         self.img_ger_fornecimen = PhotoImage(file='./imagens/fornecimento.png')
         self.btn_ger_fornecimento = Button(self.frameMenu_left, image=self.img_ger_fornecimen, text=' Fornecimento', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecimento, self.widgets_fornecimento))
         self.btn_ger_fornecimento.place(relx=0.08, rely=0.45, width=150, height=50)
-        
-        self.btn_ger_relatorio = Button(self.frameMenu_left, text='Relatório', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg= '#6E6E6E', command=lambda: self.indicate(self.btn_ger_relatorio, self.widgets_relatorio))
+
+        self.img_ger_relatorio = PhotoImage(file='./imagens/dashboard.png')
+        self.btn_ger_relatorio = Button(self.frameMenu_left, image=self.img_ger_relatorio, text='Relatório', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg= '#6E6E6E', command=lambda: self.indicate(self.btn_ger_relatorio, self.widgets_relatorio))
         self.btn_ger_relatorio.place(relx=0.08, rely=0.85,  width=150, height=50)
         
     # CONFIGURAÇÕES DA TELA INICIO
@@ -692,7 +693,6 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_listarD = Button(self.relatorio_frame, command=self.listar_vendas_por_dia, text='Listar Por Dia',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
         self.btn_listarD.place(relx=0.88, rely=0.225, relwidth=0.09, height=40)
         
-        
         self.btn_listarM = Button(self.relatorio_frame, command=self.listar_vendas_por_mes, text='Listar Por Mês',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
         self.btn_listarM.place(relx=0.88, rely=0.298, relwidth=0.09, height=40)
         
@@ -714,6 +714,5 @@ class MenuTela(Funcionalidades, Validadores):
         self.scrolllistaRelatorio = Scrollbar(self.relatorio_frame, orient='vertical', command=self.listaRelatorio.yview)
         self.listaRelatorio.configure(yscrollcommand= self.scrolllistaRelatorio.set)
         self.scrolllistaRelatorio.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
-        
-        pass    
+         
 MenuTela()
