@@ -269,7 +269,7 @@ class MenuTela(Funcionalidades, Validadores):
     def widgets_categoria(self) -> None:
         self.validaEntradas()
         self.categoria_frame = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
-        self.categoria_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        self.categoria_frame.place(relx=0.14, rely=0.09, relwidth=0.75, relheight=0.85)
         
         lbl_titulo_categoria = Label(self.categoria_frame, text='CATEGORIA', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_categoria.place(relx=0.025, rely=0.01)
@@ -278,22 +278,22 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_cod_categoria.place(relx=0.25, rely=0.1, height=20)
         self.et_cod_categoria = Entry(self.categoria_frame, font=('Roboto', 9), state='disabled', validate='key', validatecommand=self.impCod, bg='#FFF')
         self.et_cod_categoria.config(state='disabled')
-        self.et_cod_categoria.place(relx=0.30, rely=0.1, width=50, height=20)
+        self.et_cod_categoria.place(relx=0.32, rely=0.1, width=50, height=20)
 
         self.lbl_desc_categoria = Label(self.categoria_frame, text='Descrição da Categoria: ', font=('Roboto', 9, 'bold') , bg='#d9d9d9')
         self.lbl_desc_categoria.place(relx=0.25, rely=0.15, height=20)
         self.et_desc_categoria = Entry(self.categoria_frame, font=('Roboto', 9), validate='key', validatecommand=self.valString, bg='#FFF')
         self.et_desc_categoria.focus()
-        self.et_desc_categoria.place(relx=0.40, rely=0.15, width=171, height=20)
+        self.et_desc_categoria.place(relx=0.45, rely=0.15, width=171, height=20)
 
         self.btn_salvar_categoria = Button(self.categoria_frame, text=' Salvar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_categoria)
         self.btn_salvar_categoria.place(relx=0.84, rely=0.1, relwidth=0.1, height=40)
 
         self.btn_lista_categoria = Button(self.categoria_frame,  text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.exibir_categoria)
-        self.btn_lista_categoria.place(relx=0.84, rely=0.18, relwidth=0.1, height=40)
+        self.btn_lista_categoria.place(relx=0.84, rely=0.19, relwidth=0.1, height=40)
 
         self.btn_alterar_categoria = Button(self.categoria_frame,  text=' Alterar', relief='groove',  font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.editar_categoria)
-        self.btn_alterar_categoria.place(relx=0.84, rely=0.26, relwidth=0.1, height=40)
+        self.btn_alterar_categoria.place(relx=0.84, rely=0.28, relwidth=0.1, height=40)
 
         self.btn_excluir_categoria = Button(self.categoria_frame,  text=' Excluir', relief='groove',font=('Roboto',10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.deletar_categoria)
         self.btn_excluir_categoria.place(relx=0.84, rely=0.34, relwidth=0.1, height=40)
@@ -307,11 +307,11 @@ class MenuTela(Funcionalidades, Validadores):
         self.listaCategoria.column('#0', width=1)
         self.listaCategoria.column('#1', width=120, minwidth=100, stretch=NO, anchor='center')
         self.listaCategoria.column('#2', width=290, minwidth=290, stretch=NO, anchor='center')
-        self.listaCategoria.place(relx=0.26, rely=0.48, relwidth=0.45, relheight=0.5)
+        self.listaCategoria.place(relx=0.26, rely=0.43, relwidth=0.45, relheight=0.5)
 
         self.scrollListaCat = Scrollbar(self.categoria_frame, orient='vertical', command=self.listaCategoria.yview)
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
-        self.scrollListaCat.place(relx=0.72, rely=0.48, relwidth= 0.02, relheight=0.5)
+        self.scrollListaCat.place(relx=0.72, rely=0.43, relwidth= 0.02, relheight=0.5)
         self.listaCategoria.bind("<Double-1>", self.duplo_clique_cat)
 
     # CONFIGURAÇÕES DA TELA PRODUTO
@@ -604,7 +604,7 @@ class MenuTela(Funcionalidades, Validadores):
     def widgets_fornecimento(self):
         self.validaEntradas()
         self.fornecimento_frame = Frame(self.frameMenu_right, bd=1,background='#D9D9D9')
-        self.fornecimento_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        self.fornecimento_frame.place(relx=0.14, rely=0.1, relwidth=0.75, relheight=0.75)
 
         lbl_titulo_fornecimento = Label(self.fornecimento_frame, text='FORNECIMENTO', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_fornecimento.place(relx=0.025, rely=0.01)
@@ -617,32 +617,32 @@ class MenuTela(Funcionalidades, Validadores):
         self.comboxProduto.place(relx=0.13, rely=0.1, width=170, height=22)
         
         self.lbl_fornecedor_fornecimento = Label(self.fornecimento_frame, text='Fornecedor: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
-        self.lbl_fornecedor_fornecimento.place(relx=0.02, rely=0.15, height=20)
+        self.lbl_fornecedor_fornecimento.place(relx=0.02, rely=0.18, height=20)
         self.dadosRecebidosFornecedor = self.fornecimentoFornecedor()
         
         self.comboxFornecedor = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosFornecedor)
-        self.comboxFornecedor.place(relx=0.13, rely=0.15, width=170, height=22)
+        self.comboxFornecedor.place(relx=0.13, rely=0.18, width=170, height=22)
 
         self.lbl_data_fornecimento = Label(self.fornecimento_frame, text='Data Forneci.: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
-        self.lbl_data_fornecimento.place(relx=0.02, rely=0.2, height=20)
+        self.lbl_data_fornecimento.place(relx=0.02, rely=0.26, height=20)
         self.et_data_fornecimento = Entry(self.fornecimento_frame)
-        self.et_data_fornecimento.place(relx=0.13, rely=0.2, width=62, height=20)
+        self.et_data_fornecimento.place(relx=0.16, rely=0.26, width=62, height=20)
         #self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
         #self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
 
         self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
-        self.qtd_fornecida.place(relx=0.02, rely=0.25, height=20)
+        self.qtd_fornecida.place(relx=0.02, rely=0.33, height=20)
         self.et_qtd_fornecida = Entry(self.fornecimento_frame)
-        self.et_qtd_fornecida.place(relx=0.13, rely=0.25, width=62, height=20) 
+        self.et_qtd_fornecida.place(relx=0.16, rely=0.33, width=62, height=20) 
 
-        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.inserir_fornecimento)
-        self.btn_salvarFornecimento.place(relx=0.78, rely=0.05, relwidth=0.09, height=40)
+        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.inserir_fornecimento)
+        self.btn_salvarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.exibir_fornecimento)
-        self.btn_listarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.exibir_fornecimento)
+        self.btn_listarFornecimento.place(relx=0.88, rely=0.15, relwidth=0.09, height=40)
 
-        self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar", fg='#FFF',font=('Roboto', 10,'bold'), bg='#505050', command=self.editar_fornecimento)
-        self.btn_alterarFornecimento.place(relx=0.78, rely=0.2, relwidth=0.09, height=40)
+        self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.editar_fornecimento)
+        self.btn_alterarFornecimento.place(relx=0.88, rely=0.25, relwidth=0.09, height=40)
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
         self.listaFornecimento.heading("#0", text='')
