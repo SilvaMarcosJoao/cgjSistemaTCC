@@ -9,7 +9,7 @@ class ItensVenda:
         self.__cod_produto = cod_produto
         self.__qtd = qtd
         self.__cod_venda = cod_venda
-        self.__valorCompra = valor
+        self.__valor = valor
         self.itens = []
 
     # GETTERS E SETTERS
@@ -31,16 +31,16 @@ class ItensVenda:
     def set_cod_venda(self, cod_venda:int) -> None:
         self.__cod_venda = cod_venda
     
-    def get_valor_compra(self) -> float:
-        return self.__valorCompra
+    def get_valor(self) -> float:
+        return self.__valor
     
-    def set_valor_compra(self, valorcompra:float) -> None:
-        self.__valorCompra = valorcompra
+    def set_valor(self, valorcompra:float) -> None:
+        self.__valor = valorcompra
 
     # MÉTODOS DE CRUD DA CLASSE ITENS VENDA
     def cadastrarItens(self, cod_venda:int, cod_produto:int, qtd:int, valorCompra:float) -> None:
         self.banco.conectar()
-        self.banco.cursor.execute(f""" INSERT INTO itens_venda (cod_venda, cod_produto, qtd, valorCompra)
+        self.banco.cursor.execute(f""" INSERT INTO itens_venda (cod_venda, cod_produto, qtd, valor)
                                     VALUES('{cod_venda}', '{cod_produto}', '{qtd}', '{valorCompra}' ) """)
         self.banco.conexao.commit()
         self.banco.desconectar()

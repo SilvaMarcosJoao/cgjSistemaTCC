@@ -7,7 +7,7 @@ from telaAdItens import TelaItens
 
 appMenu = Tk()
 
-class MenuTela(Funcionalidades, Validadores):
+class MenuTela(TelaItens, Funcionalidades, Validadores):
 
     lmtsen = None
     def __init__(self) -> None:
@@ -564,47 +564,69 @@ class MenuTela(Funcionalidades, Validadores):
         self.btn_calendario = Button(self.frameCadTelaVenda, text='Selecionar', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendariove)
         self.btn_calendario.place(relx=0.32, rely=0.1, width=65, height=20)
 
-        self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_totalGeral.place(relx=0.025, rely=0.93)
-
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
-        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.exibirdadosTelaVenda)
-        self.btn_salvar_venda.place(relx=0.78, rely=0.215, relwidth=0.09, height=50)
+        self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
+        self.btn_salvar_venda.place(relx=0.79, rely=0.1, relwidth=0.09, height=50)
 
         self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_limpar_venda.place(relx=0.88, rely=0.215, relwidth=0.09, height=50)
+        self.btn_limpar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
 
-     
-        self.imgCar = PhotoImage(file="imagens/carrinho.png")
-        self.btn_add_itens = Button(self.frameCadTelaVenda, image=self.imgCar, relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=TelaItens)
-        self.btn_add_itens.place(relx=0.4, rely=0.1, relwidth=0.09, height=50)
 
-        self.listaVenda = ttk.Treeview(self.frameCadTelaVenda, height=3, columns=('col1','col2','col3','col4'), show='headings')
+
+        # VISUAL DO CARRINHO
+        self.cabecalhoAdd = LabelFrame(self.frameCadTelaVenda, text='Carrinho', font=('Roboto', 14), bg='#d9d9d9')
+        self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.7, relheight=0.75)
+
+        self.lbl_prodt_venda = Label(self.cabecalhoAdd, text="Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_prodt_venda.place(relx=0.025, rely=0.1) 
+        self.prodRecebidos = self.produtosVenda()
+        self.comboxaddItens = ttk.Combobox(self.cabecalhoAdd, values=self.prodRecebidos)
+        self.comboxaddItens.place(relx=0.12, rely=0.1, width=300, height=20)
+
+
+        self.lbl_qtd_venda = Label(self.cabecalhoAdd, text="Qtd: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_qtd_venda.place(relx=0.025, rely=0.16) 
+        self.et_qtd_venda = Entry(self.cabecalhoAdd)
+        self.et_qtd_venda.place(relx=0.12, rely=0.16, width=70, height=20) 
+
+        self.btn_add_prod = Button(self.cabecalhoAdd, text='Adicionar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.adicionaItens_venda)
+        self.btn_add_prod.place(relx=0.855, rely=0.4, relwidth=0.12, height=20)
+
+        self.btn_remov_prod = Button(self.cabecalhoAdd, text='Remover', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.remover_produto_venda)
+        self.btn_remov_prod.place(relx=0.855, rely=0.48, relwidth=0.12, height=20)
+
+        self.listaAddItens = ttk.Treeview(self.cabecalhoAdd, height=3, columns=('Col1', 'Col2', 'Col3', 'col4', 'col5'), show='headings')
         
-        self.listaVenda.heading('#0', text='')
-        self.listaVenda.heading('#1', text='Cód Venda')
-        self.listaVenda.heading('#2', text='Cliente')
-        self.listaVenda.heading('#3', text='Data Venda')
-        self.listaVenda.heading('#4', text='Valor Total')
+        self.listaAddItens.heading("#0", text='')
+        self.listaAddItens.heading('#1', text='Cód produto')
+        self.listaAddItens.heading('#2', text='Descrição')
+        self.listaAddItens.heading('#3', text='Modelo')
+        self.listaAddItens.heading('#4', text='Valor Unitário')
+        self.listaAddItens.heading('#5', text='Quantidade')
+        
+        self.listaAddItens.column('#0', width=1, anchor='center')
+        self.listaAddItens.column('#1', width=50, anchor='center')
+        self.listaAddItens.column('#2', width=50, anchor='center')
+        self.listaAddItens.column('#3', width=50, anchor='center')
+        self.listaAddItens.column('#4', width=50, anchor='center')
+        self.listaAddItens.column('#5', width=50, anchor='center')
+        
+        self.listaAddItens.place(relx=0.02, rely=0.4, relwidth=0.8, relheight=0.45)
 
-        self.listaVenda.column('#0', width=10, anchor='center')
-        self.listaVenda.column('#1', width=60, anchor='center')
-        self.listaVenda.column('#2', width=400, anchor='center')
-        self.listaVenda.column('#3', width=80, anchor='center')
-        self.listaVenda.column('#4', width=100, anchor='center')
+        self.scrollListaHistTela = Scrollbar(self.cabecalhoAdd, orient='vertical', command=self.listaAddItens.yview)
 
-        self.listaVenda.place(relx=0.025, rely=0.35, relwidth=0.95, relheight=0.5)
+        self.listaAddItens.configure(yscrollcommand=self.scrollListaHistTela.set)
+        self.scrollListaHistTela.place(relx=0.82, rely=0.4, relwidth= 0.02, relheight=0.45)
 
-        self.scrollListaVenda = Scrollbar(self.frameCadTelaVenda, orient='vertical',  command=self.listaVenda.yview)
-        self.scrollListaVenda.config(command=self.frameCadTelaVenda.winfo_y)
-        self.listaVenda.configure(yscrollcommand=self.scrollListaVenda.set)
-        self.scrollListaVenda.place(relx=0.975, rely=0.35, relwidth= 0.02, relheight=0.5)
+        self.scrollHor = Scrollbar(self.cabecalhoAdd, orient='horizontal')
+        self.listaAddItens.configure(xscrollcommand=self.scrollHor.set) 
+        self.scrollHor.place(relx=0.02, rely=0.85, relwidth=0.1, relheight=0.03)
 
-        self.scrollHor = Scrollbar(self.frameCadTelaVenda, orient='horizontal', command=self.listaVenda.xview)
-        self.listaVenda.configure(xscrollcommand=self.scrollHor.set)
-        self.scrollHor.place(relx=0.025, rely=0.855, relwidth=0.08, relheight=0.03)
+        self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_totalGeral.place(relx=0.026, rely=0.945)
+        
 
     def widgets_fornecimento(self):
         self.validaEntradas()

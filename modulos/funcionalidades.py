@@ -11,7 +11,7 @@ from modulos.itensvenda import ItensVenda
 
 
 
-class Funcionalidades:
+class Funcionalidades():
 
     # OBJETOS DAS CLASSES 
     categoria = CategoriaProduto()
@@ -796,10 +796,10 @@ class Funcionalidades:
         return self.exibirDados
         
     def adicionaItens_venda(self):
-        self.produtoadd = [self.comboxProdt_venda.get()]
+        self.produtoadd = [self.comboxaddItens.get()]
         
         self.lista = []
-        self.produtoEscolhido = []
+        
         self.produtosBanco = self.produtosVenda()
         for v in self.produtosBanco:
             if int(self.produtoadd[0][0]) == v[0]:
@@ -808,14 +808,11 @@ class Funcionalidades:
         for l in self.lista:
             l.append(int(self.et_qtd_venda.get()))
             l.append(l[3] * l[4])
-            for i in self.lista:
-                self.listaAddItens.insert('', END, values=i)
-                self.limpaItens()
-            self.itensVenda.itens.append(l)
-            return self.itensVenda.itens
-        
-    def enviarItens(self):
-        return self.adicionaItens_venda
+        for i in self.lista:
+            self.listaAddItens.insert('', END, values=i)
+            self.itensVenda.itens.append(i)
+
+            
 
     def remover_produto_venda(self):
         """
@@ -829,20 +826,21 @@ class Funcionalidades:
         
 
     def limpaItens(self):
-        self.comboxProdt_venda.delete(0, END)
+        self.comboxaddItens.delete(0, END)
         self.et_qtd_venda.delete(0, END)
+        self.et_data_venda.delete(0, END)
+        self.comboxClien_venda.delete(0, END)
 
     def exibirdadosTelaVenda(self):
+        '''
         self.listaItens = self.enviarItens()
-
-        
         self.clienteadd = [self.comboxClien_venda.get()]
         self.dataVen = self.et_data_venda.get()
         self.cli = self.cliente.listarClientes() 
         self.vendaSele = []
         for c in self.cli:
             if int(self.clienteadd[0][0:2]) == c[0]: 
-                self.vendaSele.append(self.listaItens[c])
+        
                 self.vendaSele.append(c[2])
                 self.vendaSele.append(self.dataVen)
                 
@@ -850,7 +848,7 @@ class Funcionalidades:
         for v in self.vendaSele:
             print(v)
             #self.listaVenda.insert('', END, values=v)
-        print(self.vendaSele)
+        print(self.vendaSele)'''
         
      
         
@@ -859,12 +857,27 @@ class Funcionalidades:
         """
 
         """
-        self.cod_cliente = [self.cliRecebidos]
-        self.valor_total = [self.calcular_total]
-
+        self.valortotal = ''
+        self.clienteadd = [self.comboxClien_venda.get()]
+        self.client = self.cliente.listarClientes()
+        for c in self.client:
+            if c[0] == int(self.clienteadd[0][0:2]):
+                self.cod_cli = c[0]
+    
+        self.listaItens = self.itensVenda.itens
+        soma = 0.0
+        for i in self.listaItens:
+            soma += float(i[5])
+            
+        print(soma)
+        self.venda.set_valor_total(soma)
         self.data = self.et_data_venda.get()
-        self.venda.cadastrarVenda(self.cod_cliente, self.valor_total, self.data)
-        self.itensVenda.cadastrarItens()
+        self.venda.cadastrarVenda(self.cod_cli, self.venda.get_valor_total(), self.data)
+        #self.cod_venda = self.venda.resCodVenda()
+        #for it in self.listaItens:
+            
+            #self.itensVenda.cadastrarItens(it[1], it[3], it[5])
+        #self.itensVenda.cadastrarItens(self.listaItens[])
         
 
 

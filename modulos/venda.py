@@ -28,7 +28,7 @@ class Venda:
     def get_valor_total(self) -> float:
         return self.__valor_total
     
-    def set_valor_total(self, valor_total) -> None:
+    def set_valor_total(self, valor_total:float) -> None:
         self.__valor_total = valor_total
 
     def get_data_venda(self) -> str:
@@ -69,6 +69,11 @@ class Venda:
                                      and cod_venda like '{cod_venda}'""").fetchmany()
         self.banco.desconectar()
         return self.vend
+    
+    def resCodVenda(self):
+        self.banco.conectar()
+        self.cods = self.banco.cursor.execute(f""" SELECT LAST(cod_venda) FROM VENDA """).fetchall()
+        return self.cods
         
     def listarData(self, data_venda:str) -> list:
         """
