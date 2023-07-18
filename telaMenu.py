@@ -676,7 +676,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.listaFornecimento.heading("#1", text='Produto')
         self.listaFornecimento.heading('#2', text='Fornecedor')
         self.listaFornecimento.heading('#3', text='Data Fornecimento')
-        self.listaFornecimento.heading('#4', text='Qtd Fornecida')
+        self.listaFornecimento.heading('#4', text='Qtd Fornecida') 
 
         self.listaFornecimento.column('#0', width=1, anchor='center')
         self.listaFornecimento.column('#1', width=120, anchor='center')
@@ -692,31 +692,29 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
         
         
-    def widgets_relatorio(self) ->None:
+    def widgets_relatorio(self) ->None: 
         self.relatorio_frame = Frame(self.frameMenu_right, bd=1, bg='#D9D9D9')
-        self.relatorio_frame.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        self.relatorio_frame.place(relx=0.095, rely=0.095, relwidth=0.75, relheight=0.75)
         
         lbl_titulo_relatorio = Label(self.relatorio_frame, text='RELATÓRIO', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_relatorio.place(relx=0.015, rely=0.01)
         
         self.lbl_consultar = Label(self.relatorio_frame, text='Buscar Venda:', font=('Roboto', 10,'bold'), bg='#d9d9d9')
-        self.lbl_consultar.place(relx=0.73, rely=0.065)
+        self.lbl_consultar.place(relx=0.4, rely=0.150)
+        self.et_consultar = Entry(self.relatorio_frame, font=('Roboto', 14))
+        self.et_consultar.place(relx=0.40, rely=0.20, width=130, height=38)
         
-        self.et_consultar = Entry(self.relatorio_frame, font=('Roboto', 9))
-        self.et_consultar.place(relx=0.73, rely=0.105, width=130, height=20)
+
+        self.imgProcurar = PhotoImage(file='./imagens/procurar.png')
+        self.btn_consultar = Button(self.relatorio_frame ,command=self.consultarVenda, image=self.imgProcurar, relief='groove', font=('Roboto', 10,'bold'),  bg="#f3f3f3")
+        self.btn_consultar.place(relx=0.54, rely=0.2, relwidth=0.05, height=40)
         
-        self.btn_consultar = Button(self.relatorio_frame ,command=self.consultarVenda,text="Consultar", relief='groove', font=('Roboto', 10,'bold'),  bg="#f3f3f3")
-        self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09, height=40)
+        self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
+        self.btn_listar.place(relx= 0.88, rely=0.15, relwidth=0.09, height=40)
         
-        self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3', command=self.listarVenda)
-        self.btn_listar.place(relx= 0.88, rely= 0.15, relwidth=0.09, height=40)
+        self.btn_gerarPDF = Button(self.relatorio_frame, text='Gerar PDF' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
+        self.btn_gerarPDF.place(relx= 0.88, rely= 0.23, relwidth=0.09, height=40)
         
-        
-        self.btn_listarD = Button(self.relatorio_frame, command=self.listar_vendas_por_dia, text='Listar Por Dia',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
-        self.btn_listarD.place(relx=0.88, rely=0.225, relwidth=0.09, height=40)
-        
-        self.btn_listarM = Button(self.relatorio_frame, command=self.listar_vendas_por_mes, text='Listar Por Mês',relief='groove', font=('Roboto', 10,'bold'), bg="#f3f3f3" )
-        self.btn_listarM.place(relx=0.88, rely=0.298, relwidth=0.09, height=40)
         
         self.listaRelatorio = ttk.Treeview(self.relatorio_frame, height= 3, columns= ('Col1', 'Col2', 'Col3', 'Col4'), show= 'headings')
         self.listaRelatorio.heading("#0", text='')
