@@ -29,6 +29,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_inicio.config(bg='#6E6E6E')
 
     def indicate(self, btn, page):
+        self.widgets_inicio()
         self.mudaCorBtnMenu()
         btn.config(bg='#FFF')
         self.delete_page()
@@ -127,10 +128,15 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
-        self.imgTitulo = PhotoImage(file='./imagens/titulo.jpg')
+        self.frame_inicio = Frame(self.frameMenu_right, bg='#fff')
+        self.frame_inicio.place(relx=0.02, rely=0.03, relwidth=0.96, relheight=0.95)
+
+        self.imgTitulo = PhotoImage(file='./imagens/logo.jpg')
+        self.lblImagem = Label(self.frame_inicio, image=self.imgTitulo)
+        self.lblImagem.place(relx=0.32, rely=0.1)
     
-        self.lbl_subtitulo_inicio = Label(self.frameMenu_right, text='Sistema de Gerenciamento', bg='#505050', font=('Roboto', 28, 'bold'))
-        self.lbl_subtitulo_inicio.place(relx=0.26, rely=0.4)
+        self.lbl_subtitulo_inicio = Label(self.frame_inicio, text='Sistema de Gerenciamento', bg='#fff', font=('Roboto', 28, 'bold'))
+        self.lbl_subtitulo_inicio.place(relx=0.25, rely=0.7)
 
     # CONFIGURAÇÕES DA TELA USUÁRIO
     def widgets_usuario(self) -> None:
@@ -217,7 +223,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
         self.btn_consultar = Button(self.frameCadTelaCliente, text=' Consultar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.buscar_cliente)
         self.btn_consultar.place(relx=0.88, rely=0.065, relwidth=0.09, height=40)
-        self.lbl_pes = Label(self.frameCadTelaCliente, text='Buscar Cliente: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_pes = Label(self.frameCadTelaCliente, text='Buscar Nome: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_pes.place(relx=0.73, rely=0.065)
         self.et_consultar_cliente = Entry(self.frameCadTelaCliente, font=('Roboto', 9), bg='#FFF')
         self.et_consultar_cliente.place(relx=0.73, rely=0.1, width=130, height=20)
@@ -264,7 +270,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
         self.scrollLista = Scrollbar(self.frameCadTelaCliente, orient='vertical', command=self.listaCliente.yview)
         self.listaCliente.configure(yscrollcommand=self.scrollLista.set)
-        self.scrollLista.place(relx=0.975, rely=0.47, relwidth= 0.02, relheight=0.48)
+        self.scrollLista.place(relx=0.97, rely=0.475, relwidth= 0.02, relheight=0.48)
 
         self.scrollHor = Scrollbar(self.frameCadTelaCliente, orient='horizontal', command=self.listaCliente.xview)
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
@@ -275,7 +281,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
     def widgets_categoria(self) -> None:
         self.validaEntradas()
         self.categoria_frame = Frame(self.frameMenu_right, bd=1,bg='#d9d9d9')
-        self.categoria_frame.place(relx=0.14, rely=0.09, relwidth=0.75, relheight=0.85)
+        self.categoria_frame.place(relx=0.13, rely=0.08, relwidth=0.75, relheight=0.85)
         
         lbl_titulo_categoria = Label(self.categoria_frame, text='CATEGORIA', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_categoria.place(relx=0.025, rely=0.01)
@@ -302,22 +308,22 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_alterar_categoria.place(relx=0.84, rely=0.28, relwidth=0.1, height=40)
 
         self.btn_excluir_categoria = Button(self.categoria_frame,  text=' Excluir', relief='groove',font=('Roboto',10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.deletar_categoria)
-        self.btn_excluir_categoria.place(relx=0.84, rely=0.34, relwidth=0.1, height=40)
+        self.btn_excluir_categoria.place(relx=0.84, rely=0.37, relwidth=0.1, height=40)
 
-        self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'))
+        self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'), show='headings')
 
         self.listaCategoria.heading('#0', text='')
-        self.listaCategoria.heading('#1', text='Código Categoria')
+        self.listaCategoria.heading('#1', text='Código')
         self.listaCategoria.heading('#2', text='Descrição da Categoria')
 
         self.listaCategoria.column('#0', width=1)
-        self.listaCategoria.column('#1', width=120, minwidth=100, stretch=NO, anchor='center')
-        self.listaCategoria.column('#2', width=290, minwidth=290, stretch=NO, anchor='center')
+        self.listaCategoria.column('#1', width=70, minwidth=70, stretch=NO, anchor='center')
+        self.listaCategoria.column('#2', width=270, minwidth=270, stretch=NO, anchor='center')
         self.listaCategoria.place(relx=0.26, rely=0.43, relwidth=0.45, relheight=0.5)
 
         self.scrollListaCat = Scrollbar(self.categoria_frame, orient='vertical', command=self.listaCategoria.yview)
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
-        self.scrollListaCat.place(relx=0.72, rely=0.43, relwidth= 0.02, relheight=0.5)
+        self.scrollListaCat.place(relx=0.71, rely=0.43, relwidth= 0.02, relheight=0.5)
         self.listaCategoria.bind("<Double-1>", self.duplo_clique_cat)
 
     # CONFIGURAÇÕES DA TELA PRODUTO
@@ -355,7 +361,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.et_preco_ven_produto = Entry(self.produto_frame, font=('Roboto', 9))
         self.et_preco_ven_produto.place(relx=0.435, rely=0.1, width=125, height=20)
 
-        self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
+        self.lbl_qtd_produto = Label(self.produto_frame, text='Qtd: ', font=('Roboto', 9, 'bold'), fg='#d9d9d9', bg='#d9d9d9')
         self.lbl_qtd_produto.place(relx=0.15, rely=0.1)
         self.et_qtd_produto = Entry(self.produto_frame, font=('Roboto', 10), state='readonly')
         self.et_qtd_produto.place(relx=0.18, rely=0.1, width=63, height=20)
@@ -373,19 +379,19 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.et_consulta_produto = Entry(self.produto_frame, font=('Roboto', 9), bg='#FFF')
         self.et_consulta_produto.place(relx=0.72, rely=0.11, width=130, height=20)
         self.btn_consulta_produto = Button(self.produto_frame, text=' Consultar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.consu_produto)
-        self.btn_consulta_produto.place(relx=0.87, rely=0.075, relwidth=0.1, height=40)
+        self.btn_consulta_produto.place(relx=0.88, rely=0.075, relwidth=0.09, height=40)
 
         self.btn_salvar_produto = Button(self.produto_frame, text=' Salvar', relief='groove',font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_produto)
-        self.btn_salvar_produto.place(relx=0.87, rely=0.155, relwidth=0.1, height=40)
+        self.btn_salvar_produto.place(relx=0.88, rely=0.155, relwidth=0.09, height=40)
 
         self.btn_lista_produto = Button(self.produto_frame,   text=' Listar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.exibir_produto)
-        self.btn_lista_produto.place(relx=0.87, rely=0.235, relwidth=0.1, height=40)
+        self.btn_lista_produto.place(relx=0.88, rely=0.235, relwidth=0.09, height=40)
 
         self.btn_alterar_produto = Button(self.produto_frame, text=' Alterar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.editar_produto)
-        self.btn_alterar_produto.place(relx=0.87, rely=0.315, relwidth=0.1, height=40)
+        self.btn_alterar_produto.place(relx=0.88, rely=0.315, relwidth=0.09, height=40)
 
         self.btn_excluir_produto = Button(self.produto_frame,  text=' Excluir', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.deletar_produto)
-        self.btn_excluir_produto.place(relx=0.87, rely=0.395, relwidth=0.1, height=40)
+        self.btn_excluir_produto.place(relx=0.88, rely=0.395, relwidth=0.09, height=40)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
         
@@ -531,7 +537,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
         self.scrollListaForne = Scrollbar(self.frameCadTelaFornecedor, orient='vertical', command=self.listaForne.yview)
         self.listaForne.configure(yscrollcommand=self.scrollListaForne.set)
-        self.scrollListaForne.place(relx=0.975, rely=0.48, relwidth= 0.02, relheight=0.48)
+        self.scrollListaForne.place(relx=0.97, rely=0.48, relwidth= 0.02, relheight=0.49)
         
         self.scrollHor = Scrollbar(self.frameCadTelaFornecedor, orient='horizontal', command=self.listaForne.xview)
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
@@ -632,7 +638,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
     def widgets_fornecimento(self):
         self.validaEntradas()
         self.fornecimento_frame = Frame(self.frameMenu_right, bd=1,background='#D9D9D9')
-        self.fornecimento_frame.place(relx=0.14, rely=0.1, relwidth=0.75, relheight=0.75)
+        self.fornecimento_frame.place(relx=0.12, rely=0.12, relwidth=0.75, relheight=0.75)
 
         lbl_titulo_fornecimento = Label(self.fornecimento_frame, text='FORNECIMENTO', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_fornecimento.place(relx=0.025, rely=0.01)
@@ -664,10 +670,10 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.et_qtd_fornecida.place(relx=0.16, rely=0.33, width=62, height=20) 
 
         self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar", relief='groove',font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.inserir_fornecimento)
-        self.btn_salvarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
+        self.btn_salvarFornecimento.place(relx=0.88, rely=0.1, relwidth=0.09, height=40)
 
         self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar", relief='groove',font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.exibir_fornecimento)
-        self.btn_listarFornecimento.place(relx=0.88, rely=0.15, relwidth=0.09, height=40)
+        self.btn_listarFornecimento.place(relx=0.88, rely=0.2, relwidth=0.09, height=40)
 
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
@@ -693,26 +699,26 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
     def widgets_relatorio(self) ->None: 
         self.relatorio_frame = Frame(self.frameMenu_right, bd=1, bg='#D9D9D9')
-        self.relatorio_frame.place(relx=0.095, rely=0.095, relwidth=0.75, relheight=0.75)
+        self.relatorio_frame.place(relx=0.12, rely=0.12, relwidth=0.75, relheight=0.75)
         
-        lbl_titulo_relatorio = Label(self.relatorio_frame, text='RELATÓRIO', font=('Roboto', 15), bg='#d9d9d9')
+        lbl_titulo_relatorio = Label(self.relatorio_frame, text='RELATÓRIO DE VENDAS', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_relatorio.place(relx=0.015, rely=0.01)
         
-        self.lbl_consultar = Label(self.relatorio_frame, text='Buscar Venda:', font=('Roboto', 10,'bold'), bg='#d9d9d9')
-        self.lbl_consultar.place(relx=0.4, rely=0.150)
+        self.lbl_consultar = Label(self.relatorio_frame, text='Digite o código de venda:', font=('Roboto', 10,'bold'), bg='#d9d9d9')
+        self.lbl_consultar.place(relx=0.35, rely=0.150)
         self.et_consultar = Entry(self.relatorio_frame, font=('Roboto', 14))
-        self.et_consultar.place(relx=0.40, rely=0.20, width=130, height=38)
+        self.et_consultar.place(relx=0.35, rely=0.20, width=130, height=38)
         
 
         self.imgProcurar = PhotoImage(file='./imagens/procurar.png')
         self.btn_consultar = Button(self.relatorio_frame ,command=self.consultarVenda, image=self.imgProcurar, relief='groove', font=('Roboto', 10,'bold'),  bg="#f3f3f3")
-        self.btn_consultar.place(relx=0.54, rely=0.2, relwidth=0.05, height=40)
+        self.btn_consultar.place(relx=0.525, rely=0.2, relwidth=0.05, height=40)
         
         self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
-        self.btn_listar.place(relx= 0.88, rely=0.15, relwidth=0.09, height=40)
+        self.btn_listar.place(relx= 0.87, rely=0.2, relwidth=0.1, height=40)
         
         self.btn_gerarPDF = Button(self.relatorio_frame, text='Gerar PDF' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
-        self.btn_gerarPDF.place(relx= 0.88, rely= 0.23, relwidth=0.09, height=40)
+        self.btn_gerarPDF.place(relx= 0.87, rely= 0.3, relwidth=0.1, height=40)
         
         
         self.listaRelatorio = ttk.Treeview(self.relatorio_frame, height= 3, columns= ('Col1', 'Col2', 'Col3', 'Col4'), show= 'headings')
@@ -722,11 +728,11 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.listaRelatorio.heading("#3", text='Valor')
         self.listaRelatorio.heading("#4", text='Data da Venda')
         
-        self.listaRelatorio.column("#0", width=1 ,anchor='center')
-        self.listaRelatorio.column("#1", width=120 ,anchor='center')
-        self.listaRelatorio.column("#2", width=120 ,anchor='center')
-        self.listaRelatorio.column("#3", width=80 ,anchor='center')
-        self.listaRelatorio.column("#4", width=90 ,anchor='center')
+        self.listaRelatorio.column("#0", width=1, minwidth=1 ,anchor='center')
+        self.listaRelatorio.column("#1", width=70, minwidth=80 ,anchor='center')
+        self.listaRelatorio.column("#2", width=250, minwidth=90 ,anchor='center')
+        self.listaRelatorio.column("#3", width=80, minwidth=90 ,anchor='center')
+        self.listaRelatorio.column("#4", width=90, minwidth=90 ,anchor='center')
         
         self.listaRelatorio.place(relx=0.025, rely=0.46, relwidth=0.95, relheight=0.5)
         
