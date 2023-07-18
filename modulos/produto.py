@@ -123,6 +123,7 @@ class Produto:
         self.banco.conexao.commit()
         self.banco.desconectar()
 
+    # MÉTODOS ASSOCIAS A VENDA
     def atualizaEstoqueProd(self, cod_produto:int, qtd:int) -> None:
         """
         """
@@ -131,9 +132,16 @@ class Produto:
                     WHERE cod_produto = {cod_produto} """)
         self.banco.conexao.commit()
         self.banco.desconectar()
+        
+    def abatEstoqueProd(self, cod_produto: int, qtd:int) -> None:
+        """ 
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" UPDATE produto SET qtd_estoque=qtd_estoque - ('{qtd}')
+                                  WHERE cod_produto = {cod_produto}""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
 
-
-    # Métodos personalizados para telaCliente
     def consultaProdutoVenda(self) -> list:
         """
         """

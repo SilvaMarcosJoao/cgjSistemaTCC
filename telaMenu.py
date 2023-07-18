@@ -63,6 +63,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
         self.appMenu.title('Menu Inicial - Sistema de Gerenciamento (SGZurc)')
+        self.appMenu.iconbitmap('./imagens/icone.ico')
         self.largTela = 1200
         self.alturTela = 600
         self.lMonitor = self.appMenu.winfo_screenwidth()
@@ -72,6 +73,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.appMenu.geometry("%dx%d+%d+%d" % (self.largTela, self.alturTela, self.posX, self.posY))
         self.appMenu.resizable(False, False)
         self.appMenu.configure(background='#FFFFFF')
+        
 
     # FRAME DO MENU PRINCIPAL LATERAL
     def frame_menu(self) -> None:
@@ -125,9 +127,8 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
-        self.lbl_titulo_inicio = Label(self.frameMenu_right, text='SGZurc', bg='#505050', font=('Roboto', 40, 'bold'))
-        self.lbl_titulo_inicio.place(relx=0.4, rely=0.2)
-
+        self.imgTitulo = PhotoImage(file='./imagens/titulo.jpg')
+    
         self.lbl_subtitulo_inicio = Label(self.frameMenu_right, text='Sistema de Gerenciamento', bg='#505050', font=('Roboto', 28, 'bold'))
         self.lbl_subtitulo_inicio.place(relx=0.26, rely=0.4)
 
@@ -662,14 +663,12 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.et_qtd_fornecida = Entry(self.fornecimento_frame)
         self.et_qtd_fornecida.place(relx=0.16, rely=0.33, width=62, height=20) 
 
-        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.inserir_fornecimento)
+        self.btn_salvarFornecimento = Button(self.fornecimento_frame,text="Salvar", relief='groove',font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.inserir_fornecimento)
         self.btn_salvarFornecimento.place(relx=0.88, rely=0.05, relwidth=0.09, height=40)
 
-        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.exibir_fornecimento)
+        self.btn_listarFornecimento = Button(self.fornecimento_frame, text="Listar", relief='groove',font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.exibir_fornecimento)
         self.btn_listarFornecimento.place(relx=0.88, rely=0.15, relwidth=0.09, height=40)
 
-        self.btn_alterarFornecimento = Button(self.fornecimento_frame, text="Alterar",font=('Roboto', 10,'bold'), bg='#f3f3f3', command=self.editar_fornecimento)
-        self.btn_alterarFornecimento.place(relx=0.88, rely=0.25, relwidth=0.09, height=40)
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
         self.listaFornecimento.heading("#0", text='')

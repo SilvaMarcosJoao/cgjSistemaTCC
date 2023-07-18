@@ -811,12 +811,13 @@ class Funcionalidades():
         for i in self.lista:
             self.listaAddItens.insert('', END, values=i)
             self.itensVenda.itens.append(i)
-
+        
+        print(self.itensVenda.itens)
             
 
     def remover_produto_venda(self):
         """
-        Remove os itens do carrinho.
+        Remove os itens do carrinho
         :param: Não tem parâmetros.
         :return: Não tem retorno.
         """
@@ -868,14 +869,14 @@ class Funcionalidades():
         soma = 0.0
         for i in self.listaItens:
             soma += float(i[5])
-            
-        print(soma)
-        self.venda.set_valor_total(soma)
+        
         self.data = self.et_data_venda.get()
-        self.venda.cadastrarVenda(self.cod_cli, self.venda.get_valor_total(), self.data)
+        #self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
+        
         #self.cod_venda = self.venda.resCodVenda()
-        #for it in self.listaItens:
-            
+        for it in self.listaItens:
+            print(it)
+            #self.produto.abatEstoqueProd(it[0], int(it[4]))
             #self.itensVenda.cadastrarItens(it[1], it[3], it[5])
         #self.itensVenda.cadastrarItens(self.listaItens[])
         
