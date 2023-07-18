@@ -85,43 +85,43 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
     def widgets_menu_left(self) -> None:
         self.img_inicio = PhotoImage(file='./imagens/inicio.png', width=60)
         self.btn_inicio = Button(self.frameMenu_left, image=self.img_inicio, text='Início',relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_inicio, self.widgets_inicio))
-        self.btn_inicio.place(relx=0.08, rely=0.05, width=150, height=50)
+        self.btn_inicio.place(relx=0.08, rely=0.01, width=150, height=50)
 
         self.img_ger_usu = PhotoImage(file='./imagens/usuario.png')
         self.btn_ger_usuario = Button(self.frameMenu_left, image=self.img_ger_usu, text=' Usuário', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E',command=lambda: self.indicate(self.btn_ger_usuario, self.widgets_usuario))
-        self.btn_ger_usuario.place(relx=0.08, rely=0.65, width=150, height=50)
+        self.btn_ger_usuario.place(relx=0.08, rely=0.61, width=150, height=50)
 
         self.img_ger_cli = PhotoImage(file='./imagens/cliente.png')
         self.btn_ger_cliente = Button(self.frameMenu_left, image=self.img_ger_cli,text=' Cliente', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_cliente, self.widgets_cliente))
-        self.btn_ger_cliente.place(relx=0.08, rely=0.25, width=150, height=50)
+        self.btn_ger_cliente.place(relx=0.08, rely=0.21, width=150, height=50)
 
         self.img_ger_cat = PhotoImage(file='./imagens/categoria.png')
         self.btn_ger_categoria = Button(self.frameMenu_left, image=self.img_ger_cat, text='Categoria', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda:self.indicate(self.btn_ger_categoria, self.widgets_categoria) )
-        self.btn_ger_categoria.place(relx=0.08, rely=0.15, width=150, height=50)
+        self.btn_ger_categoria.place(relx=0.08, rely=0.11, width=150, height=50)
 
         self.img_ger_produto = PhotoImage(file='./imagens/produto.png')
         self.btn_ger_produto = Button(self.frameMenu_left, image=self.img_ger_produto, text=' Produto', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_produto, self.widgets_produto))
-        self.btn_ger_produto.place(relx=0.08, rely=0.55, width=150, height=50)
+        self.btn_ger_produto.place(relx=0.08, rely=0.51, width=150, height=50)
         
         self.img_ger_forn = PhotoImage(file='./imagens/fornecedor.png')
         self.btn_ger_fornecedor = Button(self.frameMenu_left, image=self.img_ger_forn, text=' Fornecedor', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecedor, self.widgets_fornecedor))
-        self.btn_ger_fornecedor.place(relx=0.08, rely=0.35, width=150, height=50)
+        self.btn_ger_fornecedor.place(relx=0.08, rely=0.31, width=150, height=50)
 
         self.img_ger_vend = PhotoImage(file='./imagens/venda.png')
         self.btn_ger_venda = Button(self.frameMenu_left, image=self.img_ger_vend, text=' Venda', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_venda, self.widgets_venda))
-        self.btn_ger_venda.place(relx=0.08, rely=0.75, width=150, height=50)
+        self.btn_ger_venda.place(relx=0.08, rely=0.71, width=150, height=50)
 
         self.img_ger_sair = PhotoImage(file='./imagens/sair.png')
         self.btn_sair = Button(self.frameMenu_left, image=self.img_ger_sair, text='Finalizar', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center',bg='#6E6E6E', command=self.finalizar)
-        self.btn_sair.place(relx=0.08, rely=0.95, width=150, height=50)
+        self.btn_sair.place(relx=0.08, rely=0.91, width=150, height=50)
 
         self.img_ger_fornecimen = PhotoImage(file='./imagens/fornecimento.png')
         self.btn_ger_fornecimento = Button(self.frameMenu_left, image=self.img_ger_fornecimen, text=' Fornecimento', relief='groove',font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg='#6E6E6E', command=lambda: self.indicate(self.btn_ger_fornecimento, self.widgets_fornecimento))
-        self.btn_ger_fornecimento.place(relx=0.08, rely=0.45, width=150, height=50)
+        self.btn_ger_fornecimento.place(relx=0.08, rely=0.41, width=150, height=50)
 
         self.img_ger_relatorio = PhotoImage(file='./imagens/dashboard.png')
         self.btn_ger_relatorio = Button(self.frameMenu_left, image=self.img_ger_relatorio, text='Relatório', relief='groove', font=('Roboto', 7, 'bold'), compound='left', anchor='center', bg= '#6E6E6E', command=lambda: self.indicate(self.btn_ger_relatorio, self.widgets_relatorio))
-        self.btn_ger_relatorio.place(relx=0.08, rely=0.85,  width=150, height=50)
+        self.btn_ger_relatorio.place(relx=0.08, rely=0.81,  width=150, height=50)
         
     # CONFIGURAÇÕES DA TELA INICIO
     def widgets_inicio(self) -> None:
