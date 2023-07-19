@@ -8,7 +8,12 @@ from modulos.fornecimento import Fornecimento
 from modulos.venda import Venda
 from modulos.produto import Produto
 from modulos.itensvenda import ItensVenda
-
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.platypus import SimpleDocTemplate, Image
+import webbrowser
 
 
 class Funcionalidades():
@@ -157,7 +162,18 @@ class Funcionalidades():
         self.preco_compra = self.et_preco_comp_produto.get().strip()
         self.preco_venda = self.et_preco_ven_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
-        self.cod_cat = [self.cat]
+        self.codCat = []
+        self.codCat.append(self.cat)
+        self.codBanco = self.categoria.codigoCategoria()
+        for c in self.codBanco:
+
+            print(int(self.codCat[0][1]))
+            if c[0] == int(self.codCat[0][1]) or c[0] == int(self.codCat[0][1:3]):
+                print('igual')
+                
+        
+        
+        
         try:
             if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_cat == '':
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
@@ -166,9 +182,10 @@ class Funcionalidades():
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.cod_cat[0][1])
+                #self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.cod_cat[0][1])
                 self.limpa_produto()
-                messagebox.showinfo('Informação', 'Produto cadastrado com sucesso!')  
+                messagebox.showinfo('Sistema', 'Produto cadastrado com sucesso!')  
+                
         except Exception as erro:
             messagebox.showerror('Erro', 'Não foi possível cadastrar o produto')
             print(erro)
@@ -182,7 +199,7 @@ class Funcionalidades():
         self.listaProd.delete(*self.listaProd.get_children())
         self.exibirProd = self.produto.listarProdutos()
         if len(self.exibirProd) == 0:
-            messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
+            messagebox.showinfo('Sistema', 'Não há produtos cadastrados.')
         else:
             for i in self.exibirProd:
                 self.et_cod_produto.config(state='normal')
@@ -198,7 +215,7 @@ class Funcionalidades():
         else:
             self.resProd = self.produto.consultarProduto(self.prod)
             if len(self.resProd) == 0:
-                messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
+                messagebox.showinfo('Sistema', 'Nenhum produto encontrado.')
             else:
                 for v in self.resProd:
                     self.listaProd.insert('',END, values=v)
@@ -278,34 +295,6 @@ class Funcionalidades():
         self.et_preco_ven_produto.delete(0, END)
         self.et_qtd_produto.delete(0, END)
         
-
-    def listaper_produto(self):
-        """
-        """
-        self.listaProdTela.delete(*self.listaProdTela.get_children())
-        self.listaPr = self.produto.listaperProduto()
-        if len(self.listaPr) == 0:
-            messagebox.showinfo('Informação', 'Não há produtos cadastrados.')
-        else:
-            for i in self.listaPr:
-                self.listaProdTela.insert('',END, values=i) 
-
-
-    def consuper_produto(self):
-        """
-        """
-        self.listaProdTela.delete(*self.listaProdTela.get_children())
-        self.prod = self.et_consulta_produto.get()
-        if len(self.prod) == 0:
-            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
-        else:
-            self.resProd = self.produto.consultaperProduto(self.prod)
-            if len(self.resProd) == 0:
-                messagebox.showinfo('Informação', 'Nenhum produto encontrado.')
-            else:
-                for v in self.resProd:
-                    self.listaProdtela.insert('',END, values=v)
-                
 
     # FUNÇÕES DOS BOTÕES DA TELA DE CLIENTE
     def inserir_cliente(self):
@@ -680,7 +669,7 @@ class Funcionalidades():
         self.dadosProd = self.produto.listarProdutos()
         self.exibirProdutos = []
         for i in range(0, len(self.dadosProd)):
-            self.exibirProdutos.append(self.dadosProd[i][1:3])
+            self.exibirProdutos.append(self.dadosProd[i][0:3])
         return self.exibirProdutos
     
     def fornecimentoFornecedor(self):
@@ -697,24 +686,32 @@ class Funcionalidades():
         """
         self.cod_prod = None
         self.cnpj_forn = None
-        self.resProduto = self.comboxProduto.get()
-        self.fornecimentoProduto()
+        try:
+            self.resProduto = self.comboxProduto.get()
+            self.resFornecedor = self.comboxFornecedor.get()
+            self.qtdfornecida = int(self.et_qtd_fornecida.get())
+            self.data = self.et_data_fornecimento.get()
+            if len(self.resProduto) == 0 or len(self.resFornecedor) == 0 or self.qtdfornecida == 0 or len(self.data) == 0:
+                messagebox.showwarning('Alerta','Por favor, preencha as informações')
+            elif type(self.qtdfornecida) != int:
+                messagebox.showwarning('Alerta','Por favor, insira um quantidade válida')
+            else:
+                self.fornecimentoProduto()
+                for v in self.dadosProd:   
+                    if int(self.resProduto[0]) in v:
+                        self.cod_prod = v[0]
 
-        for v in self.dadosProd:
-            if self.resProduto in v:
-                self.cod_prod = v[0]
-
-        self.resFornecedor = self.comboxFornecedor.get()
-        self.fornecimentoFornecedor()
-        for i in self.dadosForn:
-            if self.resFornecedor in i:
-                self.cod_fornece = i[0]
+                self.fornecimentoFornecedor()
+                for i in self.dadosForn:
+                    if self.resFornecedor in i:
+                        self.cod_fornece = i[0]
         
-        self.qtdfornecida = self.et_qtd_fornecida.get()
-        self.data = self.et_data_fornecimento.get()
-        
-        self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
-        self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
+                self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
+                self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
+                messagebox.showinfo('Sistema', 'Fornecimento Realizado!')
+        except Exception as err: 
+            messagebox.showerror('Erro', 'Erro no fornecimento')
+            print(err)
         self.limpa_fornecimento()
 
     def exibir_fornecimento(self):
@@ -734,25 +731,7 @@ class Funcionalidades():
         except:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
-    def editar_fornecimento(self):
-        """
-        """
-        self.alt_cod_fornece = None
-        try:
-            self.resForn = self.comboxFornecedor.get().strip()
-            self.fornecimentoFornecedor()
-            for i in self.dadosForn:
-                if self.resForn in i:
-                    self.alt_cod_fornece = i[0]
-                self.fornecimento.set_cod_produto(self.alt_cod_fornece)
-                self.fornecimento.set_qtd_fornecida(self.et_qtd_fornecida.get().strip())
-                if len(self.fornecimento.get_cod_fornecedor()) == 0 and len(self.fornecimento.get_qtd_fornecida()) == 0:
-                    messagebox.showwarning('Alerta', 'Selecione, para alterar')
-                else:
-                    self.fornecimento.alterar_fornecimento(self.fornecimento.get_cod_fornecedor(), self.fornecimento.get_qtd_fornecida)
-        except:
-            messagebox.showerror('Erro', 'Erro na alteração.')
-        
+ 
     def duplo_clique_fornecimento(self, event):
         """
         """
@@ -812,7 +791,7 @@ class Funcionalidades():
             self.listaAddItens.insert('', END, values=i)
             self.itensVenda.itens.append(i)
         
-        print(self.itensVenda.itens)
+        #print(self.itensVenda.itens)
             
 
     def remover_produto_venda(self):
@@ -832,27 +811,6 @@ class Funcionalidades():
         self.et_data_venda.delete(0, END)
         self.comboxClien_venda.delete(0, END)
 
-    def exibirdadosTelaVenda(self):
-        '''
-        self.listaItens = self.enviarItens()
-        self.clienteadd = [self.comboxClien_venda.get()]
-        self.dataVen = self.et_data_venda.get()
-        self.cli = self.cliente.listarClientes() 
-        self.vendaSele = []
-        for c in self.cli:
-            if int(self.clienteadd[0][0:2]) == c[0]: 
-        
-                self.vendaSele.append(c[2])
-                self.vendaSele.append(self.dataVen)
-                
-                
-        for v in self.vendaSele:
-            print(v)
-            #self.listaVenda.insert('', END, values=v)
-        print(self.vendaSele)'''
-        
-     
-        
 
     def inserir_venda(self):
         """
@@ -869,16 +827,18 @@ class Funcionalidades():
         soma = 0.0
         for i in self.listaItens:
             soma += float(i[5])
-        
         self.data = self.et_data_venda.get()
-        #self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
+        self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
         
-        #self.cod_venda = self.venda.resCodVenda()
-        for it in self.listaItens:
-            print(it)
+        self.codigoVenda = self.venda.resCodVenda()
+        for item in self.listaItens:
+            self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5])    
+            self.produto.abatEstoqueProd(item[0], int(item[4]))
+
+
             #self.produto.abatEstoqueProd(it[0], int(it[4]))
-            #self.itensVenda.cadastrarItens(it[1], it[3], it[5])
-        #self.itensVenda.cadastrarItens(self.listaItens[])
+            #self.itensVenda.cadastrarItens(self.codigoVenda[0][0], it[1], it[3], it[5])
+        
         
 
 
@@ -904,7 +864,6 @@ class Funcionalidades():
         """
 
   
- 
     def consultarVenda(self):
         self.listaRelatorio.delete(*self.listaRelatorio.get_children())
         self.codv = self.et_consulta_venda.get()
@@ -920,27 +879,59 @@ class Funcionalidades():
     
     
     def listarVenda(self):
-        self.listarRelatorio.delete(*self.listaRelatorio.get_children())
+        self.listaRelatorio.delete(*self.listaRelatorio.get_children())
         self.listav = self.venda.listarVendas()
         if len(self.listav) == 0:
             messagebox.showinfo('Informação', 'Não há vendas cadastrados.')
         else:
             for i in self.listav:
-                self.et_cod_venda.config(state='normal')
-                self.listaRelatorio.insert('',END, values = i)   
+                self.listaRelatorio.insert('',END, values=i)   
+
+    def gerarRelPDF(self):
+        # Criando arquivo pdf do relatório
+        self.canv = canvas.Canvas('RelatorioVendasGeral.pdf')
+        
+
+        self.canv.setFont('Helvetica-Bold', 20)
+        #desenhar uma string na tela
+        self.canv.drawString(200, 790, 'Relatório de Vendas')
+
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(34, 690, f'Código venda')
+
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(220, 690, f'Cliente')
+
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(355, 690, f'Valor total')
+
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(455, 690, f'Data da Venda')
 
 
-    def listar_vendas_por_dia(self, data):
-        vendas_dia = []
+        #Organizando os valores do cliente na tela
+        self.vendas = self.venda.listarVendas()
+        
+        y = 0
         for venda in self.vendas:
-            if venda[1].date() == data.date():
-                vendas_dia.append(venda)
-        return vendas_dia
-    
-    def listar_vendas_por_mes(self, mes, ano):
-        vendas_mes = []
-        for venda in self.vendas:
-            if venda[1].month == mes and venda[1].year == ano:
-                vendas_mes.append(venda)
-        return vendas_mes
+            print(venda)
 
+
+        #criar linha e ou espaçamento na tela 20 é a esquerda começando 550 abaixo da última informação o outro
+        # 550 seria o comprimento do retangulo e o 5 é a grossura da linha 
+        self.canv.rect(20, 720, 550, 250, fill=False, stroke=True)
+        self.canv.rect(20, 220, 0, 500, fill=False, stroke=True)
+        self.canv.rect(148, 220, 0, 500, fill=False, stroke=True)
+        self.canv.rect(340, 220, 0, 500, fill=False, stroke=True)
+        self.canv.rect(440, 220, 0, 500, fill=False, stroke=True)
+        self.canv.rect(570, 220, 0, 500, fill=False, stroke=True)
+        self.canv.rect(20, 190, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 250, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 310, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 370, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 430, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 490, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 550, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 610, 550, 0, fill=False, stroke=True)
+        self.canv.rect(20, 670, 550, 0, fill=False, stroke=True)
+        

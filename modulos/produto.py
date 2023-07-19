@@ -128,8 +128,8 @@ class Produto:
         """
         """
         self.banco.conectar()
-        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque + ('{qtd}') 
-                    WHERE cod_produto = {cod_produto} """)
+        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque = qtd_estoque + '{qtd}' 
+                    WHERE cod_produto = {cod_produto}""")
         self.banco.conexao.commit()
         self.banco.desconectar()
         
@@ -137,7 +137,7 @@ class Produto:
         """ 
         """
         self.banco.conectar()
-        self.banco.cursor.execute(f""" UPDATE produto SET qtd_estoque=qtd_estoque - ('{qtd}')
+        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque - '{qtd}'
                                   WHERE cod_produto = {cod_produto}""")
         self.banco.conexao.commit()
         self.banco.desconectar()

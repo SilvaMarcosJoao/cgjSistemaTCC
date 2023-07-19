@@ -51,9 +51,9 @@ class Venda:
         """
         """
         self.banco.conectar()
-        self.vendas = self.banco.cursor.execute(f""" SELECT cod_venda, cliente.cod_cliente, cliente.nome_cliente,
+        self.vendas = self.banco.cursor.execute(f""" SELECT cod_venda,  cliente.nome_cliente,
                                         valor_total, data_venda
-                                      FROM Venda, Cliente ,Produto
+                                      FROM Venda, Cliente
                                       WHERE venda.cod_cliente = cliente.cod_cliente""").fetchall()
         self.banco.desconectar()
         return self.vendas
@@ -72,14 +72,7 @@ class Venda:
     
     def resCodVenda(self):
         self.banco.conectar()
-        self.cods = self.banco.cursor.execute(f""" SELECT LAST(cod_venda) FROM VENDA """).fetchall()
+        self.cods = self.banco.cursor.execute(f"""SELECT cod_venda FROM venda 
+                                            WHERE cod_venda = (SELECT MAX(cod_venda) FROM venda)  """).fetchall()
         return self.cods
         
-    def listarData(self, data_venda:str) -> list:
-        """
-        """
-        self.banco.conectar()
-        self.ven = self.banco.cursor.execute("""SELECT * FROM Venda 
-                                    WHERE data_venda like '{data_venda}' """).fetchmany()
-        self.banco.desconectar()
-        return self.ven

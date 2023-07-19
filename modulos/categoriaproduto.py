@@ -72,6 +72,11 @@ class CategoriaProduto:
 
     def buscaQtdCodigoCategoria(self) -> int:
         self.banco.conectar()
-        self.qtdcRegis = self.banco.cursor.execute(f""" SELECT count(cod_categoria_produto)  from categoria_produto""")
+        self.qtdcRegis = self.banco.cursor.execute(f""" SELECT count(cod_categoria_produto)  from categoria_produto""").fetchall()
 
         return self.qtdcRegis
+    
+    def codigoCategoria(self) -> int:
+        self.banco.conectar()
+        self.codigo = self.banco.cursor.execute(f""" SELECT cod_categoria_produto  from categoria_produto""").fetchall()
+        return self.codigo

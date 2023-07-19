@@ -29,7 +29,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_inicio.config(bg='#6E6E6E')
 
     def indicate(self, btn, page):
-        self.widgets_inicio()
+        
         self.mudaCorBtnMenu()
         btn.config(bg='#FFF')
         self.delete_page()
@@ -61,8 +61,18 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.calData = Button(self.frameMenu_right, text='Inserir Data', command=self.inserirDatave)
         self.calData.place(relx=0.5, rely=0.45, width=100, height=25)
 
+    def inserirDataFornecimento(self):
+        data = self.calendarioFor.get_date()
+        self.calendarioFor.destroy()
+        self.et_data_fornecimento.delete(0,END)
+        self.et_data_fornecimento.insert(END, data)
+        self.callen.destroy()
+
     def calendario(self):
-        pass
+        self.calendarioFor = Calendar(self.fornecimento_frame, fg='gray75', bg='blue', font=('Arial', 9, 'bold'), locale='pt_br')
+        self.calendarioFor.place(relx=0.5, rely=0.1)
+        self.callen = Button(self.frameMenu_right, text='Inserir Data', command=self.inserirDataFornecimento)
+        self.callen.place(relx=0.5, rely=0.55, width=100, height=25)
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -715,10 +725,10 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_consultar = Button(self.relatorio_frame ,command=self.consultarVenda, image=self.imgProcurar, relief='groove', font=('Roboto', 10,'bold'),  bg="#f3f3f3")
         self.btn_consultar.place(relx=0.525, rely=0.2, relwidth=0.05, height=40)
         
-        self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
+        self.btn_listar = Button(self.relatorio_frame, text='Listar' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3', command=self.listarVenda)
         self.btn_listar.place(relx= 0.87, rely=0.2, relwidth=0.1, height=40)
         
-        self.btn_gerarPDF = Button(self.relatorio_frame, text='Gerar PDF' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3')
+        self.btn_gerarPDF = Button(self.relatorio_frame, text='Gerar PDF' , font=('Roboto', 10,'bold'), relief='groove', bg='#f3f3f3', command=self.gerarRelPDF)
         self.btn_gerarPDF.place(relx= 0.87, rely= 0.3, relwidth=0.1, height=40)
         
         
@@ -734,6 +744,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.listaRelatorio.column("#2", width=250, minwidth=90 ,anchor='center')
         self.listaRelatorio.column("#3", width=80, minwidth=90 ,anchor='center')
         self.listaRelatorio.column("#4", width=90, minwidth=90 ,anchor='center')
+        
         
         self.listaRelatorio.place(relx=0.025, rely=0.46, relwidth=0.95, relheight=0.5)
         
