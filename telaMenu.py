@@ -60,6 +60,9 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.calendarioObj.place(relx=0.5, rely=0.1)
         self.calData = Button(self.frameMenu_right, text='Inserir Data', command=self.inserirDatave)
         self.calData.place(relx=0.5, rely=0.45, width=100, height=25)
+
+    def calendario(self):
+        pass
             
     # CONFIGURAÇÕES DA TELA 
     def configTelamenu(self) -> None:
@@ -547,7 +550,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
     def widgets_venda(self):
         self.validaEntradas()
         self.frameCadTelaVenda = Frame(self.frameMenu_right, bd=1,background='#d9d9d9')
-        self.frameCadTelaVenda.place(relx=0.025, rely=0.025, relwidth=0.95, relheight=0.95)
+        self.frameCadTelaVenda.place(relx=0.12, rely=0.025, relwidth=0.75, relheight=0.95)
         
         lbl_titulo_venda = Label(self.frameCadTelaVenda, text='VENDA', font=('Roboto', 15), bg='#d9d9d9')
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
@@ -555,21 +558,21 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.lbl_cod_venda = Label(self.frameCadTelaVenda, text="Código:", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_cod_venda.place(relx=0.025, rely=0.1, height=20)
         self.et_cod_venda = Entry(self.frameCadTelaVenda, state='disabled')
-        self.et_cod_venda.place(relx=0.08, rely=0.1, width=55, height=20)
+        self.et_cod_venda.place(relx=0.09, rely=0.1, width=55, height=20)
 
         self.lbl_nome_clien_venda = Label(self.frameCadTelaVenda, text="Cliente: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_nome_clien_venda.place(relx=0.025, rely=0.15) 
         self.cliRecebidos = self.clienteVenda()
         self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.cliRecebidos)
-        self.comboxClien_venda.place(relx=0.08, rely=0.15, width=300, height=20)
+        self.comboxClien_venda.place(relx=0.09, rely=0.15, width=300, height=20)
 
         self.lbl_data_venda = Label(self.frameCadTelaVenda, text='Data Venda: ', font=('Roboto', 9, 'bold'), bg='#d9d9d9')
-        self.lbl_data_venda.place(relx=0.18, rely=0.1, height=20)
+        self.lbl_data_venda.place(relx=0.215, rely=0.1, height=20)
         self.et_data_venda = Entry(self.frameCadTelaVenda)
-        self.et_data_venda.place(relx=0.255, rely=0.1, width=60, height=20)
+        self.et_data_venda.place(relx=0.31, rely=0.1, width=60, height=20)
 
         self.btn_calendario = Button(self.frameCadTelaVenda, text='Selecionar', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendariove)
-        self.btn_calendario.place(relx=0.32, rely=0.1, width=65, height=20)
+        self.btn_calendario.place(relx=0.4, rely=0.1, width=65, height=20)
 
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
@@ -581,22 +584,20 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_limpar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
 
 
-
         # VISUAL DO CARRINHO
         self.cabecalhoAdd = LabelFrame(self.frameCadTelaVenda, text='Carrinho', font=('Roboto', 14), bg='#d9d9d9')
-        self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.7, relheight=0.75)
+        self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.96, relheight=0.75)
 
         self.lbl_prodt_venda = Label(self.cabecalhoAdd, text="Produto: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_prodt_venda.place(relx=0.025, rely=0.1) 
         self.prodRecebidos = self.produtosVenda()
         self.comboxaddItens = ttk.Combobox(self.cabecalhoAdd, values=self.prodRecebidos)
-        self.comboxaddItens.place(relx=0.12, rely=0.1, width=300, height=20)
-
+        self.comboxaddItens.place(relx=0.1, rely=0.1, width=300, height=20)
 
         self.lbl_qtd_venda = Label(self.cabecalhoAdd, text="Qtd: ", font=('Roboto', 9, 'bold'), bg='#d9d9d9')
         self.lbl_qtd_venda.place(relx=0.025, rely=0.16) 
         self.et_qtd_venda = Entry(self.cabecalhoAdd)
-        self.et_qtd_venda.place(relx=0.12, rely=0.16, width=70, height=20) 
+        self.et_qtd_venda.place(relx=0.1, rely=0.16, width=70, height=20) 
 
         self.btn_add_prod = Button(self.cabecalhoAdd, text='Adicionar', relief='groove', font=('Roboto', 10, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.adicionaItens_venda)
         self.btn_add_prod.place(relx=0.855, rely=0.4, relwidth=0.12, height=20)
@@ -629,7 +630,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
 
         self.scrollHor = Scrollbar(self.cabecalhoAdd, orient='horizontal')
         self.listaAddItens.configure(xscrollcommand=self.scrollHor.set) 
-        self.scrollHor.place(relx=0.02, rely=0.85, relwidth=0.1, relheight=0.03)
+        self.scrollHor.place(relx=0.02, rely=0.85, relwidth=0.1, relheight=0.04)
 
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.026, rely=0.945)
@@ -661,8 +662,8 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.lbl_data_fornecimento.place(relx=0.02, rely=0.26, height=20)
         self.et_data_fornecimento = Entry(self.fornecimento_frame)
         self.et_data_fornecimento.place(relx=0.16, rely=0.26, width=62, height=20)
-        #self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
-        #self.btn_calendario.place(relx=0.36, rely=0.35, width=58, height=20)
+        self.btn_calendario = Button(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), bg='#d9d9d9', command=self.calendario)
+        self.btn_calendario.place(relx=0.25, rely=0.26, width=75, height=20)
 
         self.qtd_fornecida = Label(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), bg='#d9d9d9')
         self.qtd_fornecida.place(relx=0.02, rely=0.33, height=20)
