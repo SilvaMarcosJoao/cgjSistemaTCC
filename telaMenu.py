@@ -3,11 +3,11 @@ from tkinter import ttk
 from tkcalendar import Calendar
 from modulos.funcionalidades import Funcionalidades
 from modulos.validacoes import Validadores
-from telaAdItens import TelaItens
+
 
 appMenu = Tk()
 
-class MenuTela(TelaItens, Funcionalidades, Validadores):
+class MenuTela(Funcionalidades, Validadores):
 
     lmtsen = None
     def __init__(self) -> None:
@@ -263,7 +263,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.listaCliente.heading('#5', text='Telefone')
         self.listaCliente.heading('#6', text='Endereço')
         self.listaCliente.heading('#7', text='Número')
-        self.listaCliente.heading('#8', text='Cep')
+        self.listaCliente.heading('#8', text='CEP')
         self.listaCliente.heading('#9', text='Cidade')
         self.listaCliente.heading('#10', text='Estado')
 
@@ -530,7 +530,7 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.listaForne.heading('#5', text='Telefone')
         self.listaForne.heading('#6', text='Endereço')
         self.listaForne.heading('#7', text='Número')
-        self.listaForne.heading('#8', text='Cep')
+        self.listaForne.heading('#8', text='CEP')
         self.listaForne.heading('#9', text='Cidade')
         self.listaForne.heading('#10', text='Estado')
 
@@ -645,6 +645,9 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.026, rely=0.945)
         
+        self.lbl_exibGeral = Label(self.frameCadTelaVenda, textvariable='', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_exibGeral.place(relx=0.4, rely=0.945)
+        
 
     def widgets_fornecimento(self):
         self.validaEntradas()
@@ -732,19 +735,20 @@ class MenuTela(TelaItens, Funcionalidades, Validadores):
         self.btn_gerarPDF.place(relx= 0.87, rely= 0.3, relwidth=0.1, height=40)
         
         
-        self.listaRelatorio = ttk.Treeview(self.relatorio_frame, height= 3, columns= ('Col1', 'Col2', 'Col3', 'Col4'), show= 'headings')
+        self.listaRelatorio = ttk.Treeview(self.relatorio_frame, height= 3, columns= ('Col1', 'Col2', 'Col3', 'Col4', 'Col5'), show= 'headings')
         self.listaRelatorio.heading("#0", text='')
         self.listaRelatorio.heading("#1", text='Código da Venda')
         self.listaRelatorio.heading("#2", text='Cliente')
-        self.listaRelatorio.heading("#3", text='Valor')
-        self.listaRelatorio.heading("#4", text='Data da Venda')
+        self.listaRelatorio.heading("#3", text='CPF')
+        self.listaRelatorio.heading("#4", text='Valor')
+        self.listaRelatorio.heading("#5", text='Data da Venda')
         
         self.listaRelatorio.column("#0", width=1, minwidth=1 ,anchor='center')
         self.listaRelatorio.column("#1", width=70, minwidth=80 ,anchor='center')
-        self.listaRelatorio.column("#2", width=250, minwidth=90 ,anchor='center')
-        self.listaRelatorio.column("#3", width=80, minwidth=90 ,anchor='center')
+        self.listaRelatorio.column("#2", width=240, minwidth=90 ,anchor='center')
+        self.listaRelatorio.column("#3", width=100, minwidth=90 ,anchor='center')
         self.listaRelatorio.column("#4", width=90, minwidth=90 ,anchor='center')
-        
+        self.listaRelatorio.column("#5", width=80, minwidth=90 ,anchor='center')
         
         self.listaRelatorio.place(relx=0.025, rely=0.46, relwidth=0.95, relheight=0.5)
         

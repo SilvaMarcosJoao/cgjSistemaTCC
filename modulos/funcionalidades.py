@@ -165,30 +165,28 @@ class Funcionalidades():
         self.codCat = []
         self.codCat.append(self.cat)
         self.codBanco = self.categoria.codigoCategoria()
+        self.codigoCatego = None
         for c in self.codBanco:
-
             print(int(self.codCat[0][1]))
-            if c[0] == int(self.codCat[0][1]) or c[0] == int(self.codCat[0][1:3]):
-                print('igual')
-                
-        
-        
-        
+            if c[0] == int(self.codCat[0][1]):
+                 self.codigoCatego = c[0]
+            elif self.codCat[0][1:3].isnumeric():
+                if c[0] == int(self.codCat[0][1:3]):
+                    self.codigoCatego = c[0]
         try:
-            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_cat == '':
+            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.codigoCatego == 0:
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                #self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.cod_cat[0][1])
+                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.codigoCatego)
                 self.limpa_produto()
                 messagebox.showinfo('Sistema', 'Produto cadastrado com sucesso!')  
                 
         except Exception as erro:
             messagebox.showerror('Erro', 'Não foi possível cadastrar o produto')
-            print(erro)
 
     def exibir_produto(self):
         """
@@ -231,7 +229,6 @@ class Funcionalidades():
         self.preco_venda = self.et_preco_ven_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
         self.cod_categoria = [self.cat]
-        print(self.cat)
         try:
             if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_categoria == '':
                 messagebox.showwarning('Alerta', 'Por favor, Selecione um produto para alterar')
@@ -332,10 +329,11 @@ class Funcionalidades():
                 messagebox.showinfo('Sistema', 'Cliente cadastrado com sucesso!')
                 self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
                                       self.telefone,self.logradouro,self.numero,
-                                      self.cep,self.cidade,self.estado)    
-                self.limpa_cliente()
-        except:
+                                      self.cep,self.cidade,self.estado)          
+        except Exception as errou:
             messagebox.showerror('Erro', 'Houve um erro inesperado!')  
+            print(errou)
+        self.limpa_cliente()
 
     def lista_cliente(self):
         """
@@ -814,7 +812,10 @@ class Funcionalidades():
 
     def inserir_venda(self):
         """
-
+        Captura os dados selecionados, e envia para o método de cadastro 
+        da classe Venda.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
         """
         self.valortotal = ''
         self.clienteadd = [self.comboxClien_venda.get()]
@@ -829,44 +830,22 @@ class Funcionalidades():
             soma += float(i[5])
         self.data = self.et_data_venda.get()
         self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
-        
+        #self.lbl_exibGeral.insert('', END, values=soma)
+        self.pro = self.produto.listarProdutos()
         self.codigoVenda = self.venda.resCodVenda()
         for item in self.listaItens:
-            self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5])    
-            self.produto.abatEstoqueProd(item[0], int(item[4]))
+            self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5]) 
+            if item[0] == self.pro[0][0]:
+                if int(item[4]) > self.pro[0][5]:
+                    messagebox.showwarning('Atenção', 'Você não pode vender mais do que tem em estoque!')
+                else:  
+                    self.produto.abatEstoqueProd(item[0], int(item[4]))
+                    messagebox.showinfo('Sistema', 'Venda Realizada!')
+                    self.limpaItens()
 
-
-            #self.produto.abatEstoqueProd(it[0], int(it[4]))
-            #self.itensVenda.cadastrarItens(self.codigoVenda[0][0], it[1], it[3], it[5])
-        
-        
-
-
-
-#exemplo do CHATGPT
-        """produtos = []
-
-        def adicionar_produto(nome, preco_venda, quantidade):
-            produto = {'nome': nome, 'preco_venda': preco_venda, 'quantidade': quantidade}
-            produtos.append(produto)
-
-        def calcular_valor_total():
-            for produto in produtos:
-                valor_total = produto['preco_venda'] * produto['quantidade']
-                print(f"Produto: {produto['nome']}, Valor Total: R${valor_total:.2f}")
-
-        # Exemplo de uso
-        adicionar_produto('Produto 1', 10.99, 5)
-        adicionar_produto('Produto 2', 5.49, 3)
-        adicionar_produto('Produto 3', 7.99, 2)
-
-        calcular_valor_total()
-        """
-
-  
     def consultarVenda(self):
         self.listaRelatorio.delete(*self.listaRelatorio.get_children())
-        self.codv = self.et_consulta_venda.get()
+        self.codv = self.et_consultar.get()
         if len(self.codv) == 0:
             messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
         else:
@@ -876,6 +855,7 @@ class Funcionalidades():
             else:
                 for v in self.resVen:
                     self.listaRelatorio.insert('',END, values=v)
+        self.et_consultar.delete(0, END)
     
     
     def listarVenda(self):
@@ -889,7 +869,7 @@ class Funcionalidades():
 
     def gerarRelPDF(self):
         # Criando arquivo pdf do relatório
-        self.canv = canvas.Canvas('RelatorioVendasGeral.pdf')
+        self.canv = canvas.Canvas('./relatorios/RelatorioVendasGeral.pdf')
         
 
         self.canv.setFont('Helvetica-Bold', 20)
@@ -897,29 +877,43 @@ class Funcionalidades():
         self.canv.drawString(200, 790, 'Relatório de Vendas')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(34, 690, f'Código venda')
+        self.canv.drawString(6, 700, f'Código venda')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(220, 690, f'Cliente')
+        self.canv.drawString(160, 700, f'Cliente')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(355, 690, f'Valor total')
+        self.canv.drawString(310, 700, f'CPF')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(455, 690, f'Data da Venda')
+        self.canv.drawString(390, 700, f'Valor total')
 
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(490, 700, f'Data da Venda')
+        self.canv.rect(4, 750, 591, 250, fill=False, stroke=True)
 
         #Organizando os valores do cliente na tela
-        self.vendas = self.venda.listarVendas()
-        
-        y = 0
+        self.vendas = list(self.venda.listarVendas())
+        self.x = 20
+        self.y = 700
+        self.ylinhavertical = 540
         for venda in self.vendas:
-            print(venda)
+            self.ylinhavertical-= 55
+            self.y = self.y  - 80
+            
+            self.canv.drawString(40,self.y, f'{venda[0]}')
+            self.canv.drawString(110,self.y, f'{venda[1]}')
+            self.canv.drawString(280,self.y, f'{venda[2]}')
+            self.canv.drawString(400,self.y, f'{venda[3]}')
+            self.canv.drawString(505,self.y, f'{venda[4]}')
+            self.canv.rect(4, self.ylinhavertical, 591, 250, fill=False, stroke=True)
+            
+
 
 
         #criar linha e ou espaçamento na tela 20 é a esquerda começando 550 abaixo da última informação o outro
         # 550 seria o comprimento do retangulo e o 5 é a grossura da linha 
-        self.canv.rect(20, 720, 550, 250, fill=False, stroke=True)
+        '''self.canv.rect(20, 720, 550, 250, fill=False, stroke=True)
         self.canv.rect(20, 220, 0, 500, fill=False, stroke=True)
         self.canv.rect(148, 220, 0, 500, fill=False, stroke=True)
         self.canv.rect(340, 220, 0, 500, fill=False, stroke=True)
@@ -933,5 +927,8 @@ class Funcionalidades():
         self.canv.rect(20, 490, 550, 0, fill=False, stroke=True)
         self.canv.rect(20, 550, 550, 0, fill=False, stroke=True)
         self.canv.rect(20, 610, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 670, 550, 0, fill=False, stroke=True)
-        
+        self.canv.rect(20, 670, 550, 0, fill=False, stroke=True)'''
+
+        self.canv.showPage()
+        self.canv.save()
+        messagebox.showinfo('Sistema', 'PDF Gerado com Sucesso!')

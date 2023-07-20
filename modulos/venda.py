@@ -51,14 +51,14 @@ class Venda:
         """
         """
         self.banco.conectar()
-        self.vendas = self.banco.cursor.execute(f""" SELECT cod_venda,  cliente.nome_cliente,
-                                        valor_total, data_venda
+        self.vendas = self.banco.cursor.execute(f""" SELECT cod_venda, cliente.nome_cliente,
+                                        cliente.cpf, valor_total, data_venda
                                       FROM Venda, Cliente
                                       WHERE venda.cod_cliente = cliente.cod_cliente""").fetchall()
         self.banco.desconectar()
         return self.vendas
     
-    def consultarVenda(self, cod_venda:int) -> None:
+    def consultarVenda(self, cod_venda:int):
         """
         """
         self.banco.conectar()
@@ -66,7 +66,7 @@ class Venda:
                                     cliente.cpf, valor_total, data_venda
                                     FROM cliente, venda
                                     WHERE venda.cod_cliente = cliente.cod_cliente 
-                                     and cod_venda like '{cod_venda}'""").fetchmany()
+                                     and cod_venda ='{cod_venda}'""").fetchall()
         self.banco.desconectar()
         return self.vend
     

@@ -105,7 +105,7 @@ class Produto:
         """
         self.banco.conectar()
         produto = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
-                          preco_compra_produto, preco_venda_produto, categoria_produto.desc_categoria_produto 
+                          preco_compra_produto, preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
                           FROM categoria_produto, produto
                             WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto and desc_produto like '{desc_produto[0]}%'""").fetchall()
         self.banco.desconectar()  
@@ -151,3 +151,5 @@ class Produto:
                                          """).fetchall()   
         self.banco.desconectar()
         return self.produto
+    
+    

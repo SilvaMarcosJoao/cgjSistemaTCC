@@ -80,3 +80,5 @@ class CategoriaProduto:
         self.banco.conectar()
         self.codigo = self.banco.cursor.execute(f""" SELECT cod_categoria_produto  from categoria_produto""").fetchall()
         return self.codigo
+    
+
