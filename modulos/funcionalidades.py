@@ -511,7 +511,7 @@ class Funcionalidades():
             
             if self.nome == '' or self.email == '' or self.telefone == '' or self.logradouro == '' or self.numero == '' or self.cidade == '' or self.estado == '':
                 messagebox.showwarning('Alerta', 'Preencha os campos!')
-            elif len(self.cnpj) != 11:
+            elif len(self.cnpj) != 14:
                 messagebox.showwarning('Alerta', 'CPF/CNPJ Inválido')
             elif len(self.nome) <= 3 or len(self.nome) > 20:
                 messagebox.showwarning('Alerta', 'Por favor, Insira um nome válido!')
@@ -773,37 +773,63 @@ class Funcionalidades():
         return self.exibirDados
         
     def adicionaItens_venda(self):
-        self.produtoadd = [self.comboxaddItens.get()]
+        if len(self.et_qtd_venda.get()) == 0 or len(self.comboxaddItens.get()) == 0:
+            messagebox.showwarning('Alerta', 'Preencha os campos do carrinho!')
+        else:
+            self.produtoadd = [self.comboxaddItens.get()]
         
-        self.lista = []
+            self.lista = []
         
-        self.produtosBanco = self.produtosVenda()
-        for v in self.produtosBanco:
-            if int(self.produtoadd[0][0]) == v[0]:
-                self.lista.append(list(v))
+            self.produtosBanco = self.produtosVenda()
+            for v in self.produtosBanco:
+                if int(self.produtoadd[0][0]) == v[0]:
+                    self.lista.append(list(v))
+            self.tot.set(0)
+            for l in self.lista:
+                l.append(int(self.et_qtd_venda.get()))
+                l.append(l[3] * l[4])
+            
+            for i in self.lista:
+                self.listaAddItens.insert('', END, values=i)
+                self.itensVenda.itens.append(i)
 
-        for l in self.lista:
-            l.append(int(self.et_qtd_venda.get()))
-            l.append(l[3] * l[4])
-        for i in self.lista:
-            self.listaAddItens.insert('', END, values=i)
-            self.itensVenda.itens.append(i)
-        
+            c = 0 
+            self.tot.set(0) 
+            for it in self.itensVenda.itens:
+                c +=it[5]
+                self.tot.set(c)
+            
+                
+            
         #print(self.itensVenda.itens)
             
 
     def remover_produto_venda(self):
-        """
+        """ 
         Remove os itens do carrinho
         :param: Não tem parâmetros.
         :return: Não tem retorno.
         """
-        self.listaAddItens.selection()
-        for i in self.listaAddItens.selection():
-            self.listaAddItens.delete(i)
+        c = float(self.restot.get())
         
-
+        itemSelecionado = self.listaAddItens.selection()
+        for i in self.listaAddItens.selection():
+            valores = self.listaAddItens.item(itemSelecionado, 'values')
+            self.listaAddItens.delete(i)
+            c-= float(valores[5])
+            self.tot.set(c)
+            self.itensVenda.itens.pop(itemSelecionado)
+        c = 0 
+        
+       
+        
+ 
     def limpaItens(self):
+        """
+        Limpa os campos da tela venda.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
+        """
         self.comboxaddItens.delete(0, END)
         self.et_qtd_venda.delete(0, END)
         self.et_data_venda.delete(0, END)
@@ -819,29 +845,34 @@ class Funcionalidades():
         """
         self.valortotal = ''
         self.clienteadd = [self.comboxClien_venda.get()]
-        self.client = self.cliente.listarClientes()
-        for c in self.client:
-            if c[0] == int(self.clienteadd[0][0:2]):
-                self.cod_cli = c[0]
-    
-        self.listaItens = self.itensVenda.itens
-        soma = 0.0
-        for i in self.listaItens:
-            soma += float(i[5])
         self.data = self.et_data_venda.get()
-        self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
-        #self.lbl_exibGeral.insert('', END, values=soma)
-        self.pro = self.produto.listarProdutos()
-        self.codigoVenda = self.venda.resCodVenda()
-        for item in self.listaItens:
-            self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5]) 
-            if item[0] == self.pro[0][0]:
-                if int(item[4]) > self.pro[0][5]:
-                    messagebox.showwarning('Atenção', 'Você não pode vender mais do que tem em estoque!')
-                else:  
-                    self.produto.abatEstoqueProd(item[0], int(item[4]))
-                    messagebox.showinfo('Sistema', 'Venda Realizada!')
-                    self.limpaItens()
+        if len(self.clienteadd) == 0 or len(self.data) == 0:
+            messagebox.showwarning('Alerta','Preencha todos campos')
+        else:
+            self.client = self.cliente.listarClientes()
+            for c in self.client:
+                if c[0] == int(self.clienteadd[0][0:2]):
+                    self.cod_cli = c[0]
+    
+            self.listaItens = self.itensVenda.itens
+            soma = 0.0
+            for i in self.listaItens:
+                soma += float(i[5])
+                
+            self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
+            
+            self.pro = self.produto.listarProdutos()
+            self.codigoVenda = self.venda.resCodVenda()
+            for item in self.listaItens:
+                self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5]) 
+                for p in self.pro:
+                    if item[0] == p[0]:
+                        if int(item[4]) > p[5]:
+                            messagebox.showwarning('Atenção', 'Você não pode vender mais do que tem em estoque!')
+                        else:  
+                            self.produto.abatEstoqueProd(item[0], int(item[4]))
+                            messagebox.showinfo('Sistema', 'Venda Realizada!')
+            print(self.pro) 
 
     def consultarVenda(self):
         self.listaRelatorio.delete(*self.listaRelatorio.get_children())
@@ -859,6 +890,11 @@ class Funcionalidades():
     
     
     def listarVenda(self):
+        """
+        Exibe todas as vendas realizadas.
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
+        """
         self.listaRelatorio.delete(*self.listaRelatorio.get_children())
         self.listav = self.venda.listarVendas()
         if len(self.listav) == 0:
@@ -877,57 +913,36 @@ class Funcionalidades():
         self.canv.drawString(200, 790, 'Relatório de Vendas')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(6, 700, f'Código venda')
+        self.canv.drawString(6, 710, f'Código venda')
+        
+        self.canv.setFont('Helvetica', 15)
+        self.canv.drawString(160, 710, f'Cliente')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(160, 700, f'Cliente')
+        self.canv.drawString(310, 710, f'CPF')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(310, 700, f'CPF')
+        self.canv.drawString(390, 710, f'Valor total')
 
         self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(390, 700, f'Valor total')
-
-        self.canv.setFont('Helvetica', 15)
-        self.canv.drawString(490, 700, f'Data da Venda')
+        self.canv.drawString(490, 710, f'Data da Venda')
         self.canv.rect(4, 750, 591, 250, fill=False, stroke=True)
 
         #Organizando os valores do cliente na tela
         self.vendas = list(self.venda.listarVendas())
         self.x = 20
         self.y = 700
-        self.ylinhavertical = 540
+        self.ylinhavertical = 730
         for venda in self.vendas:
-            self.ylinhavertical-= 55
-            self.y = self.y  - 80
+            
+            self.y = self.y - 30
+
             
             self.canv.drawString(40,self.y, f'{venda[0]}')
-            self.canv.drawString(110,self.y, f'{venda[1]}')
+            self.canv.drawString(120,self.y, f'{venda[1]}')
             self.canv.drawString(280,self.y, f'{venda[2]}')
-            self.canv.drawString(400,self.y, f'{venda[3]}')
+            self.canv.drawString(400,self.y, f'{venda[3]:.2f}')
             self.canv.drawString(505,self.y, f'{venda[4]}')
-            self.canv.rect(4, self.ylinhavertical, 591, 250, fill=False, stroke=True)
-            
-
-
-
-        #criar linha e ou espaçamento na tela 20 é a esquerda começando 550 abaixo da última informação o outro
-        # 550 seria o comprimento do retangulo e o 5 é a grossura da linha 
-        '''self.canv.rect(20, 720, 550, 250, fill=False, stroke=True)
-        self.canv.rect(20, 220, 0, 500, fill=False, stroke=True)
-        self.canv.rect(148, 220, 0, 500, fill=False, stroke=True)
-        self.canv.rect(340, 220, 0, 500, fill=False, stroke=True)
-        self.canv.rect(440, 220, 0, 500, fill=False, stroke=True)
-        self.canv.rect(570, 220, 0, 500, fill=False, stroke=True)
-        self.canv.rect(20, 190, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 250, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 310, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 370, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 430, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 490, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 550, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 610, 550, 0, fill=False, stroke=True)
-        self.canv.rect(20, 670, 550, 0, fill=False, stroke=True)'''
 
         self.canv.showPage()
         self.canv.save()

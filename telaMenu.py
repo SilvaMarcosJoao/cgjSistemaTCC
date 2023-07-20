@@ -15,6 +15,7 @@ class MenuTela(Funcionalidades, Validadores):
         self.configTelamenu()
         self.frame_menu()
         self.widgets_menu_left()
+        self.widgets_inicio()
         self.appMenu.mainloop()
 
     def mudaCorBtnMenu(self):
@@ -384,6 +385,8 @@ class MenuTela(Funcionalidades, Validadores):
         self.et_categoria = StringVar(self.produto_frame)
         self.et_categoria.set('')
         self.lista = self.exibir_categ_prod()
+        if len(self.lista) == 0:
+            self.lista = " "
         self.popupMenu = OptionMenu(self.produto_frame, self.et_categoria, *self.lista)
         self.popupMenu.place(relx=0.435, rely=0.15, width=126, height=22)
         
@@ -587,11 +590,12 @@ class MenuTela(Funcionalidades, Validadores):
         self.lbl_exibi_total = Label(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
         
+        
         self.btn_salvar_venda = Button(self.frameCadTelaVenda, text='Registrar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3', command=self.inserir_venda)
-        self.btn_salvar_venda.place(relx=0.79, rely=0.1, relwidth=0.09, height=50)
+        self.btn_salvar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
 
-        self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        self.btn_limpar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
+        #self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
+        #self.btn_limpar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
 
 
         # VISUAL DO CARRINHO
@@ -644,9 +648,10 @@ class MenuTela(Funcionalidades, Validadores):
 
         self.lbl_totalGeral = Label(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
         self.lbl_totalGeral.place(relx=0.026, rely=0.945)
-        
-        self.lbl_exibGeral = Label(self.frameCadTelaVenda, textvariable='', font=('Roboto', 12, 'bold'), bg='#d9d9d9')
-        self.lbl_exibGeral.place(relx=0.4, rely=0.945)
+        self.tot = StringVar()
+        self.lbl_exibGeral = Label(self.frameCadTelaVenda, textvariable=self.tot, font=('Roboto', 12, 'bold'), bg='#d9d9d9')
+        self.lbl_exibGeral.place(relx=0.28, rely=0.945)
+        self.restot = self.tot
         
 
     def widgets_fornecimento(self):
