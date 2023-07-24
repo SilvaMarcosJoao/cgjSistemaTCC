@@ -1,20 +1,957 @@
-from tkinter import *
-from tkinter import messagebox
-from modulos.categoriaproduto import CategoriaProduto
-from modulos.cliente import Cliente
-from modulos.usuario import Usuario
-from modulos.fornecedor import Fornecedor
-from modulos.fornecimento import Fornecimento
-from modulos.venda import Venda
-from modulos.produto import Produto
-from modulos.itensvenda import ItensVenda
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter, A4
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import SimpleDocTemplate, Image
-import webbrowser
+from mods import *
 
+class BancoDados:
+    # CONSTRUTOR
+    def __init__(self) -> None:
+        # ATRIBUTOS
+        self.__nome = 'zurcBanco.db'
+        self.conexao = None
+        self.cursor = None
+
+    # MÉTODOS DE CONEXÃO E DESCONEXÃO DA CLASSE BANCO DADOS
+    def conectar(self) -> None:
+        """
+        """
+        try:
+            self.conexao = sqlite3.connect(self.__nome)
+            self.cursor = self.conexao.cursor()
+        except Exception as error:
+            print(f'Houve um erro: {error}')
+
+    def desconectar(self) -> None:
+        """
+        """
+        try:
+            self.conexao.close()
+        except Exception as erro:
+            print(f'Erro ao desconectar-se: {erro}')
+
+    def tabelaCategoria(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "categoria_produto" (
+	    "cod_categoria_produto"	INTEGER NOT NULL UNIQUE,
+	    "desc_categoria_produto"  TEXT(15) NOT NULL,
+	    PRIMARY KEY("cod_categoria_produto" AUTOINCREMENT));""")
+        self.conexao.commit()
+        self.desconectar()
+    
+    def tabelaProduto(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "produto" (
+	    "cod_produto"	INTEGER NOT NULL UNIQUE,
+	    "desc_produto"	TEXT(25) NOT NULL,
+	    "modelo_produto"	TEXT(15) NOT NULL,
+	    "preco_compra_produto"	REAL NOT NULL,
+	    "preco_venda_produto"	REAL NOT NULL,
+	    "qtd_estoque"	INTEGER DEFAULT 0,
+	    "cod_categoria_produto"	INTEGER NOT NULL,
+	    FOREIGN KEY("cod_categoria_produto") REFERENCES "categoria_produto",
+	    PRIMARY KEY("cod_produto" AUTOINCREMENT));""")
+        self.conexao.commit()
+        self.desconectar()
+
+    def tabelaUsuario(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "usuario" (
+	    "cod_usuario"	INTEGER NOT NULL UNIQUE,
+	    "nome"	TEXT(20) NOT NULL,
+	    "usuario"	TEXT(15) NOT NULL,
+	    "senha"	TEXT(8) NOT NULL UNIQUE,
+	    PRIMARY KEY("cod_usuario" AUTOINCREMENT));""")
+        self.conexao.commit()
+        self.desconectar()
+
+    def tabelaFornecedor(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "fornecedor" (
+	    "cod_fornecedor"	INTEGER NOT NULL UNIQUE,
+	    "cnpj_cpf"	TEXT(14) NOT NULL UNIQUE,
+	    "nome_fornecedor"	TEXT(25) NOT NULL,
+	    "email"	TEXT(35) NOT NULL UNIQUE,
+	    "telefone"	TEXT(14) NOT NULL,
+	    "logradouro"	TEXT(40) NOT NULL,
+	    "numero"	INTEGER NOT NULL,
+	    "cep"	INTEGER(8),
+	    "cidade"	TEXT(40) NOT NULL,
+	    "estado"	TEXT(40) NOT NULL,
+	    PRIMARY KEY("cod_fornecedor" AUTOINCREMENT)); """)
+        self.conexao.commit()
+        self.desconectar()
+    
+    def tabelaFornecimento(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "fornecimento" (
+	    "cod_produto"	INTEGER NOT NULL,
+	    "cod_fornecedor"	INTEGER NOT NULL,
+	    "data_fornecimento"	TEXT(10),
+	    "qtd_fornecida"	INTEGER NOT NULL,
+	    FOREIGN KEY("cod_produto") REFERENCES "produto"("cod_produto"),
+	    FOREIGN KEY("cod_fornecedor") REFERENCES "fornecimento"("cod_fornecedor"));""")
+        self.conexao.commit()
+        self.desconectar()
+
+    def tabelaCliente(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "cliente" (
+	    "cod_cliente"	INTEGER NOT NULL UNIQUE,
+	    "cpf"	TEXT(14) UNIQUE,
+	    "nome_cliente"	TEXT(20) NOT NULL,
+	    "email"	TEXT(35) UNIQUE,
+	    "telefone"	TEXT(14) NOT NULL UNIQUE,
+	    "logradouro"	TEXT(40) NOT NULL,
+	    "numero"	INTEGER NOT NULL,
+	    "cep"	INTEGER(8) UNIQUE,
+	    "cidade"	TEXT(40) NOT NULL,
+	    "estado"	TEXT(40) NOT NULL,
+	    PRIMARY KEY("cod_cliente" AUTOINCREMENT));""")
+        self.conexao.commit()
+        self.desconectar()
+
+    def tabelaVenda(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "venda" (
+	    "cod_venda"	INTEGER NOT NULL UNIQUE,
+	    "cod_cliente"	INTEGER NOT NULL,
+	    "valor_total"	REAL NOT NULL,
+	    "data_venda"	TEXT(10) NOT NULL,
+	    PRIMARY KEY("cod_venda" AUTOINCREMENT),
+	    FOREIGN KEY("cod_cliente") REFERENCES "cliente");""")
+        self.conexao.commit()
+        self.desconectar()
+
+    def tabelaItensVenda(self):
+        self.conectar()
+        self.cursor.execute(f"""CREATE TABLE IF NOT EXISTS "itens_venda" (
+	    "cod_venda"	INTEGER NOT NULL UNIQUE,
+	    "cod_produto"	INTEGER NOT NULL,
+	    "qtd"	INTEGER NOT NULL,
+	    "valor"	INTEGER NOT NULL,
+	    FOREIGN KEY("cod_venda") REFERENCES "venda",
+	    FOREIGN KEY("cod_produto") REFERENCES "produto"); """)
+        self.conexao.commit()
+        self.desconectar()
+
+
+
+import sqlite3
+banco = BancoDados()
+banco.tabelaUsuario()
+banco.tabelaCategoria()
+banco.tabelaProduto()
+banco.tabelaFornecedor()
+banco.tabelaFornecimento()
+banco.tabelaCliente()
+banco.tabelaVenda()
+banco.tabelaItensVenda()
+
+class CategoriaProduto:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_categoria_produto: int=None, desc_categoria_produto:str=None) -> None:
+        # ATRIBUTOS
+        self.__cod_categoria_produto = cod_categoria_produto
+        self.__desc_categoria_produto=desc_categoria_produto
+        
+    # GETTERS E SETTERS
+    def get_cod_categoria_produto(self) -> int:
+        return self.__cod_categoria_produto
+    
+    def set_cod_categoria_produto(self, cod: int) -> None:
+        self.__cod_categoria_produto = cod
+    
+    def get_desc_categoria_produto(self) -> str:
+        return self.__desc_categoria_produto
+
+    def set_desc_categoria_produto(self, desc_categoria_produto) -> None:
+        self.__desc_categoria_produto = desc_categoria_produto
+
+    # MÉTODOS DE CRUD DA CLASSE CATEGORIA PRODUTO
+    def cadastrarCategoria(self, desc_categoria:str) -> None:
+        """
+        Cadastra a categoria dos produtos.
+        :param: desc_categoria. 
+        :return: Não há retorno. 
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO categoria_produto (desc_categoria_produto) 
+        VALUES ('{desc_categoria}')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        
+    def alterarCategoria(self, cod_categoria_produto:int, desc_categoria:str) -> None:
+        """
+        Altera a descrição de uma categoria.
+        :param: cod_categoria_produto do tipo inteiro e desc_categoria do tipo string.
+        :return: Não tem retorno
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE categoria_produto SET desc_categoria_produto = ('{desc_categoria}')
+                                WHERE cod_categoria_produto = ('{cod_categoria_produto}') """) 
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def listarCategoria(self) -> list:
+        """
+        Exibe as categorias cadastradas.
+        :param: não há parâmetros.
+        :return: retorna uma lista com as categorias.
+        """
+        self.banco.conectar()
+        categoria = self.banco.cursor.execute(f"""SELECT * FROM categoria_produto """).fetchall()     
+        self.banco.desconectar()
+        return categoria
+    
+    def excluirCategoria(self, cod_categoria_produto:int) -> None:
+        """
+        Deleta uma categoria.
+        :param: cód_categoria_produto do tipo inteiro.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM categoria_produto
+                                WHERE cod_categoria_produto = '{cod_categoria_produto}' """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def buscaQtdCodigoCategoria(self) -> int:
+        self.banco.conectar()
+        self.qtdcRegis = self.banco.cursor.execute(f""" SELECT count(cod_categoria_produto)  from categoria_produto""").fetchall()
+
+        return self.qtdcRegis
+    
+    def codigoCategoria(self) -> int:
+        self.banco.conectar()
+        self.codigo = self.banco.cursor.execute(f""" SELECT cod_categoria_produto  from categoria_produto""").fetchall()
+        return self.codigo
+    
+
+class Produto:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self,cod_produto: int=None, desc_produto: str=None, modelo_produto:str=None ,preco_compra_produto:float=None, preco_venda_produto: float=None, qtd : int=None, categoria_produto :int=None):
+        # ATRIBUTOS
+        self.__cod_produto=cod_produto
+        self.__desc_produto=desc_produto
+        self.__modelo_produto=modelo_produto
+        self.__preco_compra_produto=preco_compra_produto
+        self.__preco_venda_produto=preco_venda_produto
+        self.__qtd =qtd 
+        self.__categoria_produto=categoria_produto
+
+    # GETTERS E SETTERS
+    def get_cod_produto(self) -> int:
+        return self.__cod_produto
+
+    def get_desc_produto(self) -> str:
+        return self.__desc_produto
+
+    def get_modelo_produto(self) -> str:
+        return self.__modelo_produto
+
+    def get_preco_compra_produto(self) -> float:
+        return self.__preco_compra_produto
+
+    def get_preco_venda_produto(self) -> float:
+        return self.__preco_venda_produto
+
+    def get_qtd(self) -> int:
+        return self.__qtd
+
+    def get_cod_categoria_produto(self) -> int:
+        return self.__categoria_produto
+
+    def set_cod_produto(self, cod_produto:int) -> None:
+        self.__cod_produto = cod_produto
+
+    def set_desc_produto(self, desc_produto:str) -> None:
+        self.__desc_produto = desc_produto
+
+    def set_modelo_produto(self, modelo_produto:str) -> None:
+        self.__modelo_produto = modelo_produto
+
+    def set_preco_compra_produto(self, preco_compra_produto:float) -> None:
+        self.__preco_compra_produto = preco_compra_produto
+
+    def set_preco_venda_produto(self, preco_venda_produto:float) -> None:
+        self.__preco_venda_produto = preco_venda_produto
+
+    def set_qtd(self, qtd:int) -> None:
+        self.__qtd = qtd
+
+    def set_cod_categoria_produto(self, cod_categoria_produto:int) -> None:
+        self.__cod_produto = cod_categoria_produto
+
+
+    # MÉTODOS DE CRUD DA CLASSE PRODUTO
+    def cadastrarProduto(self, desc_produto:str, mod_produto:str, preco_compra:float, preco_venda:float, cod_categoria:int) -> None:
+        """
+        Realiza o cadastro de produto.
+        :param: desc_produto, mod_produto, preco_compra, preco_venda e cod_categoria.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
+                          preco_compra_produto, preco_venda_produto, cod_categoria_produto) 
+                           VALUES ('{desc_produto}','{mod_produto}',
+                           '{preco_compra}','{preco_venda}','{cod_categoria}') """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+       
+    def alterarProduto(self, cod_produto:int, desc_produto:str, modelo_produto:str, preco_compra_produto:float, preco_venda_produto:float) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE produto
+                                SET desc_produto =('{desc_produto}'),
+                                modelo_produto =('{modelo_produto}'),
+                                preco_compra_produto =('{preco_compra_produto}'),
+                                preco_venda_produto =('{preco_venda_produto}')
+                                WHERE cod_produto =('{cod_produto}')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+   
+    def listarProdutos(self) -> list:
+        """
+        Exibe um lista com todos os produtos cadastrados.
+        :param: Não tem parâmetro.
+        :return: Retorna uma lista com os produtos.
+        """
+        self.banco.conectar()
+        self.produtos = self.banco.cursor.execute("""SELECT cod_produto, desc_produto, modelo_produto, preco_compra_produto,
+                                      preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
+                                      FROM categoria_produto, produto 
+                                      WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto""").fetchall()
+        self.banco.desconectar()
+        return self.produtos
+        
+    def consultarProduto(self, desc_produto:str) -> list: 
+        """
+        """
+        self.banco.conectar()
+        produto = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto, modelo_produto,
+                          preco_compra_produto, preco_venda_produto, qtd_estoque, categoria_produto.desc_categoria_produto 
+                          FROM categoria_produto, produto
+                            WHERE produto.cod_categoria_produto = categoria_produto.cod_categoria_produto and desc_produto like '{desc_produto[0]}%'""").fetchall()
+        self.banco.desconectar()  
+        return produto
+
+    def excluirProduto(self, cod_produto:int) -> None:
+        """
+        Exclui um produto específico.
+        :param: cod_produto.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM produto
+                                WHERE cod_produto='{cod_produto}'""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    # MÉTODOS ASSOCIAS A VENDA
+    def atualizaEstoqueProd(self, cod_produto:int, qtd:int) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque = qtd_estoque + '{qtd}' 
+                    WHERE cod_produto = {cod_produto}""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        
+    def abatEstoqueProd(self, cod_produto: int, qtd:int) -> None:
+        """ 
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE produto SET qtd_estoque=qtd_estoque - '{qtd}'
+                                  WHERE cod_produto = {cod_produto}""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def consultaProdutoVenda(self) -> list:
+        """
+        """
+        self.banco.conectar()
+        self.produto = self.banco.cursor.execute(f"""SELECT cod_produto, desc_produto,
+                                         modelo_produto, preco_venda_produto FROM produto 
+                                         """).fetchall()   
+        self.banco.desconectar()
+        return self.produto
+    
+    
+
+
+
+class Fornecedor:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self,cod_fornecedor:int=None, cpnj_cpf:str=None, nome_fornecedor:str=None, 
+                 email:str=None, telefone:str=None, logradouro:str=None, numero:int=None, cep:int=None,
+                 cidade:str=None, estado:str=None) -> None:
+        # ATRIBUTOS
+        self.__cod_fornecedor = cod_fornecedor
+        self.__cnpj_cpf = cpnj_cpf
+        self.__nome_fornecedor = nome_fornecedor
+        self.__email = email
+        self.__telefone = telefone
+        self.__logradouro = logradouro
+        self.__numero = numero
+        self.__cep = cep
+        self.__cidade = cidade
+        self.__estado = estado
+
+    # GETTERS E SETTERS
+    def get_cod_fornecedor(self) -> int:
+        return self.__cod_fornecedor
+
+    def set_cod_fornecedor(self, cod_fornecedor:int) -> None:
+        self.__cod_fornecedor = cod_fornecedor
+    
+    def get_cpnj_cpf(self) -> str:
+        return self.__cnpj_cpf
+
+    def set_cnpj_cpf(self, cnpj_cpf:str) -> None:
+        self.__cnpj_cpf = cnpj_cpf
+
+    def get_nome_fornecedor(self) -> str:
+        return self.__nome_fornecedor
+
+    def set_nome_fornecedor(self, nome_fornecedor:str) -> None:
+        self.__nome_fornecedor = nome_fornecedor
+
+    def get_email(self) -> str:
+        return self.__email
+
+    def set_email(self, email:str) -> None:
+        self.__email = email
+
+    def get_telefone(self) -> str:
+        return self.__telefone
+
+    def set_telefone(self, telefone:str) -> None:
+        self.__telefone = telefone
+
+    def get_logradouro(self) -> str:
+        return self.__logradouro
+
+    def set_logradouro(self, logradouro:str) -> None:
+        self.__logradouro = logradouro
+
+    def get_numero(self) -> int:
+        return self.__numero
+
+    def set_numero(self, numero:int) -> None:
+        self.__numero = numero
+
+    def get_cep(self) -> int:
+        return self.__cep
+
+    def set_cep(self, cep:int) -> None:
+        self.__cep = cep
+
+    def get_cidade(self) -> str:
+        return self.__cidade
+
+    def set_cidade(self, cidade:str) -> None:
+        self.__cidade = cidade
+
+    def get_estado(self) -> str:
+        return self.__estado
+
+    def set_estado(self, estado:str) -> None:
+        self.__estado = estado
+
+    # MÉTODOS DE CRUD DA CLASSE FORNECEDOR
+    def cadastrarFornecedor(self, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        Cadastra um fornecedor.
+        :param: cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" INSERT INTO fornecedor (cnpj_cpf, 
+                                 nome_fornecedor, email, telefone, logradouro, 
+                                 numero, cep, cidade, estado)
+                                 VALUES ('{cnpj}', '{nome_fornecedor}', '{email}', '{telefone}', '{logradouro}', '{numero}', '{cep}', 
+                                 '{cidade}', '{estado}')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def listarFornecedor(self) -> list:
+        """
+        Retorna uma lista com fornecedores.
+        :param: Não tem parâmetro.
+        :return: retorna uma lista com dados.
+        """
+        self.banco.conectar()
+        fornecedores=self.banco.cursor.execute(f"""SELECT * FROM fornecedor""").fetchall()   
+        self.banco.desconectar()
+        return fornecedores
+
+    def consultarFornecedor(self, nome_fornecedor:str) -> list:
+        """
+        Exibe os dados de um fornecedor específico.
+        :param: nome_fornecedor.
+        :return: retorna uma lista com os dados do fornecedor.
+        """
+        self.banco.conectar()
+        forn = self.banco.cursor.execute(f"""SELECT cod_fornecedor, cnpj_cpf, nome_fornecedor,
+                                    email, telefone, logradouro, numero, 
+                                    cep, cidade, estado FROM fornecedor 
+                                    WHERE nome_fornecedor like '{nome_fornecedor[0]}%' """).fetchall()
+        self.banco.desconectar()
+        return forn
+
+    def alterarFornecedor(self,cod_fornecedor:int, cnpj:str, nome_fornecedor:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        Altera os dados de um fornecedor específico.
+        :param: cod_fornecedor, cnpj, nome_fornecedor, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE fornecedor 
+        SET cnpj_cpf = '{cnpj}',
+        nome_fornecedor = '{nome_fornecedor}',
+        email = '{email}',
+        telefone = '{telefone}',
+        logradouro = '{logradouro}',
+        numero = '{numero}',
+        cep = '{cep}',
+        cidade = '{cidade}',
+        estado = '{estado}'
+        WHERE cod_fornecedor = '{cod_fornecedor}' """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    def excluirFornecedor(self, cod_fornecedor:int) -> None:
+        """
+        Exclui um fornecedor específico.
+        :param: cod_fornecedor.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM fornecedor 
+                                 WHERE cod_fornecedor = {cod_fornecedor}""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+
+class Fornecimento:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_fornecedor=None, cod_produto=None, qtd_fornecida=None, data_fornecimento=None) -> None:
+        # ATRIBUTOS
+        self.__cod_fornecedor= cod_fornecedor
+        self.__cod_produto = cod_produto
+        self.__qtd_fornecida = qtd_fornecida
+        self.__data_fornecimento = data_fornecimento
+
+    # GETTERS E SETTERS
+    def get_cod_fornecedor(self) -> int:
+        return self.__cod_fornecedor 
+
+    def set_cnpj(self, cod_fornecedor) -> None:
+        self.__cod_fornecedor = cod_fornecedor
+
+    def get_cod_produto(self) -> int:
+        return self.__cod_produto
+    
+    def set_cod_produto(self, cod_produto) -> None:
+        self.__cod_produto = cod_produto
+
+    def get_qtd_fornecida(self) -> int:
+        return self.__qtd_fornecida
+
+    def set_qtd_fornecida(self, qtd_fornecida: int) -> None:
+        self.__qtd_fornecida = qtd_fornecida
+
+    def get_data_fornecimento(self) -> str:
+        return self.__data_fornecimento
+
+    def set_data_fornecimento(self, data_fornecimento: str) -> None:
+        self.__data_fornecimento = data_fornecimento
+
+    # MÉTODOS DE CRUD DA CLASSE FORNECIMENTO
+    def cadastrarFornecimento(self, cod_produto:int, cod_fornecedor:int, data:str, qtd:int) -> None:
+        """
+        Insere os dados na tabela fornecimento.
+        :param: cod_produto, cod_fornecedor, data e qtd.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO fornecimento (cod_produto, cod_fornecedor, data_fornecimento, qtd_fornecida)
+                                  VALUES ('{cod_produto}', '{cod_fornecedor}', '{data}', '{qtd}')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+    
+    def listarFornecimentos(self) -> list:
+        """
+        Exibe a lista de fornecedores e os produtos fornecidos por eles.
+        :param: Não há parâmetro.
+        :return: retorna uma lista com dados.
+        """
+        self.banco.conectar()
+        self.forneci = list(self.banco.cursor.execute(f""" SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida 
+                                                 FROM produto, fornecedor, fornecimento
+                                                 WHERE fornecimento.cod_produto = produto.cod_produto and 
+                                                 fornecimento.cod_fornecedor = fornecedor.cod_fornecedor""").fetchall())
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        return self.forneci
+    
+    def alterar_fornecimento(self, cod_produto:int, cod_fornecedor:int) -> None:
+        """
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" UPDATE fornecimento SET qtd_fornecida, data_fornecimento
+                                  WHERE cod_produto = '{cod_produto}' and cod_fornecedor = '{cod_fornecedor}' """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+class Cliente:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_cliente:int=None, cpf:str=None, nome_cliente:str=None, email:str=None ,telefone:str=None, logradouro:str=None, numero:int=None, cep:int=None, cidade:str=None, estado:str=None):
+        # ATRIBUTOS
+        self._cod_cliente=cod_cliente
+        self.__nome_cliente=nome_cliente
+        self.__logradouro=logradouro
+        self.__cpf=cpf
+        self.__telefone=telefone
+        self.__email=email
+        self.__numero=numero
+        self.__cep=cep
+        self.__cidade=cidade
+        self.__estado=estado
+
+    # GETTERS E SETTERS
+    def get_cod_cliente(self) -> int:
+        return self.__cod_cliente
+    
+    def get_nome_cliente(self) -> str:
+        return self.__nome_cliente
+
+    def get_logradouro(self) -> str:
+        return self.__logradouro
+
+    def get_cpf(self) -> str:
+        return self.__cpf
+
+    def get_telefone(self) -> str:
+        return self.__telefone
+
+    def get_email(self) -> str:
+        return self.__email
+
+    def get_numero(self) -> int:
+        return self.__numero
+
+    def get_cep(self) -> int:
+        return self.__cep
+
+    def get_cidade(self) -> str:
+        return self.__cidade
+
+    def get_estado(self) -> str:
+        return self.__estado
+    
+    def set_cod_cliente(self, cod:int )-> None:
+        self.__cod_cliente = cod
+
+    def set_nome_cliente(self, nome_cliente:str) -> None:
+        self.__nome_cliente = nome_cliente
+
+    def set_logradouro(self, logradouro:str) -> None:
+        self.__logradouro = logradouro
+
+    def set_cpf(self, cpf: str) -> None:
+        self.__cpf = cpf
+
+    def set_telefone(self, telefone:str) -> None:
+        self.__telefone = telefone
+
+    def set_email(self, email:str) -> None:
+        self.__email = email
+
+    def set_numero(self, numero:int) -> None:
+        self.__numero = numero
+
+    def set_cep(self, cep:int) -> None:
+        self.__cep = cep
+
+    def set_cidade(self, cidade:str) -> None:
+        self.__cidade = cidade
+
+    def set_estado(self, estado:str) -> None:
+        self.__estado = estado
+
+    # MÉTODOS DE CRUD DA CLASSE CLIENTE
+    def cadastrarCliente(self, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        Efetua o cadastro dos clientes.
+        :param: .
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO cliente (cpf, nome_cliente, email,
+                          telefone, logradouro, numero, cep, cidade, estado) 
+                          values('{cpf }','{nome_cliente }','{email }','{telefone }',
+                          '{logradouro }','{numero }','{cep }','{cidade }',
+                          '{estado }')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        
+    def alterarCliente(self, cod_cliente:int, cpf:str, nome_cliente:str, email:str, telefone:str, logradouro:str, numero:int, cep:int, cidade:str, estado:str) -> None:
+        """
+        Altera os dados de um cliente.
+        :param:cod_cliente, cpf, nome_cliente, email, telefone, logradouro, numero, cep, cidade e estado.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""UPDATE cliente
+                                SET cpf = ('{cpf }'), 
+                                nome_cliente = ('{nome_cliente }') ,
+                                email = ('{email }'),
+                                telefone = ('{telefone }'),
+                                logradouro = ('{logradouro }'),
+                                numero = ('{numero }'),
+                                cep = ('{cep }'), 
+                                cidade= ('{cidade }'), 
+                                estado = ('{estado }')
+                                WHERE cod_cliente='{cod_cliente}'""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        
+    def listarClientes(self) -> list:
+        """
+        Exibe uma lista de clientes.
+        :param: Não tem parâmetro.
+        :return: retorna uma lista com clientes.
+        """
+        self.banco.conectar()
+        clientes=self.banco.cursor.execute(f"""SELECT * FROM cliente""").fetchall()   
+        self.banco.desconectar()
+        return clientes 
+    
+    def consultarCliente(self, nome:str) -> list:
+        """
+        Exibe um cliente especifico.
+        :param: nome.
+        :param: retorna uma lista com os dados do cliente.
+        """
+        self.banco.conectar()
+        cli = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente, email,
+                          telefone, logradouro, numero, cep, cidade, estado FROM Cliente
+                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()              
+        self.banco.desconectar()    
+        return cli
+    
+    def excluirCliente(self, cod_cliente:int) -> None:
+        """
+        Deleta um cliente especifica.
+        :param: cod_cliente.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""DELETE FROM cliente
+                                WHERE cod_cliente='{cod_cliente}'""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    
+    #MÉTODOS PERSONALIZADOS para telaCliente
+
+    def listaperCliente(self) -> list:
+        """
+        """
+        self.banco.conectar()
+        cliente = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM cliente""").fetchall()   
+        self.banco.desconectar()
+        return cliente
+    
+    def consultaperCliente(self, nome:str) -> list:
+        """
+        """
+        self.banco.conectar()
+        clis = self.banco.cursor.execute(f"""SELECT cod_cliente, cpf, nome_cliente FROM cliente
+                         WHERE nome_cliente like '{nome[0]}%' """).fetchall()
+        self.banco.desconectar()    
+        return clis
+
+
+class Venda:
+    banco = BancoDados()    
+    # CONSTRUTOR
+    def __int__(self, cod_venda:int=None, cod_cliente:int=None, valor_total:float=None, data_venda:str=None) -> None:
+        # ATRIBUTOS
+        self.__cod_venda = cod_venda
+        self.__cod_cliente = cod_cliente
+        self.__valor_total = valor_total
+        self.__data_venda = data_venda
+
+    # GETTERS E SETTERS
+    def get_cod_venda(self) -> int:
+        return self.__cod_venda
+    
+    def set_cod_venda(self, cod_venda) -> None:
+        self.__cod_venda = cod_venda
+
+    def get_cliente_venda(self) -> int:
+        return self.__cod_cliente
+    
+    def set_cliente_venda(self, cod_cliente) -> None:
+        self.__cod_cliente = cod_cliente
+        
+    def get_valor_total(self) -> float:
+        return self.__valor_total
+    
+    def set_valor_total(self, valor_total:float) -> None:
+        self.__valor_total = valor_total
+
+    def get_data_venda(self) -> str:
+        self.__data_venda
+    
+    def set_data_venda(self,data: str) -> None:
+        self.__data_venda = data 
+
+    # MÉTODOS DE CRUD DA CLASSE VENDA
+    def cadastrarVenda(self, cod_cliente:int, valor_total:float, data_venda:str) -> None:
+        self.banco.conectar()
+        self.banco.cursor.execute(f"""INSERT INTO Venda(cod_cliente,
+                             valor_total, data_venda)
+                             VALUES ('{cod_cliente}',
+                             '{valor_total}','{data_venda}')""")
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+        
+    def listarVendas(self) -> list:
+        """
+        """
+        self.banco.conectar()
+        self.vendas = self.banco.cursor.execute(f"""SELECT cod_venda, cliente.nome_cliente,
+                                        cliente.cpf, valor_total, data_venda
+                                      FROM venda, cliente
+                                      WHERE venda.cod_cliente = cliente.cod_cliente""").fetchall()
+        self.banco.desconectar()
+        return self.vendas
+    
+    def consultarVenda(self, cod_venda:int):
+        """
+        """
+        self.banco.conectar()
+        self.vend = self.banco.cursor.execute(f"""SELECT cod_venda, cliente.nome_cliente,
+                                    cliente.cpf, valor_total, data_venda
+                                    FROM cliente, venda
+                                    WHERE venda.cod_cliente = cliente.cod_cliente 
+                                     and cod_venda ='{cod_venda}'""").fetchall()
+        self.banco.desconectar()
+        return self.vend
+    
+    def resCodVenda(self):
+        self.banco.conectar()
+        self.cods = self.banco.cursor.execute(f"""SELECT cod_venda FROM venda 
+                                            WHERE cod_venda = (SELECT MAX(cod_venda) FROM venda) """).fetchall()
+        return self.cods
+
+
+class ItensVenda:
+    banco = BancoDados()
+    # CONSTRUTOR
+    def __init__(self, cod_produto = None, qtd = None, cod_venda = None, valor = None) -> None:
+        # ATRIBUTOS
+        self.__cod_produto = cod_produto
+        self.__qtd = qtd
+        self.__cod_venda = cod_venda
+        self.__valor = valor
+        self.itens = []
+
+    # GETTERS E SETTERS
+    def get_cod_produto(self) -> int:
+        return self.__cod_produto
+    
+    def set_cod_produto(self, cod_prod:int) -> None:
+        self.__cod_produto = cod_prod
+
+    def get_qtd(self) -> int:
+        return self.__qtd
+    
+    def set_qtd(self, qtdItem) -> None:
+        self.__qtd = qtdItem
+
+    def get_cod_venda(self) -> int:
+        return self.__cod_venda
+
+    def set_cod_venda(self, cod_venda:int) -> None:
+        self.__cod_venda = cod_venda
+    
+    def get_valor(self) -> float:
+        return self.__valor
+    
+    def set_valor(self, valorcompra:float) -> None:
+        self.__valor = valorcompra
+
+    # MÉTODOS DE CRUD DA CLASSE ITENS VENDA
+    def cadastrarItens(self, cod_venda:int, cod_produto:int, qtd:int, valorCompra:float) -> None:
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" INSERT INTO itens_venda (cod_venda, cod_produto, qtd, valor)
+                                    VALUES('{cod_venda}', '{cod_produto}', '{qtd}', '{valorCompra}' ) """)
+        self.banco.conexao.commit()
+        self.banco.desconectar()
+
+    
+class Usuario:
+    banco = BancoDados()
+    #CONSTRUTOR
+    def __init__(self):
+        # ATRIBUTOS
+        self.__cod_usuario = None
+        self.__usuario = None
+        self.__nome = None
+        self.__senha = None
+
+    # GETTERS E SETTERS
+    def get_cod_usuario(self) -> int:
+        return self.__cod_usuario
+    
+    def get_usuario(self) -> str:
+        return self.__usuario
+    
+    def get_nome(self) -> str:
+        return self.__nome
+    
+    def get_senha(self) -> str:
+        return self.__senha
+    
+    def set_cod_usuario(self, cod_usuario:int) -> None:
+        self.__cod_usuario = cod_usuario
+        
+    def set_usuario(self, usuario:str) -> None:
+        self.__usuario = usuario
+        
+    def set_nome(self, nome:str) -> None:
+        self.__nome = nome
+    
+    def set_senha(self, senha:str) -> None:
+        self.__senha = senha
+
+    # MÉTODOS DE CRUD DA CLASSE USUÁRIO
+    def logar(self) -> list:
+        """
+        Exibe  o usuário e senha. 
+        :param: Não tem parâmetro.
+        :return: Não tem retorno.
+        """
+        self.banco.conectar()
+        self.res = self.banco.cursor.execute(f""" SELECT usuario, senha FROM usuario""").fetchall()
+        return self.res
+    
+    def alterar_senha(self, senha:str) -> None:
+        """
+        Altera a senha do usuário do sistema.
+        :param: senha, digitada pelo usuário.
+        :return: não há retorno.
+        """
+        self.banco.conectar()
+        self.banco.cursor.execute(f""" UPDATE usuario SET senha= '{senha}' WHERE cod_usuario = 1 """)
+        self.banco.conexao.commit()
 
 class Funcionalidades():
 
@@ -91,7 +1028,7 @@ class Funcionalidades():
                 messagebox.showinfo('Informação', 'Não há categoria cadastrada!')
             else:
                 for i in self.exibir:
-                    self.et_cod_categoria.config(state='normal') 
+                    self.et_cod_categoria.configure(state='normal') 
                     self.listaCategoria.insert('',END, values=i) 
         except:
             messagebox.showerror('Erro', 'Houve um erro na listagem de categoria')
@@ -149,8 +1086,12 @@ class Funcionalidades():
     def exibir_categ_prod(self):
         """
         """
-        self.res = self.categoria.listarCategoria()
-        return self.res
+        
+        self.opList = []
+        for row in self.categoria.listarCategoria():
+            self.opList.append(list(row))
+        return self.opList
+            
     
 
     # FUNÇÕES DOS BOTÕES DA TELA DE PRODUTO
@@ -200,7 +1141,7 @@ class Funcionalidades():
             messagebox.showinfo('Sistema', 'Não há produtos cadastrados.')
         else:
             for i in self.exibirProd:
-                self.et_cod_produto.config(state='normal')
+                self.et_cod_produto.configure(state='normal')
                 self.listaProd.insert('',END, values=i) 
             
     def consu_produto(self):
@@ -348,11 +1289,11 @@ class Funcionalidades():
                 messagebox.showinfo('Informação', 'Não há clientes cadastrados.')
             else:
                 for n in self.lista:
-                    self.et_cod_cliente.config(state='normal')
+                    self.et_cod_cliente.configure(state='normal')
                     self.listaCliente.insert('',END, values=n)
-        except:
+        except Exception as erro:
             messagebox.showerror('Erro', 'Erro ao listar clientes')
-
+            print(erro)
     def buscar_cliente(self):
         """
         """
@@ -547,7 +1488,7 @@ class Funcionalidades():
             messagebox.showinfo('Informação', 'Não há fornecedores cadastrados.')
         else:
             for i in self.listaf:
-                self.et_cod_fornecedor.config(state='normal')
+                self.et_cod_fornecedor.configure(state='normal')
                 self.listaForne.insert('',END, values = i)
             
     def pesquisar_fornecedor(self):
