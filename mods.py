@@ -3,7 +3,9 @@ from tkinter import ttk
 from customtkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
+from PIL import Image
 import os
+
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
 from reportlab.pdfbase import pdfmetrics
