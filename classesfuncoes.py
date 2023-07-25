@@ -1014,6 +1014,7 @@ class Funcionalidades():
             self.categoria.cadastrarCategoria(self.categoria.get_desc_categoria_produto())
             messagebox.showinfo('Info', 'Categoria de produto cadastrada com sucesso!')
             self.limpa_categoria()
+            self.exibir_categoria()
 
     def exibir_categoria(self):
         """
@@ -1047,7 +1048,6 @@ class Funcionalidades():
                 self.categoria.alterarCategoria(self.cod, self.categoria.get_desc_categoria_produto())
                 messagebox.showinfo('Info', 'Categoria alterada com sucesso!')
                 self.limpa_categoria()
-                self.exibir_categoria() 
         except:
             messagebox.showerror('Erro', 'Houve um erro nas alterações')
 
@@ -1092,7 +1092,6 @@ class Funcionalidades():
             self.opList.append(list(row))
         return self.opList
             
-    
 
     # FUNÇÕES DOS BOTÕES DA TELA DE PRODUTO
     def inserir_produto(self):
@@ -1125,7 +1124,7 @@ class Funcionalidades():
                 self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.codigoCatego)
                 self.limpa_produto()
                 messagebox.showinfo('Sistema', 'Produto cadastrado com sucesso!')  
-                
+                self.exibir_produto()
         except Exception as erro:
             messagebox.showerror('Erro', 'Não foi possível cadastrar o produto')
 
@@ -1199,11 +1198,12 @@ class Funcionalidades():
                 self.exibir_produto()
                 self.limpa_produto()
                 messagebox.showinfo('Info', 'Produto deletado com sucesso!')
+                self.exibir_produto()
             else:
                 messagebox.showwarning('Alerta','Nenhum produto encontrado, não foi possível excluir')
         except Exception as erro:
             messagebox.showerror('Erro', 'Houve um erro ao excluir o produto')
-            print(erro)
+            
 
     def duplo_clique_prod(self, event):
         """
@@ -1270,7 +1270,8 @@ class Funcionalidades():
                 messagebox.showinfo('Sistema', 'Cliente cadastrado com sucesso!')
                 self.cliente.cadastrarCliente(self.cpf,self.nome,self.email,
                                       self.telefone,self.logradouro,self.numero,
-                                      self.cep,self.cidade,self.estado)          
+                                      self.cep,self.cidade,self.estado) 
+                self.lista_cliente()         
         except Exception as errou:
             messagebox.showerror('Erro', 'Houve um erro inesperado!')  
             print(errou)
@@ -1476,6 +1477,7 @@ class Funcionalidades():
                                              self.cep,self.cidade, 
                                              self.estado)
                 self.limpa_fornecedor()  
+                self.lista_fornecedor()
         except:
             messagebox.showerror('Erro', 'Houve um erro inesperado!')
                 
@@ -1648,6 +1650,7 @@ class Funcionalidades():
                 self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
                 self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
                 messagebox.showinfo('Sistema', 'Fornecimento Realizado!')
+                self.exibir_fornecimento()
         except Exception as err: 
             messagebox.showerror('Erro', 'Erro no fornecimento')
             print(err)
@@ -1740,11 +1743,7 @@ class Funcionalidades():
                 c +=it[5]
                 self.tot.set(c)
             
-                
-            
-        #print(self.itensVenda.itens)
-            
-
+        
     def remover_produto_venda(self):
         """ 
         Remove os itens do carrinho
@@ -1762,8 +1761,7 @@ class Funcionalidades():
             self.itensVenda.itens.pop(itemSelecionado)
         c = 0 
         
-       
-        
+
  
     def limpaItens(self):
         """
