@@ -293,7 +293,7 @@ class Produto:
         self.banco.cursor.execute(f"""INSERT INTO produto (desc_produto, modelo_produto,
                           preco_compra_produto, preco_venda_produto, cod_categoria_produto) 
                            VALUES ('{desc_produto}','{mod_produto}',
-                           '{preco_compra}','{preco_venda}','{cod_categoria}') """)
+                           '{preco_compra:.2f}','{preco_venda:.2f}','{cod_categoria}') """)
         self.banco.conexao.commit()
         self.banco.desconectar()
        
@@ -375,9 +375,6 @@ class Produto:
                                          """).fetchall()   
         self.banco.desconectar()
         return self.produto
-    
-    
-
 
 
 class Fornecedor:
@@ -1099,8 +1096,8 @@ class Funcionalidades():
         """
         self.desc_produto = self.et_desc_produto.get().strip()
         self.mod_produto = self.et_mode_produto.get().strip()
-        self.preco_compra = self.et_preco_comp_produto.get().strip()
-        self.preco_venda = self.et_preco_ven_produto.get().strip()
+        self.preco_compra = float(self.et_preco_comp_produto.get().strip().replace('.', ','))
+        self.preco_venda = float(self.et_preco_ven_produto.get().strip().replace('.', ','))
         self.cat = self.et_categoria.get().strip()
         self.codCat = []
         self.codCat.append(self.cat)
@@ -1114,7 +1111,7 @@ class Funcionalidades():
                 if c[0] == int(self.codCat[0][1:3]):
                     self.codigoCatego = c[0]
         try:
-            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.codigoCatego == 0:
+            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == 0 or self.preco_venda == 0 or self.codigoCatego == 0:
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
@@ -1165,12 +1162,12 @@ class Funcionalidades():
         self.cod_produto = self.et_cod_produto.get().strip()
         self.desc_produto = self.et_desc_produto.get().strip()
         self.mod_produto = self.et_mode_produto.get().strip()
-        self.preco_compra = self.et_preco_comp_produto.get().strip()
-        self.preco_venda = self.et_preco_ven_produto.get().strip()
+        self.preco_compra = float(self.et_preco_comp_produto.get().strip())
+        self.preco_venda = float(self.et_preco_ven_produto.get().strip())
         self.cat = self.et_categoria.get().strip()
         self.cod_categoria = [self.cat]
         try:
-            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.cod_categoria == '':
+            if self.cod_produto == '' or self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == 0 or self.preco_venda == 0 or self.cod_categoria == '':
                 messagebox.showwarning('Alerta', 'Por favor, Selecione um produto para alterar')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')

@@ -418,31 +418,33 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_cliente = CTkLabel(self.frameCadTelaCliente, text='CLIENTE', font=('Roboto', 15))
         lbl_titulo_cliente.place(relx=0.025, rely=0.01)
          
-        self.lbl_cod_cliente = CTkLabel(self.frameCadTelaCliente, text='Código:', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_cod_cliente.place(relx=0.025, rely=0.1)
+        #self.lbl_cod_cliente = CTkLabel(self.frameCadTelaCliente, text='Código:', font=('Roboto', 12, 'bold'), height=20)
+        #self.lbl_cod_cliente.place(relx=0.025, rely=0.1)
         self.et_cod_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), state='disabled', width=50, height=30)
         self.et_cod_cliente.place(relx=0.08, rely=0.1)
+        self.et_cod_cliente.place_forget()
+        self.et_cod_cliente.focus_displayof()
         
         self.lbl_cpf_cliente = CTkLabel(self.frameCadTelaCliente, text='CPF*:', font=('Roboto', 12, 'bold'), height=20)    
-        self.lbl_cpf_cliente.place(relx=0.025, rely=0.18)
+        self.lbl_cpf_cliente.place(relx=0.025, rely=0.11)
         self.et_cpf_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), width=220, height=30)
         self.et_cpf_cliente.focus()
-        self.et_cpf_cliente.place(relx=0.08, rely=0.17)
+        self.et_cpf_cliente.place(relx=0.08, rely=0.1)
         
         self.lbl_nome_cliente = CTkLabel(self.frameCadTelaCliente, text='Nome*: ', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_nome_cliente.place(relx=0.025, rely=0.25)
+        self.lbl_nome_cliente.place(relx=0.025, rely=0.18)
         self.et_nome_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), width=220, height=30)
-        self.et_nome_cliente.place(relx=0.08, rely=0.24)
+        self.et_nome_cliente.place(relx=0.08, rely=0.17)
 
         self.lbl_email_cliente = CTkLabel(self.frameCadTelaCliente, text='E-mail*: ', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_email_cliente.place(relx=0.025, rely=0.32)
+        self.lbl_email_cliente.place(relx=0.025, rely=0.25)
         self.et_email_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), width=220, height=30)
-        self.et_email_cliente.place(relx=0.08, rely=0.31)
+        self.et_email_cliente.place(relx=0.08, rely=0.24)
 
         self.lbl_tel_cliente = CTkLabel(self.frameCadTelaCliente, text='Fone*: ', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_tel_cliente.place(relx=0.025, rely=0.39)
+        self.lbl_tel_cliente.place(relx=0.025, rely=0.32)
         self.et_tel_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), width=220, height=30)
-        self.et_tel_cliente.place(relx=0.08, rely=0.38)
+        self.et_tel_cliente.place(relx=0.08, rely=0.31)
 
         self.lbl_logr_cliente = CTkLabel(self.frameCadTelaCliente, text='Endereço*: ', font=('Roboto', 12, 'bold'), height=20)
         self.lbl_logr_cliente.place(relx=0.34, rely=0.11)
@@ -586,11 +588,13 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_categoria = CTkLabel(self.categoria_frame, text='CATEGORIA', font=('Roboto', 15))
         lbl_titulo_categoria.place(relx=0.025, rely=0.01)
 
-        self.lbl_cod_categoria = CTkLabel(self.categoria_frame, text='Código:', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_cod_categoria.place(relx=0.27, rely=0.11)
+        #self.lbl_cod_categoria = CTkLabel(self.categoria_frame, text='Código:', font=('Roboto', 12, 'bold'), height=20)
+        #self.lbl_cod_categoria.place(relx=0.27, rely=0.11)
         self.et_cod_categoria = CTkEntry(self.categoria_frame, font=('Roboto', 12), state='disabled', width=50, height=30)
         self.et_cod_categoria.configure(state='disabled')
         self.et_cod_categoria.place(relx=0.34, rely=0.1)
+        self.et_cod_categoria.focus_displayof()
+        self.et_cod_categoria.place_forget()
         
 
         self.lbl_desc_categoria = CTkLabel(self.categoria_frame, text='Descrição da Categoria*: ', font=('Roboto', 12, 'bold'), height=20)
@@ -675,36 +679,41 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_prod = CTkLabel(self.produto_frame, text='PRODUTO', font=('Roboto', 15))
         lbl_titulo_prod.place(relx=0.02, rely=0.01)
         
-        self.lbl_cod_produto = CTkLabel(self.produto_frame, text='Código: ', font=('Roboto', 12, 'bold'))
-        self.lbl_cod_produto.place(relx=0.02, rely=0.1)
+        #self.lbl_cod_produto = CTkLabel(self.produto_frame, text='Código: ', font=('Roboto', 12, 'bold'))
+        #self.lbl_cod_produto.place(relx=0.02, rely=0.1)
         self.et_cod_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), state='disabled', width=50, height=30)
         self.et_cod_produto.place(relx=0.1, rely=0.1)
+        self.et_cod_produto.place_forget()
+        self.et_cod_produto.focus_displayof()
         
         self.lbl_mode_produto = CTkLabel(self.produto_frame, text='Modelo*: ', font=('Roboto', 12, 'bold'))
-        self.lbl_mode_produto.place(relx=0.02, rely=0.17)
+        self.lbl_mode_produto.place(relx=0.02, rely=0.18)
         self.et_mode_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), width=150, height=30)
         self.et_mode_produto.place(relx=0.1, rely=0.17)
         
         self.lbl_desc_produto = CTkLabel(self.produto_frame, text='Descrição*: ', font=('Roboto', 12, 'bold'))
-        self.lbl_desc_produto.place(relx=0.02, rely=0.24)
-        self.et_desc_produto = CTkEntry(self.produto_frame, font=('Roboto', 10), width=150, height=30)
+        self.lbl_desc_produto.place(relx=0.02, rely=0.11)
+        self.et_desc_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), width=150, height=30)
         self.et_desc_produto.focus()
-        self.et_desc_produto.place(relx=0.1, rely=0.24)
+        self.et_desc_produto.place(relx=0.1, rely=0.1)
 
         self.lbl_preco_comp_produto = CTkLabel(self.produto_frame, text='Preço Compra*: ', font=('Roboto', 12, 'bold'))
-        self.lbl_preco_comp_produto.place(relx=0.02, rely=0.31)
+        self.lbl_preco_comp_produto.place(relx=0.02, rely=0.25)
         self.et_preco_comp_produto = CTkEntry(self.produto_frame,font=('Roboto', 12), width=125, height=30)
-        self.et_preco_comp_produto.place(relx=0.125, rely=0.31)
+        self.et_preco_comp_produto.place(relx=0.125, rely=0.24)
+        
 
         self.lbl_preco_ven_produto = CTkLabel(self.produto_frame, text='Preço Venda*: ', font=('Roboto', 12, 'bold'))
         self.lbl_preco_ven_produto.place(relx=0.34, rely=0.1)
         self.et_preco_ven_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), width=125, height=30)
         self.et_preco_ven_produto.place(relx=0.435, rely=0.1)
 
-        self.lbl_qtd_produto = CTkLabel(self.produto_frame, text='Qtd: ', font=('Roboto', 12, 'bold'))
-        self.lbl_qtd_produto.place(relx=0.16, rely=0.1)
+        #self.lbl_qtd_produto = CTkLabel(self.produto_frame, text='Qtd: ', font=('Roboto', 12, 'bold'))
+        #self.lbl_qtd_produto.place(relx=0.16, rely=0.1)
         self.et_qtd_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), state='readonly', width=63, height=30)
         self.et_qtd_produto.place(relx=0.19, rely=0.1)
+        self.et_qtd_produto.place_forget()
+        self.et_qtd_produto.focus_displayof()
 
         self.lbl_cat_produto = CTkLabel(self.produto_frame, text='Categoria*: ', font=('Roboto', 12, 'bold'))
         self.lbl_cat_produto.place(relx=0.34, rely=0.16)
@@ -723,70 +732,60 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.et_consulta_produto.place(relx=0.72, rely=0.11)
         self.btn_consulta_produto = CTkButton(self.produto_frame, 
                 text=' Consultar',
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',
+                fg_color='#505050', 
                 height=40,
                 command=self.consu_produto)
         self.btn_consulta_produto.place(relx=0.88, rely=0.075, relwidth=0.09)
 
         self.btn_salvar_produto = CTkButton(self.produto_frame, 
                 text=' Salvar', 
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000', 
+                fg_color='#505050', 
                 height=40,
                 command=self.inserir_produto)
         self.btn_salvar_produto.place(relx=0.88, rely=0.155, relwidth=0.09)
 
         self.btn_lista_produto = CTkButton(self.produto_frame,   
                 text=' Listar',
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',
+                fg_color='#505050', 
                 height=40,
                 command=self.exibir_produto)
         self.btn_lista_produto.place(relx=0.88, rely=0.235, relwidth=0.09)
 
         self.btn_alterar_produto = CTkButton(self.produto_frame, 
                 text=' Alterar',
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',
+                fg_color='#505050', 
                 height=40,
                 command=self.editar_produto)
         self.btn_alterar_produto.place(relx=0.88, rely=0.315, relwidth=0.09)
 
         self.btn_excluir_produto = CTkButton(self.produto_frame,  
                 text=' Excluir', 
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000', 
+                fg_color='#505050', 
                 height=40,
                 command=self.deletar_produto)
         self.btn_excluir_produto.place(relx=0.88, rely=0.395, relwidth=0.09)
@@ -833,128 +832,120 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='FORNECEDOR', font=('Roboto', 15))
         lbl_titulo_fornecedor.place(relx=0.025, rely=0.01)
 
-        self.lbl_cod_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_cod_fornecedor.place(relx=0.02, rely=0.1)
-        self.et_cod_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), state='disabled', width=50, height=20)
-        self.et_cod_fornecedor.place(relx=0.09, rely=0.1)
+        #self.lbl_cod_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Código:', font=('Roboto', 12, 'bold'), height=20)
+        #self.lbl_cod_fornecedor.place(relx=0.02, rely=0.1)
+        self.et_cod_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), state='disabled', width=50, height=30)
+        self.et_cod_fornecedor.place(relx=0.1, rely=0.1)
+        self.et_cod_fornecedor.place_forget()
+        self.et_cod_fornecedor.focus_displayof()
 
-        self.lbl_cnpj_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='CNPJ/CPF: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_cnpj_fornecedor.place(relx=0.02, rely=0.15)
-        self.et_cnpj_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
+        self.lbl_cnpj_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='CNPJ/CPF*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_cnpj_fornecedor.place(relx=0.02, rely=0.1)
+        self.et_cnpj_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
         self.et_cnpj_fornecedor.focus()
-        self.et_cnpj_fornecedor.place(relx=0.09, rely=0.15)
+        self.et_cnpj_fornecedor.place(relx=0.1, rely=0.1)
 
-        self.lbl_nome_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Nome: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_nome_fornecedor.place(relx=0.02, rely=0.2)
-        self.et_nome_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
-        self.et_nome_fornecedor.place(relx=0.09, rely=0.2)
+        self.lbl_nome_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Nome*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_nome_fornecedor.place(relx=0.02, rely=0.18)
+        self.et_nome_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
+        self.et_nome_fornecedor.place(relx=0.1, rely=0.17)
 
-        self.lbl_email_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='E-mail: ', font=('Roboto', 9, 'bold'), height=20)
+        self.lbl_email_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='E-mail*: ', font=('Roboto', 12, 'bold'), height=20)
         self.lbl_email_fornecedor.place(relx=0.02, rely=0.25)
-        self.et_email_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
-        self.et_email_fornecedor.place(relx=0.09, rely=0.25)
+        self.et_email_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
+        self.et_email_fornecedor.place(relx=0.1, rely=0.24)
 
-        self.lbl_tel_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Telefone: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_tel_fornecedor.place(relx=0.02, rely=0.3)
-        self.et_tel_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
-        self.et_tel_fornecedor.place(relx=0.09, rely=0.3)
+        self.lbl_tel_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Telefone*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_tel_fornecedor.place(relx=0.02, rely=0.32)
+        self.et_tel_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
+        self.et_tel_fornecedor.place(relx=0.1, rely=0.31)
 
-        self.lbl_logr_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Endereço: ', font=('Roboto', 9, 'bold'), height=20)
+        self.lbl_logr_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Endereço*: ', font=('Roboto', 12, 'bold'), height=20)
         self.lbl_logr_fornecedor.place(relx=0.34, rely=0.1)
-        self.et_logr_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
-        self.et_logr_fornecedor.place(relx=0.405, rely=0.1)
+        self.et_logr_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
+        self.et_logr_fornecedor.place(relx=0.415, rely=0.1)
 
-        self.lbl_num_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Número: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_num_fornecedor.place(relx=0.35, rely=0.15)
-        self.et_num_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=60, height=20)
-        self.et_num_fornecedor.place(relx=0.405, rely=0.15)
+        self.lbl_num_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Número*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_num_fornecedor.place(relx=0.35, rely=0.18)
+        self.et_num_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=60, height=30)
+        self.et_num_fornecedor.place(relx=0.415, rely=0.17)
 
-        self.lbl_cep_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='CEP: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_cep_fornecedor.place(relx=0.49, rely=0.15)
-        self.et_cep_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=107, height=20)
-        self.et_cep_fornecedor.place(relx=0.522, rely=0.15)
+        self.lbl_cep_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='CEP*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_cep_fornecedor.place(relx=0.49, rely=0.18)
+        self.et_cep_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=107, height=30)
+        self.et_cep_fornecedor.place(relx=0.532, rely=0.17)
 
-        self.lbl_cidade_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Cidade: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_cidade_fornecedor.place(relx=0.35, rely=0.2)
-        self.et_cidade_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9),width=220, height=20)
-        self.et_cidade_fornecedor.place(relx=0.405, rely=0.2)
+        self.lbl_cidade_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Cidade*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_cidade_fornecedor.place(relx=0.35, rely=0.25)
+        self.et_cidade_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12),width=220, height=30)
+        self.et_cidade_fornecedor.place(relx=0.415, rely=0.24)
 
-        self.lbl_estado_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Estado: ', font=('Roboto', 9, 'bold'), height=20)
-        self.lbl_estado_fornecedor.place(relx=0.35, rely=0.25)
-        self.et_estado_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=220, height=20)
-        self.et_estado_fornecedor.place(relx=0.405, rely=0.25)
+        self.lbl_estado_fornecedor = CTkLabel(self.frameCadTelaFornecedor, text='Estado*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_estado_fornecedor.place(relx=0.35, rely=0.32)
+        self.et_estado_fornecedor = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=220, height=30)
+        self.et_estado_fornecedor.place(relx=0.415, rely=0.31)
         
         self.btn_consultar = CTkButton(self.frameCadTelaFornecedor,
                 text="Consultar", 
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',
+                fg_color='#505050', 
                 height=40,
                 command=self.pesquisar_fornecedor)
         self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09)
 
-        self.lbl_pes_forn = CTkLabel(self.frameCadTelaFornecedor, text='Buscar Nome: ', font=('Roboto', 9, 'bold'))
+        self.lbl_pes_forn = CTkLabel(self.frameCadTelaFornecedor, text='Buscar Nome: ', font=('Roboto', 12, 'bold'))
         self.lbl_pes_forn.place(relx=0.73, rely=0.065)
-        self.et_consultar_forne = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 9), width=130, height=20)
+        self.et_consultar_forne = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=130, height=30)
         self.et_consultar_forne.place(relx=0.73, rely=0.105)
         
         self.btn_salvar = CTkButton(self.frameCadTelaFornecedor, 
                 text="Salvar", 
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',
+                fg_color='#505050', 
                 height=40,
                 command=self.inserir_fornecedor)
         self.btn_salvar.place(relx=0.88, rely=0.155, relwidth=0.09)
 
         self.btn_listar = CTkButton(self.frameCadTelaFornecedor,
                 text="Listar",
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',    
+                fg_color='#505050', 
                 height=40,
                 command=self.lista_fornecedor)
         self.btn_listar.place(relx=0.88, rely=0.235, relwidth=0.09)
 
         self.btn_alterar = CTkButton(self.frameCadTelaFornecedor,
                 text="Alterar",
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',  
+                fg_color='#505050', 
                 height=40,
                 command=self.alterar_fornecedor)
         self.btn_alterar.place(relx=0.88, rely=0.315, relwidth=0.09)
 
         self.btn_excluir = CTkButton(self.frameCadTelaFornecedor,
                 text="Excluir",
-                text_color='#505050',
-                hover_color='#ccc',
+                text_color='#fff',
+                hover_color='#333',
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',    
+                fg_color='#505050', 
                 height=40,
                 command=self.excluir_fornecedor)
         self.btn_excluir.place(relx=0.88, rely=0.395, relwidth=0.09)
@@ -998,49 +989,67 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
     def widgets_fornecimento(self):
         
-        self.fornecimento_frame = CTkFrame(self.frameMenu_right,fg_color='#D9D9D9')
+        self.fornecimento_frame = CTkFrame(self.frameMenu_right, fg_color='#fff')
         self.fornecimento_frame.place(relx=0.12, rely=0.12, relwidth=0.75, relheight=0.75)
 
         lbl_titulo_fornecimento = CTkLabel(self.fornecimento_frame, text='FORNECIMENTO', font=('Roboto', 15))
         lbl_titulo_fornecimento.place(relx=0.025, rely=0.01)
 
-        self.lbl_produto = CTkLabel(self.fornecimento_frame, text='Produto: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_produto = CTkLabel(self.fornecimento_frame, text='Produto*: ', font=('Roboto', 12, 'bold'), height=20)
         self.lbl_produto.place(relx=0.02, rely=0.1)
         self.dadosRecebidosProduto = list(self.fornecimentoProduto())
 
         self.comboxProduto = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosProduto, width=40, height=22)
         self.comboxProduto.place(relx=0.13, rely=0.1)
         
-        self.lbl_fornecedor_fornecimento = CTkLabel(self.fornecimento_frame, text='Fornecedor: ', font=('Roboto', 12, 'bold'), height=25)
+        self.lbl_fornecedor_fornecimento = CTkLabel(self.fornecimento_frame, text='Fornecedor*: ', font=('Roboto', 12, 'bold'), height=25)
         self.lbl_fornecedor_fornecimento.place(relx=0.02, rely=0.18)
         self.dadosRecebidosFornecedor = self.fornecimentoFornecedor()
         self.comboxFornecedor = ttk.Combobox(self.fornecimento_frame, values=self.dadosRecebidosFornecedor, width=40, height=25)
         self.comboxFornecedor.place(relx=0.13, rely=0.18)
 
-        self.lbl_data_fornecimento = CTkLabel(self.fornecimento_frame, text='Data Forneci.: ', font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_data_fornecimento.place(relx=0.02, rely=0.26)
-        self.et_data_fornecimento = CTkEntry(self.fornecimento_frame, width=62, height=30)
+        self.lbl_data_fornecimento = CTkLabel(self.fornecimento_frame, text='Data Forneci*.: ', font=('Roboto', 12, 'bold'), height=20)
+        self.lbl_data_fornecimento.place(relx=0.02, rely=0.27)
+        self.et_data_fornecimento = CTkEntry(self.fornecimento_frame, width=79, height=30)
         self.et_data_fornecimento.place(relx=0.16, rely=0.26)
-        self.btn_calendario = CTkButton(self.fornecimento_frame, text='Inserir', font=('Roboto', 9, 'bold'), width=75, height=20, command=self.calendario)
-        self.btn_calendario.place(relx=0.25, rely=0.26)
+        self.btn_calendario = CTkButton(self.fornecimento_frame, 
+                text='Inserir', 
+                text_color='#fff',
+                font=('Roboto', 12, 'bold'),
+                fg_color='#505050', 
+                width=75, 
+                height=30, 
+                hover_color='#333',
+                command=self.calendario)
+        self.btn_calendario.place(relx=0.27, rely=0.26)
 
-        self.qtd_fornecida = CTkLabel(self.fornecimento_frame, text='Qtd Fornecida: ', font=('Roboto', 10, 'bold'), height=20)
-        self.qtd_fornecida.place(relx=0.02, rely=0.33)
-        self.et_qtd_fornecida = CTkEntry(self.fornecimento_frame, width=62, height=20)
-        self.et_qtd_fornecida.place(relx=0.16, rely=0.33) 
+        self.qtd_fornecida = CTkLabel(self.fornecimento_frame, text='Qtd Fornecida*: ', font=('Roboto', 12, 'bold'), height=20)
+        self.qtd_fornecida.place(relx=0.02, rely=0.35)
+        self.et_qtd_fornecida = CTkEntry(self.fornecimento_frame, width=62, height=30)
+        self.et_qtd_fornecida.place(relx=0.16, rely=0.34) 
 
         self.btn_salvarFornecimento = CTkButton(self.fornecimento_frame,
-                    text="Salvar",
-                    font=('Roboto', 12,'bold'),
-                    height=40,
-                    command=self.inserir_fornecimento)
+                text="Salvar",
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
+                compound='left', 
+                anchor='center', 
+                fg_color='#505050', 
+                height=40,
+                command=self.inserir_fornecimento)
         self.btn_salvarFornecimento.place(relx=0.88, rely=0.1, relwidth=0.09)
 
         self.btn_listarFornecimento = CTkButton(self.fornecimento_frame, 
-                    text="Listar",
-                    font=('Roboto', 12,'bold'),
-                     height=40,
-                    command=self.exibir_fornecimento)
+                text="Listar",
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
+                compound='left', 
+                anchor='center', 
+                fg_color='#505050', 
+                height=40,
+                command=self.exibir_fornecimento)
         self.btn_listarFornecimento.place(relx=0.88, rely=0.2, relwidth=0.09)
 
 
@@ -1066,33 +1075,34 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
     def widgets_venda(self):
 
-        self.frameCadTelaVenda = CTkFrame(self.frameMenu_right, fg_color='#d9d9d9')
+        self.frameCadTelaVenda = CTkFrame(self.frameMenu_right, fg_color='#fff')
         self.frameCadTelaVenda.place(relx=0.12, rely=0.025, relwidth=0.75, relheight=0.95)
         
         lbl_titulo_venda = CTkLabel(self.frameCadTelaVenda, text='VENDA', font=('Roboto', 15))
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
-        self.lbl_cod_venda = CTkLabel(self.frameCadTelaVenda, text="Código:", font=('Roboto', 9, 'bold'), height=20)
+        self.lbl_cod_venda = CTkLabel(self.frameCadTelaVenda, text="Código:", font=('Roboto', 12, 'bold'), height=20)
         self.lbl_cod_venda.place(relx=0.025, rely=0.1)
-        self.et_cod_venda = CTkEntry(self.frameCadTelaVenda, state='disabled', width=55, height=20)
+        self.et_cod_venda = CTkEntry(self.frameCadTelaVenda, state='disabled', font=('Roboto', 12), width=55, height=30)
         self.et_cod_venda.place(relx=0.09, rely=0.1)
+        
 
-        self.lbl_nome_clien_venda = CTkLabel(self.frameCadTelaVenda, text="Cliente: ", font=('Roboto', 9, 'bold'))
+        self.lbl_nome_clien_venda = CTkLabel(self.frameCadTelaVenda, text="Cliente*: ", font=('Roboto', 12, 'bold'))
         self.lbl_nome_clien_venda.place(relx=0.025, rely=0.15) 
         self.cliRecebidos = self.clienteVenda()
         self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.cliRecebidos)
         self.comboxClien_venda.place(relx=0.09, rely=0.15, width=300, height=20)
 
         self.lbl_data_venda = CTkLabel(self.frameCadTelaVenda, 
-                text='Data Venda: ', 
-                font=('Roboto', 9, 'bold'), height=20)
+                text='Data Venda*: ', 
+                font=('Roboto', 12, 'bold'), height=20)
         self.lbl_data_venda.place(relx=0.215, rely=0.1)
         self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=60, height=20)
         self.et_data_venda.place(relx=0.31, rely=0.1)
 
         self.btn_calendario = CTkButton(self.frameCadTelaVenda, 
                 text='Selecionar', 
-                font=('Roboto', 9, 'bold'), 
+                font=('Roboto', 12, 'bold'), 
                 width=65, 
                 height=20, 
                 command=self.calendariove)
@@ -1115,23 +1125,23 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
 
         # VISUAL DO CARRINHO
-        self.cabecalhoAdd = LabelFrame(self.frameCadTelaVenda, text='Carrinho', font=('Roboto', 14), bg='#d9d9d9')
+        self.cabecalhoAdd = LabelFrame(self.frameCadTelaVenda, text='Carrinho', font=('Roboto', 14), bg='#fff')
         self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.96, relheight=0.75)
 
-        self.lbl_prodt_venda = CTkLabel(self.cabecalhoAdd, text="Produto: ", font=('Roboto', 9, 'bold'))
+        self.lbl_prodt_venda = CTkLabel(self.cabecalhoAdd, text="Produto*: ", font=('Roboto', 12, 'bold'))
         self.lbl_prodt_venda.place(relx=0.025, rely=0.1) 
         self.prodRecebidos = self.produtosVenda()
         self.comboxaddItens = ttk.Combobox(self.cabecalhoAdd, values=self.prodRecebidos)
         self.comboxaddItens.place(relx=0.1, rely=0.1, width=300, height=20)
 
-        self.lbl_qtd_venda = CTkLabel(self.cabecalhoAdd, text="Qtd: ", font=('Roboto', 9, 'bold'), width=70, height=20)
+        self.lbl_qtd_venda = CTkLabel(self.cabecalhoAdd, text="Qtd*: ", font=('Roboto', 12, 'bold'), width=70, height=20)
         self.lbl_qtd_venda.place(relx=0.025, rely=0.16) 
-        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd)
+        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd, height=30, font=('Roboto', 12))
         self.et_qtd_venda.place(relx=0.1, rely=0.16) 
 
         self.btn_add_prod = CTkButton(self.cabecalhoAdd, 
                 text='Adicionar',
-                font=('Roboto', 10, 'bold'), 
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
                 height=20, 
@@ -1140,7 +1150,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
         self.btn_remov_prod = CTkButton(self.cabecalhoAdd, 
                 text='Remover',
-                font=('Roboto', 10, 'bold'), 
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center',  
                 height=20,
