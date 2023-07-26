@@ -1722,19 +1722,17 @@ class Funcionalidades():
             messagebox.showwarning('Alerta', 'Preencha os campos do carrinho!')
         else:
             self.produtoadd = [self.comboxaddItens.get()]
-            
+
             self.produtosBanco = self.produtosVenda()
             for v in self.produtosBanco:
                 if int(self.produtoadd[0][0]) == v[0]:
-                    self.listaExbiProduto.append(list(v))
-            
-            for l in self.listaExbiProduto:
-                l.append(int(self.et_qtd_venda.get()))
-                l.append(l[3] * l[4])
-
-            for it in self.listaExbiProduto:
-                self.listaAddItens.insert('', END, values=it)
-                self.itensVenda.itens.append(it)
+                    if v[0] not in self.listaExbiProduto:
+                        self.listaExbiProduto.append(list(v))
+                        for it in self.listaExbiProduto:
+                            it.append(int(self.et_qtd_venda.get()))
+                            it.append(it[3] * it[4])
+                        self.listaAddItens.insert('', END, values=it)
+                        #self.listaExbiProduto.append(v[3] * v[4])
 
             cont = 0    
             for i in self.listaExbiProduto:
@@ -1852,7 +1850,7 @@ class Funcionalidades():
 
     def gerarRelPDF(self):
         # Criando arquivo pdf do relatório
-        self.canv = canvas.Canvas('./relatorios/RelatorioVendasGeral.pdf')
+        self.canv = canvas.Canvas('..\\relatorios\\RelatorioVendasGeral.pdf')
         
 
         self.canv.setFont('Helvetica-Bold', 20)
