@@ -1,6 +1,6 @@
 from mods import *
 import classesfuncoes
-
+from PIL import Image, ImageTk
 appLogin = CTk()
 
 class LoginTela(classesfuncoes.Funcionalidades):
@@ -228,10 +228,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
     # FRAME DE EXIBIÇÃO DAS TELAS
     def widgets_menu_left(self) -> None:
-        #self.img_inicio = PhotoImage(file='./imagens/inicio.png', width=60)
-        #self.img_inicio = CTkImage(light_image=Image.draw('./imagens/inicio.png'), size=(60, 60))
-        self.btn_inicio = CTkButton(self.frameMenu_left, 
-                                 
+        #self.img_inicio = CTkImage(dark_image=Image.open('.\\imagens\\inicio.png'), size=(40, 40))
+        self.btn_inicio = CTkButton(master=self.frameMenu_left, 
+                                  
                     text='Início', 
                     font=('Roboto', 10, 'bold'), 
                     compound='left', 
@@ -242,9 +241,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                     command=lambda: self.indicate(self.btn_inicio, self.widgets_inicio),
                     width=150, height=50)
         self.btn_inicio.place(relx=0.08, rely=0.01)
-
-        #self.img_ger_usu = PhotoImage(file='./imagens/usuario.png')
+        
+        #self.img_ger_usu = CTkImage(dark_image=Image.open('.\\imagens\\usuario.png'), size=(40, 40))
         self.btn_ger_usuario = CTkButton(self.frameMenu_left, 
+                    
                     text=' Usuário', 
                     font=('Roboto', 10, 'bold'), 
                     compound='left', 
@@ -578,6 +578,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaCliente.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.96, relwidth=0.075, relheight=0.035)
         self.listaCliente.bind("<Double-1>", self.duplo_clique_cliente)
+        self.lista_cliente()
 
 
      # CONFIGURAÇÕES DA TELA CATEGORIA
@@ -606,53 +607,50 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
         self.btn_salvar_categoria = CTkButton(self.categoria_frame, 
                 text=' Salvar', 
-                text_color='#505050',
-                hover_color='#ccc',
-                font=('Roboto', 10, 'bold'), 
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000', height=40,
+                fg_color='#505050', 
+                height=40,
                 command=self.inserir_categoria)
         self.btn_salvar_categoria.place(relx=0.84, rely=0.1, relwidth=0.1)
+        
 
         self.btn_lista_categoria = CTkButton(self.categoria_frame,  
                 text=' Listar', 
-                text_color='#505050',
-                hover_color='#ccc',
-                font=('Roboto', 10, 'bold'), 
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000', height=40,
+                fg_color='#505050', 
+                height=40,
                 command=self.exibir_categoria)
         self.btn_lista_categoria.place(relx=0.84, rely=0.19, relwidth=0.1)
 
         self.btn_alterar_categoria = CTkButton(self.categoria_frame,  
                 text=' Alterar',  
-                text_color='#505050',
-                hover_color='#ccc',
-                font=('Roboto', 10, 'bold'), 
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000',height=40,
+                fg_color='#505050',
+                height=40,
                 command=self.editar_categoria)
         self.btn_alterar_categoria.place(relx=0.84, rely=0.28, relwidth=0.1)
 
         self.btn_excluir_categoria = CTkButton(self.categoria_frame,  
                 text=' Excluir',
-                text_color='#505050',
-                hover_color='#ccc',
-                font=('Roboto', 10, 'bold'), 
+                text_color='#fff',
+                hover_color='#333',
+                font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#d9d9d9', 
-                border_width=2,
-                border_color='#000', height=40,
+                fg_color='#505050', 
+                height=40,
                 command=self.deletar_categoria)
         self.btn_excluir_categoria.place(relx=0.84, rely=0.37, relwidth=0.1)
 
@@ -671,6 +669,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaCategoria.configure(yscrollcommand=self.scrollListaCat.set)
         self.scrollListaCat.place(relx=0.71, rely=0.43, relwidth= 0.02, relheight=0.5)
         self.listaCategoria.bind("<Double-1>", self.duplo_clique_cat)
+        self.exibir_categoria()
 
     # CONFIGURAÇÕES DA TELA PRODUTO
     def widgets_produto(self):
@@ -824,6 +823,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaProd.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.965, relwidth=0.1, relheight=0.03)
         self.listaProd.bind("<Double-1>", self.duplo_clique_prod)
+        self.exibir_produto()
 
     # CONFIGURAÇÕES DA TELA FORNECEDOR
     def widgets_fornecedor(self) -> None:
@@ -987,6 +987,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaForne.configure(xscrollcommand=self.scrollHor.set)
         self.scrollHor.place(relx=0.02, rely=0.97, relwidth=0.08, relheight=0.03)
         self.listaForne.bind("<Double-1>", self.duplo_clique_for)
+        self.lista_fornecedor()
 
     def widgets_fornecimento(self):
         
@@ -1073,7 +1074,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.scrollListaFornecimento = CTkScrollbar(self.fornecimento_frame, orientation='vertical', command=self.listaFornecimento.yview)
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
-
+        self.exibir_fornecimento()
     def widgets_venda(self):
 
         self.frameCadTelaVenda = CTkFrame(self.frameMenu_right, fg_color='#fff')
@@ -1193,10 +1194,6 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaAddItens.configure(yscrollcommand=self.scrollListaHistTela.set)
         self.scrollListaHistTela.place(relx=0.82, rely=0.4, relwidth= 0.02, relheight=0.45)
 
-        self.scrollHor = CTkScrollbar(self.cabecalhoAdd, orientation='horizontal')
-        self.listaAddItens.configure(xscrollcommand=self.scrollHor.set) 
-        self.scrollHor.place(relx=0.02, rely=0.85, relwidth=0.1, relheight=0.04)
-
         self.lbl_totalGeral = CTkLabel(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'))
         self.lbl_totalGeral.place(relx=0.026, rely=0.945)
         self.tot = StringVar()
@@ -1266,6 +1263,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.scrolllistaRelatorio = CTkScrollbar(self.relatorio_frame, orientation='vertical', command=self.listaRelatorio.yview)
         self.listaRelatorio.configure(yscrollcommand= self.scrolllistaRelatorio.set)
         self.scrolllistaRelatorio.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
+        self.listarVenda()
 
 LoginTela()
    

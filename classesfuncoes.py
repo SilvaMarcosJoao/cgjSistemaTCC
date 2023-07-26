@@ -961,10 +961,12 @@ class Funcionalidades():
     produto = Produto()
     venda = Venda()
     itensVenda = ItensVenda()
+    listaExbiProduto = []
     
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def finalizar(self) -> None:
         self.appMenu.destroy()
+        
 
     def mudar_senha(self) -> None:
         """
@@ -1712,34 +1714,31 @@ class Funcionalidades():
         for c in range(0, len(self.cliVenda)):
             self.exibirDados.append(self.cliVenda[c][0:3])
         return self.exibirDados
-        
+    
     def adicionaItens_venda(self):
         if len(self.et_qtd_venda.get()) == 0 or len(self.comboxaddItens.get()) == 0:
             messagebox.showwarning('Alerta', 'Preencha os campos do carrinho!')
         else:
             self.produtoadd = [self.comboxaddItens.get()]
-        
-            self.lista = []
-        
+            
             self.produtosBanco = self.produtosVenda()
             for v in self.produtosBanco:
                 if int(self.produtoadd[0][0]) == v[0]:
-                    self.lista.append(list(v))
-            self.tot.set(0)
-            for l in self.lista:
+                    self.listaExbiProduto.append(list(v))
+            
+            for l in self.listaExbiProduto:
                 l.append(int(self.et_qtd_venda.get()))
                 l.append(l[3] * l[4])
-            
-            for i in self.lista:
-                self.listaAddItens.insert('', END, values=i)
-                self.itensVenda.itens.append(i)
 
-            c = 0 
-            self.tot.set(0) 
-            for it in self.itensVenda.itens:
-                c +=it[5]
-                self.tot.set(c)
-            
+            for it in self.listaExbiProduto:
+                self.listaAddItens.insert('', END, values=it)
+                self.itensVenda.itens.append(it)
+
+            cont = 0    
+            for i in self.listaExbiProduto:
+                cont+= i[5]
+                self.tot.set(cont)
+           
         
     def remover_produto_venda(self):
         """ 
@@ -1747,18 +1746,28 @@ class Funcionalidades():
         :param: Não tem parâmetros.
         :return: Não tem retorno.
         """
-        c = float(self.restot.get())
-        
+        contMen = float(self.tot.get())
         itemSelecionado = self.listaAddItens.selection()
         for i in self.listaAddItens.selection():
-            valores = self.listaAddItens.item(itemSelecionado, 'values')
+            valores = list(self.listaAddItens.item(itemSelecionado, 'values'))
             self.listaAddItens.delete(i)
-            c-= float(valores[5])
-            self.tot.set(c)
-            self.itensVenda.itens.pop(itemSelecionado)
-        c = 0 
+            print(f'Itens da treeview: {valores}')
+            
+            for p in range (len(self.listaExbiProduto)):
+                #print(f'Código da variavel valores: {valores[0]} {type(valores[0])}')
+                #print(f'Código da variavel na lista: {self.listaExbiProduto[p][0]} {type(self.listaExbiProduto[p][0])}')
+                if int(valores[0]) == self.listaExbiProduto[p][0]:
+                    del self.listaExbiProduto[p]
+                    contMen-= float(valores[5])
+                    self.tot.set(contMen)
+            #self.tot.set(0)
         
-
+        print('Lista atualizada')
+        print(self.listaExbiProduto)
+        
+    def atualizaTotCarrinho(self):
+        if self.btn_remov_prod._clicked(event='Clicado'):
+            print('Foi')
  
     def limpaItens(self):
         """

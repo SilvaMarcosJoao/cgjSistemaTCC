@@ -3,7 +3,6 @@ from tkinter import ttk
 from customtkinter import *
 from tkinter import messagebox
 from tkcalendar import Calendar
-from PIL import Image
 import os
 
 from reportlab.pdfgen import canvas
