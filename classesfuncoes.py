@@ -1672,7 +1672,9 @@ class Funcionalidades():
         except:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
- 
+    def buscar_fornecimento(self):
+        pass
+    
     def duplo_clique_fornecimento(self, event):
         """
         """
