@@ -1737,7 +1737,7 @@ class Funcionalidades():
             cont = 0    
             for i in self.listaExbiProduto:
                 cont+= i[5]
-                self.tot.set(cont)
+                self.tot.set(f'{cont:.2f}')
            
         
     def remover_produto_venda(self):
@@ -1801,14 +1801,14 @@ class Funcionalidades():
     
             self.listaItens = self.itensVenda.itens
             soma = 0.0
-            for i in self.listaItens:
+            for i in self.listaExbiProduto:
                 soma += float(i[5])
                 
             self.venda.cadastrarVenda(self.cod_cli, soma, self.data)
             
             self.pro = self.produto.listarProdutos()
             self.codigoVenda = self.venda.resCodVenda()
-            for item in self.listaItens:
+            for item in self.listaExbiProduto:
                 self.itensVenda.cadastrarItens(self.codigoVenda[0][0], item[0], item[4], item[5]) 
                 for p in self.pro:
                     if item[0] == p[0]:
@@ -1817,7 +1817,7 @@ class Funcionalidades():
                         else:  
                             self.produto.abatEstoqueProd(item[0], int(item[4]))
                             messagebox.showinfo('Sistema', 'Venda Realizada!')
-            print(self.pro) 
+            self.listaExbiProduto = []
 
     def consultarVenda(self):
         self.listaRelatorio.delete(*self.listaRelatorio.get_children())

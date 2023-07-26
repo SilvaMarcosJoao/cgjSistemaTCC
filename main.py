@@ -1095,35 +1095,29 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_venda = CTkLabel(self.frameCadTelaVenda,text_color='#505050', text='VENDA', font=('Roboto', 15))
         lbl_titulo_venda.place(relx=0.025, rely=0.01)
 
-        self.lbl_cod_venda = CTkLabel(self.frameCadTelaVenda,text_color='#505050', text="Código:", font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_cod_venda.place(relx=0.025, rely=0.1)
-        self.et_cod_venda = CTkEntry(self.frameCadTelaVenda, state='disabled', font=('Roboto', 12), width=55, height=30)
-        self.et_cod_venda.place(relx=0.09, rely=0.1)
-        
-
         self.lbl_nome_clien_venda = CTkLabel(self.frameCadTelaVenda,text_color='#505050', text="Cliente*: ", font=('Roboto', 12, 'bold'))
-        self.lbl_nome_clien_venda.place(relx=0.025, rely=0.15) 
+        self.lbl_nome_clien_venda.place(relx=0.025, rely=0.09) 
         self.cliRecebidos = self.clienteVenda()
         self.comboxClien_venda = ttk.Combobox(self.frameCadTelaVenda, values=self.cliRecebidos)
-        self.comboxClien_venda.place(relx=0.09, rely=0.15, width=300, height=20)
+        self.comboxClien_venda.place(relx=0.1, rely=0.1, width=300, height=20)
 
         self.lbl_data_venda = CTkLabel(self.frameCadTelaVenda, text_color='#505050',
                 text='Data Venda*: ', 
                 font=('Roboto', 12, 'bold'), height=20)
-        self.lbl_data_venda.place(relx=0.215, rely=0.1)
-        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=60, height=20, placeholder_text='Data')
-        self.et_data_venda.place(relx=0.31, rely=0.1)
+        self.lbl_data_venda.place(relx=0.025, rely=0.16)
+        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=75, height=20, placeholder_text='Data')
+        self.et_data_venda.place(relx=0.14, rely=0.16)
 
         self.btn_calendario = CTkButton(self.frameCadTelaVenda,
                 text='Selecionar', 
                 font=('Roboto', 12, 'bold'), 
                 width=65, 
-                height=20,
+                height=22,
                 text_color='#fff',
                 hover_color='#333',
                 fg_color='#505050', 
                 command=self.calendariove)
-        self.btn_calendario.place(relx=0.4, rely=0.1)
+        self.btn_calendario.place(relx=0.24, rely=0.16)
 
         self.lbl_exibi_total = CTkLabel(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'))
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
@@ -1140,24 +1134,21 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.89, rely=0.1, relwidth=0.09)
 
-        #self.btn_limpar_venda = Button(self.frameCadTelaVenda, text='Cancelar \nVenda', relief='groove', font=('Roboto', 9, 'bold'), compound='left', anchor='center', bg='#f3f3f3')
-        #self.btn_limpar_venda.place(relx=0.89, rely=0.1, relwidth=0.09, height=50)
-
 
         # VISUAL DO CARRINHO
         self.cabecalhoAdd = LabelFrame(self.frameCadTelaVenda, text='Carrinho', font=('Roboto', 14), bg='#fff')
-        self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.96, relheight=0.75)
+        self.cabecalhoAdd.place(relx=0.02, rely=0.25, relwidth=0.96, relheight=0.73)
 
         self.lbl_prodt_venda = CTkLabel(self.cabecalhoAdd, text_color='#505050',text="Produto*: ", font=('Roboto', 12, 'bold'))
-        self.lbl_prodt_venda.place(relx=0.025, rely=0.1) 
+        self.lbl_prodt_venda.place(relx=0.025, rely=0.09) 
         self.prodRecebidos = self.produtosVenda()
         self.comboxaddItens = ttk.Combobox(self.cabecalhoAdd, values=self.prodRecebidos)
-        self.comboxaddItens.place(relx=0.1, rely=0.1, width=300, height=20)
+        self.comboxaddItens.place(relx=0.11, rely=0.1, width=300, height=20)
 
-        self.lbl_qtd_venda = CTkLabel(self.cabecalhoAdd,text_color='#505050', text="Qtd*: ", font=('Roboto', 12, 'bold'), width=70, height=20)
-        self.lbl_qtd_venda.place(relx=0.025, rely=0.16) 
-        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd, height=30, font=('Roboto', 12))
-        self.et_qtd_venda.place(relx=0.1, rely=0.16) 
+        self.lbl_qtd_venda = CTkLabel(self.cabecalhoAdd,text_color='#505050', text="Qtd*: ", font=('Roboto', 12, 'bold'))
+        self.lbl_qtd_venda.place(relx=0.025, rely=0.19) 
+        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd, height=20, font=('Roboto', 12), width=70)
+        self.et_qtd_venda.place(relx=0.07, rely=0.2) 
 
         self.btn_add_prod = CTkButton(self.cabecalhoAdd, 
                 text='Adicionar',
@@ -1207,10 +1198,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.scrollListaHistTela.place(relx=0.82, rely=0.4, relwidth= 0.02, relheight=0.45)
 
         self.lbl_totalGeral = CTkLabel(self.frameCadTelaVenda, text='TOTAL DA COMPRA R$: ', font=('Roboto', 12, 'bold'))
-        self.lbl_totalGeral.place(relx=0.026, rely=0.945)
+        self.lbl_totalGeral.place(relx=0.04, rely=0.905)
         self.tot = StringVar()
         self.lbl_exibGeral = CTkLabel(self.frameCadTelaVenda, textvariable=self.tot, font=('Roboto', 12, 'bold'))
-        self.lbl_exibGeral.place(relx=0.28, rely=0.945)
+        self.lbl_exibGeral.place(relx=0.2, rely=0.905)
         self.restot = self.tot
 
     def widgets_relatorio(self) ->None: 
