@@ -579,6 +579,20 @@ class Fornecimento:
         self.banco.conexao.commit()
         self.banco.desconectar()
     
+    def consultaFornecimento(self, nome_fornece:str) -> list:
+        """
+        Exibe fornecimentos de um fornecedor.
+        :param: nome fornecedor.
+        :return: uma lista com os fornecimentos do fornecedor.
+        """
+        self.banco.conectar()
+        self.resultado = self.banco.cursor.execute(f"""SELECT produto.desc_produto, fornecedor.nome_fornecedor, data_fornecimento, qtd_fornecida
+                                  FROM produto, fornecedor, fornecimento
+                                   WHERE fornecimento.cod_produto = produto.cod_produto and 
+                                                 fornecimento.cod_fornecedor = fornecedor.cod_fornecedor and fornecedor.nome_fornecedor like '{nome_fornece[0]}%' """).fetchall()
+        self.banco.desconectar()
+        return self.resultado
+    
     def listarFornecimentos(self) -> list:
         """
         Exibe a lista de fornecedores e os produtos fornecidos por eles.
@@ -590,7 +604,7 @@ class Fornecimento:
                                                  FROM produto, fornecedor, fornecimento
                                                  WHERE fornecimento.cod_produto = produto.cod_produto and 
                                                  fornecimento.cod_fornecedor = fornecedor.cod_fornecedor""").fetchall())
-        self.banco.conexao.commit()
+        
         self.banco.desconectar()
         return self.forneci
     
@@ -1098,8 +1112,8 @@ class Funcionalidades():
         """
         self.desc_produto = self.et_desc_produto.get().strip()
         self.mod_produto = self.et_mode_produto.get().strip()
-        self.preco_compra = float(self.et_preco_comp_produto.get().strip().replace('.', ','))
-        self.preco_venda = float(self.et_preco_ven_produto.get().strip().replace('.', ','))
+        self.preco_compra = float(self.et_preco_comp_produto.get().strip())
+        self.preco_venda = float(self.et_preco_ven_produto.get().strip())
         self.cat = self.et_categoria.get().strip()
         self.codCat = []
         self.codCat.append(self.cat)
@@ -1631,7 +1645,7 @@ class Funcionalidades():
             self.resFornecedor = self.comboxFornecedor.get()
             self.qtdfornecida = int(self.et_qtd_fornecida.get())
             self.data = self.et_data_fornecimento.get()
-            if len(self.resProduto) == 0 or len(self.resFornecedor) == 0 or self.qtdfornecida == 0 or len(self.data) == 0:
+            if len(self.resProduto) == 0 or len(self.resFornecedor) == 0 or  len(self.data) == 0 or self.qtdfornecida == 0:
                 messagebox.showwarning('Alerta','Por favor, preencha as informações')
             elif type(self.qtdfornecida) != int:
                 messagebox.showwarning('Alerta','Por favor, insira um quantidade válida')
@@ -1673,7 +1687,18 @@ class Funcionalidades():
             messagebox.showerror('Erro', 'Houve um erro, não foi possível exibir a lista de fornecimento')
 
     def buscar_fornecimento(self):
-        pass
+        self.listaFornecimento.delete(*self.listaFornecimento.get_children())
+        self.fornece = self.et_consu_forneci.get()
+        if len(self.fornece) == 0:
+            messagebox.showwarning('Alerta', 'Preencha o campo de consulta.')
+        else:
+            self.resFornece = self.fornecimento.consultaFornecimento(self.fornece)
+            if len(self.resFornece) ==0:
+                messagebox.showinfo("Informação", "Nenhum Fornecedor encontrado.")
+            else:
+                for r in self.resFornece:
+                    self.listaFornecimento.insert('', END, values=r)
+        self.limpa_fornecimento()
     
     def duplo_clique_fornecimento(self, event):
         """
@@ -1686,6 +1711,7 @@ class Funcionalidades():
             self.comboxFornecedor.insert(END, col2)
             self.et_data_fornecimento.insert(END, col3)
             self.et_qtd_fornecida.insert(END, col4)
+            self.et_consu_forneci
 
     def limpa_fornecimento(self):
         """
@@ -1697,6 +1723,7 @@ class Funcionalidades():
         self.comboxFornecedor.delete(0, END)
         self.et_qtd_fornecida.delete(0, END)
         self.et_data_fornecimento.delete(0, END)
+        self.et_consu_forneci.delete(0, END)
 
 
     #CRUD da venda
