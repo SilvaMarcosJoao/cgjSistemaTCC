@@ -51,7 +51,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                     fg_color="#d9d9d9", 
                     border_color="#FFF", 
                     hover_color="#ccc",
-                    width=80, height=50, command=self.telaMenu)
+                    width=80, height=40, command=self.telaMenu)
         self.btn_login.place(relx=0.43, rely=0.59)
 
         
@@ -61,10 +61,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                                           fg_color="#d9d9d9", 
                                           border_color="#FFF", 
                                           hover_color="#ccc", 
-                                          width=180, 
-                                          height=50,
+                                          width=110, 
+                                          height=40,
                                           command=self.telamudaSenha)
-        self.btn_alterarsenha.place(relx=0.34, rely=0.78)
+        self.btn_alterarsenha.place(relx=0.405, rely=0.75)
     
     def efetuarLogin(self) -> None:
         """
@@ -125,13 +125,13 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.titulo_login_senha.configure(font=("Roboto", 24,"bold"))
 
         self.nova_senha = CTkLabel(self.mudasenhatela, text="Nova senha:", font=('Roboto', 12, 'bold'), text_color='#FFF')
-        self.nova_senha.place(relx=0.32, rely=0.3)
+        self.nova_senha.place(relx=0.246, rely=0.3)
         self.et_nova_senha = CTkEntry(self.mudasenhatela, font=('Roboto', 12), show='*', width=120, placeholder_text='Digite nova senha')
         self.et_nova_senha.place(relx=0.46, rely=0.3)
 
-        self.confirmar_senha = CTkLabel(self.mudasenhatela, text="Confirmar senha:",text_color='#FFF')
-        self.confirmar_senha.place(relx=0.265, rely=0.4)
-        self.et_confir_senha = CTkEntry(self.mudasenhatela, font=('Roboto', 12), show='*', width=120, placeholder_text='Confirmar senha') 
+        self.confirmar_senha = CTkLabel(self.mudasenhatela, text="Confirmar senha:", font=('Roboto', 12, 'bold'), text_color='#FFF')
+        self.confirmar_senha.place(relx=0.246, rely=0.4)
+        self.et_confir_senha = CTkEntry(self.mudasenhatela, font=('Roboto', 12, ), show='*', width=120, placeholder_text='Confirmar senha') 
         self.et_confir_senha.place(relx=0.46, rely=0.4)
 
         self.btn_alterar = CTkButton(self.mudasenhatela, text="Alterar", 
@@ -140,10 +140,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                                         fg_color="#d9d9d9", 
                                         border_color="#FFF", 
                                         hover_color="#ccc", 
-                                        width=180, 
-                                        height=50,
+                                        width=80, 
+                                        height=40,
                                         command=self.mudar_senha)
-        self.btn_alterar.place(relx=0.35, rely=0.59)
+        self.btn_alterar.place(relx=0.45, rely=0.59)
 
 
     def mudaCorBtnMenu(self):
@@ -428,7 +428,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                                           text_color="#fff", 
                                           font=('Roboto', 14, 'bold'), 
                                           fg_color="#505050", 
-                                          border_color="#FFF", 
+                                          border_width=2,
                                           hover_color="#777", 
                                           width=70, 
                                           height=30,
@@ -512,9 +512,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.btn_consultar.place(relx=0.88, rely=0.065, relwidth=0.09)
 
         self.lbl_pes = CTkLabel(self.frameCadTelaCliente,text_color='#505050', text='Buscar Nome: ', font=('Roboto', 12, 'bold'))
-        self.lbl_pes.place(relx=0.73, rely=0.065)
+        self.lbl_pes.place(relx=0.73, rely=0.035)
         self.et_consultar_cliente = CTkEntry(self.frameCadTelaCliente, font=('Roboto', 12), width=130, height=30, placeholder_text='Buscar')
-        self.et_consultar_cliente.place(relx=0.73, rely=0.1)
+        self.et_consultar_cliente.place(relx=0.73, rely=0.08)
         
         self.btn_salvar = CTkButton(self.frameCadTelaCliente,  
                 text=' Salvar', 
@@ -528,19 +528,6 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 height=40,
                 command=self.inserir_cliente)
         self.btn_salvar.place(relx=0.88, rely=0.145, relwidth=0.09)
-        
-        self.btn_listar = CTkButton(self.frameCadTelaCliente,   
-                text=' Listar', 
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                border_width=2,
-                height=40,
-                command=self.lista_cliente)
-        self.btn_listar.place(relx=0.88, rely=0.225, relwidth=0.09)
 
         self.btn_alterar = CTkButton(self.frameCadTelaCliente,  
                 text=' Alterar',  
@@ -553,7 +540,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 border_width=2,
                 height=40,
                 command=self.alterar_cliente)
-        self.btn_alterar.place(relx=0.88, rely=0.305, relwidth=0.09)
+        self.btn_alterar.place(relx=0.88, rely=0.225, relwidth=0.09)
 
         self.btn_excluir = CTkButton(self.frameCadTelaCliente,  
                 text=' Excluir',  
@@ -566,7 +553,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 border_width=2,
                 height=40,
                 command=self.deletar_cliente)
-        self.btn_excluir.place(relx=0.88, rely=0.385, relwidth=0.09)
+        self.btn_excluir.place(relx=0.88, rely=0.305, relwidth=0.09)
     
         self.listaCliente = ttk.Treeview(self.frameCadTelaCliente, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7',
                                                                                       'Col8', 'Col9','Col10'), show = 'headings')
@@ -642,19 +629,6 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 height=40,
                 command=self.inserir_categoria)
         self.btn_salvar_categoria.place(relx=0.84, rely=0.1, relwidth=0.1)
-        
-
-        self.btn_lista_categoria = CTkButton(self.categoria_frame,  
-                text=' Listar', 
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                height=40,
-                command=self.exibir_categoria)
-        self.btn_lista_categoria.place(relx=0.84, rely=0.19, relwidth=0.1)
 
         self.btn_alterar_categoria = CTkButton(self.categoria_frame,  
                 text=' Alterar',  
@@ -666,7 +640,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 fg_color='#505050',
                 height=40,
                 command=self.editar_categoria)
-        self.btn_alterar_categoria.place(relx=0.84, rely=0.28, relwidth=0.1)
+        self.btn_alterar_categoria.place(relx=0.84, rely=0.2, relwidth=0.1)
 
         self.btn_excluir_categoria = CTkButton(self.categoria_frame,  
                 text=' Excluir',
@@ -678,7 +652,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 fg_color='#505050', 
                 height=40,
                 command=self.deletar_categoria)
-        self.btn_excluir_categoria.place(relx=0.84, rely=0.37, relwidth=0.1)
+        self.btn_excluir_categoria.place(relx=0.84, rely=0.3, relwidth=0.1)
 
         self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'), show='headings')
 
@@ -725,17 +699,15 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
         self.lbl_preco_comp_produto = CTkLabel(self.produto_frame,text_color='#505050', text='Preço Compra*: ', font=('Roboto', 12, 'bold'))
         self.lbl_preco_comp_produto.place(relx=0.02, rely=0.24)
-        self.et_preco_comp_produto = CTkEntry(self.produto_frame,font=('Roboto', 12), width=125, height=30, placeholder_text='Preço de compra')
+        self.et_preco_comp_produto = CTkEntry(self.produto_frame,font=('Roboto', 12), width=65, height=30, placeholder_text='Preço de compra')
         self.et_preco_comp_produto.place(relx=0.125, rely=0.24)
         
 
         self.lbl_preco_ven_produto = CTkLabel(self.produto_frame,text_color='#505050', text='Preço Venda*: ', font=('Roboto', 12, 'bold'))
         self.lbl_preco_ven_produto.place(relx=0.34, rely=0.1)
-        self.et_preco_ven_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), width=125, height=30, placeholder_text='Preço de venda')
+        self.et_preco_ven_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), width=65, height=30, placeholder_text='Preço de venda')
         self.et_preco_ven_produto.place(relx=0.435, rely=0.1)
 
-        #self.lbl_qtd_produto = CTkLabel(self.produto_frame, text='Qtd: ', font=('Roboto', 12, 'bold'))
-        #self.lbl_qtd_produto.place(relx=0.16, rely=0.1)
         self.et_qtd_produto = CTkEntry(self.produto_frame, font=('Roboto', 12), state='readonly', width=63, height=30)
         self.et_qtd_produto.place(relx=0.19, rely=0.1)
         self.et_qtd_produto.place_forget()
@@ -753,9 +725,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
         
 
         self.lbl_consulta_produto = CTkLabel(self.produto_frame,text_color='#505050', text='Buscar Descrição: ', font=('Roboto', 12, 'bold'))
-        self.lbl_consulta_produto.place(relx=0.72, rely=0.07)
+        self.lbl_consulta_produto.place(relx=0.72, rely=0.035)
         self.et_consulta_produto = CTkEntry(self.produto_frame, font=('Roboto', 12),  width=130, height=30, placeholder_text='Buscar')
-        self.et_consulta_produto.place(relx=0.72, rely=0.11)
+        self.et_consulta_produto.place(relx=0.72, rely=0.078)
         self.btn_consulta_produto = CTkButton(self.produto_frame, 
                 text=' Consultar',
                 text_color='#fff',
@@ -764,9 +736,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.consu_produto)
-        self.btn_consulta_produto.place(relx=0.88, rely=0.075, relwidth=0.09)
+        self.btn_consulta_produto.place(relx=0.88, rely=0.065, relwidth=0.09)
 
         self.btn_salvar_produto = CTkButton(self.produto_frame, 
                 text=' Salvar', 
@@ -776,21 +749,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.inserir_produto)
-        self.btn_salvar_produto.place(relx=0.88, rely=0.155, relwidth=0.09)
-
-        self.btn_lista_produto = CTkButton(self.produto_frame,   
-                text=' Listar',
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                height=40,
-                command=self.exibir_produto)
-        self.btn_lista_produto.place(relx=0.88, rely=0.235, relwidth=0.09)
+        self.btn_salvar_produto.place(relx=0.88, rely=0.145, relwidth=0.09)
 
         self.btn_alterar_produto = CTkButton(self.produto_frame, 
                 text=' Alterar',
@@ -800,9 +762,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.editar_produto)
-        self.btn_alterar_produto.place(relx=0.88, rely=0.315, relwidth=0.09)
+        self.btn_alterar_produto.place(relx=0.88, rely=0.225, relwidth=0.09)
 
         self.btn_excluir_produto = CTkButton(self.produto_frame,  
                 text=' Excluir', 
@@ -811,10 +774,11 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 font=('Roboto', 12, 'bold'), 
                 compound='left', 
                 anchor='center', 
-                fg_color='#505050', 
+                fg_color='#505050',
+                border_width=2, 
                 height=40,
                 command=self.deletar_produto)
-        self.btn_excluir_produto.place(relx=0.88, rely=0.395, relwidth=0.09)
+        self.btn_excluir_produto.place(relx=0.88, rely=0.305, relwidth=0.09)
 
         self.listaProd = ttk.Treeview(self.produto_frame, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7'), show='headings')
         
@@ -920,14 +884,15 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.pesquisar_fornecedor)
-        self.btn_consultar.place(relx=0.88, rely=0.075, relwidth=0.09)
+        self.btn_consultar.place(relx=0.88, rely=0.065, relwidth=0.09)
 
         self.lbl_pes_forn = CTkLabel(self.frameCadTelaFornecedor,text_color='#505050', text='Buscar Nome: ', font=('Roboto', 12, 'bold'))
-        self.lbl_pes_forn.place(relx=0.73, rely=0.065)
+        self.lbl_pes_forn.place(relx=0.73, rely=0.035)
         self.et_consultar_forne = CTkEntry(self.frameCadTelaFornecedor, font=('Roboto', 12), width=130, height=30, placeholder_text='Buscar')
-        self.et_consultar_forne.place(relx=0.73, rely=0.105)
+        self.et_consultar_forne.place(relx=0.73, rely=0.08)
         
         self.btn_salvar = CTkButton(self.frameCadTelaFornecedor, 
                 text="Salvar", 
@@ -937,21 +902,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.inserir_fornecedor)
-        self.btn_salvar.place(relx=0.88, rely=0.155, relwidth=0.09)
-
-        self.btn_listar = CTkButton(self.frameCadTelaFornecedor,
-                text="Listar",
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                height=40,
-                command=self.lista_fornecedor)
-        self.btn_listar.place(relx=0.88, rely=0.235, relwidth=0.09)
+        self.btn_salvar.place(relx=0.88, rely=0.145, relwidth=0.09)
 
         self.btn_alterar = CTkButton(self.frameCadTelaFornecedor,
                 text="Alterar",
@@ -961,9 +915,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.alterar_fornecedor)
-        self.btn_alterar.place(relx=0.88, rely=0.315, relwidth=0.09)
+        self.btn_alterar.place(relx=0.88, rely=0.225, relwidth=0.09)
 
         self.btn_excluir = CTkButton(self.frameCadTelaFornecedor,
                 text="Excluir",
@@ -973,9 +928,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.excluir_fornecedor)
-        self.btn_excluir.place(relx=0.88, rely=0.395, relwidth=0.09)
+        self.btn_excluir.place(relx=0.88, rely=0.305, relwidth=0.09)
 
         self.listaForne = ttk.Treeview(self.frameCadTelaFornecedor, height=3, columns=('Col1', 'Col2', 'Col3', 'Col4', 'Col5', 'Col6', 'Col7', 
                                                                                         'Col8', 'Col9', 'Col10'), show='headings')
@@ -1053,7 +1009,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
         self.qtd_fornecida = CTkLabel(self.fornecimento_frame,text_color='#505050', text='Qtd Fornecida*: ', font=('Roboto', 12, 'bold'), height=20)
         self.qtd_fornecida.place(relx=0.02, rely=0.35)
-        self.et_qtd_fornecida = CTkEntry(self.fornecimento_frame, width=62, height=20, placeholder_text='Qtd')
+        self.et_qtd_fornecida = CTkEntry(self.fornecimento_frame, width=42, height=20, placeholder_text='Qtd')
         self.et_qtd_fornecida.place(relx=0.16, rely=0.35) 
 
         self.btn_salvarFornecimento = CTkButton(self.fornecimento_frame,
@@ -1064,21 +1020,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.inserir_fornecimento)
         self.btn_salvarFornecimento.place(relx=0.88, rely=0.2, relwidth=0.09)
-
-        self.btn_listarFornecimento = CTkButton(self.fornecimento_frame, 
-                text="Listar",
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                height=40,
-                command=self.exibir_fornecimento)
-        self.btn_listarFornecimento.place(relx=0.88, rely=0.3, relwidth=0.09)
         
         self.btn_buscarFornecimento = CTkButton(self.fornecimento_frame, 
                 text="Buscar",
@@ -1088,11 +1033,15 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 compound='left', 
                 anchor='center', 
                 fg_color='#505050', 
+                border_width=2,
                 height=40,
                 command=self.buscar_fornecimento)
         self.btn_buscarFornecimento.place(relx=0.88, rely=0.1, relwidth=0.09)
+        
+        self.lbl_consu_fornecimento = CTkLabel(self.fornecimento_frame, text_color='#505050', text='Buscar Nome:', font=('Roboto', 12, 'bold'))
+        self.lbl_consu_fornecimento.place(relx=0.73, rely=0.06)
         self.et_consu_forneci = CTkEntry(self.fornecimento_frame,width=100, height=32, placeholder_text='Buscar')
-        self.et_consu_forneci.place(relx=0.74, rely=0.1)
+        self.et_consu_forneci.place(relx=0.73, rely=0.11)
 
 
         self.listaFornecimento = ttk.Treeview(self.fornecimento_frame, height=3 ,columns=('Col1','Col2', 'Col3', 'Col4'),show = 'headings')
@@ -1115,6 +1064,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.listaFornecimento.configure(yscrollcommand=self.scrollListaFornecimento.set)
         self.scrollListaFornecimento.place(relx=0.975, rely=0.46, relwidth= 0.02, relheight=0.5)
         self.exibir_fornecimento()
+        
     def widgets_venda(self):
 
         self.frameCadTelaVenda = CTkFrame(self.frameMenu_right, fg_color='#fff')
@@ -1143,6 +1093,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 height=22,
                 text_color='#fff',
                 hover_color='#333',
+                border_width=2,
                 fg_color='#505050', 
                 command=self.calendariove)
         self.btn_calendario.place(relx=0.24, rely=0.16)
@@ -1158,6 +1109,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 text_color='#fff',
                 hover_color='#333',
                 fg_color='#505050',
+                border_width=2,
                 height=50,
                 command=self.inserir_venda)
         self.btn_salvar_venda.place(relx=0.89, rely=0.1, relwidth=0.09)
@@ -1175,7 +1127,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
 
         self.lbl_qtd_venda = CTkLabel(self.cabecalhoAdd,text_color='#505050', text="Qtd*: ", font=('Roboto', 12, 'bold'))
         self.lbl_qtd_venda.place(relx=0.025, rely=0.19) 
-        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd, height=20, font=('Roboto', 12), width=70)
+        self.et_qtd_venda = CTkEntry(self.cabecalhoAdd, height=20, font=('Roboto', 12), width=42)
         self.et_qtd_venda.place(relx=0.07, rely=0.2) 
 
         self.btn_add_prod = CTkButton(self.cabecalhoAdd, 
@@ -1187,6 +1139,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 text_color='#fff',
                 hover_color='#333',
                 fg_color='#505050',
+                border_width=2,
                 command=self.adicionaItens_venda)
         self.btn_add_prod.place(relx=0.855, rely=0.4, relwidth=0.12)
 
@@ -1199,6 +1152,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 text_color='#fff',
                 hover_color='#333',
                 fg_color='#505050',
+                border_width=2,
                 command=self.remover_produto_venda)
         self.btn_remov_prod.place(relx=0.855, rely=0.48, relwidth=0.12)
 
@@ -1239,10 +1193,10 @@ class LoginTela(classesfuncoes.Funcionalidades):
         lbl_titulo_relatorio = CTkLabel(self.relatorio_frame,text_color='#505050', text='RELATÓRIO DE VENDAS', font=('Roboto', 15))
         lbl_titulo_relatorio.place(relx=0.015, rely=0.01)
         
-        self.lbl_consultar = CTkLabel(self.relatorio_frame,text_color='#505050', text='Código de venda:', font=('Roboto', 12,'bold'))
-        self.lbl_consultar.place(relx=0.35, rely=0.150)
-        self.et_consultar = CTkEntry(self.relatorio_frame, font=('Roboto', 14), width=50, height=25, placeholder_text='Digite aqui')
-        self.et_consultar.place(relx=0.35, rely=0.20)
+        self.lbl_consultar = CTkLabel(self.relatorio_frame,text_color='#505050', text='Código da venda:', font=('Roboto', 12,'bold'))
+        self.lbl_consultar.place(relx=0.35, rely=0.13)
+        self.et_consultar = CTkEntry(self.relatorio_frame, font=('Roboto', 14), width=42, height=30, placeholder_text='Digite aqui')
+        self.et_consultar.place(relx=0.50, rely=0.13)
         
 
         #self.imgProcurar = PhotoImage(file='./imagens/procurar.png')
@@ -1250,18 +1204,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 command=self.consultarVenda, 
                 font=('Roboto', 10,'bold'), 
                 fg_color='#505050',
+                border_width=2,
                 height=40,)
-        self.btn_consultar.place(relx=0.525, rely=0.2, relwidth=0.1)
-        
-        self.btn_listar = CTkButton(self.relatorio_frame, 
-                text='Listar', 
-                text_color='#fff',
-                font=('Roboto', 12,'bold'),
-                height=40,
-                fg_color='#505050', 
-                hover_color='#333',
-                command=self.listarVenda)
-        self.btn_listar.place(relx= 0.87, rely=0.2, relwidth=0.1)
+        self.btn_consultar.place(relx=0.63, rely=0.13, relwidth=0.1)
         
         self.btn_gerarPDF = CTkButton(self.relatorio_frame, 
                 text='Gerar PDF',
@@ -1269,6 +1214,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 font=('Roboto', 12,'bold'), 
                 height=40, 
                 fg_color='#505050',
+                border_width=2,
                 hover_color='#333',
                 command=self.gerarRelPDF)
         self.btn_gerarPDF.place(relx= 0.87, rely= 0.3, relwidth=0.1)
