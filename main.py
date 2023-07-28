@@ -51,7 +51,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                     fg_color="#d9d9d9", 
                     border_color="#FFF", 
                     hover_color="#ccc",
-                    width=80, height=50, command=self.telaMenu)
+                    width=80, height=50, command=self.efetuarLogin)
         self.btn_login.place(relx=0.43, rely=0.59)
 
         
@@ -87,8 +87,8 @@ class LoginTela(classesfuncoes.Funcionalidades):
             else:
                 if self.resUser[0][0] == self.captusuario and self.resUser[0][1] == self.captsenha:
                     self.limpa_usuario()
-            
-                    self.appLogin.destroy()
+                    self.telaMenu()
+                    self.appLogin.withdraw()
                     
                 else:
                     print(self.resUser[0])
@@ -97,7 +97,6 @@ class LoginTela(classesfuncoes.Funcionalidades):
         except Exception as e:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
             print(e)
-        
         
     def limpa_usuario(self):
         self.et_usuario.delete(0,END)
@@ -409,8 +408,8 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.usuario_frame = CTkFrame(self.frameMenu_right, fg_color='#fff')
         self.usuario_frame.place(relx=0.25, rely=0.25, relwidth=0.5, relheight=0.5)
         
-        lbl_titulo_usuario = CTkLabel(self.usuario_frame, text_color='#505050',text='USUÁRIO', font=('Roboto', 15))
-        lbl_titulo_usuario.place(relx=0.025, rely=0.01)
+        lbl_titulo_usuario = CTkLabel(self.usuario_frame, text_color='#505050',text='GERENCIAR USUÁRIO', font=('Roboto', 15))
+        lbl_titulo_usuario.place(relx=0.35, rely=0.01)
 
         self.lbl_nova_senha = CTkLabel(self.usuario_frame,text_color='#505050',
                     text='Nova Senha:',
@@ -629,20 +628,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 fg_color='#505050', 
                 height=40,
                 command=self.inserir_categoria)
-        self.btn_salvar_categoria.place(relx=0.84, rely=0.1, relwidth=0.1)
-        
-
-        self.btn_lista_categoria = CTkButton(self.categoria_frame,  
-                text=' Listar', 
-                text_color='#fff',
-                hover_color='#333',
-                font=('Roboto', 12, 'bold'), 
-                compound='left', 
-                anchor='center', 
-                fg_color='#505050', 
-                height=40,
-                command=self.exibir_categoria)
-        self.btn_lista_categoria.place(relx=0.84, rely=0.19, relwidth=0.1)
+        self.btn_salvar_categoria.place(relx=0.84, rely=0.15, relwidth=0.1)
 
         self.btn_alterar_categoria = CTkButton(self.categoria_frame,  
                 text=' Alterar',  
@@ -654,7 +640,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 fg_color='#505050',
                 height=40,
                 command=self.editar_categoria)
-        self.btn_alterar_categoria.place(relx=0.84, rely=0.28, relwidth=0.1)
+        self.btn_alterar_categoria.place(relx=0.84, rely=0.245, relwidth=0.1)
 
         self.btn_excluir_categoria = CTkButton(self.categoria_frame,  
                 text=' Excluir',
@@ -666,7 +652,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 fg_color='#505050', 
                 height=40,
                 command=self.deletar_categoria)
-        self.btn_excluir_categoria.place(relx=0.84, rely=0.37, relwidth=0.1)
+        self.btn_excluir_categoria.place(relx=0.84, rely=0.335, relwidth=0.1)
 
         self.listaCategoria = ttk.Treeview(self.categoria_frame, height=3, columns=('Col1', 'Col2'), show='headings')
 
@@ -1095,7 +1081,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 text='Data Venda*: ', 
                 font=('Roboto', 12, 'bold'), height=20)
         self.lbl_data_venda.place(relx=0.025, rely=0.16)
-        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=75, height=20, placeholder_text='Data')
+        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=80, height=20, placeholder_text='Data')
         self.et_data_venda.place(relx=0.14, rely=0.16)
 
         self.btn_calendario = CTkButton(self.frameCadTelaVenda,
@@ -1107,7 +1093,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 hover_color='#333',
                 fg_color='#505050', 
                 command=self.calendariove)
-        self.btn_calendario.place(relx=0.24, rely=0.16)
+        self.btn_calendario.place(relx=0.26, rely=0.16)
 
         self.lbl_exibi_total = CTkLabel(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'))
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)
