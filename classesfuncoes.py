@@ -1112,29 +1112,29 @@ class Funcionalidades():
         """
         self.desc_produto = self.et_desc_produto.get().strip()
         self.mod_produto = self.et_mode_produto.get().strip()
-        self.preco_compra = float(self.et_preco_comp_produto.get().strip())
-        self.preco_venda = float(self.et_preco_ven_produto.get().strip())
+        self.preco_compra = self.et_preco_comp_produto.get().strip()
+        self.preco_venda = self.et_preco_ven_produto.get().strip()
         self.cat = self.et_categoria.get().strip()
         self.codCat = []
         self.codCat.append(self.cat)
         self.codBanco = self.categoria.codigoCategoria()
         self.codigoCatego = None
-        for c in self.codBanco:
-            print(int(self.codCat[0][1]))
-            if c[0] == int(self.codCat[0][1]):
-                 self.codigoCatego = c[0]
-            elif self.codCat[0][1:3].isnumeric():
-                if c[0] == int(self.codCat[0][1:3]):
+        if len(self.cat) != 0:
+            for c in self.codBanco:
+                if c[0] == int(self.codCat[0][1]):
                     self.codigoCatego = c[0]
+                elif self.codCat[0][1:3].isnumeric():
+                    if c[0] == int(self.codCat[0][1:3]):
+                        self.codigoCatego = c[0]
         try:
-            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == 0 or self.preco_venda == 0 or self.codigoCatego == 0:
+            if self.desc_produto == '' or self.mod_produto == '' or self.preco_compra == '' or self.preco_venda == '' or self.codigoCatego == 0:
                 messagebox.showwarning('Alerta', 'Por favor, preencha os campos')
             elif len(self.desc_produto) < 3 or len(self.desc_produto) > 25:
                     messagebox.showwarning('Alerta', 'Descrição inválida, \nquantidade de caracteres não atende aos requisitos')
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, self.preco_compra, self.preco_venda, self.codigoCatego)
+                #self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, float(self.preco_compra), float(self.preco_venda), self.codigoCatego)
                 self.limpa_produto()
                 messagebox.showinfo('Sistema', 'Produto cadastrado com sucesso!')  
                 self.exibir_produto()
@@ -1167,6 +1167,7 @@ class Funcionalidades():
             self.resProd = self.produto.consultarProduto(self.prod)
             if len(self.resProd) == 0:
                 messagebox.showinfo('Sistema', 'Nenhum produto encontrado.')
+                self.exibir_produto()
             else:
                 for v in self.resProd:
                     self.listaProd.insert('',END, values=v)
@@ -1320,6 +1321,7 @@ class Funcionalidades():
                 self.resCli = self.cliente.consultarCliente(self.cli)
                 if len(self.resCli) == 0:
                     messagebox.showinfo('Informação', 'Nenhum cliente encontrado.')
+                    self.lista_cliente()
                 else:
                     for v in self.resCli:
                         self.listaCliente.insert('',END, values=v)
@@ -1452,6 +1454,7 @@ class Funcionalidades():
     # FUNÇÕES DOS BOTÕES DA TELA FORNECEDOR
     def inserir_fornecedor(self):
         """
+
         """
         self.cnpj = self.et_cnpj_fornecedor.get().strip()
         self.nome = self.et_nome_fornecedor.get().strip()
@@ -1517,6 +1520,7 @@ class Funcionalidades():
             self.resForne = self.fornecedor.consultarFornecedor(self.forne)
             if len(self.resForne) ==0:
                 messagebox.showinfo("Informação", "Nenhum Fornecedor encontrado.")
+                self.lista_fornecedor()
             else:
                 for r in self.resForne:
                     self.listaForne.insert('', END, values=r)
@@ -1643,12 +1647,10 @@ class Funcionalidades():
         try:
             self.resProduto = self.comboxProduto.get()
             self.resFornecedor = self.comboxFornecedor.get()
-            self.qtdfornecida = int(self.et_qtd_fornecida.get())
+            self.qtdfornecida = self.et_qtd_fornecida.get()
             self.data = self.et_data_fornecimento.get()
-            if len(self.resProduto) == 0 or len(self.resFornecedor) == 0 or  len(self.data) == 0 or self.qtdfornecida == 0:
+            if len(self.resProduto) == 0 or len(self.resFornecedor) == 0 or  len(self.data) == 0 or len(self.qtdfornecida) == 0:
                 messagebox.showwarning('Alerta','Por favor, preencha as informações')
-            elif type(self.qtdfornecida) != int:
-                messagebox.showwarning('Alerta','Por favor, insira um quantidade válida')
             else:
                 self.fornecimentoProduto()
                 for v in self.dadosProd:   
@@ -1660,8 +1662,8 @@ class Funcionalidades():
                     if self.resFornecedor in i:
                         self.cod_fornece = i[0]
         
-                self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, self.qtdfornecida)
-                self.produto.atualizaEstoqueProd(self.cod_prod, self.qtdfornecida)
+                self.fornecimento.cadastrarFornecimento(self.cod_prod, self.cod_fornece, self.data, int(self.qtdfornecida))
+                self.produto.atualizaEstoqueProd(self.cod_prod, int(self.qtdfornecida))
                 messagebox.showinfo('Sistema', 'Fornecimento Realizado!')
                 self.exibir_fornecimento()
         except Exception as err: 
@@ -1695,6 +1697,7 @@ class Funcionalidades():
             self.resFornece = self.fornecimento.consultaFornecimento(self.fornece)
             if len(self.resFornece) ==0:
                 messagebox.showinfo("Informação", "Nenhum Fornecedor encontrado.")
+                self.exibir_fornecimento()
             else:
                 for r in self.resFornece:
                     self.listaFornecimento.insert('', END, values=r)
@@ -1773,21 +1776,23 @@ class Funcionalidades():
         :param: Não tem parâmetros.
         :return: Não tem retorno.
         """
-        contMen = float(self.tot.get())
+        contMen = self.tot.get()
+        contador = float(contMen)
         itemSelecionado = self.listaAddItens.selection()
         for i in self.listaAddItens.selection():
             valores = list(self.listaAddItens.item(itemSelecionado, 'values'))
             self.listaAddItens.delete(i)
-            print(f'Itens da treeview: {valores}')
+            
             
             for p in range (len(self.listaExbiProduto)):
                 #print(f'Código da variavel valores: {valores[0]} {type(valores[0])}')
                 #print(f'Código da variavel na lista: {self.listaExbiProduto[p][0]} {type(self.listaExbiProduto[p][0])}')
                 if int(valores[0]) == self.listaExbiProduto[p][0]:
                     del self.listaExbiProduto[p]
-                    contMen-= float(valores[5])
-                    self.tot.set(contMen)
-            #self.tot.set(0)
+                    contador-= float(valores[5])
+    
+                    self.tot.set(f'{contador}')
+            
         
         print('Lista atualizada')
         print(self.listaExbiProduto)
