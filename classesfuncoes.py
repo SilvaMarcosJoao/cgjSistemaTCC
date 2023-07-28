@@ -1881,7 +1881,7 @@ class Funcionalidades():
 
     def gerarRelPDF(self):
         # Criando arquivo pdf do relatório
-        self.canv = canvas.Canvas('..\\relatorios\\RelatorioVendasGeral.pdf')
+        self.canv = canvas.Canvas('.\\relatorios\\RelatorioVendasGeral.pdf')
         
 
         self.canv.setFont('Helvetica-Bold', 20)
