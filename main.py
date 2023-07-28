@@ -51,7 +51,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                     fg_color="#d9d9d9", 
                     border_color="#FFF", 
                     hover_color="#ccc",
-                    width=80, height=40, command=self.telaMenu)
+                    width=80, height=50, command=self.efetuarLogin)
         self.btn_login.place(relx=0.43, rely=0.59)
 
         
@@ -87,8 +87,8 @@ class LoginTela(classesfuncoes.Funcionalidades):
             else:
                 if self.resUser[0][0] == self.captusuario and self.resUser[0][1] == self.captsenha:
                     self.limpa_usuario()
-            
-                    self.appLogin.destroy()
+                    self.telaMenu()
+                    self.appLogin.withdraw()
                     
                 else:
                     print(self.resUser[0])
@@ -97,7 +97,6 @@ class LoginTela(classesfuncoes.Funcionalidades):
         except Exception as e:
             messagebox.showerror('Erro', 'Houve um erro, não foi possível efetuar login')
             print(e)
-        
         
     def limpa_usuario(self):
         self.et_usuario.delete(0,END)
@@ -409,8 +408,8 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.usuario_frame = CTkFrame(self.frameMenu_right, fg_color='#fff')
         self.usuario_frame.place(relx=0.25, rely=0.25, relwidth=0.5, relheight=0.5)
         
-        lbl_titulo_usuario = CTkLabel(self.usuario_frame, text_color='#505050',text='USUÁRIO', font=('Roboto', 15))
-        lbl_titulo_usuario.place(relx=0.025, rely=0.01)
+        lbl_titulo_usuario = CTkLabel(self.usuario_frame, text_color='#505050',text='GERENCIAR USUÁRIO', font=('Roboto', 15))
+        lbl_titulo_usuario.place(relx=0.35, rely=0.01)
 
         self.lbl_nova_senha = CTkLabel(self.usuario_frame,text_color='#505050',
                     text='Nova Senha:',
@@ -1084,7 +1083,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 text='Data Venda*: ', 
                 font=('Roboto', 12, 'bold'), height=20)
         self.lbl_data_venda.place(relx=0.025, rely=0.16)
-        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=75, height=20, placeholder_text='Data')
+        self.et_data_venda = CTkEntry(self.frameCadTelaVenda, width=80, height=20, placeholder_text='Data')
         self.et_data_venda.place(relx=0.14, rely=0.16)
 
         self.btn_calendario = CTkButton(self.frameCadTelaVenda,
@@ -1097,7 +1096,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
                 border_width=2,
                 fg_color='#505050', 
                 command=self.calendariove)
-        self.btn_calendario.place(relx=0.24, rely=0.16)
+        self.btn_calendario.place(relx=0.26, rely=0.16)
 
         self.lbl_exibi_total = CTkLabel(self.frameCadTelaVenda, font=('Roboto', 12, 'bold'))
         self.lbl_exibi_total.place(relx=0.5, rely=0.93)

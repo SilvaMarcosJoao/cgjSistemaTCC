@@ -980,6 +980,7 @@ class Funcionalidades():
     # FUNÇÔES DOS BOTÕES DA TELA DE USUÁRIO
     def finalizar(self) -> None:
         self.appMenu.destroy()
+        self.appLogin.deiconify()
         
 
     def mudar_senha(self) -> None:
@@ -1134,7 +1135,7 @@ class Funcionalidades():
             elif len(self.mod_produto) > 15:
                 messagebox.showwarning('Alerta', 'Modelo inválido, preencha corretamente!')
             else:
-                #self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, float(self.preco_compra), float(self.preco_venda), self.codigoCatego)
+                self.produto.cadastrarProduto(self.desc_produto, self.mod_produto, float(self.preco_compra), float(self.preco_venda), self.codigoCatego)
                 self.limpa_produto()
                 messagebox.showinfo('Sistema', 'Produto cadastrado com sucesso!')  
                 self.exibir_produto()
@@ -1785,8 +1786,6 @@ class Funcionalidades():
             
             
             for p in range (len(self.listaExbiProduto)):
-                #print(f'Código da variavel valores: {valores[0]} {type(valores[0])}')
-                #print(f'Código da variavel na lista: {self.listaExbiProduto[p][0]} {type(self.listaExbiProduto[p][0])}')
                 if int(valores[0]) == self.listaExbiProduto[p][0]:
                     del self.listaExbiProduto[p]
                     contador-= float(valores[5])
