@@ -14,5 +14,8 @@
 </div>
 <div style='display: inline-block'>
   <h2>Autores</h2>
-  <p>Carlos Anderson, Guilherme Nascimento e João Marcos.</p>
+  <p>
+    <a href="https://github.com/CarlosAnderson25">Carlos Anderson</a>, 
+    <a href="https://github.com/Guisotnas">Guilherme Nascimento</a> e 
+    <a href="https://github.com/SilvaMarcosJoao">João Marcos.</a></p>
 </div>
