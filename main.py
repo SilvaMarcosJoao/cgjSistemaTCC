@@ -13,7 +13,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.appLogin.mainloop()
         
     def config_tela_login(self) -> None:
-        self.appLogin.title('Sistema de Gerenciamento (SGZurc) - Login') 
+        self.appLogin.title('Sistema de Gerenciamento CGJ - Login') 
         self.appLogin.configure(fg_color='#585858')
         self.larTela = 600
         self.altTela = 350
@@ -26,9 +26,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.appLogin.minsize(width=600, height=350)
         self.appLogin.resizable(False, False)
         
-        self.titulo_login = CTkLabel(self.appLogin, text="SGZurc", fg_color="#585858",text_color="#FFF")
-        self.titulo_login.place(relx=0.41, rely=0.1)
-        self.titulo_login.configure(bg_color='#FFF',font=("Roboto", 24,"bold"))
+        self.titulo_login = CTkLabel(self.appLogin, text="CGJ", fg_color="#585858",text_color="#FFF")
+        self.titulo_login.place(relx=0.45, rely=0.1)
+        self.titulo_login.configure(bg_color='#FFF',font=("Candara", 36,"bold"))
 
     def widgets_tela_login(self):
         # Criação dos widgets (rótulos, campos de entrada e botão)
@@ -106,7 +106,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
     # VISUAL DA TELA DE ALTERAR SENHA
     def telamudaSenha(self):
         self.mudasenhatela = CTkToplevel()
-        self.mudasenhatela.title("Sistema de Gerenciamento (SGZurc) - Alterar Senha")
+        self.mudasenhatela.title("Sistema de Gerenciamento CGJ - Alterar Senha")
         self.mudasenhatela.configure(fg_color='#505050')
         self.largTela = 600
         self.alturTela = 350
@@ -119,9 +119,9 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.mudasenhatela.grab_set()
         self.mudasenhatela.resizable(False, False)
 
-        self.titulo_login_senha = CTkLabel(self.mudasenhatela, text="SGZurc",text_color='#FFF')
-        self.titulo_login_senha.place(relx=0.42, rely=0.1)
-        self.titulo_login_senha.configure(font=("Roboto", 24,"bold"))
+        self.titulo_login_senha = CTkLabel(self.mudasenhatela, text="CGJ",text_color='#FFF')
+        self.titulo_login_senha.place(relx=0.45, rely=0.1)
+        self.titulo_login_senha.configure(font=("Candara", 36,"bold"))
 
         self.nova_senha = CTkLabel(self.mudasenhatela, text="Nova senha:", font=('Roboto', 12, 'bold'), text_color='#FFF')
         self.nova_senha.place(relx=0.246, rely=0.3)
@@ -217,7 +217,7 @@ class LoginTela(classesfuncoes.Funcionalidades):
     # VISUAL DA TELA MENU PRINCIPAL
     def telaMenu(self):
         self.appMenu = CTkToplevel()
-        self.appMenu.title('Sistema de Gerenciamento (SGZurc) - Menu Inicial')
+        self.appMenu.title('Sistema de Gerenciamento CGJ - Menu Inicial')
         #self.appMenu.iconbitmap('./imagens/icone.ico')
         self.largTela = 1200
         self.alturTela = 600
@@ -392,15 +392,15 @@ class LoginTela(classesfuncoes.Funcionalidades):
         self.frame_inicio = CTkFrame(self.frameMenu_right, fg_color='#fff')
         self.frame_inicio.place(relx=0.02, rely=0.03, relwidth=0.96, relheight=0.95)
 
-        self.imgTitulo = CTkImage(dark_image=Image.open('.\\imagens\\logo.jpg'), size=(250, 250))
-        self.lblImagem = CTkLabel(self.frame_inicio, text='', image=self.imgTitulo)
-        self.lblImagem.place(relx=0.38, rely=0.2)
+        #self.imgTitulo = CTkImage(dark_image=Image.open('.\\imagens\\logo.jpg'), size=(250, 250))
+        self.lblImagem = CTkLabel(self.frame_inicio, text='CGJ', font=('Candara', 80))
+        self.lblImagem.place(relx=0.43, rely=0.3)
 
         self.lbl_subtitulo_inicio = CTkLabel(self.frame_inicio, 
                     text='Sistema de Gerenciamento', 
                     text_color='#000', 
                     font=('Roboto', 28, 'bold'))
-        self.lbl_subtitulo_inicio.place(relx=0.32, rely=0.7)
+        self.lbl_subtitulo_inicio.place(relx=0.32, rely=0.5)
     
     # CONFIGURAÇÕES DA TELA USUÁRIO
     def widgets_usuario(self) -> None:

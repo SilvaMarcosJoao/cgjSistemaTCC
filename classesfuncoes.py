@@ -4,7 +4,7 @@ class BancoDados:
     # CONSTRUTOR
     def __init__(self) -> None:
         # ATRIBUTOS
-        self.__nome = 'zurcBanco.db'
+        self.__nome = 'cgjBanco.db'
         self.conexao = None
         self.cursor = None
 
