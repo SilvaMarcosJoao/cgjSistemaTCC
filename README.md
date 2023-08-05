@@ -2,6 +2,7 @@
 <h1> Repositório do projeto de TCC do Curso técnico de informática do Instituto Federal de Educação, Ciência e Tecnologia de Sergipe.</h1>
 <div style='display:inline-block'>
   <h2>Imagens do Sistema</h2>
+  <p><b>Obs: Os dados que aparecem nas imagens ilustradas, são fictícios.</b></p>
   <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaLogin.png"/>
   <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaAlteraSenha.png"/>
   <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaPrincipal.png"/>
