@@ -3,7 +3,10 @@
 <h1> Repositório do projeto de TCC do Curso técnico de informática do Instituto Federal de Educação, Ciência e Tecnologia de Sergipe.</h1>
 <div style='display:inline-block'>
   <h2>Imagens do Sistema</h2>
-
+  <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaLogin.png"/>
+  <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaAlteraSenha.png"/>
+  <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaPrincipal.png"/>
+  <img src="https://github.com/SilvaMarcosJoao/cgjSistemaTCC/blob/master/screenshots/telaCategoriaProdutos.png"/>
 
   <h3>Descrição</h3>
   <p>Este projeto consiste no desenvolvimento de um sistema desktop para o gerenciamento do estoque, fornecedores, clientes, e venda, para uma
